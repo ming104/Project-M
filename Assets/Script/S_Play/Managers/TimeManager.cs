@@ -1,0 +1,57 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class TimeManager : MonoBehaviour
+{
+    public float[] TimeScaleList; // 배속 설정
+    public Image[] Time_UI_Image;
+    public int TimeScaleListIndex = 0; // 처음은 1배속이여야하니 0넣음 
+
+    void Start()
+    {
+        Time.timeScale = TimeScaleList[TimeScaleListIndex];
+        Time_UI_Image[TimeScaleListIndex + 1].color = Color.black; // 얘는 0이 timescale이 0인데 그러면 그림에 맞지않음
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (Time.timeScale == 0f) // 이미 멈춘상태라면 원래 속도로 돌려줌
+            {
+                Time_UI_Image[0].color = Color.red;
+                Time_UI_Image[TimeScaleListIndex + 1].color = Color.black;
+                Time.timeScale = TimeScaleList[TimeScaleListIndex];
+            }
+            else // 멈춤상태가 아니라면 멈춤
+            {
+                Time_UI_Image[0].color = Color.black;
+                Time_UI_Image[TimeScaleListIndex + 1].color = Color.red;
+                Time.timeScale = 0f;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (TimeScaleListIndex > 0) // 만약 0보다 크면 1배속 보다 크니까 
+            {
+                Time_UI_Image[0].color = Color.red;
+                Time_UI_Image[TimeScaleListIndex + 1].color = Color.red; // 원래 자기 자신
+                TimeScaleListIndex -= 1; // 감소시키고
+                Time_UI_Image[TimeScaleListIndex + 1].color = Color.black;
+                Time.timeScale = TimeScaleList[TimeScaleListIndex]; // 배속을 줄임
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (TimeScaleListIndex < TimeScaleList.Length - 1) // 만약 3보다 작으면 3배속 이하니까
+            {
+                Time_UI_Image[0].color = Color.red;
+                Time_UI_Image[TimeScaleListIndex + 1].color = Color.red;
+                TimeScaleListIndex += 1; // 증가시키고
+                Time_UI_Image[TimeScaleListIndex + 1].color = Color.black;
+                Time.timeScale = TimeScaleList[TimeScaleListIndex]; // 배속을 늘림
+            }
+        }
+    }
+}

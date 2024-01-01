@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Monster>
+<!--
+    필요한 요소 : 이름, 식별코드, 연구 정도, 연구 정보
+-->
+    <id num = "000000">
+
+    <research level = "3"> <!-- 연구 정도 (0,1,2,3) -->
+
+        <profile>
+            <code level = "0"> S-12-24-01 </code>
+
+            <image level = "1"> 리소스 위치 </image>
+            <MonsterName level = "1"> 더미 </MonsterName>
+            <riskLevel level = "1"> 1 </riskLevel>
+        </profile>
+
+        <Research_log size = "2">
+            <log level = "1"> 연구결과가 성공이라면 탈출카운트가 감소한다. </log>
+            <log level = "1"> 연구결과가 실패라면 탈출카운트가 증가한다. </log>
+        <Research_log>
+
+    </research>
+
+    </id>
+
+</Monster>
