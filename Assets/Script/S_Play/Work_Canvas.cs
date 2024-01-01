@@ -6,7 +6,7 @@ public class Work_Canvas : MonoBehaviour
 {
     public GameObject EmployeeList;
 
-    private void OnEnable()
+    private void Start()
     {
         EmployeeList.SetActive(false);
     }

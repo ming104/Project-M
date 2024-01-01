@@ -1,7 +1,13 @@
 {
   "id": "000000",
-  "Openlevel": {
-    "name": "Dummy",
-    "image": "locate"
-  }
+
+  "profile": {
+    "code": "S-12-24-01",
+
+    "name": "더미",
+    "image": "locate",
+    "riskLevel": 1
+  },
+
+  "Research_log": {}
 }
