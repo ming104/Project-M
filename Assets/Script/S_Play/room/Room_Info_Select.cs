@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Room_Info_Select : MonoBehaviour
+public class Room_Info_Select : Singleton<Room_Info_Select>
 {
+    public GameObject InfoCanvas;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +18,18 @@ public class Room_Info_Select : MonoBehaviour
     {
 
     }
+
+    public void InfoCanvasON()
+    {
+        DataManager.Instance.DataLoad("Dummy");
+        InfoCanvas.SetActive(true);
+    }
+
+    public void InfoCanvasOFF()
+    {
+        InfoCanvas.SetActive(false);
+    }
+
     private void OnMouseEnter()
     {
         GetComponent<SpriteRenderer>().color = Color.yellow;

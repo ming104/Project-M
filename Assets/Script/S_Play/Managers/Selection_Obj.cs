@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Selection_Obj : MonoBehaviour
+public class Selection_Obj : Singleton<Selection_Obj>
 {
-    public static Selection_Obj instance = null;
-
     [Header("드래그 범위 설정")]
     public LayerMask unitLayerMask; // 유닛 레이어 마스크
     [SerializeField] private GameObject dragSquare; // 프리팹 범위 설정
@@ -18,15 +16,6 @@ public class Selection_Obj : MonoBehaviour
     public List<GameObject> SelectOBJ = new List<GameObject>();
 
     public bool isSelect;
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-    }
 
     // Update is called once per frame
     void Update()

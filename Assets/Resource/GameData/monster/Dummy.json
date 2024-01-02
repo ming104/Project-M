@@ -1,23 +1,21 @@
 {
-  "Monster": {
-    "id": "000000",
+  "id": "000000",
 
-    "Max_research_Level": 3,
+  "Max_research_Level": 3,
 
-    "profile": {
-      "code": "S-12-24-01",
-      "image": "이미지 위치",
-      "MonsterName": "더미",
-      "riskLevel": 1
-    },
+  "profile": {
+    "code": "S-12-24-01",
+    "imagePATH": "이미지 위치",
+    "MonsterName": "더미",
+    "riskLevel": 1
+  },
 
-    "Research_log": {
-      "log": [
-        "연구결과가 성공이라면 탈출카운트가 감소한다.",
-        "연구결과가 실패라면 탈출카운트가 증가한다."
-      ]
-    },
+  "Research_log": {
+    "log": [
+      "연구결과가 성공이라면 탈출카운트가 감소한다.",
+      "연구결과가 실패라면 탈출카운트가 증가한다."
+    ]
+  },
 
-    "OpenLevel": "0"
-  }
+  "OpenLevel": "0"
 }

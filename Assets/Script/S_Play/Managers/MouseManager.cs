@@ -25,7 +25,11 @@ public class MouseManager : MonoBehaviour
                 {
                     string MonsterName = hit.collider.GetComponent<Room_Select>().ReturnMonsterName();
                     Debug.Log(MonsterName);
-                    Room_Canvas.instance.OnCanvas(); //UI 활성화하는 코드 실행
+                    Room_Canvas.Instance.OnCanvas(); //UI 활성화하는 코드 실행
+                }
+                else if (hit.collider.CompareTag("RoomInfo"))
+                {
+                    Room_Info_Select.Instance.InfoCanvasON();
                 }
             }
 
@@ -33,7 +37,7 @@ public class MouseManager : MonoBehaviour
             {
                 // 아무런 오브젝트와 충돌하지 않았을 때의 처리                
                 Debug.Log("No object clicked.");
-                Room_Canvas.instance.OffCanvas();
+                Room_Canvas.Instance.OffCanvas();
             }
         }
     }

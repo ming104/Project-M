@@ -3,16 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Room_Canvas : MonoBehaviour
+public class Room_Canvas : Singleton<Room_Canvas>
 {
-    public static Room_Canvas instance = null;
-
     public GameObject Work_Canvas;
-
-    void Awake()
-    {
-        instance = this;
-    }
 
     void Start()
     {
