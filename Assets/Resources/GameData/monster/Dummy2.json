@@ -1,0 +1,19 @@
+{
+  "Max_research_Level": 3,
+
+  "profile": {
+    "code": "W-04-52",
+    "imagePATH": "MonsterImage/Dummy2",
+    "MonsterName": "더2",
+    "riskLevel": 5
+  },
+
+  "Research_log": {
+    "log": [
+      "연구결과가 성공이라면 탈출카운트가 증가한다.",
+      "연구결과가 실패라면 탈출카운트가 감소한다."
+    ]
+  },
+
+  "OpenLevel": "0"
+}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Room_Info_Select : Singleton<Room_Info_Select>
 {
     public GameObject InfoCanvas;
@@ -21,7 +22,7 @@ public class Room_Info_Select : Singleton<Room_Info_Select>
 
     public void InfoCanvasON()
     {
-        DataManager.Instance.DataLoad("Dummy");
+        DataManager.Instance.DataLoad(DataManager.Instance.MainCompanyData());
         InfoCanvas.SetActive(true);
     }
 
