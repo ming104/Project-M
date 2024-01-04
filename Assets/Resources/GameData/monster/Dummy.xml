@@ -6,7 +6,7 @@
 -->
     <id num = "000000">
 
-    <research level = "3"> <!-- 연구 정도 (0,1,2,3) -->
+    <research level="3"> <!-- 연구 정도 (0,1,2,3) -->
 
         <profile>
             <code level = "0"> S-12-24-01 </code>

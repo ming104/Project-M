@@ -56,7 +56,7 @@ public class DataManager : Singleton<DataManager>
         //MainCompanyData();
     }
 
-    public string MainCompanyData()
+    public string[] MainCompanyData()
     {
         string filePath = "Assets/Resources/GameData/MainData.json";
 
@@ -67,7 +67,7 @@ public class DataManager : Singleton<DataManager>
         // {
         //     return MonList;
         // }
-        return MainData.MonsterList[0];
+        return MainData.MonsterList;
     }
 
     public void DataLoad(string filename)

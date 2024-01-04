@@ -22,7 +22,7 @@ public class Room_Info_Select : Singleton<Room_Info_Select>
 
     public void InfoCanvasON()
     {
-        DataManager.Instance.DataLoad(DataManager.Instance.MainCompanyData());
+        //DataManager.Instance.DataLoad(DataManager.Instance.MonsterListData()[0]);
         InfoCanvas.SetActive(true);
     }
 
