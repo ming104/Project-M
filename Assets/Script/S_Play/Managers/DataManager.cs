@@ -12,10 +12,11 @@ using UnityEngine.UI;
 public class MainCompanyData
 {
     public int day;
-    public int OpenCompany;
+    public int Money;
+    public int ResearchPoint;
     public string[] MonsterList;
 
-    public string[] Employee;
+    public string[] EmployeeList;
 }
 
 [Serializable]
@@ -45,39 +46,27 @@ public class ResearchLogData
 
 public class DataManager : Singleton<DataManager>
 {
-    public Image monsterImage;
-    public TextMeshProUGUI monsterName;
-    public TextMeshProUGUI code;
-    public TextMeshProUGUI dangerLevel;
-    public TextMeshProUGUI Research_log;
-
     void Start()
     {
         //MainCompanyData();
     }
 
-    public string[] MainCompanyData()
+    public MainCompanyData MainData()
     {
         string filePath = "Assets/Resources/GameData/MainData.json";
 
         string jsonText = File.ReadAllText(filePath);
         MainCompanyData MainData = JsonUtility.FromJson<MainCompanyData>(jsonText);
-        Debug.Log("JSON Text: " + jsonText);
+        //Debug.Log("JSON Text: " + jsonText);
         // foreach (string MonList in MainData.MonsterList)
         // {
         //     return MonList;
         // }
-        return MainData.MonsterList;
+        return MainData;
     }
 
-    public void DataLoad(string filename)
+    public MonsterData MonsterDataLoad(string filename)
     {
-        monsterImage.sprite = Resources.Load<Sprite>(null);
-        monsterName.text = null;
-        code.text = null;
-        dangerLevel.text = null;
-        Research_log.text = null;
-
         string filePath = "Assets/Resources/GameData/Monster/" + filename + ".json";
 
         // JSON 파일 읽어오기
@@ -89,23 +78,7 @@ public class DataManager : Singleton<DataManager>
         // JSON 데이터를 객체로 변환
         MonsterData monsterData = JsonUtility.FromJson<MonsterData>(jsonText);
 
-        // 변환된 객체 사용
-        // Debug.Log("ID: " + monsterData.id);
-        // Debug.Log("Max Research Level: " + monsterData.Max_research_Level);
-        // Debug.Log("Monster Name: " + monsterData.profile.MonsterName);
-        // foreach (string log in monsterData.Research_log.log)
-        // {
-        //     Debug.Log("- " + log);
-        // }
-        // Debug.Log("Open Level: " + monsterData.OpenLevel);
-
-        monsterImage.sprite = Resources.Load<Sprite>(monsterData.profile.imagePATH);
-        monsterName.text = "이름 : " + monsterData.profile.MonsterName;
-        code.text = "식별 코드 : " + monsterData.profile.code;
-        dangerLevel.text = "위험도 : " + monsterData.profile.riskLevel.ToString();
-        foreach (string log in monsterData.Research_log.log)
-        {
-            Research_log.text += "- " + log + "\n";
-        }
+        // 리턴시켜서 다른곳에서도 사용이 가능하게 바꿈
+        return monsterData;
     }
 }

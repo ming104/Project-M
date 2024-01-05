@@ -1,9 +1,8 @@
 {
   "Day": 0,
-  "OpenCompany": 1,
-  "Money": 0,
+  "Money": 100,
   "ResearchPoint": 0,
 
-  "MonsterList": ["Dummy"],
-  "Employee": ["000000"]
+  "MonsterList": ["Dummy", "Dummy2"],
+  "EmployeeList": ["000000"]
 }

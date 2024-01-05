@@ -23,21 +23,23 @@ public class MouseManager : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Room")) // Room 태그를 갖는 오브젝트를 클릭했다면
                 {
-                    string MonsterName = hit.collider.GetComponent<Room_Select>().ReturnMonsterName();
-                    Debug.Log(MonsterName);
-                    Room_Canvas.Instance.OnCanvas(); //UI 활성화하는 코드 실행
+                    // string MonsterName = hit.collider.GetComponent<Room_Select_Manager>()._monName;
+                    //Debug.Log(MonsterName);
+                    UI_Manager.Instance.WorkCanvasOn(); //UI 활성화하는 코드 실행
                 }
                 else if (hit.collider.CompareTag("RoomInfo"))
                 {
-                    Room_Info_Select.Instance.InfoCanvasON();
+                    var monsterData = DataManager.Instance.MonsterDataLoad(hit.collider.GetComponentInParent<Room_Select_Manager>()._monName);
+
+                    UI_Manager.Instance.InfoCanvasOn(monsterData);
                 }
             }
 
             else if (EventSystem.current.IsPointerOverGameObject() == false)
             {
                 // 아무런 오브젝트와 충돌하지 않았을 때의 처리                
-                Debug.Log("No object clicked.");
-                Room_Canvas.Instance.OffCanvas();
+                //Debug.Log("No object clicked.");
+                UI_Manager.Instance.WorkCanvasOff();
             }
         }
     }

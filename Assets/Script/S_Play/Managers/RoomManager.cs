@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour
@@ -13,8 +14,16 @@ public class RoomManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        Monsters = DataManager.Instance.MonsterListData();
+        Monsters = DataManager.Instance.MainData().MonsterList;
+    }
 
+    void Start()
+    {
+        for (int i = 0; i < Monsters.Length; i++)
+        {
+            Room.GetComponent<Room_Select_Manager>()._monName = Monsters[i];
+            Instantiate(Room, RoomLocate[i], quaternion.identity);
+        }
     }
 
     // Update is called once per frame
