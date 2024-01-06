@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Camera_Manager : MonoBehaviour
+public class Camera_Manager : Singleton<Camera_Manager>
 {
     [Header("카메라")]
     [SerializeField] private Camera Main_Camera; // 카메라
@@ -14,6 +14,7 @@ public class Camera_Manager : MonoBehaviour
     [Header("커서 모양")]
     public Texture2D CursorTexture;
 
+    public bool CamInteractionOn = true;
     void Start()
     {
         Main_Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -22,8 +23,11 @@ public class Camera_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CameraMove(); // 카메라 움직임
-        CameraSize(); // 카메라 휠로 크기조절
+        if (CamInteractionOn == true)
+        {
+            CameraMove(); // 카메라 움직임
+            CameraSize(); // 카메라 휠로 크기조절
+        }
     }
 
     void CameraMove()

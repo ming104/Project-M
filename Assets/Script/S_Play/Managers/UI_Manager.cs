@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +23,10 @@ public class UI_Manager : Singleton<UI_Manager>
     public TextMeshProUGUI dangerLevel;
     public TextMeshProUGUI Research_log;
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    [Header("Pause")]
+    public GameObject PauseMenu;
+    public GameObject PauseBG;
+    //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
     public Slider Enegy_Slider;
     public GameObject EndButton;
@@ -33,6 +38,7 @@ public class UI_Manager : Singleton<UI_Manager>
         InfoCanvasOff();
         WorkCanvasOff();
         EndButtonOff();
+        PauseMenuOff();
         Money.text = "자금 : " + DataManager.Instance.MainData().Money.ToString();
         ReserchPoint.text = "연구 포인트 : " + DataManager.Instance.MainData().ResearchPoint.ToString();
     }
@@ -84,5 +90,19 @@ public class UI_Manager : Singleton<UI_Manager>
     public void EndButtonOff()
     {
         EndButton.SetActive(false);
+    }
+
+    public void PauseMenuOn()
+    {
+        Time.timeScale = 0;
+        GameManager.Instance.AllInteractionOff();
+        PauseMenu.SetActive(true);
+    }
+
+    public void PauseMenuOff()
+    {
+        Time.timeScale = TimeManager.Instance.TimeScaleList[TimeManager.Instance.TimeScaleListIndex];
+        GameManager.Instance.AllInteractionOn();
+        PauseMenu.SetActive(false);
     }
 }
