@@ -4,9 +4,23 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    public int nowday;
+    public int nowMoney;
+    public int nowResearchPoint;
+    public List<string> nowMonsterList;
+
+    public List<string> nowEmployeeList;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        nowday = DataManager.Instance.MainDataLoad().day;
+        nowMoney = DataManager.Instance.MainDataLoad().Money;
+        nowResearchPoint = DataManager.Instance.MainDataLoad().ResearchPoint;
+        nowMonsterList = DataManager.Instance.MainDataLoad().MonsterList;
+        nowEmployeeList = DataManager.Instance.MainDataLoad().EmployeeList;
+
         AllInteractionOn();
     }
 
@@ -26,6 +40,10 @@ public class GameManager : Singleton<GameManager>
         {
             AllInteractionOn();
             UI_Manager.Instance.PauseMenuOff();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            DataManager.Instance.MaindataSave();
         }
     }
 

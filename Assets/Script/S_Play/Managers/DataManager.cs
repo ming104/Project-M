@@ -14,9 +14,9 @@ public class MainCompanyData
     public int day;
     public int Money;
     public int ResearchPoint;
-    public string[] MonsterList;
+    public List<string> MonsterList;
 
-    public string[] EmployeeList;
+    public List<string> EmployeeList;
 }
 
 [Serializable]
@@ -37,13 +37,13 @@ public class ProfileData
     public int riskLevel;
 }
 
-[Serializable]
 public class ResearchLogData
 {
-    public string[] log;
+    public List<string> log;
 }
 #endregion DataSet
 
+[Serializable]
 public class DataManager : Singleton<DataManager>
 {
     void Start()
@@ -51,17 +51,40 @@ public class DataManager : Singleton<DataManager>
         //MainCompanyData();
     }
 
-    public MainCompanyData MainData()
+    #region DataSave_and_Create
+
+    public void MaindataSave()
+    {
+        string filePath = "Assets/Resources/GameData/MainData.json";
+
+        string jsonText = File.ReadAllText(filePath);
+
+        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText);
+
+        maindata.day = GameManager.Instance.nowday;
+        maindata.Money = GameManager.Instance.nowMoney;
+        maindata.ResearchPoint = GameManager.Instance.nowResearchPoint;
+
+        maindata.MonsterList = GameManager.Instance.nowMonsterList;
+        maindata.EmployeeList = GameManager.Instance.nowEmployeeList;
+
+        string ChangeMainData = JsonUtility.ToJson(maindata, true);
+
+        File.WriteAllText(filePath, ChangeMainData);
+    }
+
+
+    #endregion DataSave_and_Create
+
+    #region DataLoad
+
+    public MainCompanyData MainDataLoad()
     {
         string filePath = "Assets/Resources/GameData/MainData.json";
 
         string jsonText = File.ReadAllText(filePath);
         MainCompanyData MainData = JsonUtility.FromJson<MainCompanyData>(jsonText);
-        //Debug.Log("JSON Text: " + jsonText);
-        // foreach (string MonList in MainData.MonsterList)
-        // {
-        //     return MonList;
-        // }
+
         return MainData;
     }
 
@@ -72,13 +95,11 @@ public class DataManager : Singleton<DataManager>
         // JSON 파일 읽어오기
         string jsonText = File.ReadAllText(filePath);
 
-        // 읽어온 JSON 텍스트 확인
-        //Debug.Log("JSON Text: " + jsonText);
-
         // JSON 데이터를 객체로 변환
         MonsterData monsterData = JsonUtility.FromJson<MonsterData>(jsonText);
 
         // 리턴시켜서 다른곳에서도 사용이 가능하게 바꿈
         return monsterData;
     }
+    #endregion DataLoad
 }

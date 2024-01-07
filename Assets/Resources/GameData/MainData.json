@@ -1,8 +1,13 @@
 {
-  "Day": 0,
-  "Money": 100,
-  "ResearchPoint": 0,
-
-  "MonsterList": ["Dummy", "Dummy2"],
-  "EmployeeList": ["000000"]
+    "day": 1,
+    "Money": 100,
+    "ResearchPoint": 10,
+    "MonsterList": [
+        "Dummy",
+        "Dummy2",
+        "Dummy4"
+    ],
+    "EmployeeList": [
+        "000000"
+    ]
 }

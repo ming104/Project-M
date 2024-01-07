@@ -9,17 +9,17 @@ public class RoomManager : MonoBehaviour
 
     public Vector3[] RoomLocate; // 룸 지정 번호는 1 2 3 4 로 했을 때 왼쪽이 1 2 부서 3 4 형식
 
-    public string[] Monsters;
+    public List<string> Monsters;
 
     // Start is called before the first frame update
     void Awake()
     {
-        Monsters = DataManager.Instance.MainData().MonsterList;
+        Monsters = DataManager.Instance.MainDataLoad().MonsterList;
     }
 
     void Start()
     {
-        for (int i = 0; i < Monsters.Length; i++)
+        for (int i = 0; i < Monsters.Count; i++)
         {
             Room.GetComponent<Room_Select_Manager>()._monName = Monsters[i];
             Instantiate(Room, RoomLocate[i], quaternion.identity);

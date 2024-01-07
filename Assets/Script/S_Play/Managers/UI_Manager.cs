@@ -39,8 +39,8 @@ public class UI_Manager : Singleton<UI_Manager>
         WorkCanvasOff();
         EndButtonOff();
         PauseMenuOff();
-        Money.text = "자금 : " + DataManager.Instance.MainData().Money.ToString();
-        ReserchPoint.text = "연구 포인트 : " + DataManager.Instance.MainData().ResearchPoint.ToString();
+        Money.text = "자금 : " + GameManager.Instance.nowMoney;
+        ReserchPoint.text = "연구 포인트 : " + GameManager.Instance.nowResearchPoint;
     }
 
     public void WorkButtonClick(int workNum)

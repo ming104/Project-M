@@ -167,6 +167,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d55f99a02a389024cb6bcf3ede5e6558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nowday: 0
+  nowMoney: 0
+  nowResearchPoint: 0
+  nowMonsterList: []
+  nowEmployeeList: []
 --- !u!1 &52755916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,7 +1989,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &975937746
 RectTransform:
   m_ObjectHideFlags: 0
