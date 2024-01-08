@@ -15,7 +15,7 @@ public class MouseManager : Singleton<MouseManager>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && MouseInteractionOn == true) // 마우스 왼쪽 버튼 클릭 감지
+        if (Input.GetMouseButtonDown(0) && MouseInteractionOn == true && !EventSystem.current.IsPointerOverGameObject()) // 마우스 왼쪽 버튼 클릭 감지
         {
             Vector2 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // 마우스 클릭 위치를 2D 좌표로 변환
             RaycastHit2D hit = Physics2D.Raycast(clickPos, Vector2.zero); // Raycast로 해당 위치에 오브젝트 감지
@@ -24,9 +24,8 @@ public class MouseManager : Singleton<MouseManager>
             {
                 if (hit.collider.CompareTag("Room")) // Room 태그를 갖는 오브젝트를 클릭했다면
                 {
-                    // string MonsterName = hit.collider.GetComponent<Room_Select_Manager>()._monName;
-                    //Debug.Log(MonsterName);
-                    UI_Manager.Instance.WorkCanvasOn(); //UI 활성화하는 코드 실행
+                    var monsterData = DataManager.Instance.MonsterDataLoad(hit.collider.GetComponentInParent<Room_Select_Manager>()._monName);
+                    UI_Manager.Instance.WorkCanvasOn(monsterData); //UI 활성화하는 코드 실행
                 }
                 else if (hit.collider.CompareTag("RoomInfo"))
                 {

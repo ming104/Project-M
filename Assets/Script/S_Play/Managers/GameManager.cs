@@ -45,6 +45,10 @@ public class GameManager : Singleton<GameManager>
         {
             DataManager.Instance.MaindataSave();
         }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            DataManager.Instance.CreateEmployeeData();
+        }
     }
 
     public void AllInteractionOn()
