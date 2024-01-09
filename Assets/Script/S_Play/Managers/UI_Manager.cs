@@ -9,6 +9,7 @@ public class UI_Manager : Singleton<UI_Manager>
     public GameObject Work_Canvas;
     public GameObject InfoCanvas;
     public GameObject EmployeeListCanvas;
+    public GameObject Employee_Info;
 
     [Header("Money_ReserchPoint")]
     public TextMeshProUGUI Money;
@@ -38,10 +39,24 @@ public class UI_Manager : Singleton<UI_Manager>
     [Header("EmployeeList_Element")]
     public GameObject Employee_Element;
     public Transform EmpLayOutGroup;
+
+    //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+    [Header("EmployeeSelected_Element")]
+    public Image EmployeeImage;
+    public TextMeshProUGUI empName;
+    public TextMeshProUGUI empHp;
+    public TextMeshProUGUI empDef;
+    public TextMeshProUGUI empintelligence;
+
+    //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
     [Header("else")]
     public Slider Enegy_Slider;
     public GameObject EndButton;
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
 
 
     private void Start()
@@ -51,6 +66,7 @@ public class UI_Manager : Singleton<UI_Manager>
         WorkCanvasOff();
         EndButtonOff();
         PauseMenuOff();
+        EmployeeSelectcancel();
         Money.text = "자금 : " + GameManager.Instance.nowMoney;
         ReserchPoint.text = "연구 포인트 : " + GameManager.Instance.nowResearchPoint;
     }
@@ -128,7 +144,7 @@ public class UI_Manager : Singleton<UI_Manager>
 
     public void EmployeeListCanvasOn()
     {
-        for (int i = 0; i < GameManager.Instance.nowEmployeeList.Count; i++)
+        for (int i = 0; i < GameManager.Instance.nowEmployeeList.Count && i < 5; i++)
         {
             var newEmployee_Element = Instantiate(Employee_Element, EmpLayOutGroup);
             EmployeeListUI emUI = newEmployee_Element.GetComponent<EmployeeListUI>();
@@ -141,6 +157,21 @@ public class UI_Manager : Singleton<UI_Manager>
 
     public void EmployeeListCanvasOff()
     {
+        EmployeeListCanvas.SetActive(false);
+    }
 
+    public void EmployeeSelected()
+    {
+        //EmployeeImage.sprite = ???
+        string SelectedEmployeename = Selection_Obj.Instance.SelectOBJ[0].GetComponent<Employee>()._empName;
+        empName.text = DataManager.Instance.EmployeeDataLoad(SelectedEmployeename).name;
+        empHp.text = $"Hp : {DataManager.Instance.EmployeeDataLoad(SelectedEmployeename).hp}";
+        empDef.text = $"Def : {DataManager.Instance.EmployeeDataLoad(SelectedEmployeename).def}";
+        empintelligence.text = $"Intelligence : {DataManager.Instance.EmployeeDataLoad(SelectedEmployeename).intelligence}";
+        Employee_Info.SetActive(true);
+    }
+    public void EmployeeSelectcancel()
+    {
+        Employee_Info.SetActive(false);
     }
 }

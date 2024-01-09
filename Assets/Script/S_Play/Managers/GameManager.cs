@@ -21,6 +21,9 @@ public class GameManager : Singleton<GameManager>
         nowMonsterList = DataManager.Instance.MainDataLoad().MonsterList;
         nowEmployeeList = DataManager.Instance.MainDataLoad().EmployeeList;
 
+        RoomManager.Instance.MainSet();
+        EmployeeManager.Instance.MainSet();
+
         AllInteractionOn();
     }
 

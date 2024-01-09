@@ -1,9 +1,7 @@
 {
-  "name": "계약직 1호",
-  "department": 1,
-
-  "hp": 10,
-  "def": 3,
-
-  "intelligence": 10
+    "name": "계약직 1호",
+    "department": 84,
+    "hp": 64,
+    "def": 73,
+    "intelligence": 94
 }

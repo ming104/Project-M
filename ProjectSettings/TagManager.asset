@@ -7,6 +7,7 @@ TagManager:
   - SelectionBase
   - Room
   - RoomInfo
+  - Employee
   layers:
   - Default
   - TransparentFX

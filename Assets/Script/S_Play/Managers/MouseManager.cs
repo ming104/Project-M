@@ -40,6 +40,7 @@ public class MouseManager : Singleton<MouseManager>
                 // 아무런 오브젝트와 충돌하지 않았을 때의 처리                
                 //Debug.Log("No object clicked.");
                 UI_Manager.Instance.WorkCanvasOff();
+                UI_Manager.Instance.EmployeeSelectcancel();
             }
         }
     }

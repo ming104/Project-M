@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class RoomManager : MonoBehaviour
+public class RoomManager : Singleton<RoomManager>
 {
     public GameObject Room;
 
@@ -11,14 +11,9 @@ public class RoomManager : MonoBehaviour
 
     public List<string> Monsters;
 
-    // Start is called before the first frame update
-    void Awake()
+    public void MainSet()
     {
-        Monsters = DataManager.Instance.MainDataLoad().MonsterList;
-    }
-
-    void Start()
-    {
+        Monsters = GameManager.Instance.nowMonsterList;
         for (int i = 0; i < Monsters.Count; i++)
         {
             Room.GetComponent<Room_Select_Manager>()._monName = Monsters[i];

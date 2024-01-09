@@ -61,6 +61,7 @@ public class Selection_Obj : Singleton<Selection_Obj>
             {
                 GameObject unit = collider.gameObject; //유닛에다가 인식된 콜라이더의 게임오브젝트를 넣어줌
                 Select_Obj(unit); // 배열에다가 넣어둠
+                UI_Manager.Instance.EmployeeSelected();
             }
             Destroy(square); // 삭제
         }

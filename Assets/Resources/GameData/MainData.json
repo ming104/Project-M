@@ -1,15 +1,16 @@
 {
-    "day": 1,
-    "Money": 100,
-    "ResearchPoint": 10,
-    "MonsterList": [
-        "Dummy",
-        "Dummy2",
-        "Dummy4"
-    ],
-    "EmployeeList": [
-        "계약직 1호",
-        "계약직 56호",
-        "계약직 71호"
-    ]
+  "day": 1,
+  "Money": 100,
+  "ResearchPoint": 10,
+  "MonsterList": ["Dummy", "Dummy2", "Dummy4"],
+  "EmployeeList": [
+    "계약직 1호",
+    "계약직 56호",
+    "계약직 71호",
+    "계약직 52호",
+    "계약직 10호",
+    "계약직 73호",
+    "계약직 36호",
+    "계약직 64호"
+  ]
 }
