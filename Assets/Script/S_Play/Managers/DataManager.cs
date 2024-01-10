@@ -52,9 +52,12 @@ public class EmployeeData
     public int department;
 
     public int hp;
+    public int mp;
     public int def;
 
+    public int power;
     public int intelligence;
+    public int movementSpeed;
 }
 
 #endregion DataSet
@@ -92,12 +95,19 @@ public class DataManager : Singleton<DataManager>
 
     public void CreateEmployeeData()
     {
-        EmployeeData newEmployeeData = new EmployeeData();
-        newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
-        newEmployeeData.department = UnityEngine.Random.Range(0, 100);
-        newEmployeeData.hp = UnityEngine.Random.Range(0, 100);
-        newEmployeeData.def = UnityEngine.Random.Range(0, 100);
-        newEmployeeData.intelligence = UnityEngine.Random.Range(0, 100);
+        EmployeeData newEmployeeData = new EmployeeData
+        {
+            name = $"계약직 {UnityEngine.Random.Range(0, 100)}호",
+            department = UnityEngine.Random.Range(0, 100),
+
+            hp = UnityEngine.Random.Range(0, 100),
+            mp = UnityEngine.Random.Range(0, 100),
+            def = UnityEngine.Random.Range(0, 100),
+
+            power = UnityEngine.Random.Range(0, 100),
+            intelligence = UnityEngine.Random.Range(0, 100),
+            movementSpeed = UnityEngine.Random.Range(0, 100),
+        };
 
         GameManager.Instance.nowEmployeeList.Add(newEmployeeData.name);
         string filename = newEmployeeData.name;

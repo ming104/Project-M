@@ -1,7 +1,10 @@
 {
-    "name": "계약직 1호",
-    "department": 84,
-    "hp": 64,
-    "def": 73,
-    "intelligence": 94
+  "name": "계약직 1호",
+  "department": 84,
+  "hp": 64,
+  "mp": 74,
+  "def": 73,
+  "power": 12,
+  "intelligence": 94,
+  "MovementSpeed": 10
 }

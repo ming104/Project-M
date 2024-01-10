@@ -25,11 +25,23 @@ public class Employee : MonoBehaviour
         get { return Employeedef; }
     }
 
+    [SerializeField] private int EmployeePower;
+    public int _empPower
+    {
+        set { EmployeePower = value; }
+        get { return EmployeePower; }
+    }
     [SerializeField] private int Employeeintelligence;
     public int _empintelligence
     {
         set { Employeeintelligence = value; }
         get { return Employeeintelligence; }
+    }
+    [SerializeField] private int EmployeeMovementSpeed;
+    public int _empMovementSpeed
+    {
+        set { EmployeeMovementSpeed = value; }
+        get { return EmployeeMovementSpeed; }
     }
 
     // Start is called before the first frame update
