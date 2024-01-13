@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Employee : MonoBehaviour
 {
@@ -11,11 +12,18 @@ public class Employee : MonoBehaviour
         get { return EmployeeName; }
     }
 
-    [SerializeField] private int EmployeeHp;
-    public int _empHp
+    [SerializeField] private int EmployeeMaxHp;
+    public int _empMaxHp
     {
-        set { EmployeeHp = value; }
-        get { return EmployeeHp; }
+        set { EmployeeMaxHp = value; }
+        get { return EmployeeMaxHp; }
+    }
+
+    [SerializeField] private int EmployeeMaxMp;
+    public int _empMaxMp
+    {
+        set { EmployeeMaxMp = value; }
+        get { return EmployeeMaxMp; }
     }
 
     [SerializeField] private int Employeedef;
@@ -44,15 +52,35 @@ public class Employee : MonoBehaviour
         get { return EmployeeMovementSpeed; }
     }
 
+    [SerializeField] private int CurHP;
+    public int _empCurHp
+    {
+        set { CurHP = value; }
+        get { return CurHP; }
+    }
+
+    [SerializeField] private int CurMP;
+    public int _empCurMp
+    {
+        set { CurMP = value; }
+        get { return CurMP; }
+    }
+
+    [SerializeField] private TMPro.TextMeshProUGUI nameText;
+    [SerializeField] private Slider HPBar;
+    [SerializeField] private Slider MPBar;
     // Start is called before the first frame update
     void Start()
     {
-
+        nameText.text = EmployeeName;
+        HPBar.maxValue = EmployeeMaxHp;
+        MPBar.maxValue = EmployeeMaxMp;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        HPBar.value = CurHP;
+        MPBar.value = CurMP;
     }
 }

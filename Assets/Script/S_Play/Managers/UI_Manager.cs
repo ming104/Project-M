@@ -46,8 +46,13 @@ public class UI_Manager : Singleton<UI_Manager>
     public Image EmployeeImage;
     public TextMeshProUGUI empName;
     public TextMeshProUGUI empHp;
+    public TextMeshProUGUI empMp;
+    public Slider EmployeeSelected_HpSlider;
+    public Slider EmployeeSelected_MpSlider;
     public TextMeshProUGUI empDef;
+    public TextMeshProUGUI empPower;
     public TextMeshProUGUI empintelligence;
+    public TextMeshProUGUI empMovementSpeed;
 
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -69,6 +74,11 @@ public class UI_Manager : Singleton<UI_Manager>
         EmployeeSelectcancel();
         Money.text = "자금 : " + GameManager.Instance.nowMoney;
         ReserchPoint.text = "연구 포인트 : " + GameManager.Instance.nowResearchPoint;
+    }
+
+    void Update()
+    {
+
     }
 
     public void WorkButtonClick(int workNum)
@@ -160,14 +170,26 @@ public class UI_Manager : Singleton<UI_Manager>
         EmployeeListCanvas.SetActive(false);
     }
 
-    public void EmployeeSelected()
+    public void EmployeeSelected() //데미지 받으면 다시 호출하는 방식으로 해야할듯 그래야 체력이 동기화됨
     {
         //EmployeeImage.sprite = ???
-        string SelectedEmployeename = Selection_Obj.Instance.SelectOBJ[0].GetComponent<Employee>()._empName;
-        empName.text = DataManager.Instance.EmployeeDataLoad(SelectedEmployeename).name;
-        empHp.text = $"Hp : {DataManager.Instance.EmployeeDataLoad(SelectedEmployeename).hp}";
-        empDef.text = $"Def : {DataManager.Instance.EmployeeDataLoad(SelectedEmployeename).def}";
-        empintelligence.text = $"Intelligence : {DataManager.Instance.EmployeeDataLoad(SelectedEmployeename).intelligence}";
+        var SelectedEmployeeData = Selection_Obj.Instance.SelectOBJ[0].GetComponent<Employee>();
+        empName.text = SelectedEmployeeData._empName;
+        empHp.text = $"체력 : {SelectedEmployeeData._empCurHp}/{SelectedEmployeeData._empMaxHp}";
+        empMp.text = $"정신력 : {SelectedEmployeeData._empCurMp}/{SelectedEmployeeData._empMaxMp}";
+        empDef.text = $"방어력 : {SelectedEmployeeData._empdef}";
+        empPower.text = $"힘 : {SelectedEmployeeData._empPower}";
+        empintelligence.text = $"지능 : {SelectedEmployeeData._empintelligence}";
+        empMovementSpeed.text = $"이동속도 : {SelectedEmployeeData._empMovementSpeed}";
+
+        EmployeeSelected_HpSlider.maxValue = SelectedEmployeeData._empMaxHp;
+        EmployeeSelected_HpSlider.value = SelectedEmployeeData._empCurHp;
+        EmployeeSelected_MpSlider.maxValue = SelectedEmployeeData._empMaxMp;
+        EmployeeSelected_MpSlider.value = SelectedEmployeeData._empCurMp;
+
+        // empHp.text = $"Hp : {DataManager.Instance.EmployeeDataLoad(SelectedEmployeename).hp}";
+        // empDef.text = $"Def : {DataManager.Instance.EmployeeDataLoad(SelectedEmployeename).def}";
+        // empintelligence.text = $"Intelligence : {DataManager.Instance.EmployeeDataLoad(SelectedEmployeename).intelligence}";
         Employee_Info.SetActive(true);
     }
     public void EmployeeSelectcancel()

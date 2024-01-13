@@ -765,8 +765,13 @@ MonoBehaviour:
   EmployeeImage: {fileID: 782215136}
   empName: {fileID: 1470442368}
   empHp: {fileID: 1977267980}
+  empMp: {fileID: 1406832258}
+  EmployeeSelected_HpSlider: {fileID: 906716728}
+  EmployeeSelected_MpSlider: {fileID: 525585564}
   empDef: {fileID: 97818724}
+  empPower: {fileID: 1202825149}
   empintelligence: {fileID: 496175718}
+  empMovementSpeed: {fileID: 212377218}
   Enegy_Slider: {fileID: 1084678919}
   EndButton: {fileID: 1315642012}
 --- !u!1 &212377216
@@ -3424,7 +3429,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -3941,6 +3946,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1281980658}
   - component: {fileID: 1281980659}
+  - component: {fileID: 1281980660}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -4015,6 +4021,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1281980660
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281980657}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1315642012
 GameObject:
   m_ObjectHideFlags: 0
@@ -5849,7 +5881,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -6503,7 +6535,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
