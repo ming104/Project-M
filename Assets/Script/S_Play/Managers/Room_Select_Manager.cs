@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
 public class Room_Select_Manager : MonoBehaviour
 {
-    //public GameObject InfoCanvas;
+    public TextMeshPro textName;
 
     [SerializeField] private string monsterName;
     public string _monName
@@ -18,7 +19,7 @@ public class Room_Select_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        textName.text = _monName;
     }
 
     // Update is called once per frame

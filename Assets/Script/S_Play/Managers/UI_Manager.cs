@@ -26,6 +26,8 @@ public class UI_Manager : Singleton<UI_Manager>
     [Header("Pause")]
     public GameObject PauseMenu;
     public GameObject PauseBG;
+    [Header("Setting")]
+    public GameObject SettingPanel;
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     [Header("Work_Canvas_Element")]
     public Image monsterWorkImage;
@@ -71,6 +73,7 @@ public class UI_Manager : Singleton<UI_Manager>
         WorkCanvasOff();
         EndButtonOff();
         PauseMenuOff();
+        SettingOff();
         EmployeeSelectcancel();
         Money.text = "자금 : " + GameManager.Instance.nowMoney;
         ReserchPoint.text = "연구 포인트 : " + GameManager.Instance.nowResearchPoint;
@@ -195,5 +198,14 @@ public class UI_Manager : Singleton<UI_Manager>
     public void EmployeeSelectcancel()
     {
         Employee_Info.SetActive(false);
+    }
+
+    public void SettingOn()
+    {
+        SettingPanel.SetActive(true);
+    }
+    public void SettingOff()
+    {
+        SettingPanel.SetActive(false);
     }
 }

@@ -59,6 +59,7 @@ public class GameManager : Singleton<GameManager>
         TimeManager.Instance.TimeInteraction = true;
         MouseManager.Instance.MouseInteractionOn = true;
         Camera_Manager.Instance.CamInteractionOn = true;
+        Selection_Obj.Instance.Select_Interaction = true;
     }
 
     public void AllInteractionOff()
@@ -66,5 +67,6 @@ public class GameManager : Singleton<GameManager>
         TimeManager.Instance.TimeInteraction = false;
         MouseManager.Instance.MouseInteractionOn = false;
         Camera_Manager.Instance.CamInteractionOn = false;
+        Selection_Obj.Instance.Select_Interaction = false;
     }
 }
