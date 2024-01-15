@@ -50,7 +50,7 @@ public class GameManager : Singleton<GameManager>
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
-            DataManager.Instance.CreateEmployeeData();
+            DataManager.Instance.CreateEmployeeData(0);
         }
     }
 

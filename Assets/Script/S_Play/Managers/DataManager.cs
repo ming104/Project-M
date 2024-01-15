@@ -5,6 +5,7 @@ using TMPro;
 using System.IO;
 using System;
 using UnityEngine.UI;
+using System.Diagnostics;
 
 
 #region DataSet
@@ -63,7 +64,7 @@ public class EmployeeData
 #endregion DataSet
 
 [Serializable]
-public class DataManager : Singleton<DataManager>
+public class DataManager : Singleton_DonDes<DataManager>
 {
     void Start()
     {
@@ -93,28 +94,88 @@ public class DataManager : Singleton<DataManager>
         File.WriteAllText(filePath, ChangeMainData);
     }
 
-    public void CreateEmployeeData()
+    public void CreateEmployeeData(int number)
     {
-        EmployeeData newEmployeeData = new EmployeeData
+
+        EmployeeData newEmployeeData = new EmployeeData();
+
+        switch (number)
         {
-            name = $"계약직 {UnityEngine.Random.Range(0, 100)}호",
-            department = UnityEngine.Random.Range(0, 100),
+            case 0: // 기본 능력치 직원
+                newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
+                newEmployeeData.department = UnityEngine.Random.Range(10, 100);
 
-            hp = UnityEngine.Random.Range(0, 100),
-            mp = UnityEngine.Random.Range(0, 100),
-            def = UnityEngine.Random.Range(0, 100),
+                newEmployeeData.hp = UnityEngine.Random.Range(10, 80);
+                newEmployeeData.mp = UnityEngine.Random.Range(10, 80);
+                newEmployeeData.def = UnityEngine.Random.Range(10, 80);
 
-            power = UnityEngine.Random.Range(0, 100),
-            intelligence = UnityEngine.Random.Range(0, 100),
-            movementSpeed = UnityEngine.Random.Range(0, 100),
-        };
+                newEmployeeData.power = UnityEngine.Random.Range(0, 80);
+                newEmployeeData.intelligence = UnityEngine.Random.Range(0, 80);
+                newEmployeeData.movementSpeed = UnityEngine.Random.Range(50, 80);
+                break;
+
+            case 1: // 관리 부서 직원
+                newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
+                newEmployeeData.department = UnityEngine.Random.Range(0, 100);
+
+                newEmployeeData.hp = UnityEngine.Random.Range(60, 80);
+                newEmployeeData.mp = UnityEngine.Random.Range(60, 80);
+                newEmployeeData.def = UnityEngine.Random.Range(40, 80);
+
+                newEmployeeData.power = UnityEngine.Random.Range(70, 80);
+                newEmployeeData.intelligence = UnityEngine.Random.Range(20, 50);
+                newEmployeeData.movementSpeed = 50;
+                break;
+
+            case 2: // 감사 부서 직원
+                newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
+                newEmployeeData.department = UnityEngine.Random.Range(0, 100);
+
+                newEmployeeData.hp = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.mp = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.def = UnityEngine.Random.Range(30, 50);
+
+                newEmployeeData.power = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.intelligence = UnityEngine.Random.Range(60, 80);
+                newEmployeeData.movementSpeed = 50;
+                break;
+
+            case 3: // 연구 부서 직원
+                newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
+                newEmployeeData.department = UnityEngine.Random.Range(0, 100);
+
+                newEmployeeData.hp = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.mp = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.def = UnityEngine.Random.Range(30, 50);
+
+                newEmployeeData.power = UnityEngine.Random.Range(20, 50);
+                newEmployeeData.intelligence = UnityEngine.Random.Range(60, 80);
+                newEmployeeData.movementSpeed = 50;
+                break;
+
+            case 4: // 회계 부서 직원
+                newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
+                newEmployeeData.department = UnityEngine.Random.Range(0, 100);
+
+                newEmployeeData.hp = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.mp = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.def = UnityEngine.Random.Range(30, 50);
+
+                newEmployeeData.power = UnityEngine.Random.Range(20, 50);
+                newEmployeeData.intelligence = UnityEngine.Random.Range(60, 80);
+                newEmployeeData.movementSpeed = 50;
+                break;
+        }
+
 
         GameManager.Instance.nowEmployeeList.Add(newEmployeeData.name);
         string filename = newEmployeeData.name;
         string filePath = $"Assets/Resources/GameData/Employee/{filename}.json";
         string Employeejson = JsonUtility.ToJson(newEmployeeData, true);
         File.WriteAllText(filePath, Employeejson);
+
     }
+
 
 
     #endregion DataSave_and_Create

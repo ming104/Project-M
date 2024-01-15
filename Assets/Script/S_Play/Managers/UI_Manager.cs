@@ -79,11 +79,6 @@ public class UI_Manager : Singleton<UI_Manager>
         ReserchPoint.text = "연구 포인트 : " + GameManager.Instance.nowResearchPoint;
     }
 
-    void Update()
-    {
-
-    }
-
     public void WorkButtonClick(int workNum)
     {
         EmployeeListCanvasOn();
@@ -152,6 +147,7 @@ public class UI_Manager : Singleton<UI_Manager>
     {
         Time.timeScale = TimeManager.Instance.TimeScaleList[TimeManager.Instance.TimeScaleListIndex];
         GameManager.Instance.AllInteractionOn();
+        SettingOff();
         PauseMenu.SetActive(false);
     }
 
