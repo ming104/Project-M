@@ -153,13 +153,13 @@ public class UI_Manager : Singleton<UI_Manager>
 
     public void EmployeeListCanvasOn()
     {
-        for (int i = 0; i < GameManager.Instance.nowEmployeeList.Count && i < 5; i++)
+        for (int i = 0; i < DataManager.Instance.MainDataLoad().EmployeeList.Count && i < 5; i++)
         {
             var newEmployee_Element = Instantiate(Employee_Element, EmpLayOutGroup);
             EmployeeListUI emUI = newEmployee_Element.GetComponent<EmployeeListUI>();
-            emUI.Name.text = DataManager.Instance.EmployeeDataLoad(GameManager.Instance.nowEmployeeList[i]).name;
-            emUI.Hp.text = DataManager.Instance.EmployeeDataLoad(GameManager.Instance.nowEmployeeList[i]).hp.ToString();
-            emUI.def.text = DataManager.Instance.EmployeeDataLoad(GameManager.Instance.nowEmployeeList[i]).def.ToString();
+            emUI.Name.text = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().EmployeeList[i]).name;
+            emUI.Hp.text = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().EmployeeList[i]).hp.ToString();
+            emUI.def.text = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().EmployeeList[i]).def.ToString();
         }
         EmployeeListCanvas.SetActive(true);
     }

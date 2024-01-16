@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -7,9 +9,7 @@ public class GameManager : Singleton<GameManager>
     public int nowday;
     public int nowMoney;
     public int nowResearchPoint;
-    public List<string> nowMonsterList;
-
-    public List<string> nowEmployeeList;
+    public int CompanyOpenness; // 회사 개방도
 
 
     // Start is called before the first frame update
@@ -18,9 +18,6 @@ public class GameManager : Singleton<GameManager>
         nowday = DataManager.Instance.MainDataLoad().day;
         nowMoney = DataManager.Instance.MainDataLoad().Money;
         nowResearchPoint = DataManager.Instance.MainDataLoad().ResearchPoint;
-        nowMonsterList = DataManager.Instance.MainDataLoad().MonsterList;
-        nowEmployeeList = DataManager.Instance.MainDataLoad().EmployeeList;
-
         RoomManager.Instance.MainSet();
         EmployeeManager.Instance.MainSet();
 
@@ -54,7 +51,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void AllInteractionOn()
+    public void AllInteractionOn() // 모든 인터렉션 켜기
     {
         TimeManager.Instance.TimeInteraction = true;
         MouseManager.Instance.MouseInteractionOn = true;
@@ -62,7 +59,7 @@ public class GameManager : Singleton<GameManager>
         Selection_Obj.Instance.Select_Interaction = true;
     }
 
-    public void AllInteractionOff()
+    public void AllInteractionOff() // 모든 인터렉션 끄기
     {
         TimeManager.Instance.TimeInteraction = false;
         MouseManager.Instance.MouseInteractionOn = false;

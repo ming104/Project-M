@@ -21,7 +21,7 @@ public class EmployeeManager : Singleton<EmployeeManager>
 
     public void MainSet()
     {
-        Employees = GameManager.Instance.nowEmployeeList;
+        Employees = DataManager.Instance.MainDataLoad().EmployeeList;
         for (int i = 0; i < Employees.Count; i++)
         {
             var empl = Instantiate(Emp, new Vector3(0, 0, 0), Quaternion.identity);

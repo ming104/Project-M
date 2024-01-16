@@ -5,7 +5,6 @@ using TMPro;
 using System.IO;
 using System;
 using UnityEngine.UI;
-using System.Diagnostics;
 
 
 #region DataSet
@@ -15,10 +14,16 @@ public class MainCompanyData
     public int day;
     public int Money;
     public int ResearchPoint;
-    public List<string> MonsterList;
+    public List<List<string>> DepartmentMonster;
 
     public List<string> EmployeeList;
 }
+
+// [Serializable]
+// public class MonsterListClass
+// {
+//     public List<string> MonsterList;
+// }
 
 // 몬스터 데이터 셋
 
@@ -82,12 +87,12 @@ public class DataManager : Singleton_DonDes<DataManager>
 
         MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText);
 
-        maindata.day = GameManager.Instance.nowday;
+        maindata.day += 1;
         maindata.Money = GameManager.Instance.nowMoney;
         maindata.ResearchPoint = GameManager.Instance.nowResearchPoint;
 
-        maindata.MonsterList = GameManager.Instance.nowMonsterList;
-        maindata.EmployeeList = GameManager.Instance.nowEmployeeList;
+        // maindata.Monsters[0].MonsterList = GameManager.Instance.nowMonsterList; // 수정 필요
+        // maindata.EmployeeList = GameManager.Instance.nowEmployeeList;
 
         string ChangeMainData = JsonUtility.ToJson(maindata, true);
 
@@ -132,7 +137,7 @@ public class DataManager : Singleton_DonDes<DataManager>
                 newEmployeeData.department = UnityEngine.Random.Range(0, 100);
 
                 newEmployeeData.hp = UnityEngine.Random.Range(30, 50);
-                newEmployeeData.mp = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.mp = UnityEngine.Random.Range(60, 80);
                 newEmployeeData.def = UnityEngine.Random.Range(30, 50);
 
                 newEmployeeData.power = UnityEngine.Random.Range(30, 50);
@@ -145,7 +150,7 @@ public class DataManager : Singleton_DonDes<DataManager>
                 newEmployeeData.department = UnityEngine.Random.Range(0, 100);
 
                 newEmployeeData.hp = UnityEngine.Random.Range(30, 50);
-                newEmployeeData.mp = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.mp = UnityEngine.Random.Range(60, 80);
                 newEmployeeData.def = UnityEngine.Random.Range(30, 50);
 
                 newEmployeeData.power = UnityEngine.Random.Range(20, 50);
@@ -167,8 +172,6 @@ public class DataManager : Singleton_DonDes<DataManager>
                 break;
         }
 
-
-        GameManager.Instance.nowEmployeeList.Add(newEmployeeData.name);
         string filename = newEmployeeData.name;
         string filePath = $"Assets/Resources/GameData/Employee/{filename}.json";
         string Employeejson = JsonUtility.ToJson(newEmployeeData, true);
@@ -188,6 +191,7 @@ public class DataManager : Singleton_DonDes<DataManager>
 
         string jsonText = File.ReadAllText(filePath);
         MainCompanyData MainData = JsonUtility.FromJson<MainCompanyData>(jsonText);
+        Debug.Log(jsonText);
 
         return MainData;
     }
