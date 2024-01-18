@@ -26,6 +26,13 @@ public class Employee : MonoBehaviour
         get { return EmployeeMaxMp; }
     }
 
+    [SerializeField] private string EmployeeDepartment;
+    public string _empDepartment
+    {
+        set { EmployeeDepartment = value; }
+        get { return EmployeeDepartment; }
+    }
+
     [SerializeField] private int Employeedef;
     public int _empdef
     {

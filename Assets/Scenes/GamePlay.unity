@@ -170,8 +170,7 @@ MonoBehaviour:
   nowday: 0
   nowMoney: 0
   nowResearchPoint: 0
-  nowMonsterList: []
-  nowEmployeeList: []
+  CompanyOpenness: 0
 --- !u!1 &52755916
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,6 +989,7 @@ MonoBehaviour:
   empName: {fileID: 1470442368}
   empHp: {fileID: 1977267980}
   empMp: {fileID: 1406832258}
+  empDepartment: {fileID: 1753060667}
   EmployeeSelected_HpSlider: {fileID: 906716728}
   EmployeeSelected_MpSlider: {fileID: 525585564}
   empDef: {fileID: 97818724}
@@ -3569,7 +3569,6 @@ MonoBehaviour:
   - {x: -20, y: 4, z: 0}
   - {x: 20, y: 4, z: 0}
   - {x: 40, y: 4, z: 0}
-  Monsters: []
 --- !u!1 &906716726
 GameObject:
   m_ObjectHideFlags: 0

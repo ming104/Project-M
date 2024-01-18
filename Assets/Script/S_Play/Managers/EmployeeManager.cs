@@ -21,21 +21,26 @@ public class EmployeeManager : Singleton<EmployeeManager>
 
     public void MainSet()
     {
-        Employees = DataManager.Instance.MainDataLoad().EmployeeList;
-        for (int i = 0; i < Employees.Count; i++)
+        for (int i = 0; i < DataManager.Instance.MainDataLoad().Department.Count; i++)
         {
-            var empl = Instantiate(Emp, new Vector3(0, 0, 0), Quaternion.identity);
-            var empdata = empl.GetComponent<Employee>();
-            empdata._empName = Employees[i];
-            empdata._empMaxHp = DataManager.Instance.EmployeeDataLoad(Employees[i]).hp;
-            empdata._empMaxMp = DataManager.Instance.EmployeeDataLoad(Employees[i]).mp;
-            empdata._empdef = DataManager.Instance.EmployeeDataLoad(Employees[i]).def;
-            empdata._empPower = DataManager.Instance.EmployeeDataLoad(Employees[i]).power;
-            empdata._empintelligence = DataManager.Instance.EmployeeDataLoad(Employees[i]).intelligence;
-            empdata._empMovementSpeed = DataManager.Instance.EmployeeDataLoad(Employees[i]).movementSpeed;
-            empdata._empCurHp = empdata._empMaxHp;
-            empdata._empCurMp = empdata._empMaxMp;
+            Employees = DataManager.Instance.MainDataLoad().Department[i].EmployeeList;
+            for (int j = 0; j < Employees.Count; j++)
+            {
+                var empl = Instantiate(Emp, new Vector3(0, 0, 0), Quaternion.identity);
+                var empdata = empl.GetComponent<Employee>();
+                var empdata_manager = DataManager.Instance.EmployeeDataLoad(Employees[j]);
+                empdata._empName = Employees[j];
+                empdata._empMaxHp = empdata_manager.hp;
+                empdata._empMaxMp = empdata_manager.mp;
+                empdata._empDepartment = $"관리부서_{i}";
+                empdata._empdef = empdata_manager.def;
+                empdata._empPower = empdata_manager.power;
+                empdata._empintelligence = empdata_manager.intelligence;
+                empdata._empMovementSpeed = empdata_manager.movementSpeed;
+                empdata._empCurHp = empdata._empMaxHp;
+                empdata._empCurMp = empdata._empMaxMp;
 
+            }
         }
     }
 

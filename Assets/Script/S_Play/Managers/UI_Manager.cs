@@ -49,6 +49,7 @@ public class UI_Manager : Singleton<UI_Manager>
     public TextMeshProUGUI empName;
     public TextMeshProUGUI empHp;
     public TextMeshProUGUI empMp;
+    public TextMeshProUGUI empDepartment;
     public Slider EmployeeSelected_HpSlider;
     public Slider EmployeeSelected_MpSlider;
     public TextMeshProUGUI empDef;
@@ -153,14 +154,14 @@ public class UI_Manager : Singleton<UI_Manager>
 
     public void EmployeeListCanvasOn()
     {
-        for (int i = 0; i < DataManager.Instance.MainDataLoad().EmployeeList.Count && i < 5; i++)
-        {
-            var newEmployee_Element = Instantiate(Employee_Element, EmpLayOutGroup);
-            EmployeeListUI emUI = newEmployee_Element.GetComponent<EmployeeListUI>();
-            emUI.Name.text = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().EmployeeList[i]).name;
-            emUI.Hp.text = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().EmployeeList[i]).hp.ToString();
-            emUI.def.text = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().EmployeeList[i]).def.ToString();
-        }
+        // for (int i = 0; i < DataManager.Instance.MainDataLoad().Department[0].EmployeeList.Count && i < 5; i++) // 수정필요
+        // {
+        //     var newEmployee_Element = Instantiate(Employee_Element, EmpLayOutGroup);
+        //     EmployeeListUI emUI = newEmployee_Element.GetComponent<EmployeeListUI>();
+        //     emUI.Name.text = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().EmployeeList[i]).name;
+        //     emUI.Hp.text = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().EmployeeList[i]).hp.ToString();
+        //     emUI.def.text = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().EmployeeList[i]).def.ToString();
+        // }
         EmployeeListCanvas.SetActive(true);
     }
 
@@ -169,13 +170,13 @@ public class UI_Manager : Singleton<UI_Manager>
         EmployeeListCanvas.SetActive(false);
     }
 
-    public void EmployeeSelected() //데미지 받으면 다시 호출하는 방식으로 해야할듯 그래야 체력이 동기화됨
+    public void EmployeeSelected() //데미지 받으면 다시 호출하는 방식으로 해야할듯 그래야 체력이 동기화됨 + 힐 받을 때
     {
-        //EmployeeImage.sprite = ???
         var SelectedEmployeeData = Selection_Obj.Instance.SelectOBJ[0].GetComponent<Employee>();
         empName.text = SelectedEmployeeData._empName;
         empHp.text = $"체력 : {SelectedEmployeeData._empCurHp}/{SelectedEmployeeData._empMaxHp}";
         empMp.text = $"정신력 : {SelectedEmployeeData._empCurMp}/{SelectedEmployeeData._empMaxMp}";
+        empDepartment.text = $"근무 부서 : {SelectedEmployeeData._empDepartment}";
         empDef.text = $"방어력 : {SelectedEmployeeData._empdef}";
         empPower.text = $"힘 : {SelectedEmployeeData._empPower}";
         empintelligence.text = $"지능 : {SelectedEmployeeData._empintelligence}";
@@ -185,10 +186,6 @@ public class UI_Manager : Singleton<UI_Manager>
         EmployeeSelected_HpSlider.value = SelectedEmployeeData._empCurHp;
         EmployeeSelected_MpSlider.maxValue = SelectedEmployeeData._empMaxMp;
         EmployeeSelected_MpSlider.value = SelectedEmployeeData._empCurMp;
-
-        // empHp.text = $"Hp : {DataManager.Instance.EmployeeDataLoad(SelectedEmployeename).hp}";
-        // empDef.text = $"Def : {DataManager.Instance.EmployeeDataLoad(SelectedEmployeename).def}";
-        // empintelligence.text = $"Intelligence : {DataManager.Instance.EmployeeDataLoad(SelectedEmployeename).intelligence}";
         Employee_Info.SetActive(true);
     }
     public void EmployeeSelectcancel()

@@ -9,21 +9,19 @@ using UnityEngine.UI;
 
 #region DataSet
 [Serializable]
+public class MonsterListClass
+{
+    public List<string> MonsterList;
+    public List<string> EmployeeList;
+}
+[Serializable]
 public class MainCompanyData
 {
     public int day;
     public int Money;
     public int ResearchPoint;
-    public List<List<string>> DepartmentMonster;
-
-    public List<string> EmployeeList;
+    public List<MonsterListClass> Department;
 }
-
-// [Serializable]
-// public class MonsterListClass
-// {
-//     public List<string> MonsterList;
-// }
 
 // 몬스터 데이터 셋
 
@@ -191,7 +189,7 @@ public class DataManager : Singleton_DonDes<DataManager>
 
         string jsonText = File.ReadAllText(filePath);
         MainCompanyData MainData = JsonUtility.FromJson<MainCompanyData>(jsonText);
-        Debug.Log(jsonText);
+        //Debug.Log(jsonText);
 
         return MainData;
     }
