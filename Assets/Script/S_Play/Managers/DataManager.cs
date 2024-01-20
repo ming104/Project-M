@@ -5,6 +5,7 @@ using TMPro;
 using System.IO;
 using System;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 
 #region DataSet
@@ -50,6 +51,7 @@ public class ResearchLogData
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 //직원 전용 데이터 셋(미완)
+[Serializable]
 public class EmployeeData
 {
     public string name;
@@ -81,23 +83,22 @@ public class DataManager : Singleton_DonDes<DataManager>
     {
         string filePath = "Assets/Resources/GameData/MainData.json";
 
-        string jsonText = File.ReadAllText(filePath);
+        string jsonText = File.ReadAllText(filePath); // 읽어오고
 
-        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText);
+        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText); // class객체로 변환
 
-        maindata.day += 1;
-        maindata.Money = GameManager.Instance.nowMoney;
-        maindata.ResearchPoint = GameManager.Instance.nowResearchPoint;
-
+        // maindata.day += 1;
+        // maindata.Money = GameManager.Instance.nowMoney;
+        // maindata.ResearchPoint = GameManager.Instance.nowResearchPoint;
         // maindata.Monsters[0].MonsterList = GameManager.Instance.nowMonsterList; // 수정 필요
         // maindata.EmployeeList = GameManager.Instance.nowEmployeeList;
 
-        string ChangeMainData = JsonUtility.ToJson(maindata, true);
+        string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
 
-        File.WriteAllText(filePath, ChangeMainData);
+        File.WriteAllText(filePath, ChangeMainData); // string 값을 파일로 저장
     }
 
-    public void CreateEmployeeData(int number)
+    public EmployeeData CreateEmployeeData(int number) // 직원 생성
     {
 
         EmployeeData newEmployeeData = new EmployeeData();
@@ -170,10 +171,11 @@ public class DataManager : Singleton_DonDes<DataManager>
                 break;
         }
 
-        string filename = newEmployeeData.name;
-        string filePath = $"Assets/Resources/GameData/Employee/{filename}.json";
-        string Employeejson = JsonUtility.ToJson(newEmployeeData, true);
-        File.WriteAllText(filePath, Employeejson);
+        return newEmployeeData;
+        // string filename = newEmployeeData.name;
+        // string filePath = $"Assets/Resources/GameData/Employee/{filename}.json";
+        // string Employeejson = JsonUtility.ToJson(newEmployeeData, true);
+        // File.WriteAllText(filePath, Employeejson);
 
     }
 
@@ -196,7 +198,7 @@ public class DataManager : Singleton_DonDes<DataManager>
 
     public MonsterData MonsterDataLoad(string filename)
     {
-        string filePath = "Assets/Resources/GameData/Monster/" + filename + ".json";
+        string filePath = $"Assets/Resources/GameData/Monster/{filename}.json";
 
         // JSON 파일 읽어오기
         string jsonText = File.ReadAllText(filePath);
@@ -212,7 +214,7 @@ public class DataManager : Singleton_DonDes<DataManager>
 
     public EmployeeData EmployeeDataLoad(string filename)
     {
-        string filePath = "Assets/Resources/GameData/Employee/" + filename + ".json";
+        string filePath = $"Assets/Resources/GameData/Employee/{filename}.json";
 
         string jsonText = File.ReadAllText(filePath);
 

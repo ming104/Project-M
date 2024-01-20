@@ -22,6 +22,8 @@ public class Management_Manager : MonoBehaviour
     public TextMeshProUGUI code;
     public TextMeshProUGUI dangerLevel;
     public TextMeshProUGUI research_log;
+    [Header("Employ_Canvas")]
+    public GameObject Employ_Canvas;
 
 
     [Header("ResetImage")]
@@ -127,5 +129,15 @@ public class Management_Manager : MonoBehaviour
         {
             Debug.Log("비어있음");
         }
+    }
+
+    public void Employ_Canvas_ON()
+    {
+        Employ_Manager.Instance.Employ_Setting();
+        Employ_Canvas.SetActive(true);
+    }
+    public void Employ_Canvas_OFF()
+    {
+        Employ_Canvas.SetActive(false);
     }
 }
