@@ -1,10 +1,10 @@
 {
-    "name": "계약직 63호",
-    "department": 42,
-    "hp": 64,
-    "mp": 30,
-    "def": 96,
-    "power": 46,
-    "intelligence": 53,
-    "movementSpeed": 94
+  "name": "계약직 63호",
+  "department": -1,
+  "hp": 64,
+  "mp": 30,
+  "def": 96,
+  "power": 46,
+  "intelligence": 53,
+  "movementSpeed": 94
 }

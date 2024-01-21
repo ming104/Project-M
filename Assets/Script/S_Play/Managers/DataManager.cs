@@ -5,7 +5,6 @@ using TMPro;
 using System.IO;
 using System;
 using UnityEngine.UI;
-using Unity.VisualScripting;
 
 
 #region DataSet
@@ -21,6 +20,7 @@ public class MainCompanyData
     public int day;
     public int Money;
     public int ResearchPoint;
+    public List<string> UnaffiliatedEmployee;
     public List<MonsterListClass> Department;
 }
 
@@ -79,6 +79,9 @@ public class DataManager : Singleton_DonDes<DataManager>
 
     #region DataSave_and_Create
 
+    /// <summary>
+    /// Day, Money, ReserchPoint 처럼 기본적인 것들만 저장함
+    /// </summary>
     public void MaindataSave()
     {
         string filePath = "Assets/Resources/GameData/MainData.json";
@@ -87,17 +90,55 @@ public class DataManager : Singleton_DonDes<DataManager>
 
         MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText); // class객체로 변환
 
-        // maindata.day += 1;
-        // maindata.Money = GameManager.Instance.nowMoney;
-        // maindata.ResearchPoint = GameManager.Instance.nowResearchPoint;
-        // maindata.Monsters[0].MonsterList = GameManager.Instance.nowMonsterList; // 수정 필요
-        // maindata.EmployeeList = GameManager.Instance.nowEmployeeList;
+        maindata.day = GameManager.Instance.nowday;
+        maindata.Money = GameManager.Instance.nowMoney;
+        maindata.ResearchPoint = GameManager.Instance.nowResearchPoint;
+
+        string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
+
+        File.WriteAllText(filePath, ChangeMainData); // string 값을 파일로 저장
+    }
+    /// <summary>
+    /// type는 0일때 몬스터, 1, 2, 3일때 직원임 다만 1은 직원 생성이고 2는 직원 부서 배치임 3은 부서에서 부서 이동할 때 잠깐 부서가 없을 때//
+    /// department는 소속될 회사 부서를 말함 //
+    /// name은 말 그대로 이름임, maindata에 올라갈 이름으로 꼭 파일이름과 같아야 함
+    /// </summary>
+    public void MaindataSave(int type, int department, string name) // 종류, 소속, 이름으로 저장
+    {
+        string filePath = "Assets/Resources/GameData/MainData.json";
+
+        string jsonText = File.ReadAllText(filePath); // 읽어오고
+
+        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText); // class객체로 변환
+        if (type == 0) // 몬스터
+        {
+            maindata.Department[department].MonsterList.Add(name);
+        }
+
+        if (type == 1) // 직원
+        {
+            maindata.UnaffiliatedEmployee.Add(name);
+        }
+        if (type == 2) // 직원 부서 이동
+        {
+            maindata.UnaffiliatedEmployee.Remove(name);
+            maindata.Department[department].EmployeeList.Add(name);
+        }
+        if (type == 3) // 직원 부서 이동할 때 뺄 때
+        {
+            maindata.Department[department].EmployeeList.Remove(name);
+            maindata.UnaffiliatedEmployee.Add(name);
+        }
 
         string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
 
         File.WriteAllText(filePath, ChangeMainData); // string 값을 파일로 저장
     }
 
+    /// <summary>
+    /// 직원의 데이터를 만드는 곳 저장은 되지 않음, 기본으로 이름, 부서, hp, mp, def, power, intelligence, movementSpeed가 정해지게 됨
+    /// 각각 부서 별로 생성되는 직원이 다름 -> 0일 경우 기본 직원이 나오게 됨, 1일 경우 관리부서 직원, 2일 경우 감사부서 직원 3일경우 연구부서 직원, 4일 경우 회계부서 직원이 생성됨
+    /// </summary>
     public EmployeeData CreateEmployeeData(int number) // 직원 생성
     {
 
@@ -107,7 +148,7 @@ public class DataManager : Singleton_DonDes<DataManager>
         {
             case 0: // 기본 능력치 직원
                 newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
-                newEmployeeData.department = UnityEngine.Random.Range(10, 100);
+                newEmployeeData.department = -1;
 
                 newEmployeeData.hp = UnityEngine.Random.Range(10, 80);
                 newEmployeeData.mp = UnityEngine.Random.Range(10, 80);
@@ -120,7 +161,7 @@ public class DataManager : Singleton_DonDes<DataManager>
 
             case 1: // 관리 부서 직원
                 newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
-                newEmployeeData.department = UnityEngine.Random.Range(0, 100);
+                newEmployeeData.department = -1;
 
                 newEmployeeData.hp = UnityEngine.Random.Range(60, 80);
                 newEmployeeData.mp = UnityEngine.Random.Range(60, 80);
@@ -133,7 +174,7 @@ public class DataManager : Singleton_DonDes<DataManager>
 
             case 2: // 감사 부서 직원
                 newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
-                newEmployeeData.department = UnityEngine.Random.Range(0, 100);
+                newEmployeeData.department = -1;
 
                 newEmployeeData.hp = UnityEngine.Random.Range(30, 50);
                 newEmployeeData.mp = UnityEngine.Random.Range(60, 80);
@@ -146,7 +187,7 @@ public class DataManager : Singleton_DonDes<DataManager>
 
             case 3: // 연구 부서 직원
                 newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
-                newEmployeeData.department = UnityEngine.Random.Range(0, 100);
+                newEmployeeData.department = -1;
 
                 newEmployeeData.hp = UnityEngine.Random.Range(30, 50);
                 newEmployeeData.mp = UnityEngine.Random.Range(60, 80);
@@ -159,7 +200,7 @@ public class DataManager : Singleton_DonDes<DataManager>
 
             case 4: // 회계 부서 직원
                 newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
-                newEmployeeData.department = UnityEngine.Random.Range(0, 100);
+                newEmployeeData.department = -1;
 
                 newEmployeeData.hp = UnityEngine.Random.Range(30, 50);
                 newEmployeeData.mp = UnityEngine.Random.Range(30, 50);

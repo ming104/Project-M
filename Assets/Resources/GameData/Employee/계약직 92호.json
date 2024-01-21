@@ -1,10 +1,10 @@
 {
-    "name": "계약직 92호",
-    "department": 41,
-    "hp": 38,
-    "mp": 14,
-    "def": 52,
-    "power": 47,
-    "intelligence": 75,
-    "movementSpeed": 18
+  "name": "계약직 92호",
+  "department": -1,
+  "hp": 38,
+  "mp": 14,
+  "def": 52,
+  "power": 47,
+  "intelligence": 75,
+  "movementSpeed": 18
 }

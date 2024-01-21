@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Management_Manager : MonoBehaviour
 {
@@ -139,5 +140,10 @@ public class Management_Manager : MonoBehaviour
     public void Employ_Canvas_OFF()
     {
         Employ_Canvas.SetActive(false);
+    }
+
+    public void GameStart()
+    {
+        SceneManager.LoadScene("GamePlay");
     }
 }

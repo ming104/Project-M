@@ -61,11 +61,10 @@ public class Setting : MonoBehaviour
         screenMode = isFull ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
     }
 
-    public void SettingOff()
+    public void SettingApply()
     {
         Screen.SetResolution(resolutions[resolutionNum].width,
             resolutions[resolutionNum].height,
             screenMode);
-        UI_Manager.Instance.SettingOff();
     }
 }

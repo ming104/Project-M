@@ -2,6 +2,7 @@
   "day": 3,
   "Money": 100,
   "ResearchPoint": 10,
+  "UnaffiliatedEmployee": [],
   "Department": [
     {
       "MonsterList": ["Dummy", "Dummy2"],
@@ -15,7 +16,7 @@
     },
     {
       "MonsterList": ["Dummy", "Dummy2"],
-      "EmployeeList": ["계약직 6호", "계약직 61호", "계약직 63호", "계약직 3호"]
+      "EmployeeList": ["계약직 6호", "계약직 63호", "계약직 3호"]
     }
   ]
 }

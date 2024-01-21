@@ -17,7 +17,7 @@ public class TitleManager : MonoBehaviour
     #region BtnOnOff
     public void OnGameStartBtn()
     {
-        SceneManager.LoadScene("GamePlay");
+        SceneManager.LoadScene("Management_Scene");
     }
 
     public void SettingBtn_On()
