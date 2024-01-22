@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Management_Manager : MonoBehaviour
 {
@@ -25,7 +26,21 @@ public class Management_Manager : MonoBehaviour
     public TextMeshProUGUI research_log;
     [Header("Employ_Canvas")]
     public GameObject Employ_Canvas;
-
+    [Header("UnaffiliatedEmployee_Panel")]
+    public GameObject UnaffiliatedEmployee_Panel;
+    public GameObject UnaffiliatedEmployee_Info;
+    public Transform Prefab_UnaffiliatedEmployee_List;
+    public GameObject Prefab_UnaffiliatedEmployee_Ele;
+    public List<GameObject> Prefab_UnaffiliatedEmployee_Ele_List;
+    public string SelectedName;
+    [Header("UnaffiliatedEmployee_Panel_UI")]
+    public TextMeshProUGUI UnaffiliatedEmployeeName;
+    public TextMeshProUGUI UnaffiliatedEmployeeHp;
+    public TextMeshProUGUI UnaffiliatedEmployeeMp;
+    public TextMeshProUGUI UnaffiliatedEmployeeDef;
+    public TextMeshProUGUI UnaffiliatedEmployeePower;
+    public TextMeshProUGUI UnaffiliatedEmployeeIntelligence;
+    public TextMeshProUGUI UnaffiliatedEmployeeMovementSpeed;
 
     [Header("ResetImage")]
     public Sprite ResetImage;
@@ -37,6 +52,7 @@ public class Management_Manager : MonoBehaviour
         ResearchPoint.text = $"연구 포인트 : {DataManager.Instance.MainDataLoad().ResearchPoint}";
         DepartmentNumber = 0;
         DepartmentInfo();
+        UnaffiliatedEmployee_Panel_Off();
     }
 
     void DepartmentInfo()
@@ -119,16 +135,17 @@ public class Management_Manager : MonoBehaviour
         InfoCanvas.SetActive(false);
     }
 
-    public void InfoSelectButton(GameObject GB)
+    public void InfoSelectButton(GameObject GO)
     {
-        if (GB.GetComponent<MonsterInfo_Management>()._monName != string.Empty)
+        if (GO.GetComponent<MonsterInfo_Management>()._monName != string.Empty)
         {
-            var monsterData = DataManager.Instance.MonsterDataLoad(GB.GetComponent<MonsterInfo_Management>()._monName);
+            var monsterData = DataManager.Instance.MonsterDataLoad(GO.GetComponent<MonsterInfo_Management>()._monName);
             InfoCanvasOn(monsterData);
         }
         else
         {
             Debug.Log("비어있음");
+            return;
         }
     }
 
@@ -145,5 +162,73 @@ public class Management_Manager : MonoBehaviour
     public void GameStart()
     {
         SceneManager.LoadScene("GamePlay");
+    }
+
+    public void UnaffiliatedEmployee_Panel_On()
+    {
+        UnaffiliatedEmployee_Info_Off();
+        for (int i = 0; i < DataManager.Instance.MainDataLoad().UnaffiliatedEmployee.Count; i++)
+        {
+            var UnaffiliatedEmployee = Instantiate(Prefab_UnaffiliatedEmployee_Ele, Prefab_UnaffiliatedEmployee_List);
+            var UnaffEmpData = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().UnaffiliatedEmployee[i]);
+            var GetComUnEmpInfo = UnaffiliatedEmployee.GetComponent<UnaffiliatedEmployee_Info>();
+            GetComUnEmpInfo._empName = UnaffEmpData.name;
+            GetComUnEmpInfo._empHp = UnaffEmpData.hp;
+            GetComUnEmpInfo._empMp = UnaffEmpData.mp;
+            GetComUnEmpInfo._empdef = UnaffEmpData.def;
+            GetComUnEmpInfo._empPower = UnaffEmpData.power;
+            GetComUnEmpInfo._empintelligence = UnaffEmpData.intelligence;
+            GetComUnEmpInfo._empMovementSpeed = UnaffEmpData.movementSpeed;
+            Prefab_UnaffiliatedEmployee_Ele_List.Add(UnaffiliatedEmployee);
+            UnaffiliatedEmployee.GetComponent<Button>().onClick.AddListener(() => ShowUnaffiliatedEmployeeData(UnaffiliatedEmployee));
+        }
+        UnaffiliatedEmployee_Panel.SetActive(true);
+    }
+    public void UnaffiliatedEmployee_Panel_Off()
+    {
+        UnaffiliatedEmployee_Panel.SetActive(false);
+    }
+
+    public void EmployeeInfoSelectButton(GameObject GO)
+    {
+        if (GO.GetComponent<EmployeeInfo_Management>()._EmpName != string.Empty)
+        {
+            var UnaffiliatedEmployeeData = DataManager.Instance.EmployeeDataLoad(GO.GetComponent<EmployeeInfo_Management>()._EmpName);
+            //InfoCanvasOn(UnaffiliatedEmployeeData);
+        }
+        else
+        {
+            UnaffiliatedEmployee_Panel_On();
+        }
+    }
+
+    public void ShowUnaffiliatedEmployeeData(GameObject GO)
+    {
+        var UnEmp_Info = GO.GetComponent<UnaffiliatedEmployee_Info>();
+        UnaffiliatedEmployeeName.text = $"이름 : {UnEmp_Info._empName}";
+        UnaffiliatedEmployeeHp.text = $"체력 : {UnEmp_Info._empHp}";
+        UnaffiliatedEmployeeMp.text = $"정신력 : {UnEmp_Info._empMp}";
+        UnaffiliatedEmployeeDef.text = $"방어력 : {UnEmp_Info._empdef}";
+        UnaffiliatedEmployeePower.text = $"힘 : {UnEmp_Info._empPower}";
+        UnaffiliatedEmployeeIntelligence.text = $"지능 : {UnEmp_Info._empintelligence}";
+        UnaffiliatedEmployeeMovementSpeed.text = $"이동속도 : {UnEmp_Info._empMovementSpeed}";
+        SelectedName = UnEmp_Info._empName;
+        UnaffiliatedEmployee_Info.SetActive(true);
+    }
+
+    public void UnaffiliatedEmployee_Info_On()
+    {
+        UnaffiliatedEmployee_Info.SetActive(true);
+    }
+    public void UnaffiliatedEmployee_Info_Off()
+    {
+        UnaffiliatedEmployee_Info.SetActive(false);
+    }
+
+    public void InsertUnaffiliatedEmp()
+    {
+        DataManager.Instance.MaindataSave(2, DepartmentNumber, SelectedName);
+        DepartmentInfo();
+        UnaffiliatedEmployee_Panel_Off();
     }
 }

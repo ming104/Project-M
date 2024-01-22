@@ -1,0 +1,22 @@
+{
+  "Max_research_Level": 3,
+
+  "profile": {
+    "code": "M-16-968",
+    "imagePATH": "MonsterImage/P.O.V",
+    "MonsterName": "P.O.V",
+    "riskLevel": 4
+  },
+
+  "Research_log": {
+    "log": [
+      "회사에서 직원이 죽을 때 마다 탈출카운트가 감소한다.",
+      "직원이 아무도 죽지 않았을 경우 연구 성공률이 상승했다.",
+      "연구결과가 실패라면 탈출카운트가 감소한다.",
+      "연구결과가 성공이라면 탈출 카운트가 증가했다.",
+      "2단계 이상의 비상상황이 되었을 때 탈출한다."
+    ]
+  },
+
+  "OpenLevel": 0
+}

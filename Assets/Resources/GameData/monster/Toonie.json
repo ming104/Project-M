@@ -1,0 +1,16 @@
+{
+  "Max_research_Level": 3,
+
+  "profile": {
+    "code": "T-22-930",
+    "imagePATH": "MonsterImage/Toonie",
+    "MonsterName": "투니",
+    "riskLevel": 3
+  },
+
+  "Research_log": {
+    "log": ["미정"]
+  },
+
+  "OpenLevel": 0
+}

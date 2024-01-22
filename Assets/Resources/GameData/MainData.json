@@ -5,7 +5,7 @@
   "UnaffiliatedEmployee": [],
   "Department": [
     {
-      "MonsterList": ["Dummy", "Dummy2"],
+      "MonsterList": ["Dummy", "Dummy2", "P.O.V", "Toonie"],
       "EmployeeList": [
         "계약직 1호",
         "계약직 12호",
@@ -16,7 +16,13 @@
     },
     {
       "MonsterList": ["Dummy", "Dummy2"],
-      "EmployeeList": ["계약직 6호", "계약직 63호", "계약직 3호"]
+      "EmployeeList": [
+        "계약직 6호",
+        "계약직 63호",
+        "계약직 3호",
+        "계약직 84호",
+        "계약직 14호"
+      ]
     }
   ]
 }
