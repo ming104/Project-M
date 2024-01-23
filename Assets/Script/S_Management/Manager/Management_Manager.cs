@@ -17,6 +17,7 @@ public class Management_Manager : MonoBehaviour
     public List<TextMeshProUGUI> MonsterNameText;
     public List<Image> EmployeeImage;
     public List<TextMeshProUGUI> EmployeeNameText;
+    public Button GameStartBtn;
     [Header("InfoCanvas")]
     public GameObject InfoCanvas;
     public Image monsterImage;
@@ -41,6 +42,17 @@ public class Management_Manager : MonoBehaviour
     public TextMeshProUGUI UnaffiliatedEmployeePower;
     public TextMeshProUGUI UnaffiliatedEmployeeIntelligence;
     public TextMeshProUGUI UnaffiliatedEmployeeMovementSpeed;
+    [Header("EmpInfo_Selected")]
+    public GameObject AffiliatedEmployee_Panel;
+    public TextMeshProUGUI AffiliatedEmployeeName;
+    public TextMeshProUGUI AffiliatedEmployeeHp;
+    public TextMeshProUGUI AffiliatedEmployeeMp;
+    public TextMeshProUGUI AffiliatedEmployeeDef;
+    public TextMeshProUGUI AffiliatedEmployeePower;
+    public TextMeshProUGUI AffiliatedEmployeeIntelligence;
+    public TextMeshProUGUI AffiliatedEmployeeMovementSpeed;
+    public GameObject Selected_GameObject;
+
 
     [Header("ResetImage")]
     public Sprite ResetImage;
@@ -53,6 +65,7 @@ public class Management_Manager : MonoBehaviour
         DepartmentNumber = 0;
         DepartmentInfo();
         UnaffiliatedEmployee_Panel_Off();
+        AffiliatedEmployee_Panel_Off();
     }
 
     void DepartmentInfo()
@@ -72,6 +85,7 @@ public class Management_Manager : MonoBehaviour
         for (int i = 0; i < DataManager.Instance.MainDataLoad().Department[DepartmentNumber].EmployeeList.Count; i++)
         {
             EmployeeImage[i].sprite = null;
+            EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = DataManager.Instance.MainDataLoad().Department[DepartmentNumber].EmployeeList[i];
             EmployeeNameText[i].text = DataManager.Instance.MainDataLoad().Department[DepartmentNumber].EmployeeList[i];
         }
     }
@@ -82,11 +96,13 @@ public class Management_Manager : MonoBehaviour
         {
             MonsterImage[i].sprite = ResetImage;
             MonsterNameText[i].text = "없음";
+            MonsterImage[i].GetComponent<MonsterInfo_Management>()._monName = string.Empty;
         }
         for (int i = 0; i < EmployeeImage.Count; i++)
         {
             EmployeeImage[i].sprite = ResetImage;
             EmployeeNameText[i].text = "없음";
+            EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = string.Empty;
         }
     }
 
@@ -186,6 +202,10 @@ public class Management_Manager : MonoBehaviour
     }
     public void UnaffiliatedEmployee_Panel_Off()
     {
+        foreach (Transform child in Prefab_UnaffiliatedEmployee_List)
+        {
+            Destroy(child.gameObject);
+        }
         UnaffiliatedEmployee_Panel.SetActive(false);
     }
 
@@ -194,7 +214,7 @@ public class Management_Manager : MonoBehaviour
         if (GO.GetComponent<EmployeeInfo_Management>()._EmpName != string.Empty)
         {
             var UnaffiliatedEmployeeData = DataManager.Instance.EmployeeDataLoad(GO.GetComponent<EmployeeInfo_Management>()._EmpName);
-            //InfoCanvasOn(UnaffiliatedEmployeeData);
+            AffiliatedEmployee_Panel_On(UnaffiliatedEmployeeData);
         }
         else
         {
@@ -230,5 +250,28 @@ public class Management_Manager : MonoBehaviour
         DataManager.Instance.MaindataSave(2, DepartmentNumber, SelectedName);
         DepartmentInfo();
         UnaffiliatedEmployee_Panel_Off();
+    }
+
+    public void ConvertUnaffiliatedEmp()
+    {
+        DataManager.Instance.MaindataSave(3, DepartmentNumber, SelectedName);
+        AffiliatedEmployee_Panel_Off();
+        DepartmentInfo();
+    }
+    public void AffiliatedEmployee_Panel_On(EmployeeData empdata)
+    {
+        AffiliatedEmployeeName.text = $"이름 : {empdata.name}";
+        AffiliatedEmployeeHp.text = $"체력 : {empdata.hp}";
+        AffiliatedEmployeeMp.text = $"정신력 : {empdata.mp}";
+        AffiliatedEmployeeDef.text = $"방어력 : {empdata.def}";
+        AffiliatedEmployeePower.text = $"힘 : {empdata.power}";
+        AffiliatedEmployeeIntelligence.text = $"지능 : {empdata.intelligence}";
+        AffiliatedEmployeeMovementSpeed.text = $"이동속도 : {empdata.movementSpeed}";
+        SelectedName = empdata.name;
+        AffiliatedEmployee_Panel.SetActive(true);
+    }
+    public void AffiliatedEmployee_Panel_Off()
+    {
+        AffiliatedEmployee_Panel.SetActive(false);
     }
 }
