@@ -81,7 +81,7 @@ public class Camera_Manager : Singleton<Camera_Manager>
         }
         else if (wheelInput < 0) // 내렸을 때 처리 -> 오브젝트 축소
         {
-            if (Main_Camera.orthographicSize < 20)
+            if (Main_Camera.orthographicSize < 40)
             {
                 Main_Camera.orthographicSize += 1;// 축소를 해야하니 스케일을 늘려 보이는 범위를 늘림
             }

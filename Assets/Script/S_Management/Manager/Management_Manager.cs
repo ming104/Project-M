@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.EventSystems;
 
 public class Management_Manager : MonoBehaviour
 {
@@ -71,22 +72,33 @@ public class Management_Manager : MonoBehaviour
     void DepartmentInfo()
     {
         DepartmentInfoReset();
-        Department.text = $"현재 부서 : 관리부서_{DepartmentNumber}";
+        switch (DepartmentNumber)
+        {
+            case -2:
+                Department.text = $"현재 부서 : 관리부서_{DepartmentNumber}";
+                break;
+            case -1:
+                Department.text = $"현재 부서 : 관리부서_{DepartmentNumber}";
+                break;
+            default:
+                Department.text = $"현재 부서 : 관리부서_{DepartmentNumber}";
 
-        for (int i = 0; i < DataManager.Instance.MainDataLoad().Department[DepartmentNumber].MonsterList.Count; i++)
-        {
-            MonsterImage[i].sprite = Resources.Load<Sprite>(DataManager.Instance.MonsterDataLoad
-                (DataManager.Instance.MainDataLoad().Department[DepartmentNumber].MonsterList[i]).profile.imagePATH);
-            MonsterNameText[i].text = DataManager.Instance.MonsterDataLoad
-                (DataManager.Instance.MainDataLoad().Department[DepartmentNumber].MonsterList[i]).profile.MonsterName;
-            MonsterImage[i].GetComponent<MonsterInfo_Management>()._monName =
-                DataManager.Instance.MainDataLoad().Department[DepartmentNumber].MonsterList[i];
-        }
-        for (int i = 0; i < DataManager.Instance.MainDataLoad().Department[DepartmentNumber].EmployeeList.Count; i++)
-        {
-            EmployeeImage[i].sprite = null;
-            EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = DataManager.Instance.MainDataLoad().Department[DepartmentNumber].EmployeeList[i];
-            EmployeeNameText[i].text = DataManager.Instance.MainDataLoad().Department[DepartmentNumber].EmployeeList[i];
+                for (int i = 0; i < DataManager.Instance.MainDataLoad().Department[DepartmentNumber].MonsterList.Count; i++)
+                {
+                    MonsterImage[i].sprite = Resources.Load<Sprite>(DataManager.Instance.MonsterDataLoad
+                        (DataManager.Instance.MainDataLoad().Department[DepartmentNumber].MonsterList[i]).profile.imagePATH);
+                    MonsterNameText[i].text = DataManager.Instance.MonsterDataLoad
+                        (DataManager.Instance.MainDataLoad().Department[DepartmentNumber].MonsterList[i]).profile.MonsterName;
+                    MonsterImage[i].GetComponent<MonsterInfo_Management>()._monName =
+                        DataManager.Instance.MainDataLoad().Department[DepartmentNumber].MonsterList[i];
+                }
+                for (int i = 0; i < DataManager.Instance.MainDataLoad().Department[DepartmentNumber].EmployeeList.Count; i++)
+                {
+                    EmployeeImage[i].sprite = null;
+                    EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = DataManager.Instance.MainDataLoad().Department[DepartmentNumber].EmployeeList[i];
+                    EmployeeNameText[i].text = DataManager.Instance.MainDataLoad().Department[DepartmentNumber].EmployeeList[i];
+                }
+                break;
         }
     }
 
@@ -109,6 +121,12 @@ public class Management_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject() == false)
+        {
+            // 아무런 오브젝트와 충돌하지 않았을 때의 처리                
+            //Debug.Log("No object clicked.");
+            AffiliatedEmployee_Panel_Off();
+        }
         DepartmentNumberSizeControll();
     }
 
