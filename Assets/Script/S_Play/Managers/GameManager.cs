@@ -41,14 +41,14 @@ public class GameManager : Singleton<GameManager>
             AllInteractionOn();
             UI_Manager.Instance.PauseMenuOff();
         }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            DataManager.Instance.MaindataSave();
-        }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            DataManager.Instance.CreateEmployeeData(0);
-        }
+        // if (Input.GetKeyDown(KeyCode.L))
+        // {
+        //     DataManager.Instance.MaindataSave();
+        // }
+        // if (Input.GetKeyDown(KeyCode.M))
+        // {
+        //     DataManager.Instance.CreateEmployeeData(0);
+        // }
     }
 
     public void AllInteractionOn() // 모든 인터렉션 켜기
