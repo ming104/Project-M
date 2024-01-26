@@ -75,10 +75,22 @@ public class Management_Manager : MonoBehaviour
         switch (DepartmentNumber)
         {
             case -2:
-                Department.text = $"현재 부서 : 관리부서_{DepartmentNumber}";
+                Department.text = $"현재 부서 : 감사부서";
+                for (int i = 0; i < DataManager.Instance.MainDataLoad().elseDepart[0].AuditDepartment.Count; i++)
+                {
+                    EmployeeImage[i].sprite = null;
+                    EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = DataManager.Instance.MainDataLoad().elseDepart[0].AuditDepartment[i];
+                    EmployeeNameText[i].text = DataManager.Instance.MainDataLoad().elseDepart[0].AuditDepartment[i];
+                }
                 break;
             case -1:
-                Department.text = $"현재 부서 : 관리부서_{DepartmentNumber}";
+                Department.text = $"현재 부서 : 회계부서";
+                for (int i = 0; i < DataManager.Instance.MainDataLoad().elseDepart[0].AccountingDepartment.Count; i++)
+                {
+                    EmployeeImage[i].sprite = null;
+                    EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = DataManager.Instance.MainDataLoad().elseDepart[0].AccountingDepartment[i];
+                    EmployeeNameText[i].text = DataManager.Instance.MainDataLoad().elseDepart[0].AccountingDepartment[i];
+                }
                 break;
             default:
                 Department.text = $"현재 부서 : 관리부서_{DepartmentNumber}";
@@ -133,7 +145,7 @@ public class Management_Manager : MonoBehaviour
     void DepartmentNumberSizeControll()
     {
         float wheelInput = Input.GetAxis("Mouse ScrollWheel");
-        if (wheelInput > 0 && DepartmentNumber > 0) // 올렸을 때 처리 -> Department감소
+        if (wheelInput > 0 && DepartmentNumber > -2) // 올렸을 때 처리 -> Department감소
         {
             DepartmentNumber--;
             DepartmentInfo();
@@ -251,7 +263,7 @@ public class Management_Manager : MonoBehaviour
         UnaffiliatedEmployeeIntelligence.text = $"지능 : {UnEmp_Info._empintelligence}";
         UnaffiliatedEmployeeMovementSpeed.text = $"이동속도 : {UnEmp_Info._empMovementSpeed}";
         SelectedName = UnEmp_Info._empName;
-        UnaffiliatedEmployee_Info.SetActive(true);
+        UnaffiliatedEmployee_Info_On();
     }
 
     public void UnaffiliatedEmployee_Info_On()
@@ -260,21 +272,36 @@ public class Management_Manager : MonoBehaviour
     }
     public void UnaffiliatedEmployee_Info_Off()
     {
+        SelectedName = string.Empty;
         UnaffiliatedEmployee_Info.SetActive(false);
     }
 
     public void InsertUnaffiliatedEmp()
     {
-        DataManager.Instance.MaindataSave(2, DepartmentNumber, SelectedName);
-        DepartmentInfo();
-        UnaffiliatedEmployee_Panel_Off();
+        if (SelectedName != string.Empty)
+        {
+            DataManager.Instance.MaindataSave(2, DepartmentNumber, SelectedName);
+            DepartmentInfo();
+            UnaffiliatedEmployee_Panel_Off();
+        }
+        else
+        {
+            Debug.Log("비어있음");
+        }
     }
 
     public void ConvertUnaffiliatedEmp()
     {
-        DataManager.Instance.MaindataSave(3, DepartmentNumber, SelectedName);
-        AffiliatedEmployee_Panel_Off();
-        DepartmentInfo();
+        if (SelectedName != string.Empty)
+        {
+            DataManager.Instance.MaindataSave(3, DepartmentNumber, SelectedName);
+            AffiliatedEmployee_Panel_Off();
+            DepartmentInfo();
+        }
+        else
+        {
+            Debug.Log("비어있음");
+        }
     }
     public void AffiliatedEmployee_Panel_On(EmployeeData empdata)
     {

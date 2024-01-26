@@ -15,12 +15,20 @@ public class MonsterListClass
     public List<string> EmployeeList;
 }
 [Serializable]
+public class ElseEmployee
+{
+    public List<string> AuditDepartment;
+    public List<string> AccountingDepartment;
+}
+
+[Serializable]
 public class MainCompanyData
 {
     public int day;
     public int Money;
     public int ResearchPoint;
     public List<string> UnaffiliatedEmployee;
+    public List<ElseEmployee> elseDepart;
     public List<MonsterListClass> Department;
 }
 
@@ -110,24 +118,48 @@ public class DataManager : Singleton_DonDes<DataManager>
         string jsonText = File.ReadAllText(filePath); // 읽어오고
 
         MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText); // class객체로 변환
-        if (type == 0) // 몬스터
+        switch (type)
         {
-            maindata.Department[department].MonsterList.Add(name);
-        }
-
-        if (type == 1) // 직원
-        {
-            maindata.UnaffiliatedEmployee.Add(name);
-        }
-        if (type == 2) // 직원 부서 이동
-        {
-            maindata.UnaffiliatedEmployee.Remove(name);
-            maindata.Department[department].EmployeeList.Add(name);
-        }
-        if (type == 3) // 직원 부서 이동할 때 뺄 때
-        {
-            maindata.Department[department].EmployeeList.Remove(name);
-            maindata.UnaffiliatedEmployee.Add(name);
+            case 0: // 몬스터
+                maindata.Department[department].MonsterList.Add(name);
+                break;
+            case 1: // 직원
+                maindata.UnaffiliatedEmployee.Add(name);
+                break;
+            case 2: // 직원 부서 이동
+                switch (department)
+                {
+                    case -2:
+                        maindata.UnaffiliatedEmployee.Remove(name);
+                        maindata.elseDepart[0].AuditDepartment.Add(name);
+                        break;
+                    case -1:
+                        maindata.UnaffiliatedEmployee.Remove(name);
+                        maindata.elseDepart[0].AccountingDepartment.Add(name);
+                        break;
+                    default:
+                        maindata.UnaffiliatedEmployee.Remove(name);
+                        maindata.Department[department].EmployeeList.Add(name);
+                        break;
+                }
+                break;
+            case 3: // 직원 부서 이동할 때 뺄 때
+                switch (department)
+                {
+                    case -2:
+                        maindata.elseDepart[0].AuditDepartment.Remove(name);
+                        maindata.UnaffiliatedEmployee.Add(name);
+                        break;
+                    case -1:
+                        maindata.elseDepart[0].AccountingDepartment.Remove(name);
+                        maindata.UnaffiliatedEmployee.Add(name);
+                        break;
+                    default:
+                        maindata.Department[department].EmployeeList.Remove(name);
+                        maindata.UnaffiliatedEmployee.Add(name);
+                        break;
+                }
+                break;
         }
 
         string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
