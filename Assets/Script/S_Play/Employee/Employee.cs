@@ -52,6 +52,12 @@ public class Employee : MonoBehaviour
         set { Employeeintelligence = value; }
         get { return Employeeintelligence; }
     }
+    [SerializeField] private int EmployeeJustice;
+    public int _empJustice
+    {
+        set { EmployeeJustice = value; }
+        get { return EmployeeJustice; }
+    }
     [SerializeField] private int EmployeeMovementSpeed;
     public int _empMovementSpeed
     {

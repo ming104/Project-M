@@ -1,10 +1,10 @@
 {
     "name": "계약직 65호",
-    "department": -1,
-    "hp": 77,
-    "mp": 60,
-    "def": 20,
-    "power": 35,
-    "intelligence": 70,
-    "movementSpeed": 57
+    "hp": 46,
+    "mp": 42,
+    "def": 31,
+    "power": 36,
+    "intelligence": 35,
+    "justice": 78,
+    "movementSpeed": 50
 }

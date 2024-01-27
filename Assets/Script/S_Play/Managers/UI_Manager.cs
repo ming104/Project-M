@@ -55,6 +55,7 @@ public class UI_Manager : Singleton<UI_Manager>
     public TextMeshProUGUI empDef;
     public TextMeshProUGUI empPower;
     public TextMeshProUGUI empintelligence;
+    public TextMeshProUGUI empJustice;
     public TextMeshProUGUI empMovementSpeed;
 
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -180,6 +181,7 @@ public class UI_Manager : Singleton<UI_Manager>
         empDef.text = $"방어력 : {SelectedEmployeeData._empdef}";
         empPower.text = $"힘 : {SelectedEmployeeData._empPower}";
         empintelligence.text = $"지능 : {SelectedEmployeeData._empintelligence}";
+        empJustice.text = $"정의 : {SelectedEmployeeData._empJustice}";
         empMovementSpeed.text = $"이동속도 : {SelectedEmployeeData._empMovementSpeed}";
 
         EmployeeSelected_HpSlider.maxValue = SelectedEmployeeData._empMaxHp;

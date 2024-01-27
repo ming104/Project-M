@@ -1,0 +1,10 @@
+{
+    "name": "계약직 60호",
+    "hp": 30,
+    "mp": 42,
+    "def": 44,
+    "power": 49,
+    "intelligence": 38,
+    "justice": 75,
+    "movementSpeed": 50
+}

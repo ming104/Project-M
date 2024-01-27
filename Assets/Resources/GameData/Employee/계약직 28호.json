@@ -1,10 +1,10 @@
 {
     "name": "계약직 28호",
-    "department": -1,
-    "hp": 58,
-    "mp": 26,
-    "def": 47,
-    "power": 28,
-    "intelligence": 33,
-    "movementSpeed": 58
+    "hp": 37,
+    "mp": 65,
+    "def": 65,
+    "power": 61,
+    "intelligence": 17,
+    "justice": 11,
+    "movementSpeed": 50
 }

@@ -21,6 +21,42 @@ public class EmployeeManager : Singleton<EmployeeManager>
 
     public void MainSet()
     {
+        for (int i = 0; i < DataManager.Instance.MainDataLoad().elseDepart[0].AuditDepartment.Count; i++)
+        {
+            var empl = Instantiate(Emp);
+            var empdata = empl.GetComponent<Employee>();
+            var empdata_manager = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().elseDepart[0].AuditDepartment[i]);
+            empdata._empName = DataManager.Instance.MainDataLoad().elseDepart[0].AuditDepartment[i];
+            empdata._empMaxHp = empdata_manager.hp;
+            empdata._empMaxMp = empdata_manager.mp;
+            empdata._empDepartment = $"감사부서";
+            empdata._empdef = empdata_manager.def;
+            empdata._empPower = empdata_manager.power;
+            empdata._empintelligence = empdata_manager.intelligence;
+            empdata._empJustice = empdata_manager.justice;
+            empdata._empMovementSpeed = empdata_manager.movementSpeed;
+            empdata._empCurHp = empdata._empMaxHp;
+            empdata._empCurMp = empdata._empMaxMp;
+            empl.transform.position = new Vector3(-20, 20, 0);
+        }
+        for (int i = 0; i < DataManager.Instance.MainDataLoad().elseDepart[0].AccountingDepartment.Count; i++)
+        {
+            var empl = Instantiate(Emp);
+            var empdata = empl.GetComponent<Employee>();
+            var empdata_manager = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().elseDepart[0].AccountingDepartment[i]);
+            empdata._empName = DataManager.Instance.MainDataLoad().elseDepart[0].AccountingDepartment[i];
+            empdata._empMaxHp = empdata_manager.hp;
+            empdata._empMaxMp = empdata_manager.mp;
+            empdata._empDepartment = $"회계부서";
+            empdata._empdef = empdata_manager.def;
+            empdata._empPower = empdata_manager.power;
+            empdata._empintelligence = empdata_manager.intelligence;
+            empdata._empJustice = empdata_manager.justice;
+            empdata._empMovementSpeed = empdata_manager.movementSpeed;
+            empdata._empCurHp = empdata._empMaxHp;
+            empdata._empCurMp = empdata._empMaxMp;
+            empl.transform.position = new Vector3(20, 20, 0);
+        }
         for (int i = 0; i < DataManager.Instance.MainDataLoad().Department.Count; i++)
         {
             Employees = DataManager.Instance.MainDataLoad().Department[i].EmployeeList;
@@ -36,6 +72,7 @@ public class EmployeeManager : Singleton<EmployeeManager>
                 empdata._empdef = empdata_manager.def;
                 empdata._empPower = empdata_manager.power;
                 empdata._empintelligence = empdata_manager.intelligence;
+                empdata._empJustice = empdata_manager.justice;
                 empdata._empMovementSpeed = empdata_manager.movementSpeed;
                 empdata._empCurHp = empdata._empMaxHp;
                 empdata._empCurMp = empdata._empMaxMp;

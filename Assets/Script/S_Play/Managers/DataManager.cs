@@ -63,7 +63,6 @@ public class ResearchLogData
 public class EmployeeData
 {
     public string name;
-    public int department;
 
     public int hp;
     public int mp;
@@ -71,6 +70,7 @@ public class EmployeeData
 
     public int power;
     public int intelligence;
+    public int justice;
     public int movementSpeed;
 }
 
@@ -169,7 +169,7 @@ public class DataManager : Singleton_DonDes<DataManager>
 
     /// <summary>
     /// 직원의 데이터를 만드는 곳 저장은 되지 않음, 기본으로 이름, 부서, hp, mp, def, power, intelligence, movementSpeed가 정해지게 됨
-    /// 각각 부서 별로 생성되는 직원이 다름 -> 0일 경우 기본 직원이 나오게 됨, 1일 경우 관리부서 직원, 2일 경우 감사부서 직원 3일경우 연구부서 직원, 4일 경우 회계부서 직원이 생성됨
+    /// 각각 부서 별로 생성되는 직원이 다름 -> 0일 경우 기본 직원이 나오게 됨, 1일 경우 관리(연구)부서 직원, 2일 경우 감사부서 직원 3일 경우 회계부서 직원이 생성됨
     /// </summary>
     public EmployeeData CreateEmployeeData(int number) // 직원 생성
     {
@@ -180,66 +180,53 @@ public class DataManager : Singleton_DonDes<DataManager>
         {
             case 0: // 기본 능력치 직원
                 newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
-                newEmployeeData.department = -1;
-
-                newEmployeeData.hp = UnityEngine.Random.Range(10, 80);
-                newEmployeeData.mp = UnityEngine.Random.Range(10, 80);
-                newEmployeeData.def = UnityEngine.Random.Range(10, 80);
-
-                newEmployeeData.power = UnityEngine.Random.Range(0, 80);
-                newEmployeeData.intelligence = UnityEngine.Random.Range(0, 80);
-                newEmployeeData.movementSpeed = UnityEngine.Random.Range(50, 80);
-                break;
-
-            case 1: // 관리 부서 직원
-                newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
-                newEmployeeData.department = -1;
-
-                newEmployeeData.hp = UnityEngine.Random.Range(60, 80);
-                newEmployeeData.mp = UnityEngine.Random.Range(60, 80);
-                newEmployeeData.def = UnityEngine.Random.Range(40, 80);
-
-                newEmployeeData.power = UnityEngine.Random.Range(70, 80);
-                newEmployeeData.intelligence = UnityEngine.Random.Range(20, 50);
-                newEmployeeData.movementSpeed = 50;
-                break;
-
-            case 2: // 감사 부서 직원
-                newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
-                newEmployeeData.department = -1;
-
-                newEmployeeData.hp = UnityEngine.Random.Range(30, 50);
-                newEmployeeData.mp = UnityEngine.Random.Range(60, 80);
-                newEmployeeData.def = UnityEngine.Random.Range(30, 50);
-
-                newEmployeeData.power = UnityEngine.Random.Range(30, 50);
-                newEmployeeData.intelligence = UnityEngine.Random.Range(60, 80);
-                newEmployeeData.movementSpeed = 50;
-                break;
-
-            case 3: // 연구 부서 직원
-                newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
-                newEmployeeData.department = -1;
-
-                newEmployeeData.hp = UnityEngine.Random.Range(30, 50);
-                newEmployeeData.mp = UnityEngine.Random.Range(60, 80);
-                newEmployeeData.def = UnityEngine.Random.Range(30, 50);
-
-                newEmployeeData.power = UnityEngine.Random.Range(20, 50);
-                newEmployeeData.intelligence = UnityEngine.Random.Range(60, 80);
-                newEmployeeData.movementSpeed = 50;
-                break;
-
-            case 4: // 회계 부서 직원
-                newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
-                newEmployeeData.department = -1;
 
                 newEmployeeData.hp = UnityEngine.Random.Range(30, 50);
                 newEmployeeData.mp = UnityEngine.Random.Range(30, 50);
                 newEmployeeData.def = UnityEngine.Random.Range(30, 50);
 
-                newEmployeeData.power = UnityEngine.Random.Range(20, 50);
-                newEmployeeData.intelligence = UnityEngine.Random.Range(60, 80);
+                newEmployeeData.power = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.intelligence = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.justice = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.movementSpeed = 50;
+                break;
+
+            case 1: // 관리(연구) 부서 직원
+                newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
+
+                newEmployeeData.hp = UnityEngine.Random.Range(30, 80);
+                newEmployeeData.mp = UnityEngine.Random.Range(30, 80);
+                newEmployeeData.def = UnityEngine.Random.Range(30, 80);
+
+                newEmployeeData.power = UnityEngine.Random.Range(50, 80);
+                newEmployeeData.intelligence = UnityEngine.Random.Range(10, 30);
+                newEmployeeData.justice = UnityEngine.Random.Range(10, 40);
+                newEmployeeData.movementSpeed = 50;
+                break;
+
+            case 2: // 감사 부서 직원
+                newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
+
+                newEmployeeData.hp = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.mp = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.def = UnityEngine.Random.Range(30, 50);
+
+                newEmployeeData.power = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.intelligence = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.justice = UnityEngine.Random.Range(50, 80);
+                newEmployeeData.movementSpeed = 50;
+                break;
+
+            case 3: // 회계 부서 직원
+                newEmployeeData.name = $"계약직 {UnityEngine.Random.Range(0, 100)}호";
+
+                newEmployeeData.hp = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.mp = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.def = UnityEngine.Random.Range(30, 50);
+
+                newEmployeeData.power = UnityEngine.Random.Range(30, 50);
+                newEmployeeData.intelligence = UnityEngine.Random.Range(50, 80);
+                newEmployeeData.justice = UnityEngine.Random.Range(30, 50);
                 newEmployeeData.movementSpeed = 50;
                 break;
         }

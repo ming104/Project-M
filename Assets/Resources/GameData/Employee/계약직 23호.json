@@ -1,10 +1,10 @@
 {
     "name": "계약직 23호",
-    "department": -1,
-    "hp": 77,
-    "mp": 63,
-    "def": 59,
-    "power": 64,
-    "intelligence": 73,
-    "movementSpeed": 61
+    "hp": 45,
+    "mp": 31,
+    "def": 48,
+    "power": 36,
+    "intelligence": 35,
+    "justice": 73,
+    "movementSpeed": 50
 }

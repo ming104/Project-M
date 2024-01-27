@@ -14,6 +14,7 @@ public class Employee_Element_EmployManager
     public TextMeshProUGUI Def;
     public TextMeshProUGUI Power;
     public TextMeshProUGUI Intelligence;
+    public TextMeshProUGUI justice;
     public TextMeshProUGUI MovementSpeed;
 }
 public class Employ_Manager : Singleton<Employ_Manager>
@@ -33,6 +34,7 @@ public class Employ_Manager : Singleton<Employ_Manager>
             Employ[i].Def.text = $"방어력 : {empinfo.def}";
             Employ[i].Power.text = $"힘 : {empinfo.power}";
             Employ[i].Intelligence.text = $"지능 : {empinfo.intelligence}";
+            Employ[i].justice.text = $"정의 : {empinfo.justice}";
             Employ[i].MovementSpeed.text = $"이동속도 : {empinfo.movementSpeed}";
             empdata[i] = empinfo;
         }

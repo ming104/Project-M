@@ -42,6 +42,7 @@ public class Management_Manager : MonoBehaviour
     public TextMeshProUGUI UnaffiliatedEmployeeDef;
     public TextMeshProUGUI UnaffiliatedEmployeePower;
     public TextMeshProUGUI UnaffiliatedEmployeeIntelligence;
+    public TextMeshProUGUI UnaffiliatedEmployeeJustice;
     public TextMeshProUGUI UnaffiliatedEmployeeMovementSpeed;
     [Header("EmpInfo_Selected")]
     public GameObject AffiliatedEmployee_Panel;
@@ -51,6 +52,7 @@ public class Management_Manager : MonoBehaviour
     public TextMeshProUGUI AffiliatedEmployeeDef;
     public TextMeshProUGUI AffiliatedEmployeePower;
     public TextMeshProUGUI AffiliatedEmployeeIntelligence;
+    public TextMeshProUGUI AffiliatedEmployeeJustice;
     public TextMeshProUGUI AffiliatedEmployeeMovementSpeed;
     public GameObject Selected_GameObject;
 
@@ -128,6 +130,22 @@ public class Management_Manager : MonoBehaviour
             EmployeeNameText[i].text = "없음";
             EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = string.Empty;
         }
+
+        for (int i = 0; i < DataManager.Instance.MainDataLoad().Department.Count; i++)
+        {
+            if (DataManager.Instance.MainDataLoad().Department[i].EmployeeList.Count == 0
+            || DataManager.Instance.MainDataLoad().elseDepart[0].AuditDepartment.Count == 0
+            || DataManager.Instance.MainDataLoad().elseDepart[0].AccountingDepartment.Count == 0)
+            {
+                GameStartBtn.interactable = false;
+                return;
+            }
+            else
+            {
+                GameStartBtn.interactable = true;
+            }
+        }
+
     }
 
     // Update is called once per frame
@@ -224,6 +242,7 @@ public class Management_Manager : MonoBehaviour
             GetComUnEmpInfo._empdef = UnaffEmpData.def;
             GetComUnEmpInfo._empPower = UnaffEmpData.power;
             GetComUnEmpInfo._empintelligence = UnaffEmpData.intelligence;
+            GetComUnEmpInfo._empJustice = UnaffEmpData.justice;
             GetComUnEmpInfo._empMovementSpeed = UnaffEmpData.movementSpeed;
             Prefab_UnaffiliatedEmployee_Ele_List.Add(UnaffiliatedEmployee);
             UnaffiliatedEmployee.GetComponent<Button>().onClick.AddListener(() => ShowUnaffiliatedEmployeeData(UnaffiliatedEmployee));
@@ -261,6 +280,7 @@ public class Management_Manager : MonoBehaviour
         UnaffiliatedEmployeeDef.text = $"방어력 : {UnEmp_Info._empdef}";
         UnaffiliatedEmployeePower.text = $"힘 : {UnEmp_Info._empPower}";
         UnaffiliatedEmployeeIntelligence.text = $"지능 : {UnEmp_Info._empintelligence}";
+        UnaffiliatedEmployeeJustice.text = $"정의 : {UnEmp_Info._empJustice}";
         UnaffiliatedEmployeeMovementSpeed.text = $"이동속도 : {UnEmp_Info._empMovementSpeed}";
         SelectedName = UnEmp_Info._empName;
         UnaffiliatedEmployee_Info_On();
@@ -311,6 +331,7 @@ public class Management_Manager : MonoBehaviour
         AffiliatedEmployeeDef.text = $"방어력 : {empdata.def}";
         AffiliatedEmployeePower.text = $"힘 : {empdata.power}";
         AffiliatedEmployeeIntelligence.text = $"지능 : {empdata.intelligence}";
+        AffiliatedEmployeeJustice.text = $"정의 : {empdata.justice}";
         AffiliatedEmployeeMovementSpeed.text = $"이동속도 : {empdata.movementSpeed}";
         SelectedName = empdata.name;
         AffiliatedEmployee_Panel.SetActive(true);
