@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Camera_Manager : Singleton<Camera_Manager>
@@ -15,6 +12,9 @@ public class Camera_Manager : Singleton<Camera_Manager>
     public Texture2D CursorTexture;
 
     public bool CamInteractionOn = true;
+    [Header("최대 x값, 최소 x값")]
+    public float MaxPosX;
+    public float MinPosX;
     void Start()
     {
         Main_Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -32,6 +32,7 @@ public class Camera_Manager : Singleton<Camera_Manager>
 
     void CameraMove()
     {
+        //var asdf = Mathf.Clamp(Main_Camera.transform.position.x, MinPosX, MaxPosX);
         if (Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))
         {
             //Cursor.SetCursor(CursorTexture, Vector2.zero, CursorMode.ForceSoftware);
@@ -67,6 +68,7 @@ public class Camera_Manager : Singleton<Camera_Manager>
             Main_Camera.transform.Translate(Vector2.right * CameraMovementSpeed * Time.unscaledDeltaTime);
             // 이동시키는 코드 시간이 멈췄을 때 움직이는것이 끊기면 안되니까 UnscaledDeltaTime을 사용함
         }
+
     }
 
     void CameraSize() //orthographicSize가 클수록 오브젝트가 작아짐
