@@ -55,7 +55,11 @@ public class Management_Manager : MonoBehaviour
     public TextMeshProUGUI AffiliatedEmployeeJustice;
     public TextMeshProUGUI AffiliatedEmployeeMovementSpeed;
     public GameObject Selected_GameObject;
-
+    [Header("MonsterBuy_Element")]
+    public GameObject MonsterBuy_Canvas;
+    public List<GameObject> MonsterBuy_GO;
+    [Header("Random_Duplicate_List")]
+    public List<int> DuplicateList;
 
     [Header("ResetImage")]
     public Sprite ResetImage;
@@ -69,6 +73,7 @@ public class Management_Manager : MonoBehaviour
         DepartmentInfo();
         UnaffiliatedEmployee_Panel_Off();
         AffiliatedEmployee_Panel_Off();
+        MonsterBuy_Canvas_Off();
     }
 
     void DepartmentInfo()
@@ -340,4 +345,51 @@ public class Management_Manager : MonoBehaviour
     {
         AffiliatedEmployee_Panel.SetActive(false);
     }
+    public int CreateUnDuplicateRandom(int min, int max)
+    {
+        int number = 0;
+        int currentNumber = 0;
+
+        while (number < max)
+        {
+            currentNumber = UnityEngine.Random.Range(min, max);
+            if (!DuplicateList.Contains(currentNumber))
+            {
+                DuplicateList.Add(currentNumber);
+                break;
+            }
+            else
+            {
+                number++;
+            }
+        }
+        return currentNumber;
+    }
+    public void MonsterBuy_Canvas_Btn_On()
+    {
+        for (int i = 0; i < MonsterBuy_GO.Count; i++)
+        {
+            var rand_number = CreateUnDuplicateRandom(0, DataManager.Instance.MainDataLoad().All_Monster.Count);
+            var MonsterInfo = MonsterBuy_GO[i].GetComponent<MonsterBuy_Selected_Info>();
+            var MonsterDataInfo = DataManager.Instance.MonsterDataLoad(DataManager.Instance.MainDataLoad().All_Monster[rand_number]);
+            MonsterInfo._MonCode = MonsterDataInfo.profile.code;
+            MonsterInfo._MonName = MonsterDataInfo.profile.MonsterName;
+            MonsterInfo._MonInfo = MonsterDataInfo.profile.MonsterBuy_Info;
+
+        }
+        MonsterBuy_Canvas.SetActive(true);
+    }
+    public void MonsterBuy_Canvas_Btn_Off(int num)
+    {
+        DataManager.Instance.MaindataSave(0, 1, DataManager.Instance.MainDataLoad().All_Monster[DuplicateList[num]]);
+        Debug.Log(DataManager.Instance.MainDataLoad().All_Monster[DuplicateList[num]]);
+        DepartmentInfo();
+        DuplicateList.Clear();
+        MonsterBuy_Canvas.SetActive(false);
+    }
+    public void MonsterBuy_Canvas_Off()
+    {
+        MonsterBuy_Canvas.SetActive(false);
+    }
+
 }

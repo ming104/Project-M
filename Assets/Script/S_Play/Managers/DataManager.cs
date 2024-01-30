@@ -30,6 +30,7 @@ public class MainCompanyData
     public List<string> UnaffiliatedEmployee;
     public List<ElseEmployee> elseDepart;
     public List<MonsterListClass> Department;
+    public List<string> All_Monster;
 }
 
 // 몬스터 데이터 셋
@@ -49,6 +50,7 @@ public class ProfileData
     public string code;
     public string imagePATH;
     public string MonsterName;
+    public string MonsterBuy_Info;
     public int riskLevel;
 }
 [Serializable]
