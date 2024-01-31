@@ -123,7 +123,20 @@ public class DataManager : Singleton_DonDes<DataManager>
         switch (type)
         {
             case 0: // 몬스터
-                maindata.Department[department].MonsterList.Add(name);
+                if (maindata.Department[maindata.Department.Count - 1].MonsterList.Count == 4)
+                {
+                    MonsterListClass monsterListAdd = new MonsterListClass
+                    {
+                        MonsterList = new List<string> { name },
+                        EmployeeList = new List<string>()
+                    };
+                    maindata.Department.Add(monsterListAdd);
+                }
+                else
+                {
+                    maindata.Department[department].MonsterList.Add(name);
+                }
+
                 break;
             case 1: // 직원
                 maindata.UnaffiliatedEmployee.Add(name);

@@ -33,13 +33,17 @@
       ]
     },
     {
-      "MonsterList": ["Dummy", "Dummy2"],
+      "MonsterList": ["Dummy", "Dummy2", "P.O.V", "Toonie"],
       "EmployeeList": [
         "계약직 28호",
         "계약직 37호",
         "계약직 77호",
         "계약직 85호"
       ]
+    },
+    {
+      "MonsterList": ["Dummy2"],
+      "EmployeeList": ["계약직 8호"]
     }
   ],
   "All_Monster": ["Dummy", "Dummy2", "P.O.V", "Toonie"]
