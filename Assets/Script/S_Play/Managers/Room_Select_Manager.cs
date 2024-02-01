@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 
 
+
 public class Room_Select_Manager : MonoBehaviour
 {
     public TextMeshPro textName;
@@ -27,14 +28,4 @@ public class Room_Select_Manager : MonoBehaviour
     {
 
     }
-
-    // private void OnMouseEnter()
-    // {
-    //     GetComponent<SpriteRenderer>().color = Color.yellow;
-    // }
-
-    // private void OnMouseExit()
-    // {
-    //     GetComponent<SpriteRenderer>().color = Color.black;
-    // }
 }

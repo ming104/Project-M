@@ -18,14 +18,13 @@ public class RoomManager : Singleton<RoomManager>
 
     public void MainSet()
     {
-        //Debug.Log(DataManager.Instance.MainDataLoad().Department[0].MonsterList[0]);
-        //Monsters = DataManager.Instance.MainDataLoad().Department[0].MonsterList.Count; // 수정필요
         for (int Depart = 0; Depart < DataManager.Instance.MainDataLoad().Department.Count; Depart++)
         {
             for (int i = 0; i < DataManager.Instance.MainDataLoad().Department[Depart].MonsterList.Count; i++)
             {
-                Room.GetComponent<Room_Select_Manager>()._monName = DataManager.Instance.MainDataLoad().Department[Depart].MonsterList[i];
-                Instantiate(Room, Department_Room[Depart].RoomLocate[i], quaternion.identity);
+                var MonRoom = Instantiate(Room);
+                MonRoom.transform.position = Department_Room[Depart].RoomLocate[i];
+                MonRoom.GetComponent<Room_Select_Manager>()._monName = DataManager.Instance.MainDataLoad().Department[Depart].MonsterList[i];
             }
         }
     }
