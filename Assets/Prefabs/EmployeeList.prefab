@@ -93,8 +93,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: {fileID: 8535253993978944417}
-  Hp: {fileID: 4738500749517950217}
-  def: {fileID: 8909498648926956754}
+  SuccessRate: {fileID: 4738500749517950217}
+  ResearchTime: {fileID: 8909498648926956754}
 --- !u!1 &3992613672450502558
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 3479557628310863346}
   - component: {fileID: 8909498648926956754}
   m_Layer: 5
-  m_Name: Def
+  m_Name: ResearchTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'def
+  m_text: '30
 
 '
   m_isRightToLeft: 0
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 8925667187869099843}
   - component: {fileID: 4738500749517950217}
   m_Layer: 5
-  m_Name: Hp
+  m_Name: SuccessRate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,7 +298,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HP
+  m_text: "\uB192\uC74C\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0b02c5bd75aae094ca2995ec2dda97d0, type: 2}
   m_sharedMaterial: {fileID: 4681818631210200266, guid: 0b02c5bd75aae094ca2995ec2dda97d0, type: 2}
@@ -400,11 +400,11 @@ RectTransform:
   m_Father: {fileID: 5610446490313759390}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -136.36, y: 37.5}
-  m_SizeDelta: {x: 127.2896, y: 25}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 320, y: 25}
+  m_Pivot: {x: 1, y: 1}
 --- !u!222 &96868354258627945
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -467,7 +467,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -496,7 +496,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 15, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

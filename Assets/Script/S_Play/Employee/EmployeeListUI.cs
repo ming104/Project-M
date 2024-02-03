@@ -6,6 +6,6 @@ using UnityEngine;
 public class EmployeeListUI : MonoBehaviour
 {
     public TextMeshProUGUI Name;
-    public TextMeshProUGUI Hp;
-    public TextMeshProUGUI def;
+    public TextMeshProUGUI SuccessRate;
+    public TextMeshProUGUI ResearchTime;
 }

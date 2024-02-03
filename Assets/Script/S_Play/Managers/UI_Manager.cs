@@ -36,9 +36,12 @@ public class UI_Manager : Singleton<UI_Manager>
     public TextMeshProUGUI RiskLevel;
     public TextMeshProUGUI OpenLevel;
 
+    private int Select_mon_Depart;
+
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
     [Header("EmployeeList_Element")]
+    public TextMeshProUGUI Depart_Text;
     public GameObject Employee_Element;
     public Transform EmpLayOutGroup;
 
@@ -77,13 +80,14 @@ public class UI_Manager : Singleton<UI_Manager>
         PauseMenuOff();
         SettingOff();
         EmployeeSelectcancel();
+        Select_mon_Depart = 0;
         Money.text = "자금 : " + GameManager.Instance.nowMoney;
         ReserchPoint.text = "연구 포인트 : " + GameManager.Instance.nowResearchPoint;
     }
 
     public void WorkButtonClick(int workNum)
     {
-        EmployeeListCanvasOn();
+        EmployeeListCanvasOn(Select_mon_Depart);
         Debug.Log("Select_Work : " + workNum);
     }
 
@@ -111,13 +115,14 @@ public class UI_Manager : Singleton<UI_Manager>
         InfoCanvas.SetActive(false);
     }
 
-    public void WorkCanvasOn(MonsterData monsterData)
+    public void WorkCanvasOn(MonsterData monsterData, int Mon_depart)
     {
         monsterWorkImage.sprite = Resources.Load<Sprite>(monsterData.profile.imagePATH);
         Name.text = monsterData.profile.MonsterName;
         CodeName.text = monsterData.profile.code;
         RiskLevel.text = $"위험도 : {monsterData.profile.riskLevel}";
         OpenLevel.text = $"연구 정도 : {monsterData.OpenLevel}";
+        Select_mon_Depart = Mon_depart;
 
 
         EmployeeListCanvasOff();
@@ -153,21 +158,27 @@ public class UI_Manager : Singleton<UI_Manager>
         PauseMenu.SetActive(false);
     }
 
-    public void EmployeeListCanvasOn()
+    public void EmployeeListCanvasOn(int depart)
     {
-        // for (int i = 0; i < DataManager.Instance.MainDataLoad().Department[0].EmployeeList.Count && i < 5; i++) // 수정필요
-        // {
-        //     var newEmployee_Element = Instantiate(Employee_Element, EmpLayOutGroup);
-        //     EmployeeListUI emUI = newEmployee_Element.GetComponent<EmployeeListUI>();
-        //     emUI.Name.text = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().EmployeeList[i]).name;
-        //     emUI.Hp.text = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().EmployeeList[i]).hp.ToString();
-        //     emUI.def.text = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().EmployeeList[i]).def.ToString();
-        // }
+        Depart_Text.text = $"관리부서_{depart}";
+        for (int i = 0; i < DataManager.Instance.MainDataLoad().Department[depart].EmployeeList.Count && i < 5; i++)
+        {
+            var newEmployee_Element = Instantiate(Employee_Element, EmpLayOutGroup);
+            EmployeeListUI emUI = newEmployee_Element.GetComponent<EmployeeListUI>();
+            var data = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().Department[depart].EmployeeList[i]);
+            emUI.Name.text = data.name;
+            //emUI.SuccessRate.text = data.hp.ToString(); // 수정필요
+            //emUI.ResearchTime.text = data.def.ToString(); // 수정필요
+        }
         EmployeeListCanvas.SetActive(true);
     }
 
     public void EmployeeListCanvasOff()
     {
+        foreach (Transform child in EmpLayOutGroup) // 자식 삭제 -> 초기화
+        {
+            Destroy(child.gameObject);
+        }
         EmployeeListCanvas.SetActive(false);
     }
 

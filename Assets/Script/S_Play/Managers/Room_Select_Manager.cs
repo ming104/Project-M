@@ -16,6 +16,12 @@ public class Room_Select_Manager : MonoBehaviour
         get { return monsterName; }
     }
 
+    [SerializeField] private int Depart_locate;
+    public int DepartLocate
+    {
+        set { Depart_locate = value; }
+        get { return Depart_locate; }
+    }
 
     // Start is called before the first frame update
     void Start()

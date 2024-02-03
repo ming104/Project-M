@@ -3,18 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class RoomInside : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+public class RoomInside : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if (eventData.button == PointerEventData.InputButton.Left && MouseManager.Instance.MouseInteractionOn == true)
-        {
-            var monsterData = DataManager.Instance.MonsterDataLoad(GetComponentInParent<Room_Select_Manager>()._monName);
-            UI_Manager.Instance.WorkCanvasOn(monsterData); //UI 활성화하는 코드 실행
-
-        }
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         GetComponent<SpriteRenderer>().color = Color.blue;
@@ -23,6 +13,17 @@ public class RoomInside : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerExit(PointerEventData eventData)
     {
         GetComponent<SpriteRenderer>().color = Color.green;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Left && MouseManager.Instance.MouseInteractionOn == true && eventData.pointerDrag == false)
+        {
+            var monsterData = DataManager.Instance.MonsterDataLoad(GetComponentInParent<Room_Select_Manager>()._monName);
+            int monster_depart = GetComponentInParent<Room_Select_Manager>().DepartLocate;
+            UI_Manager.Instance.WorkCanvasOn(monsterData, monster_depart); //UI 활성화하는 코드 실행
+
+        }
     }
 }
 
