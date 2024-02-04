@@ -1,0 +1,22 @@
+{
+  "Max_research_Level": 3,
+
+  "profile": {
+    "code": "U-06-137",
+    "imagePATH": "MonsterImage/Light pillars",
+    "MonsterName": "빛의 기둥",
+    "MonsterBuy_Info": "어둠을 멸하고 부디 빛을 내려주소서",
+    "riskLevel": 5
+  },
+
+  "Research_log": {
+    "log": [
+      "정신력이 60 이하 인 직원이 연구를 시작할 시 탈출 카운트가 증가한다.",
+      "지능이 60 이하인 직원이 연구를 시작할 시 탈출 카운트가 증가한다.",
+      "연구 결과가 실패일 경우 탈출 카운트가 증가한다.",
+      "\"이끌림\"를 사용 할 시 해당 연구법을 사용한 직원은 사라지고 탈출 카운트가 감소한다."
+    ]
+  },
+
+  "OpenLevel": 0
+}

@@ -1,0 +1,20 @@
+{
+  "Max_research_Level": 3,
+
+  "profile": {
+    "code": "T-08-81",
+    "imagePATH": "MonsterImage/StarlightFlower",
+    "MonsterName": "별빛 꽃",
+    "MonsterBuy_Info": "꽃은 하늘의 별과 같아!",
+    "riskLevel": 2
+  },
+
+  "Research_log": {
+    "log": [
+      "연구 결과가 성공이라면 직원의 머리 위에 별빛이 내린다. 이는 일정한 체력을 치유해주는 것으로 확인 되었다.",
+      "연구 결과가 실패라면 직원의 머리 위에 별빛이 내린다. 이는 정신력의 피해를 입히는 것으로 확인되었다."
+    ]
+  },
+
+  "OpenLevel": 0
+}

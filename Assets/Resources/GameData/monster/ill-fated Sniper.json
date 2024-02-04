@@ -1,0 +1,22 @@
+{
+  "Max_research_Level": 3,
+
+  "profile": {
+    "code": "S-06-973",
+    "imagePATH": "MonsterImage/ill-fated Sniper",
+    "MonsterName": "비운의 스나이퍼",
+    "MonsterBuy_Info": "죽이고 싶지 않아 더는....",
+    "riskLevel": 4
+  },
+
+  "Research_log": {
+    "log": [
+      "정신력이 60 이하 인 직원이 연구를 시작할 시 탈출 카운트가 증가한다.",
+      "힘이 40 이하 인 직원이 연구를 시작할 시 즉시 탈출 카운트가 꽉 차게 되었다.(추후에 탈출 카운트 지정)",
+      "연구 결과가 성공이라면 탈출 카운트가 감소하였다.",
+      "직원이 사망할 시 탈출 카운트가 증가한다."
+    ]
+  },
+
+  "OpenLevel": 0
+}

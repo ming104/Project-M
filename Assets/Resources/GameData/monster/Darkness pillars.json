@@ -1,0 +1,22 @@
+{
+  "Max_research_Level": 3,
+
+  "profile": {
+    "code": "U-06-138",
+    "imagePATH": "MonsterImage/Darkness pillars",
+    "MonsterName": "어둠의 기둥",
+    "MonsterBuy_Info": "마지막 불빛을 꺼뜨리고 영원한 어둠을 내려 주시옵소서",
+    "riskLevel": 5
+  },
+
+  "Research_log": {
+    "log": [
+      "힘이 60 이하 인 직원이 연구를 시작할 시 탈출 카운트가 증가한다.",
+      "정의가 60 이하인 직원이 연구를 시작할 시 탈출 카운트가 증가한다.",
+      "연구 결과가 실패일 경우 탈출 카운트가 증가한다.",
+      "\"삼켜짐\"를 사용할 시 해당 연구법을 사용한 직원은 사라지고 탈출 카운트가 감소한다."
+    ]
+  },
+
+  "OpenLevel": 0
+}

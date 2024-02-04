@@ -1,0 +1,20 @@
+{
+  "Max_research_Level": 3,
+
+  "profile": {
+    "code": "S-05-536",
+    "imagePATH": "MonsterImage/need_to_rest",
+    "MonsterName": "휴식이 필요한 소녀",
+    "MonsterBuy_Info": "피곤해 자고싶어...",
+    "riskLevel": 1
+  },
+
+  "Research_log": {
+    "log": [
+      "연구를 시작하면 탈출 카운터가 증가한다.",
+      "연구를 하지 않고 일정 시간이 지났을 때 탈출 카운트가 감소하는 것을 확인했다."
+    ]
+  },
+
+  "OpenLevel": 0
+}

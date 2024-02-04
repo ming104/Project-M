@@ -1,0 +1,22 @@
+{
+  "Max_research_Level": 3,
+
+  "profile": {
+    "code": "H-13-525",
+    "imagePATH": "MonsterImage/Mysterious Well",
+    "MonsterName": "신비한 우물",
+    "MonsterBuy_Info": "이 물을 마시게 된다면 엄청난 일을 겪게 되지...",
+    "riskLevel": 3
+  },
+
+  "Research_log": {
+    "log": [
+      "연구가 끝이 난 뒤 우물에서 알 수 없는 액체가 올라왔다.",
+      "연구 결과가 성공 일 경우 액체를 마셨더니 체력과 정신력이 모두 회복이 된 것으로 확인되었다.",
+      "연구 결과가 보통 일 경우 액체를 마셨더니 아무 일도 일어나지 않았다.",
+      "연구 결과가 실패 일 경우 액체를 마셨더니 액체를 마신 직원이 사망한 것으로 확인 되었다."
+    ]
+  },
+
+  "OpenLevel": 0
+}
