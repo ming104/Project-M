@@ -8,12 +8,18 @@ using UnityEngine;
 public class Room_Select_Manager : MonoBehaviour
 {
     public TextMeshPro textName;
-
     [SerializeField] private string monsterName;
     public string _monName
     {
         set { monsterName = value; }
         get { return monsterName; }
+    }
+
+    [SerializeField] private string monsterFileName;
+    public string _monfileName
+    {
+        set { monsterFileName = value; }
+        get { return monsterFileName; }
     }
 
     [SerializeField] private int Depart_locate;

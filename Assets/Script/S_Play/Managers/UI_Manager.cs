@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class UI_Manager : Singleton<UI_Manager>
 {
@@ -37,6 +39,7 @@ public class UI_Manager : Singleton<UI_Manager>
     public TextMeshProUGUI OpenLevel;
 
     private int Select_mon_Depart;
+    public string pri_monname;
 
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -85,9 +88,9 @@ public class UI_Manager : Singleton<UI_Manager>
         ReserchPoint.text = "연구 포인트 : " + GameManager.Instance.nowResearchPoint;
     }
 
-    public void WorkButtonClick(int workNum)
+    public void WorkButtonClick(int workNum) // 작업 버튼 클릭
     {
-        EmployeeListCanvasOn(Select_mon_Depart);
+        EmployeeListCanvasOn(Select_mon_Depart, workNum);
         Debug.Log("Select_Work : " + workNum);
     }
 
@@ -158,16 +161,41 @@ public class UI_Manager : Singleton<UI_Manager>
         PauseMenu.SetActive(false);
     }
 
-    public void EmployeeListCanvasOn(int depart)
+    public void EmployeeListCanvasOn(int depart, int workButtonNumber)
     {
+        foreach (Transform child in EmpLayOutGroup) // 자식 삭제 -> 초기화
+        {
+            Destroy(child.gameObject);
+        }
         Depart_Text.text = $"관리부서_{depart}";
         for (int i = 0; i < DataManager.Instance.MainDataLoad().Department[depart].EmployeeList.Count && i < 5; i++)
         {
             var newEmployee_Element = Instantiate(Employee_Element, EmpLayOutGroup);
             EmployeeListUI emUI = newEmployee_Element.GetComponent<EmployeeListUI>();
-            var data = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().Department[depart].EmployeeList[i]);
-            emUI.Name.text = data.name;
-            //emUI.SuccessRate.text = data.hp.ToString(); // 수정필요
+            var empdata = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().Department[depart].EmployeeList[i]);
+            var mondata = DataManager.Instance.MonsterDataLoad(pri_monname);
+            emUI.Name.text = empdata.name;
+            switch (workButtonNumber)
+            {
+                case 1:
+                    emUI.SuccessRate.text = $"{mondata.Research_Preferences.FEAR}%";
+                    break;
+                case 2:
+                    emUI.SuccessRate.text = $"{mondata.Research_Preferences.ANGER}%";
+                    break;
+                case 3:
+                    emUI.SuccessRate.text = $"{mondata.Research_Preferences.DISGUST}%";
+                    break;
+                case 4:
+                    emUI.SuccessRate.text = $"{mondata.Research_Preferences.SAD}%";
+                    break;
+                case 5:
+                    emUI.SuccessRate.text = $"{mondata.Research_Preferences.HAPPY}%";
+                    break;
+                case 6:
+                    emUI.SuccessRate.text = $"{mondata.Research_Preferences.SURPRISE}%";
+                    break;
+            }
             //emUI.ResearchTime.text = data.def.ToString(); // 수정필요
         }
         EmployeeListCanvas.SetActive(true);
@@ -175,10 +203,6 @@ public class UI_Manager : Singleton<UI_Manager>
 
     public void EmployeeListCanvasOff()
     {
-        foreach (Transform child in EmpLayOutGroup) // 자식 삭제 -> 초기화
-        {
-            Destroy(child.gameObject);
-        }
         EmployeeListCanvas.SetActive(false);
     }
 

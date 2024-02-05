@@ -1,0 +1,29 @@
+{
+  "Max_research_Level": 3,
+
+  "profile": {
+    "code": "M-07-505",
+    "imagePATH": "MonsterImage/Importance of turn",
+    "MonsterName": "차례의 중요성",
+    "MonsterBuy_Info": "하나! 둘! 셋! 넷! 다섯! 여섯!",
+    "riskLevel": 2
+  },
+
+  "Research_log": {
+    "log": [
+      "연구 시 두려움 → 분노 → 혐오 → 슬픔 → 기쁨 → 놀람 순서대로 연구를 해야 한다.",
+      "위의 순서를 어기고 연구를 할 시 연구를 실행한 직원이 즉시 사망한 것으로 확인되었다."
+    ]
+  },
+
+  "Research_Preferences": {
+    "FEAR": 50,
+    "ANGER": 50,
+    "DISGUST": 50,
+    "SAD": 50,
+    "HAPPY": 50,
+    "SURPRISE": 50
+  },
+
+  "OpenLevel": 0
+}

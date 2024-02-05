@@ -25,7 +25,8 @@ public class RoomManager : Singleton<RoomManager>
                 var MonRoom = Instantiate(Room);
                 MonRoom.transform.position = Department_Room[Depart].RoomLocate[i];
                 var monroom = MonRoom.GetComponent<Room_Select_Manager>();
-                monroom._monName = DataManager.Instance.MainDataLoad().Department[Depart].MonsterList[i];
+                monroom._monName = DataManager.Instance.MonsterDataLoad(DataManager.Instance.MainDataLoad().Department[Depart].MonsterList[i]).profile.MonsterName;
+                monroom._monfileName = DataManager.Instance.MainDataLoad().Department[Depart].MonsterList[i];
                 monroom.DepartLocate = Depart;
 
             }

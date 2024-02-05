@@ -16,5 +16,14 @@
     ]
   },
 
+  "Research_Preferences": {
+    "FEAR": 50,
+    "ANGER": 50,
+    "DISGUST": 50,
+    "SAD": 50,
+    "HAPPY": 50,
+    "SURPRISE": 50
+  },
+
   "OpenLevel": 0
 }

@@ -1,58 +1,68 @@
 {
-  "day": 3,
-  "Money": 100,
-  "ResearchPoint": 10,
-  "UnaffiliatedEmployee": [],
-  "elseDepart": [
-    {
-      "AuditDepartment": [
-        "계약직 23호",
-        "계약직 20호",
-        "계약직 60호",
-        "계약직 65호",
-        "계약직 26호"
-      ],
-      "AccountingDepartment": [
-        "계약직 48호",
-        "계약직 94호",
-        "계약직 73호",
-        "계약직 50호",
-        "계약직 63호"
-      ]
-    }
-  ],
-  "Department": [
-    {
-      "MonsterList": ["Dummy", "Dummy2", "P.O.V", "Toonie"],
-      "EmployeeList": [
-        "계약직 94호",
-        "계약직 17호",
-        "계약직 44호",
-        "계약직 32호",
-        "계약직 97호"
-      ]
-    },
-    {
-      "MonsterList": ["Dummy", "Dummy2", "P.O.V", "Toonie"],
-      "EmployeeList": [
-        "계약직 28호",
-        "계약직 37호",
-        "계약직 77호",
-        "계약직 85호"
-      ]
-    }
-  ],
-  "All_Monster": [
-    "Dummy",
-    "Dummy2",
-    "need_to_rest",
-    "StarlightFlower",
-    "ForgottenMan",
-    "Toonie",
-    "MysteriousWell",
-    "P.O.V",
-    "ill-fated Sniper",
-    "Light pillars",
-    "Darkness pillars"
-  ]
+    "day": 3,
+    "Money": 100,
+    "ResearchPoint": 10,
+    "UnaffiliatedEmployee": [],
+    "elseDepart": [
+        {
+            "AuditDepartment": [
+                "계약직 23호",
+                "계약직 20호",
+                "계약직 60호",
+                "계약직 65호",
+                "계약직 26호"
+            ],
+            "AccountingDepartment": [
+                "계약직 48호",
+                "계약직 94호",
+                "계약직 73호",
+                "계약직 50호",
+                "계약직 63호"
+            ]
+        }
+    ],
+    "Department": [
+        {
+            "MonsterList": [
+                "Dummy",
+                "Dummy2",
+                "P.O.V",
+                "Toonie"
+            ],
+            "EmployeeList": [
+                "계약직 94호",
+                "계약직 17호",
+                "계약직 44호",
+                "계약직 32호",
+                "계약직 97호"
+            ]
+        },
+        {
+            "MonsterList": [
+                "need_to_rest",
+                "MysteriousWell",
+                "ill-fated Sniper",
+                "StarlightFlower"
+            ],
+            "EmployeeList": [
+                "계약직 28호",
+                "계약직 37호",
+                "계약직 77호",
+                "계약직 85호"
+            ]
+        }
+    ],
+    "All_Monster": [
+        "Dummy",
+        "Dummy2",
+        "need_to_rest",
+        "StarlightFlower",
+        "ForgottenMan",
+        "Toonie",
+        "MysteriousWell",
+        "P.O.V",
+        "ill-fated Sniper",
+        "Light pillars",
+        "Darkness pillars"
+    ]
 }

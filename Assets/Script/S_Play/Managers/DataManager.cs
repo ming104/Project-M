@@ -32,6 +32,16 @@ public class MainCompanyData
     public List<MonsterListClass> Department;
     public List<string> All_Monster;
 }
+[Serializable]
+public class ResearchList
+{
+    public int FEAR; //0
+    public int ANGER; //1
+    public int DISGUST; //2
+    public int SAD; //3
+    public int HAPPY; //4
+    public int SURPRISE; //5
+}
 
 // 몬스터 데이터 셋
 
@@ -42,6 +52,7 @@ public class MonsterData
     public int Max_research_Level;
     public ProfileData profile;
     public ResearchLogData Research_log;
+    public ResearchList Research_Preferences;
     public int OpenLevel;
 }
 [Serializable]
