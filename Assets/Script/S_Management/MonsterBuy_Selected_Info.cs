@@ -33,7 +33,7 @@ public class MonsterBuy_Selected_Info : MonoBehaviour, IPointerEnterHandler, IPo
     public void OnPointerEnter(PointerEventData eventData)
     {
         MonsterInfo_GO.SetActive(true);
-        MonsterInfo_Text.text = $"{MonsterBuy_Info}";
+        MonsterInfo_Text.text = $"\"{MonsterBuy_Info}\"";
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -65,20 +65,6 @@ public class Employee : MonoBehaviour
         get { return EmployeeMovementSpeed; }
     }
 
-    [SerializeField] private int CurHP;
-    public int _empCurHp
-    {
-        set { CurHP = value; }
-        get { return CurHP; }
-    }
-
-    [SerializeField] private int CurMP;
-    public int _empCurMp
-    {
-        set { CurMP = value; }
-        get { return CurMP; }
-    }
-
     [SerializeField] private TMPro.TextMeshProUGUI nameText;
     [SerializeField] private Slider HPBar;
     [SerializeField] private Slider MPBar;
@@ -90,10 +76,10 @@ public class Employee : MonoBehaviour
         MPBar.maxValue = EmployeeMaxMp;
     }
 
-    // Update is called once per frame
+    //Update is called once per frame
     void Update()
     {
-        HPBar.value = CurHP;
-        MPBar.value = CurMP;
+        HPBar.value = EmployeeManager.Instance.Employees[EmployeeName].CurrentHP;
+        MPBar.value = EmployeeManager.Instance.Employees[EmployeeName].CurrentMP;
     }
 }

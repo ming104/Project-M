@@ -172,9 +172,16 @@ public class UI_Manager : Singleton<UI_Manager>
         {
             var newEmployee_Element = Instantiate(Employee_Element, EmpLayOutGroup);
             EmployeeListUI emUI = newEmployee_Element.GetComponent<EmployeeListUI>();
-            var empdata = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().Department[depart].EmployeeList[i]);
+            var empListdata = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().Department[depart].EmployeeList[i]);
             var mondata = DataManager.Instance.MonsterDataLoad(pri_monname);
-            emUI.Name.text = empdata.name;
+            emUI.Name.text = empListdata.name;
+            emUI.HpSlider.maxValue = empListdata.hp;
+            emUI.MpSlider.maxValue = empListdata.mp;
+            emUI.HpSlider.value = EmployeeManager.Instance.Employees[empListdata.name].CurrentHP;
+            emUI.MpSlider.value = EmployeeManager.Instance.Employees[empListdata.name].CurrentMP;
+            emUI.HpSlider_Text.text = $"HP : {empListdata.hp}/{empListdata.hp}";
+            emUI.MpSlider_Text.text = $"MP : {empListdata.mp}/{empListdata.mp}";
+
             switch (workButtonNumber)
             {
                 case 1:
@@ -210,8 +217,8 @@ public class UI_Manager : Singleton<UI_Manager>
     {
         var SelectedEmployeeData = Selection_Obj.Instance.SelectOBJ[0].GetComponent<Employee>();
         empName.text = SelectedEmployeeData._empName;
-        empHp.text = $"체력 : {SelectedEmployeeData._empCurHp}/{SelectedEmployeeData._empMaxHp}";
-        empMp.text = $"정신력 : {SelectedEmployeeData._empCurMp}/{SelectedEmployeeData._empMaxMp}";
+        empHp.text = $"체력 : {EmployeeManager.Instance.Employees[SelectedEmployeeData._empName].CurrentHP}/{SelectedEmployeeData._empMaxHp}";
+        empMp.text = $"정신력 : {EmployeeManager.Instance.Employees[SelectedEmployeeData._empName].CurrentMP}/{SelectedEmployeeData._empMaxMp}";
         empDepartment.text = $"근무 부서 : {SelectedEmployeeData._empDepartment}";
         empDef.text = $"방어력 : {SelectedEmployeeData._empdef}";
         empPower.text = $"힘 : {SelectedEmployeeData._empPower}";
@@ -220,9 +227,9 @@ public class UI_Manager : Singleton<UI_Manager>
         empMovementSpeed.text = $"이동속도 : {SelectedEmployeeData._empMovementSpeed}";
 
         EmployeeSelected_HpSlider.maxValue = SelectedEmployeeData._empMaxHp;
-        EmployeeSelected_HpSlider.value = SelectedEmployeeData._empCurHp;
+        EmployeeSelected_HpSlider.value = EmployeeManager.Instance.Employees[SelectedEmployeeData._empName].CurrentHP;
         EmployeeSelected_MpSlider.maxValue = SelectedEmployeeData._empMaxMp;
-        EmployeeSelected_MpSlider.value = SelectedEmployeeData._empCurMp;
+        EmployeeSelected_MpSlider.value = EmployeeManager.Instance.Employees[SelectedEmployeeData._empName].CurrentMP;
         Employee_Info.SetActive(true);
     }
     public void EmployeeSelectcancel()
