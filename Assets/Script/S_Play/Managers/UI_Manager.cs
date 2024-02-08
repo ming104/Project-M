@@ -40,6 +40,7 @@ public class UI_Manager : Singleton<UI_Manager>
 
     private int Select_mon_Depart;
     public string pri_monname;
+    public ObjectLayoutGroup SelectedRoom;
 
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -186,21 +187,27 @@ public class UI_Manager : Singleton<UI_Manager>
             {
                 case 1:
                     emUI.SuccessRate.text = $"{mondata.Research_Preferences.FEAR}%";
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(mondata, mondata.Research_Preferences.FEAR));
                     break;
                 case 2:
                     emUI.SuccessRate.text = $"{mondata.Research_Preferences.ANGER}%";
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(mondata, mondata.Research_Preferences.ANGER));
                     break;
                 case 3:
                     emUI.SuccessRate.text = $"{mondata.Research_Preferences.DISGUST}%";
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(mondata, mondata.Research_Preferences.DISGUST));
                     break;
                 case 4:
                     emUI.SuccessRate.text = $"{mondata.Research_Preferences.SAD}%";
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(mondata, mondata.Research_Preferences.SAD));
                     break;
                 case 5:
                     emUI.SuccessRate.text = $"{mondata.Research_Preferences.HAPPY}%";
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(mondata, mondata.Research_Preferences.HAPPY));
                     break;
                 case 6:
                     emUI.SuccessRate.text = $"{mondata.Research_Preferences.SURPRISE}%";
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(mondata, mondata.Research_Preferences.SURPRISE));
                     break;
             }
             //emUI.ResearchTime.text = data.def.ToString(); // 수정필요
@@ -211,6 +218,59 @@ public class UI_Manager : Singleton<UI_Manager>
     public void EmployeeListCanvasOff()
     {
         EmployeeListCanvas.SetActive(false);
+    }
+
+    public void ResearchStart(MonsterData mondata, int persent)
+    {
+        int RePoCount = 0;
+        //var empListUI = gameObject.GetComponent<EmployeeListUI>();
+        switch (mondata.profile.riskLevel)
+        {
+            case 1:
+                RePoCount = 10;
+                StartCoroutine(probabilitytask(RePoCount, persent));
+                break;
+            case 2:
+                RePoCount = 20;
+                StartCoroutine(probabilitytask(RePoCount, persent));
+                break;
+            case 3:
+                RePoCount = 30;
+                StartCoroutine(probabilitytask(RePoCount, persent));
+                break;
+            case 4:
+                RePoCount = 40;
+                StartCoroutine(probabilitytask(RePoCount, persent));
+                break;
+            case 5:
+                RePoCount = 50;
+                StartCoroutine(probabilitytask(RePoCount, persent));
+                break;
+        }
+
+    }
+    private IEnumerator probabilitytask(int RePo, int persent)
+    {
+        int sum = 0;
+        int nsum = 0;
+        //Debug.Log(SelectedRoom.GetComponent<ObjectLayoutGroup>());
+        for (int i = 0; i < RePo; i++)
+        {
+            var RanNum = Random.Range(0, 100);
+
+            if (RanNum <= persent)
+            {
+                sum++;
+                SelectedRoom.GetComponent<ObjectLayoutGroup>().StackObjects(RePo, true);
+            }
+            else
+            {
+                nsum++;
+                SelectedRoom.GetComponent<ObjectLayoutGroup>().StackObjects(RePo, false);
+            }
+            yield return new WaitForSeconds(0.2f);
+        }
+        Debug.Log($"성공 : {sum}, 실패 : {nsum}");
     }
 
     public void EmployeeSelected() //데미지 받으면 다시 호출하는 방식으로 해야할듯 그래야 체력이 동기화됨 + 힐 받을 때

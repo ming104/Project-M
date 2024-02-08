@@ -1272,6 +1272,7 @@ MonoBehaviour:
   RiskLevel: {fileID: 2021646742}
   OpenLevel: {fileID: 723992365}
   pri_monname: 
+  SelectedRoom: {fileID: 0}
   Depart_Text: {fileID: 1859431509}
   Employee_Element: {fileID: 619761235840833733, guid: 13ce0e2301199dc42b4314a128a16fc6, type: 3}
   EmpLayOutGroup: {fileID: 5534748358754606336}
@@ -13690,7 +13691,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Emp: {fileID: 6493314234655353575, guid: 051c2b836248fa343a22864841b2d83e, type: 3}
-  Employees: []
 --- !u!1 &2083176207
 GameObject:
   m_ObjectHideFlags: 0
