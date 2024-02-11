@@ -254,6 +254,7 @@ public class UI_Manager : Singleton<UI_Manager>
         int sum = 0;
         int nsum = 0;
         //Debug.Log(SelectedRoom.GetComponent<ObjectLayoutGroup>());
+        SelectedRoom.GetComponent<ObjectLayoutGroup>().ChildDestory();
         for (int i = 0; i < RePo; i++)
         {
             var RanNum = Random.Range(0, 100);
