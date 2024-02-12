@@ -8,6 +8,7 @@ TagManager:
   - Room
   - RoomInfo
   - Employee
+  - Passage_Col
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Employee
   - Room
   - RoomInfo
-  - 
+  - Passage_Col
   - 
   - 
   - 

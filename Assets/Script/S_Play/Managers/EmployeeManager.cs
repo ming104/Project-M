@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum EmployeeFSM
 {
@@ -26,6 +25,7 @@ public class Employee_Hp_Mp_Data
 public class EmployeeManager : Singleton<EmployeeManager>
 {
     public GameObject Emp;
+    NavMeshAgent agent;
 
     public Dictionary<string, Employee_Hp_Mp_Data> Employees = new Dictionary<string, Employee_Hp_Mp_Data>();
 
@@ -36,6 +36,9 @@ public class EmployeeManager : Singleton<EmployeeManager>
             var empl = Instantiate(Emp);
             var empdata = empl.GetComponent<Employee>();
             var empdata_manager = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().elseDepart[0].AuditDepartment[i]);
+            agent = empl.GetComponent<NavMeshAgent>();
+            agent.updateRotation = false;
+            agent.updateUpAxis = false;
             empdata._empName = DataManager.Instance.MainDataLoad().elseDepart[0].AuditDepartment[i];
             empdata._empMaxHp = empdata_manager.hp;
             empdata._empMaxMp = empdata_manager.mp;
@@ -62,6 +65,9 @@ public class EmployeeManager : Singleton<EmployeeManager>
             var empl = Instantiate(Emp);
             var empdata = empl.GetComponent<Employee>();
             var empdata_manager = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().elseDepart[0].AccountingDepartment[i]);
+            agent = empl.GetComponent<NavMeshAgent>();
+            agent.updateRotation = false;
+            agent.updateUpAxis = false;
             empdata._empName = DataManager.Instance.MainDataLoad().elseDepart[0].AccountingDepartment[i];
             empdata._empMaxHp = empdata_manager.hp;
             empdata._empMaxMp = empdata_manager.mp;
@@ -90,6 +96,10 @@ public class EmployeeManager : Singleton<EmployeeManager>
                 var empl = Instantiate(Emp);
                 var empdata = empl.GetComponent<Employee>();
                 var empdata_manager = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().Department[i].EmployeeList[j]);
+
+                agent = empl.GetComponent<NavMeshAgent>();
+                agent.updateRotation = false;
+                agent.updateUpAxis = false;
                 empdata._empName = DataManager.Instance.MainDataLoad().Department[i].EmployeeList[j];
                 empdata._empMaxHp = empdata_manager.hp;
                 empdata._empMaxMp = empdata_manager.mp;
@@ -116,8 +126,8 @@ public class EmployeeManager : Singleton<EmployeeManager>
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    // void Update()
+    // {
 
-    }
+    // }
 }

@@ -222,34 +222,34 @@ public class UI_Manager : Singleton<UI_Manager>
 
     public void ResearchStart(MonsterData mondata, int persent)
     {
-        int RePoCount = 0;
+        int RePoCount;
         //var empListUI = gameObject.GetComponent<EmployeeListUI>();
         switch (mondata.profile.riskLevel)
         {
             case 1:
                 RePoCount = 10;
-                StartCoroutine(probabilitytask(RePoCount, persent));
+                StartCoroutine(Probabilitytask(RePoCount, persent));
                 break;
             case 2:
                 RePoCount = 20;
-                StartCoroutine(probabilitytask(RePoCount, persent));
+                StartCoroutine(Probabilitytask(RePoCount, persent));
                 break;
             case 3:
                 RePoCount = 30;
-                StartCoroutine(probabilitytask(RePoCount, persent));
+                StartCoroutine(Probabilitytask(RePoCount, persent));
                 break;
             case 4:
                 RePoCount = 40;
-                StartCoroutine(probabilitytask(RePoCount, persent));
+                StartCoroutine(Probabilitytask(RePoCount, persent));
                 break;
             case 5:
                 RePoCount = 50;
-                StartCoroutine(probabilitytask(RePoCount, persent));
+                StartCoroutine(Probabilitytask(RePoCount, persent));
                 break;
         }
 
     }
-    private IEnumerator probabilitytask(int RePo, int persent)
+    private IEnumerator Probabilitytask(int RePo, int persent)
     {
         int sum = 0;
         int nsum = 0;

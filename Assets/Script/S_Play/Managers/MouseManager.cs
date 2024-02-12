@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 public class MouseManager : Singleton<MouseManager>
@@ -13,6 +14,23 @@ public class MouseManager : Singleton<MouseManager>
         {
             Vector2 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // 마우스 클릭 위치를 2D 좌표로 변환
             RaycastHit2D hit = Physics2D.Raycast(clickPos, Vector2.zero); // Raycast로 해당 위치에 오브젝트 감지
+
+            // if (hit.collider.CompareTag("Passage_Col"))
+            // {
+            //     if (Selection_Obj.Instance.isSelect == false)
+            //     {
+            //         return;
+            //     }
+            //     else
+            //     {
+            //         for (int i = 0; i < Selection_Obj.Instance.SelectOBJ.Count; i++)
+            //         {
+            //             var SelectnavEmp = Selection_Obj.Instance.SelectOBJ[i].GetComponent<NavMeshAgent>();
+            //             SelectnavEmp.SetDestination(hit.collider.transform.position);
+            //         }
+            //     }
+            // }
+
 
             if (EventSystem.current.IsPointerOverGameObject() == false)
             {
