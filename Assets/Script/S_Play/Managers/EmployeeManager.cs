@@ -36,9 +36,14 @@ public class EmployeeManager : Singleton<EmployeeManager>
             var empl = Instantiate(Emp);
             var empdata = empl.GetComponent<Employee>();
             var empdata_manager = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().elseDepart[0].AuditDepartment[i]);
+
+
             agent = empl.GetComponent<NavMeshAgent>();
             agent.updateRotation = false;
             agent.updateUpAxis = false;
+            agent.enabled = false;
+            empl.transform.position = new Vector3(-20, 20, 0);
+
             empdata._empName = DataManager.Instance.MainDataLoad().elseDepart[0].AuditDepartment[i];
             empdata._empMaxHp = empdata_manager.hp;
             empdata._empMaxMp = empdata_manager.mp;
@@ -50,7 +55,7 @@ public class EmployeeManager : Singleton<EmployeeManager>
             empdata._empMovementSpeed = empdata_manager.movementSpeed;
             //empdata._empCurHp = empdata._empMaxHp;
             //empdata._empCurMp = empdata._empMaxMp;
-            empl.transform.position = new Vector3(-20, 20, 0);
+
             var emphmpdata = new Employee_Hp_Mp_Data
             {
                 MaxHP = empdata_manager.hp,
@@ -59,15 +64,20 @@ public class EmployeeManager : Singleton<EmployeeManager>
                 CurrentMP = empdata._empMaxMp,
             };
             Employees.Add(empdata._empName, emphmpdata);
+            agent.enabled = true;
         }
         for (int i = 0; i < DataManager.Instance.MainDataLoad().elseDepart[0].AccountingDepartment.Count; i++)
         {
             var empl = Instantiate(Emp);
             var empdata = empl.GetComponent<Employee>();
             var empdata_manager = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().elseDepart[0].AccountingDepartment[i]);
+            //empl.transform.position = new Vector3(20, 20, 0);
+
             agent = empl.GetComponent<NavMeshAgent>();
             agent.updateRotation = false;
             agent.updateUpAxis = false;
+            agent.enabled = false;
+            empl.transform.position = new Vector3(20, 20, 0);
             empdata._empName = DataManager.Instance.MainDataLoad().elseDepart[0].AccountingDepartment[i];
             empdata._empMaxHp = empdata_manager.hp;
             empdata._empMaxMp = empdata_manager.mp;
@@ -79,7 +89,7 @@ public class EmployeeManager : Singleton<EmployeeManager>
             empdata._empMovementSpeed = empdata_manager.movementSpeed;
             //empdata._empCurHp = empdata._empMaxHp;
             //empdata._empCurMp = empdata._empMaxMp;
-            empl.transform.position = new Vector3(20, 20, 0);
+
             var emphmpdata = new Employee_Hp_Mp_Data
             {
                 MaxHP = empdata_manager.hp,
@@ -88,6 +98,7 @@ public class EmployeeManager : Singleton<EmployeeManager>
                 CurrentMP = empdata._empMaxMp,
             };
             Employees.Add(empdata._empName, emphmpdata);
+            agent.enabled = true;
         }
         for (int i = 0; i < DataManager.Instance.MainDataLoad().Department.Count; i++)
         {
@@ -96,10 +107,14 @@ public class EmployeeManager : Singleton<EmployeeManager>
                 var empl = Instantiate(Emp);
                 var empdata = empl.GetComponent<Employee>();
                 var empdata_manager = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().Department[i].EmployeeList[j]);
+                //empl.transform.position = new Vector3(0, i * -20, 0);
 
                 agent = empl.GetComponent<NavMeshAgent>();
                 agent.updateRotation = false;
                 agent.updateUpAxis = false;
+                agent.enabled = false;
+                empl.transform.position = new Vector3(0, i * -20, 0);
+
                 empdata._empName = DataManager.Instance.MainDataLoad().Department[i].EmployeeList[j];
                 empdata._empMaxHp = empdata_manager.hp;
                 empdata._empMaxMp = empdata_manager.mp;
@@ -111,7 +126,7 @@ public class EmployeeManager : Singleton<EmployeeManager>
                 empdata._empMovementSpeed = empdata_manager.movementSpeed;
                 //empdata._empCurHp = empdata._empMaxHp;
                 //empdata._empCurMp = empdata._empMaxMp;
-                empl.transform.position = new Vector3(0, i * -20, 0);
+
                 var emphmpdata = new Employee_Hp_Mp_Data
                 {
                     MaxHP = empdata_manager.hp,
@@ -120,6 +135,7 @@ public class EmployeeManager : Singleton<EmployeeManager>
                     CurrentMP = empdata._empMaxMp,
                 };
                 Employees.Add(empdata._empName, emphmpdata);
+                agent.enabled = true;
             }
         }
 

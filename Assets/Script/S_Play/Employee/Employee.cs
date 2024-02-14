@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class Employee : MonoBehaviour
@@ -69,6 +70,13 @@ public class Employee : MonoBehaviour
     [SerializeField] private Slider HPBar;
     [SerializeField] private Slider MPBar;
     // Start is called before the first frame update
+    // private void Awake()
+    // {
+    //     NavMeshAgent agent = GetComponent<NavMeshAgent>();
+    //     agent.updateRotation = false;
+    //     agent.updateUpAxis = false;
+    // }
+
     void Start()
     {
         nameText.text = EmployeeName;
