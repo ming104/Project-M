@@ -32,11 +32,13 @@ public class Passage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
                 {
                     NavMeshAgent Selection_Nav = Selection_Obj.Instance.SelectOBJ[i].GetComponent<NavMeshAgent>();
                     Selection_Nav.destination = transform.position;
+
                     // if (Selection_Nav.destination == transform.position)
                     // {
                     //     Selection_Nav.ResetPath(); // 이동했을 때 움직임 멈추는 코드
                     // }
                 }
+                Selection_Obj.Instance.DeSelect_Obj();
             }
         }
         else
