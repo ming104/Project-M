@@ -17,7 +17,7 @@ public class Passage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
             {
                 for (int i = 0; i < Selection_Obj.Instance.SelectOBJ.Count; i++)
                 {
-                    Debug.Log(Selection_Obj.Instance.SelectOBJ[i].name);
+                    //Debug.Log(Selection_Obj.Instance.SelectOBJ[i].name);
                     Selection_Obj.Instance.SelectOBJ[i].GetComponent<Astar>().targetPos = new Vector2Int((int)transform.position.x, (int)transform.position.y);
                     Selection_Obj.Instance.SelectOBJ[i].GetComponent<Astar>().PathFinding();
                 }

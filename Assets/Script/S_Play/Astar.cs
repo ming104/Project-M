@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 [System.Serializable]
@@ -27,6 +28,9 @@ public class Astar : MonoBehaviour
     Node[,] NodeArray;
     Node StartNode, TargetNode, CurNode;
     List<Node> OpenList, ClosedList;
+
+    private Coroutine moveCoroutine;
+
 
     void Update()
     {
@@ -87,9 +91,8 @@ public class Astar : MonoBehaviour
                 FinalNodeList.Add(StartNode);
                 FinalNodeList.Reverse();
 
-                for (int i = 0; i < FinalNodeList.Count; i++) print(i + "번째는 " + FinalNodeList[i].x + ", " + FinalNodeList[i].y);
-
-                StartCoroutine(MoveToWaypoints());
+                //for (int i = 0; i < FinalNodeList.Count; i++) print(i + "번째는 " + FinalNodeList[i].x + ", " + FinalNodeList[i].y);
+                StartMovingToWaypoints();
                 return;
             }
 
@@ -103,11 +106,11 @@ public class Astar : MonoBehaviour
                 OpenListAdd(CurNode.x + 1, CurNode.y - 1);
             }
 
-            // ↑ → ↓ ←
-            OpenListAdd(CurNode.x, CurNode.y + 1);
+            // → ↑ ← ↓
             OpenListAdd(CurNode.x + 1, CurNode.y);
-            OpenListAdd(CurNode.x, CurNode.y - 1);
+            OpenListAdd(CurNode.x, CurNode.y + 1);
             OpenListAdd(CurNode.x - 1, CurNode.y);
+            OpenListAdd(CurNode.x, CurNode.y - 1);
         }
     }
 
@@ -146,19 +149,26 @@ public class Astar : MonoBehaviour
                 Gizmos.DrawLine(new Vector2(FinalNodeList[i].x, FinalNodeList[i].y), new Vector2(FinalNodeList[i + 1].x, FinalNodeList[i + 1].y));
     }
 
+    void StartMovingToWaypoints()
+    {
+        if (moveCoroutine != null)
+            StopCoroutine(moveCoroutine);
+
+        moveCoroutine = StartCoroutine(MoveToWaypoints());
+    }
+
     IEnumerator MoveToWaypoints()
     {
         for (int i = 0; i < FinalNodeList.Count; i++)
         {
-            Vector2 targetPosition = new Vector2(FinalNodeList[i].x, FinalNodeList[i].y);
+            Vector2 targetPosition = new Vector2(FinalNodeList[i].x, FinalNodeList[i].y); //FinalNodeList[i].x, FinalNodeList[i].y
+            //Debug.Log(targetPosition);
 
-            while (new Vector2(transform.position.x, transform.position.y) != targetPosition)
+            while (Vector2.Distance(transform.position, targetPosition) > 0.01f)
             {
                 transform.position = Vector2.MoveTowards(transform.position, targetPosition, GetComponent<Employee>()._empMovementSpeed / 10 * Time.deltaTime);
                 yield return null;
             }
-
-            yield return new WaitForSeconds(0.005f); // 다음 좌표로 이동하기 전에 1초 대기
         }
     }
 }

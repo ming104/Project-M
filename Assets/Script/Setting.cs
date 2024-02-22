@@ -25,7 +25,7 @@ public class Setting : MonoBehaviour
     {
         for (int i = 0; i < Screen.resolutions.Length; i++)
         {
-            if (Screen.resolutions[i].refreshRate != 30)
+            if (Screen.resolutions[i].refreshRateRatio.numerator != 30)
             {
                 resolutions.Add(Screen.resolutions[i]);
             }
@@ -37,7 +37,7 @@ public class Setting : MonoBehaviour
         foreach (Resolution item in resolutions)
         {
             TMP_Dropdown.OptionData option = new TMP_Dropdown.OptionData();
-            option.text = item.width + "x" + item.height + " " + item.refreshRate + "hz";
+            option.text = item.width + "x" + item.height + " " + item.refreshRateRatio.numerator + "hz";
             resolutionDropdown.options.Add(option);
 
             if (item.width == Screen.width && item.height == Screen.height)
