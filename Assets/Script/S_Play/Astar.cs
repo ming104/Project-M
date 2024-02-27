@@ -30,6 +30,13 @@ public class Astar : MonoBehaviour
     List<Node> OpenList, ClosedList;
 
     private Coroutine moveCoroutine;
+    private Employee myEmployee;
+
+    void Start()
+    {
+        myEmployee = GetComponent<Employee>();
+        //myEmployee._empEmployee_CurrentStatus = EmployeeFSM.Wait;
+    }
 
 
     void Update()
@@ -92,6 +99,7 @@ public class Astar : MonoBehaviour
                 FinalNodeList.Reverse();
 
                 //for (int i = 0; i < FinalNodeList.Count; i++) print(i + "번째는 " + FinalNodeList[i].x + ", " + FinalNodeList[i].y);
+                myEmployee.PingPongstartPosition = new Vector3(targetPos.x, targetPos.y, 0);
                 StartMovingToWaypoints();
                 return;
             }
@@ -159,6 +167,7 @@ public class Astar : MonoBehaviour
 
     IEnumerator MoveToWaypoints()
     {
+        myEmployee._empEmployee_CurrentStatus = EmployeeFSM.moving;
         for (int i = 0; i < FinalNodeList.Count; i++)
         {
             Vector2 targetPosition = new Vector2(FinalNodeList[i].x, FinalNodeList[i].y); //FinalNodeList[i].x, FinalNodeList[i].y
@@ -170,5 +179,6 @@ public class Astar : MonoBehaviour
                 yield return null;
             }
         }
+        myEmployee._empEmployee_CurrentStatus = EmployeeFSM.Wait;
     }
 }

@@ -4,15 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum EmployeeFSM
-{
-    Wait = 0,
-    moving = 1,
-    Work = 2,
-    battle = 3,
-    status_effect = 4
-}
-
 [Serializable]
 public class Employee_Hp_Mp_Data
 {
@@ -46,6 +37,7 @@ public class EmployeeManager : Singleton<EmployeeManager>
             empdata._empintelligence = empdata_manager.intelligence;
             empdata._empJustice = empdata_manager.justice;
             empdata._empMovementSpeed = empdata_manager.movementSpeed;
+            //empdata._empEmployee_CurrentStatus = EmployeeFSM.Wait;
             //empdata._empCurHp = empdata._empMaxHp;
             //empdata._empCurMp = empdata._empMaxMp;
 
@@ -73,6 +65,7 @@ public class EmployeeManager : Singleton<EmployeeManager>
             empdata._empintelligence = empdata_manager.intelligence;
             empdata._empJustice = empdata_manager.justice;
             empdata._empMovementSpeed = empdata_manager.movementSpeed;
+            //empdata._empEmployee_CurrentStatus = EmployeeFSM.Wait;
             //empdata._empCurHp = empdata._empMaxHp;
             //empdata._empCurMp = empdata._empMaxMp;
 
@@ -103,6 +96,7 @@ public class EmployeeManager : Singleton<EmployeeManager>
                 empdata._empintelligence = empdata_manager.intelligence;
                 empdata._empJustice = empdata_manager.justice;
                 empdata._empMovementSpeed = empdata_manager.movementSpeed;
+                //empdata._empEmployee_CurrentStatus = EmployeeFSM.Wait;
                 //empdata._empCurHp = empdata._empMaxHp;
                 //empdata._empCurMp = empdata._empMaxMp;
 
