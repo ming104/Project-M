@@ -7,19 +7,18 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public enum EmployeeFSM
-{
-    Wait = 0,
-    moving = 1,
-    Work = 2,
-    battle = 3,
-    status_effect = 4
-}
+
 
 public class Employee : MonoBehaviour
 {
-    private EmployeeFSM _StateEmp;
-
+    public enum EmployeeFSM
+    {
+        Wait = 0,
+        moving = 1,
+        Work = 2,
+        battle = 3,
+        status_effect = 4
+    }
     [SerializeField] private string EmployeeName;
     public string _empName
     {
@@ -107,7 +106,7 @@ public class Employee : MonoBehaviour
         MPBar.maxValue = EmployeeMaxMp;
 
         PingPongstartPosition = transform.position;
-        _StateEmp = EmployeeFSM.Wait;
+        Employee_CurrentStatus = EmployeeFSM.Wait;
     }
 
     //Update is called once per frame
@@ -115,7 +114,7 @@ public class Employee : MonoBehaviour
     {
         HPBar.value = EmployeeManager.Instance.Employees[EmployeeName].CurrentHP;
         MPBar.value = EmployeeManager.Instance.Employees[EmployeeName].CurrentMP;
-        switch (_StateEmp)
+        switch (Employee_CurrentStatus)
         {
             case EmployeeFSM.Wait:
                 Waiting();
@@ -137,10 +136,7 @@ public class Employee : MonoBehaviour
 
     void Waiting()
     {
-        float pingPongValue = Mathf.PingPong(Time.time * (_empMovementSpeed / 10), 5);
 
-        // 오브젝트의 x 좌표를 업데이트합니다.
-        transform.position = new Vector3(PingPongstartPosition.x + pingPongValue, PingPongstartPosition.y, PingPongstartPosition.z);
     }
     void Moving()
     {

@@ -1,0 +1,29 @@
+{
+  "Max_research_Level": 3,
+
+  "profile": {
+    "code": "M-21-861",
+    "imagePATH": "MonsterImage/Distortion",
+    "MonsterName": "뒤틀림",
+    "MonsterBuy_Info": "#@$@$@##!#@%@%!!^!#%#!#$*",
+    "riskLevel": 5
+  },
+
+  "Research_log": {
+    "log": [
+      "정신력 85 이하인 직원이 연구 시 탈출 카운트 증가한다.",
+      "연구 결과가 실패 시 탈출 카운트 증가한다."
+    ]
+  },
+
+  "Research_Preferences": {
+    "FEAR": 90,
+    "ANGER": 0,
+    "DISGUST": 0,
+    "SAD": 60,
+    "HAPPY": 0,
+    "SURPRISE": 0
+  },
+
+  "OpenLevel": 0
+}
