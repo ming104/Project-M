@@ -3,7 +3,8 @@
   "Money": 100,
   "ResearchPoint": 10,
   "UnaffiliatedEmployee": [],
-  "elseDepart": [
+
+  "Floor": [
     {
       "AuditDepartment": [
         "계약직 23호",
@@ -17,33 +18,34 @@
         "계약직 73호",
         "계약직 50호",
         "계약직 63호"
-      ]
-    }
-  ],
-  "Department": [
-    {
-      "MonsterList": ["Dummy", "Dummy2", "P.O.V", "Toonie"],
-      "EmployeeList": [
-        "계약직 94호",
-        "계약직 17호",
-        "계약직 44호",
-        "계약직 32호",
-        "계약직 97호"
-      ]
-    },
-    {
-      "MonsterList": [
-        "need_to_rest",
-        "MysteriousWell",
-        "ill-fated Sniper",
-        "StarlightFlower"
       ],
-      "EmployeeList": [
-        "계약직 28호",
-        "계약직 37호",
-        "계약직 77호",
-        "계약직 85호",
-        "계약직 33호"
+
+      "Department": [
+        {
+          "MonsterList": ["Dummy", "Dummy2", "P.O.V", "Toonie"],
+          "EmployeeList": [
+            "계약직 94호",
+            "계약직 17호",
+            "계약직 44호",
+            "계약직 32호",
+            "계약직 97호"
+          ]
+        },
+        {
+          "MonsterList": [
+            "need_to_rest",
+            "MysteriousWell",
+            "ill-fated Sniper",
+            "StarlightFlower"
+          ],
+          "EmployeeList": [
+            "계약직 28호",
+            "계약직 37호",
+            "계약직 77호",
+            "계약직 85호",
+            "계약직 33호"
+          ]
+        }
       ]
     }
   ],

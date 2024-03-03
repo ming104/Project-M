@@ -9,16 +9,18 @@ using UnityEngine.UI;
 
 #region DataSet
 [Serializable]
-public class MonsterListClass
+public class MonsterEmpListClass
 {
     public List<string> MonsterList;
     public List<string> EmployeeList;
+
 }
 [Serializable]
-public class ElseEmployee
+public class Floors
 {
     public List<string> AuditDepartment;
     public List<string> AccountingDepartment;
+    public List<MonsterEmpListClass> Department;
 }
 
 [Serializable]
@@ -27,9 +29,8 @@ public class MainCompanyData
     public int day;
     public int Money;
     public int ResearchPoint;
+    public List<Floors> Floor;
     public List<string> UnaffiliatedEmployee;
-    public List<ElseEmployee> elseDepart;
-    public List<MonsterListClass> Department;
     public List<string> All_Monster;
 }
 [Serializable]
@@ -71,7 +72,7 @@ public class ResearchLogData
 }
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-//직원 전용 데이터 셋(미완)
+//직원 전용 데이터 셋
 [Serializable]
 public class EmployeeData
 {
@@ -124,7 +125,7 @@ public class DataManager : Singleton_DonDes<DataManager>
     /// department는 소속될 회사 부서를 말함 //
     /// name은 말 그대로 이름임, maindata에 올라갈 이름으로 꼭 파일이름과 같아야 함
     /// </summary>
-    public void MaindataSave(int type, int department, string name) // 종류, 소속, 이름으로 저장
+    public void MaindataSave(int type, int floor, int department, string name) // 종류, 소속, 이름으로 저장
     {
         string filePath = "Assets/Resources/GameData/MainData.json";
 
@@ -134,18 +135,18 @@ public class DataManager : Singleton_DonDes<DataManager>
         switch (type)
         {
             case 0: // 몬스터
-                if (maindata.Department[maindata.Department.Count - 1].MonsterList.Count == 4)
+                if (maindata.Floor[floor].Department[maindata.Floor[0].Department.Count - 1].MonsterList.Count == 4)
                 {
-                    MonsterListClass monsterListAdd = new MonsterListClass
+                    MonsterEmpListClass monsterListAdd = new MonsterEmpListClass
                     {
                         MonsterList = new List<string> { name },
                         EmployeeList = new List<string>()
                     };
-                    maindata.Department.Add(monsterListAdd);
+                    maindata.Floor[floor].Department.Add(monsterListAdd);
                 }
                 else
                 {
-                    maindata.Department[department].MonsterList.Add(name);
+                    maindata.Floor[floor].Department[department].MonsterList.Add(name);
                 }
 
                 break;
@@ -157,15 +158,15 @@ public class DataManager : Singleton_DonDes<DataManager>
                 {
                     case -2:
                         maindata.UnaffiliatedEmployee.Remove(name);
-                        maindata.elseDepart[0].AuditDepartment.Add(name);
+                        maindata.Floor[floor].AuditDepartment.Add(name);
                         break;
                     case -1:
                         maindata.UnaffiliatedEmployee.Remove(name);
-                        maindata.elseDepart[0].AccountingDepartment.Add(name);
+                        maindata.Floor[floor].AccountingDepartment.Add(name);
                         break;
                     default:
                         maindata.UnaffiliatedEmployee.Remove(name);
-                        maindata.Department[department].EmployeeList.Add(name);
+                        maindata.Floor[floor].Department[department].EmployeeList.Add(name);
                         break;
                 }
                 break;
@@ -173,20 +174,34 @@ public class DataManager : Singleton_DonDes<DataManager>
                 switch (department)
                 {
                     case -2:
-                        maindata.elseDepart[0].AuditDepartment.Remove(name);
+                        maindata.Floor[floor].AuditDepartment.Remove(name);
                         maindata.UnaffiliatedEmployee.Add(name);
                         break;
                     case -1:
-                        maindata.elseDepart[0].AccountingDepartment.Remove(name);
+                        maindata.Floor[floor].AccountingDepartment.Remove(name);
                         maindata.UnaffiliatedEmployee.Add(name);
                         break;
                     default:
-                        maindata.Department[department].EmployeeList.Remove(name);
+                        maindata.Floor[floor].Department[department].EmployeeList.Remove(name);
                         maindata.UnaffiliatedEmployee.Add(name);
                         break;
                 }
                 break;
         }
+
+        string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
+
+        File.WriteAllText(filePath, ChangeMainData); // string 값을 파일로 저장
+    }
+    public void MaindataSave_Employ(string name) // 종류, 소속, 이름으로 저장
+    {
+        string filePath = "Assets/Resources/GameData/MainData.json";
+
+        string jsonText = File.ReadAllText(filePath); // 읽어오고
+
+        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText); // class객체로 변환
+
+        maindata.UnaffiliatedEmployee.Add(name);
 
         string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
 

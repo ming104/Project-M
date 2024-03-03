@@ -89,13 +89,14 @@ public class Employee : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI nameText;
     [SerializeField] private Slider HPBar;
     [SerializeField] private Slider MPBar;
-    // Start is called before the first frame update
-    // private void Awake()
-    // {
-    //     NavMeshAgent agent = GetComponent<NavMeshAgent>();
-    //     agent.updateRotation = false;
-    //     agent.updateUpAxis = false;
-    // }
+    private NavMeshAgent agent;
+    //Start is called before the first frame update
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        //agent.updateRotation = false;
+        //agent.updateUpAxis = false;
+    }
 
     public Vector3 PingPongstartPosition;
 
@@ -114,6 +115,11 @@ public class Employee : MonoBehaviour
     {
         HPBar.value = EmployeeManager.Instance.Employees[EmployeeName].CurrentHP;
         MPBar.value = EmployeeManager.Instance.Employees[EmployeeName].CurrentMP;
+        if (agent.velocity.sqrMagnitude >= .2f && agent.remainingDistance <= 0.5f)
+        {
+            agent.ResetPath();
+            Employee_CurrentStatus = EmployeeFSM.Wait;
+        }
         switch (Employee_CurrentStatus)
         {
             case EmployeeFSM.Wait:

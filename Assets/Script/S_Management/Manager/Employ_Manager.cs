@@ -47,7 +47,7 @@ public class Employ_Manager : Singleton<Employ_Manager>
         string Employeejson = JsonUtility.ToJson(empdata[Selected_Number], true);
         File.WriteAllText(filePath, Employeejson);
         Debug.Log(filename);
-        DataManager.Instance.MaindataSave(1, 1, filename);
+        DataManager.Instance.MaindataSave_Employ(filename);
     }
 
     public void SelectedEmp(int num)

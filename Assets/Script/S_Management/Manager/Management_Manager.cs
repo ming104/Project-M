@@ -12,6 +12,7 @@ public class Management_Manager : MonoBehaviour
     public TextMeshProUGUI Day;
     public TextMeshProUGUI Money;
     public TextMeshProUGUI ResearchPoint;
+    public int FloorNumber;
     public int DepartmentNumber;
     public TextMeshProUGUI Department;
     public List<Image> MonsterImage;
@@ -60,6 +61,12 @@ public class Management_Manager : MonoBehaviour
     public List<GameObject> MonsterBuy_GO;
     [Header("Random_Duplicate_List")]
     public List<int> DuplicateList;
+    [Header("Select_FD")]
+    public GameObject Floor_Select;
+    public int Selected_Floor;
+    public GameObject Depart_Select;
+    public int Select_Depart;
+    public GameObject Selected_Depart;
 
     [Header("ResetImage")]
     public Sprite ResetImage;
@@ -83,39 +90,39 @@ public class Management_Manager : MonoBehaviour
         {
             case -2:
                 Department.text = $"현재 부서 : 감사부서";
-                for (int i = 0; i < DataManager.Instance.MainDataLoad().elseDepart[0].AuditDepartment.Count; i++)
+                for (int i = 0; i < DataManager.Instance.MainDataLoad().Floor[FloorNumber].AuditDepartment.Count; i++)
                 {
                     EmployeeImage[i].sprite = null;
-                    EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = DataManager.Instance.MainDataLoad().elseDepart[0].AuditDepartment[i];
-                    EmployeeNameText[i].text = DataManager.Instance.MainDataLoad().elseDepart[0].AuditDepartment[i];
+                    EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = DataManager.Instance.MainDataLoad().Floor[FloorNumber].AuditDepartment[i];
+                    EmployeeNameText[i].text = DataManager.Instance.MainDataLoad().Floor[FloorNumber].AuditDepartment[i];
                 }
                 break;
             case -1:
                 Department.text = $"현재 부서 : 회계부서";
-                for (int i = 0; i < DataManager.Instance.MainDataLoad().elseDepart[0].AccountingDepartment.Count; i++)
+                for (int i = 0; i < DataManager.Instance.MainDataLoad().Floor[FloorNumber].AccountingDepartment.Count; i++)
                 {
                     EmployeeImage[i].sprite = null;
-                    EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = DataManager.Instance.MainDataLoad().elseDepart[0].AccountingDepartment[i];
-                    EmployeeNameText[i].text = DataManager.Instance.MainDataLoad().elseDepart[0].AccountingDepartment[i];
+                    EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = DataManager.Instance.MainDataLoad().Floor[FloorNumber].AccountingDepartment[i];
+                    EmployeeNameText[i].text = DataManager.Instance.MainDataLoad().Floor[FloorNumber].AccountingDepartment[i];
                 }
                 break;
             default:
                 Department.text = $"현재 부서 : 관리부서_{DepartmentNumber}";
 
-                for (int i = 0; i < DataManager.Instance.MainDataLoad().Department[DepartmentNumber].MonsterList.Count; i++)
+                for (int i = 0; i < DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[DepartmentNumber].MonsterList.Count; i++)
                 {
                     MonsterImage[i].sprite = Resources.Load<Sprite>(DataManager.Instance.MonsterDataLoad
-                        (DataManager.Instance.MainDataLoad().Department[DepartmentNumber].MonsterList[i]).profile.imagePATH);
+                        (DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[DepartmentNumber].MonsterList[i]).profile.imagePATH);
                     MonsterNameText[i].text = DataManager.Instance.MonsterDataLoad
-                        (DataManager.Instance.MainDataLoad().Department[DepartmentNumber].MonsterList[i]).profile.MonsterName;
+                        (DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[DepartmentNumber].MonsterList[i]).profile.MonsterName;
                     MonsterImage[i].GetComponent<MonsterInfo_Management>()._monName =
-                        DataManager.Instance.MainDataLoad().Department[DepartmentNumber].MonsterList[i];
+                        DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[DepartmentNumber].MonsterList[i];
                 }
-                for (int i = 0; i < DataManager.Instance.MainDataLoad().Department[DepartmentNumber].EmployeeList.Count; i++)
+                for (int i = 0; i < DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[DepartmentNumber].EmployeeList.Count; i++)
                 {
                     EmployeeImage[i].sprite = null;
-                    EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = DataManager.Instance.MainDataLoad().Department[DepartmentNumber].EmployeeList[i];
-                    EmployeeNameText[i].text = DataManager.Instance.MainDataLoad().Department[DepartmentNumber].EmployeeList[i];
+                    EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[DepartmentNumber].EmployeeList[i];
+                    EmployeeNameText[i].text = DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[DepartmentNumber].EmployeeList[i];
                 }
                 break;
         }
@@ -136,21 +143,23 @@ public class Management_Manager : MonoBehaviour
             EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = string.Empty;
         }
 
-        for (int i = 0; i < DataManager.Instance.MainDataLoad().Department.Count; i++)
+        for (int f = 0; f < DataManager.Instance.MainDataLoad().Floor.Count; f++)
         {
-            if (DataManager.Instance.MainDataLoad().Department[i].EmployeeList.Count == 0
-            || DataManager.Instance.MainDataLoad().elseDepart[0].AuditDepartment.Count == 0
-            || DataManager.Instance.MainDataLoad().elseDepart[0].AccountingDepartment.Count == 0)
+            for (int i = 0; i < DataManager.Instance.MainDataLoad().Floor[f].Department.Count; i++)
             {
-                GameStartBtn.interactable = false;
-                return;
-            }
-            else
-            {
-                GameStartBtn.interactable = true;
+                if (DataManager.Instance.MainDataLoad().Floor[f].Department[i].EmployeeList.Count == 0
+                || DataManager.Instance.MainDataLoad().Floor[f].AuditDepartment.Count == 0
+                || DataManager.Instance.MainDataLoad().Floor[f].AccountingDepartment.Count == 0)
+                {
+                    GameStartBtn.interactable = false;
+                    return;
+                }
+                else
+                {
+                    GameStartBtn.interactable = true;
+                }
             }
         }
-
     }
 
     // Update is called once per frame
@@ -173,7 +182,7 @@ public class Management_Manager : MonoBehaviour
             DepartmentNumber--;
             DepartmentInfo();
         }
-        else if (wheelInput < 0 && DepartmentNumber < DataManager.Instance.MainDataLoad().Department.Count - 1) // 내렸을 때 처리 -> Department증가
+        else if (wheelInput < 0 && DepartmentNumber < DataManager.Instance.MainDataLoad().Floor.Count - 1) // 내렸을 때 처리 -> Department증가
         {
             DepartmentNumber++;
             DepartmentInfo();
@@ -305,7 +314,7 @@ public class Management_Manager : MonoBehaviour
     {
         if (SelectedName != string.Empty)
         {
-            DataManager.Instance.MaindataSave(2, DepartmentNumber, SelectedName);
+            DataManager.Instance.MaindataSave(2, FloorNumber, DepartmentNumber, SelectedName);
             DepartmentInfo();
             UnaffiliatedEmployee_Panel_Off();
         }
@@ -319,7 +328,7 @@ public class Management_Manager : MonoBehaviour
     {
         if (SelectedName != string.Empty)
         {
-            DataManager.Instance.MaindataSave(3, DepartmentNumber, SelectedName);
+            DataManager.Instance.MaindataSave(3, FloorNumber, DepartmentNumber, SelectedName);
             AffiliatedEmployee_Panel_Off();
             DepartmentInfo();
         }
@@ -381,7 +390,7 @@ public class Management_Manager : MonoBehaviour
     }
     public void MonsterBuy_Canvas_Btn_Off(int num)
     {
-        DataManager.Instance.MaindataSave(0, 1, DataManager.Instance.MainDataLoad().All_Monster[DuplicateList[num]]);
+        DataManager.Instance.MaindataSave(0, FloorNumber, 1, DataManager.Instance.MainDataLoad().All_Monster[DuplicateList[num]]);
         Debug.Log(DataManager.Instance.MainDataLoad().All_Monster[DuplicateList[num]]);
         DepartmentInfo();
         DuplicateList.Clear();
@@ -390,6 +399,34 @@ public class Management_Manager : MonoBehaviour
     public void MonsterBuy_Canvas_Off()
     {
         MonsterBuy_Canvas.SetActive(false);
+    }
+
+    public void FloorSelect_Summon()
+    {
+        for (int i = 0; i < DataManager.Instance.MainDataLoad().Floor.Count; i++)
+        {
+            //코드 추가
+
+        }
+
+    }
+    public void FloorSelected(int _floor)
+    {
+        //Instantiate() // 중앙 감사회계부서
+        for (int i = 0; i < DataManager.Instance.MainDataLoad().Floor[_floor].Department.Count; i++)
+        {
+            //Instantiate() // 사이드 4개 버튼
+        }
+        Floor_Select.SetActive(false);
+        Depart_Select.SetActive(true);
+    }
+    public void DepartSelect_Summon()
+    {
+        for (int i = 0; i < DataManager.Instance.MainDataLoad().Floor[Selected_Floor].Department.Count; i++)
+        {
+            //코드 추가
+        }
+
     }
 
 }
