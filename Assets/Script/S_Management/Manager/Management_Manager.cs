@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using System;
 using UnityEngine.EventSystems;
 using System.Linq;
+using UnityEngine.Assertions.Must;
 
 public class Management_Manager : MonoBehaviour
 {
@@ -242,19 +243,26 @@ public class Management_Manager : MonoBehaviour
     {
         FloorInfoReset();
         currentFloor_Text.text = $"현재 층 : {FloorNumber}층";
-        for (int i = 0; i < DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department.Count; i++) // 여기를 있는 갯수만큼 세아리고 나머지를 인터랙트 꺼야함 수정필요!
+
+        var mainData = DataManager.Instance.MainDataLoad();
+
+        if (mainData != null && FloorNumber < mainData.Floor.Count)
         {
-            if (DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[i].MonsterList.Count == 0)
+            for (int i = 0; i < mainData.Floor[FloorNumber].Department.Count; i++) // 여기를 있는 갯수만큼 세아리고 나머지를 인터랙트 꺼야함 수정필요!
             {
-                Depart[i].GetComponent<Button>().interactable = false;
-            }
-            else
-            {
-                Depart[i].GetComponent<Button>().interactable = true;
-            }
-            if (DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[i].MonsterList.Count != 0 && DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[i].EmployeeList.Count == 0)
-            {
-                Depart[i].GetComponent<SpriteRenderer>().color = Color.red;
+                if (mainData.Floor[FloorNumber].Department[i].MonsterList != null &&
+                mainData.Floor[FloorNumber].Department[i].MonsterList.Count == 0)
+                {
+                    Depart[i].GetComponent<Button>().interactable = false;
+                }
+                else
+                {
+                    Depart[i].GetComponent<Button>().interactable = true;
+                }
+                if (DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[i].MonsterList.Count != 0 && DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[i].EmployeeList.Count == 0)
+                {
+                    Depart[i].GetComponent<SpriteRenderer>().color = Color.red;
+                }
             }
         }
     }
