@@ -134,15 +134,18 @@ public class DataManager : Singleton_DonDes<DataManager>
         MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText); // class객체로 변환
         switch (type)
         {
-            case 0: // 몬스터
-                if (maindata.Floor[floor].Department[maindata.Floor[0].Department.Count - 1].MonsterList.Count == 4)
+            case 0: // 몬스터 <-- 수정해야됨
+                if (maindata.Floor[floor].Department[maindata.Floor[0].Department.Count - 1].MonsterList.Count == 4) // 만약 Department에 몬스터가 꽉찼다면 다음 부서 생성
                 {
-                    MonsterEmpListClass monsterListAdd = new MonsterEmpListClass
+                    if (maindata.Floor[floor].Department.Count == 4)
                     {
-                        MonsterList = new List<string> { name },
-                        EmployeeList = new List<string>()
-                    };
-                    maindata.Floor[floor].Department.Add(monsterListAdd);
+                        MonsterEmpListClass monsterListAdd = new MonsterEmpListClass
+                        {
+                            MonsterList = new List<string> { name },
+                            EmployeeList = new List<string>()
+                        };
+                        maindata.Floor[floor].Department.Add(monsterListAdd);
+                    }
                 }
                 else
                 {
@@ -189,6 +192,35 @@ public class DataManager : Singleton_DonDes<DataManager>
                 break;
         }
 
+        string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
+
+        File.WriteAllText(filePath, ChangeMainData); // string 값을 파일로 저장
+    }
+    public void AddFloor()
+    {
+        string filePath = "Assets/Resources/GameData/MainData.json";
+
+        string jsonText = File.ReadAllText(filePath); // 읽어오고
+
+        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText); // class객체로 변환
+
+        MonsterEmpListClass floorDepart = new MonsterEmpListClass
+        {
+            MonsterList = new List<string>(),
+            EmployeeList = new List<string>()
+        };
+
+        Floors newfloors = new Floors
+        {
+            AuditDepartment = new List<string>(),
+            AccountingDepartment = new List<string>(),
+            Department = new List<MonsterEmpListClass>
+            {
+                floorDepart
+            }
+
+        };
+        maindata.Floor.Add(newfloors);
         string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
 
         File.WriteAllText(filePath, ChangeMainData); // string 값을 파일로 저장

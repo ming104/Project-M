@@ -93,25 +93,26 @@ public class Management_Manager : MonoBehaviour
         MonsterBuy_Canvas_Off();
     }
 
-    public void DepartmentInfo(int num)
+    public void DepartmentInfo(int _Depart)
     {
         DepartmentInfoReset();
+        DepartmentNumber = _Depart;
         Depart_Select.SetActive(false);
         Selected_Depart.SetActive(true);
-        for (int i = 0; i < DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[num].MonsterList.Count; i++)
+        for (int i = 0; i < DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[DepartmentNumber].MonsterList.Count; i++)
         {
             MonsterImage[i].sprite = Resources.Load<Sprite>(DataManager.Instance.MonsterDataLoad
-                (DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[num].MonsterList[i]).profile.imagePATH);
+                (DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[DepartmentNumber].MonsterList[i]).profile.imagePATH);
             MonsterNameText[i].text = DataManager.Instance.MonsterDataLoad
-                (DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[num].MonsterList[i]).profile.MonsterName;
+                (DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[DepartmentNumber].MonsterList[i]).profile.MonsterName;
             MonsterImage[i].GetComponent<MonsterInfo_Management>()._monName =
-                DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[num].MonsterList[i];
+                DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[DepartmentNumber].MonsterList[i];
         }
-        for (int i = 0; i < DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[num].EmployeeList.Count; i++)
+        for (int i = 0; i < DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[DepartmentNumber].EmployeeList.Count; i++)
         {
             EmployeeImage[i].sprite = null;
-            EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[num].EmployeeList[i];
-            EmployeeNameText[i].text = DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[num].EmployeeList[i];
+            EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[DepartmentNumber].EmployeeList[i];
+            EmployeeNameText[i].text = DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[DepartmentNumber].EmployeeList[i];
         }
 
         // switch (DepartmentNumber)
@@ -232,7 +233,7 @@ public class Management_Manager : MonoBehaviour
     {
         for (int i = 1; i < Depart.Count; i++)
         {
-            Depart[i].GetComponent<Button>().interactable = true;
+            Depart[i].GetComponent<Button>().interactable = false;
             ColorBlock BtnColor = Depart[i].GetComponent<Button>().colors;
             BtnColor.normalColor = Color.white;
             Depart[i].GetComponent<Button>().colors = BtnColor;
@@ -250,18 +251,14 @@ public class Management_Manager : MonoBehaviour
         {
             for (int i = 0; i < mainData.Floor[FloorNumber].Department.Count; i++) // 여기를 있는 갯수만큼 세아리고 나머지를 인터랙트 꺼야함 수정필요!
             {
-                if (mainData.Floor[FloorNumber].Department[i].MonsterList != null &&
-                mainData.Floor[FloorNumber].Department[i].MonsterList.Count == 0)
-                {
-                    Depart[i].GetComponent<Button>().interactable = false;
-                }
-                else
-                {
-                    Depart[i].GetComponent<Button>().interactable = true;
-                }
+                Depart[i].GetComponent<Button>().interactable = true;
+
                 if (DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[i].MonsterList.Count != 0 && DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[i].EmployeeList.Count == 0)
                 {
-                    Depart[i].GetComponent<SpriteRenderer>().color = Color.red;
+                    ColorBlock BtnColor = Depart[i].GetComponent<Button>().colors;
+                    BtnColor.normalColor = Color.red;
+                    Depart[i].GetComponent<Button>().colors = BtnColor;
+                    //Depart[i].GetComponent<SpriteRenderer>().color = Color.red;
                 }
             }
         }
@@ -393,7 +390,7 @@ public class Management_Manager : MonoBehaviour
         if (SelectedName != string.Empty)
         {
             DataManager.Instance.MaindataSave(2, FloorNumber, DepartmentNumber, SelectedName);
-            //DepartmentInfo();
+            DepartmentInfo(DepartmentNumber);
             UnaffiliatedEmployee_Panel_Off();
         }
         else
@@ -408,7 +405,7 @@ public class Management_Manager : MonoBehaviour
         {
             DataManager.Instance.MaindataSave(3, FloorNumber, DepartmentNumber, SelectedName);
             AffiliatedEmployee_Panel_Off();
-            //DepartmentInfo();
+            DepartmentInfo(DepartmentNumber);
         }
         else
         {
@@ -468,14 +465,19 @@ public class Management_Manager : MonoBehaviour
     }
     public void MonsterBuy_Canvas_Btn_Off(int num)
     {
-        DataManager.Instance.MaindataSave(0, FloorNumber, 1, DataManager.Instance.MainDataLoad().All_Monster[DuplicateList[num]]);
+        DataManager.Instance.MaindataSave(0, FloorNumber, DepartmentNumber, DataManager.Instance.MainDataLoad().All_Monster[DuplicateList[num]]);
         Debug.Log(DataManager.Instance.MainDataLoad().All_Monster[DuplicateList[num]]);
-        //DepartmentInfo();
+        DepartmentInfo(DepartmentNumber);
         DuplicateList.Clear();
-        MonsterBuy_Canvas.SetActive(false);
+        MonsterBuy_Canvas_Off();
     }
     public void MonsterBuy_Canvas_Off()
     {
         MonsterBuy_Canvas.SetActive(false);
+    }
+
+    public void AddFloor()
+    {
+        DataManager.Instance.AddFloor();
     }
 }
