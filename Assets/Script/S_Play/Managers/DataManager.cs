@@ -134,24 +134,20 @@ public class DataManager : Singleton_DonDes<DataManager>
         MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText); // class객체로 변환
         switch (type)
         {
-            case 0: // 몬스터 <-- 수정해야됨
-                if (maindata.Floor[floor].Department[maindata.Floor[0].Department.Count - 1].MonsterList.Count == 4) // 만약 Department에 몬스터가 꽉찼다면 다음 부서 생성
+            case 0: // 몬스터
+                if (maindata.Floor[maindata.Floor.Count - 1].Department[maindata.Floor[maindata.Floor.Count - 1].Department.Count - 1].MonsterList.Count == 4)
                 {
-                    if (maindata.Floor[floor].Department.Count == 4)
+                    MonsterEmpListClass monsterListAdd = new MonsterEmpListClass
                     {
-                        MonsterEmpListClass monsterListAdd = new MonsterEmpListClass
-                        {
-                            MonsterList = new List<string> { name },
-                            EmployeeList = new List<string>()
-                        };
-                        maindata.Floor[floor].Department.Add(monsterListAdd);
-                    }
+                        MonsterList = new List<string> { name },
+                        EmployeeList = new List<string>()
+                    };
+                    maindata.Floor[maindata.Floor.Count - 1].Department.Add(monsterListAdd);
                 }
                 else
                 {
-                    maindata.Floor[floor].Department[department].MonsterList.Add(name);
+                    maindata.Floor[maindata.Floor.Count - 1].Department[maindata.Floor[maindata.Floor.Count - 1].Department.Count - 1].MonsterList.Add(name);
                 }
-
                 break;
             case 1: // 직원
                 maindata.UnaffiliatedEmployee.Add(name);

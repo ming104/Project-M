@@ -44,16 +44,29 @@
                         "계약직 28호",
                         "계약직 37호",
                         "계약직 77호",
-                        "계약직 85호",
-                        "계약직 33호"
+                        "계약직 85호"
                     ]
                 },
                 {
                     "MonsterList": [
-                        "MysteriousWell"
+                        "MysteriousWell",
+                        "P.O.V",
+                        "Double Faced Ghost",
+                        "Distortion"
                     ],
                     "EmployeeList": [
                         "계약직 36호"
+                    ]
+                },
+                {
+                    "MonsterList": [
+                        "Darkness pillars",
+                        "Distortion",
+                        "Distortion",
+                        "Light pillars"
+                    ],
+                    "EmployeeList": [
+                        "계약직 34호"
                     ]
                 }
             ]
@@ -63,10 +76,19 @@
             "AccountingDepartment": [],
             "Department": [
                 {
-                    "MonsterList": [],
-                    "EmployeeList": [
-                        "계약직 17호"
-                    ]
+                    "MonsterList": [
+                        "MysteriousWell",
+                        "need_to_rest",
+                        "Double Faced Ghost",
+                        "ForgottenMan"
+                    ],
+                    "EmployeeList": []
+                },
+                {
+                    "MonsterList": [
+                        "Dummy"
+                    ],
+                    "EmployeeList": []
                 }
             ]
         }

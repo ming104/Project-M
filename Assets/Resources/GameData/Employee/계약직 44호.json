@@ -1,10 +1,10 @@
 {
     "name": "계약직 44호",
-    "hp": 66,
-    "mp": 61,
-    "def": 70,
-    "power": 78,
-    "intelligence": 29,
-    "justice": 11,
+    "hp": 39,
+    "mp": 35,
+    "def": 36,
+    "power": 39,
+    "intelligence": 43,
+    "justice": 33,
     "movementSpeed": 50
 }

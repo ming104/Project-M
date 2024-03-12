@@ -13,24 +13,25 @@ public class MouseManager : Singleton<MouseManager>
         if (Input.GetMouseButtonDown(1) && MouseInteractionOn == true) // 마우스 왼쪽 버튼 클릭 감지&& !EventSystem.current.IsPointerOverGameObject()
         {
             Vector2 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // 마우스 클릭 위치를 2D 좌표로 변환
-            RaycastHit2D hit = Physics2D.Raycast(clickPos, Vector2.zero); // Raycast로 해당 위치에 오브젝트 감지
+            //RaycastHit2D hit = Physics2D.Raycast(clickPos, Vector2.zero); // Raycast로 해당 위치에 오브젝트 감지
             if (Selection_Obj.Instance.isSelect == true)
             {
-                if (!hit.collider.CompareTag("Passage_Col"))
+                for (int i = 0; i < Selection_Obj.Instance.SelectOBJ.Count; i++)
                 {
-                    return;
+                    var SelectnavEmp = Selection_Obj.Instance.SelectOBJ[i].GetComponent<NavMeshAgent>();
+                    var SelectEmp = Selection_Obj.Instance.SelectOBJ[i].GetComponent<Employee>();
+                    SelectnavEmp.SetDestination(new Vector3(clickPos.x, clickPos.y, transform.position.z));
+                    SelectEmp._empEmployee_CurrentStatus = Employee.EmployeeFSM.moving;
                 }
-                else
-                {
-                    for (int i = 0; i < Selection_Obj.Instance.SelectOBJ.Count; i++)
-                    {
-                        var SelectnavEmp = Selection_Obj.Instance.SelectOBJ[i].GetComponent<NavMeshAgent>();
-                        var SelectEmp = Selection_Obj.Instance.SelectOBJ[i].GetComponent<Employee>();
-                        SelectnavEmp.SetDestination(new Vector3(clickPos.x, clickPos.y, transform.position.z));
-                        SelectEmp._empEmployee_CurrentStatus = Employee.EmployeeFSM.moving;
-                    }
-                    Selection_Obj.Instance.DeSelect_Obj();
-                }
+                Selection_Obj.Instance.DeSelect_Obj();
+                // if (!hit.collider.CompareTag("Passage_Col") || Physics2D.Raycast(clickPos, Vector2.zero))
+                // {
+                //     return;
+                // }
+                //else
+                //{
+                //for문 원래 안에 있었음
+                //}
             }
 
 
