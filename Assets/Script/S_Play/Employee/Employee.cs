@@ -86,10 +86,17 @@ public class Employee : MonoBehaviour
         get { return Employee_CurrentStatus; }
     }
 
+    [SerializeField] private GameObject Emp_GO;
+    public GameObject _emp_GameObject
+    {
+        set { Emp_GO = value; }
+        get { return Emp_GO; }
+    }
+
     [SerializeField] private TMPro.TextMeshProUGUI nameText;
     [SerializeField] private Slider HPBar;
     [SerializeField] private Slider MPBar;
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
     //Start is called before the first frame update
     private void Awake()
     {
@@ -100,13 +107,13 @@ public class Employee : MonoBehaviour
 
     public Vector3 PingPongstartPosition;
 
+
     void Start()
     {
         nameText.text = EmployeeName;
         HPBar.maxValue = EmployeeMaxHp;
         MPBar.maxValue = EmployeeMaxMp;
 
-        PingPongstartPosition = transform.position;
         Employee_CurrentStatus = EmployeeFSM.Wait;
     }
 

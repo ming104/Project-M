@@ -24,7 +24,7 @@ public class RoomInside : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             int monster_depart = GetComponentInParent<Room_Select_Manager>().DepartLocate;
             UI_Manager.Instance.SelectedRoom = transform.parent.GetComponentInChildren<ObjectLayoutGroup>();
             UI_Manager.Instance.WorkCanvasOn(monsterData, monster_depart); //UI 활성화하는 코드 실행
-
+            UI_Manager.Instance.Roomtrans = transform;
         }
     }
 }

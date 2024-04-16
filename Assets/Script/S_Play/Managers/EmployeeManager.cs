@@ -79,6 +79,8 @@ public class EmployeeManager : Singleton<EmployeeManager>
                 empdata._empintelligence = empdata_manager.intelligence;
                 empdata._empJustice = empdata_manager.justice;
                 empdata._empMovementSpeed = empdata_manager.movementSpeed;
+
+                empdata._emp_GameObject = empl;
                 //empdata._empEmployee_CurrentStatus = EmployeeFSM.Wait;
                 //empdata._empCurHp = empdata._empMaxHp;
                 //empdata._empCurMp = empdata._empMaxMp;

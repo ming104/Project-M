@@ -42,6 +42,7 @@ public class UI_Manager : Singleton<UI_Manager>
     public int currnentFloor;
     public string pri_monname;
     public ObjectLayoutGroup SelectedRoom;
+    public Transform Roomtrans;
 
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -184,9 +185,20 @@ public class UI_Manager : Singleton<UI_Manager>
             emUI.HpSlider_Text.text = $"HP : {empListdata.hp}/{empListdata.hp}";
             emUI.MpSlider_Text.text = $"MP : {empListdata.mp}/{empListdata.mp}";
 
-            switch (workButtonNumber)
+            //emUI.Empdata = FindObjectOfType<Employee>();
+            var employeedata = FindObjectsOfType<Employee>();
+            for (int e = 0; e < employeedata.Length; e++)
+            {
+                //if(employeedata._ == em)
+
+            }
+
+
+
+            switch (workButtonNumber) // 여기에 이동코드 들어가야 함
             {
                 case 1:
+                    emUI.Empdata.agent.destination = Roomtrans.position;
                     emUI.SuccessRate.text = $"{mondata.Research_Preferences.FEAR}%";
                     newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(mondata, mondata.Research_Preferences.FEAR));
                     break;
@@ -270,7 +282,7 @@ public class UI_Manager : Singleton<UI_Manager>
                 nsum++;
                 SelectedRoom.GetComponent<ObjectLayoutGroup>().StackObjects(RePo, false);
             }
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.6f);
         }
         Debug.Log($"성공 : {sum}, 실패 : {nsum}");
     }

@@ -14,4 +14,5 @@ public class EmployeeListUI : MonoBehaviour
     public TextMeshProUGUI Name;
     public TextMeshProUGUI SuccessRate;
     public TextMeshProUGUI ResearchTime;
+    public Employee Empdata;
 }

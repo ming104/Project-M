@@ -47,7 +47,6 @@ public class Astar : MonoBehaviour
 
     public void PathFinding()
     {
-        // 여기부터
         // NodeArray의 크기 정해주고, isWall, x, y 대입
         sizeX = topRight.x - bottomLeft.x + 1;
         sizeY = topRight.y - bottomLeft.y + 1;
@@ -64,7 +63,6 @@ public class Astar : MonoBehaviour
                 NodeArray[i, j] = new Node(isWall, i + bottomLeft.x, j + bottomLeft.y);
             }
         }
-        // 여기까지 수정해야됨
 
         // 시작과 끝 노드, 열린리스트와 닫힌리스트, 마지막리스트 초기화
         StartNode = NodeArray[startPos.x - bottomLeft.x, startPos.y - bottomLeft.y];
@@ -73,7 +71,6 @@ public class Astar : MonoBehaviour
         OpenList = new List<Node>() { StartNode };
         ClosedList = new List<Node>();
         FinalNodeList = new List<Node>();
-        //여기 까지일 수도?
 
         while (OpenList.Count > 0)
         {
