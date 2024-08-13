@@ -10,4 +10,10 @@ public class EmployeeInfo_Management : MonoBehaviour
         set { empName = value; }
         get { return empName; }
     }
+    [SerializeField] private int empDepart;
+    public int _EmpDepart
+    {
+        set { empDepart = value; }
+        get { return empDepart; }
+    }
 }

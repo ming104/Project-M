@@ -4,10 +4,9 @@ using TMPro;
 using UnityEngine;
 
 
-
 public class Room_Select_Manager : MonoBehaviour
 {
-    public TextMeshPro textName;
+    public TextMeshProUGUI textName;
     [SerializeField] private string monsterName;
     public string _monName
     {

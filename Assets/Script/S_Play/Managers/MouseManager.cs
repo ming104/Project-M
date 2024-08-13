@@ -10,6 +10,11 @@ public class MouseManager : Singleton<MouseManager>
 
     void Update()
     {
+        // Vector2 clickPosHover = Camera.main.ScreenToWorldPoint(Input.mousePosition); // 마우스 클릭 위치를 2D 좌표로 변환
+        // RaycastHit2D hit = Physics2D.Raycast(clickPosHover, Vector2.zero);
+        
+        
+        
         if (Input.GetMouseButtonDown(1) && MouseInteractionOn == true) // 마우스 왼쪽 버튼 클릭 감지&& !EventSystem.current.IsPointerOverGameObject()
         {
             Vector2 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // 마우스 클릭 위치를 2D 좌표로 변환
@@ -18,20 +23,12 @@ public class MouseManager : Singleton<MouseManager>
             {
                 for (int i = 0; i < Selection_Obj.Instance.SelectOBJ.Count; i++)
                 {
-                    var SelectnavEmp = Selection_Obj.Instance.SelectOBJ[i].GetComponent<NavMeshAgent>();
                     var SelectEmp = Selection_Obj.Instance.SelectOBJ[i].GetComponent<Employee>();
-                    SelectnavEmp.SetDestination(new Vector3(clickPos.x, clickPos.y, transform.position.z));
+                    SelectEmp.DestinationMoving(clickPos.x, clickPos.y, transform.position.z);
                     SelectEmp._empEmployee_CurrentStatus = Employee.EmployeeFSM.moving;
                 }
+
                 Selection_Obj.Instance.DeSelect_Obj();
-                // if (!hit.collider.CompareTag("Passage_Col") || Physics2D.Raycast(clickPos, Vector2.zero))
-                // {
-                //     return;
-                // }
-                //else
-                //{
-                //for문 원래 안에 있었음
-                //}
             }
 
 

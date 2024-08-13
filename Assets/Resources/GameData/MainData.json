@@ -5,17 +5,10 @@
     "Floor": [
         {
             "AuditDepartment": [
-                "계약직 23호",
-                "계약직 20호",
-                "계약직 60호",
-                "계약직 65호",
-                "계약직 26호"
+                "계약직 48호"
             ],
             "AccountingDepartment": [
-                "계약직 48호",
-                "계약직 73호",
-                "계약직 50호",
-                "계약직 63호"
+                "계약직 73호"
             ],
             "Department": [
                 {
@@ -44,7 +37,8 @@
                         "계약직 28호",
                         "계약직 37호",
                         "계약직 77호",
-                        "계약직 85호"
+                        "계약직 85호",
+                        "계약직 41호"
                     ]
                 },
                 {
@@ -55,7 +49,8 @@
                         "Distortion"
                     ],
                     "EmployeeList": [
-                        "계약직 36호"
+                        "계약직 36호",
+                        "계약직 60호"
                     ]
                 },
                 {
@@ -66,34 +61,21 @@
                         "Light pillars"
                     ],
                     "EmployeeList": [
-                        "계약직 34호"
+                        "계약직 34호",
+                        "계약직 26호"
                     ]
-                }
-            ]
-        },
-        {
-            "AuditDepartment": [],
-            "AccountingDepartment": [],
-            "Department": [
-                {
-                    "MonsterList": [
-                        "MysteriousWell",
-                        "need_to_rest",
-                        "Double Faced Ghost",
-                        "ForgottenMan"
-                    ],
-                    "EmployeeList": []
-                },
-                {
-                    "MonsterList": [
-                        "Dummy"
-                    ],
-                    "EmployeeList": []
                 }
             ]
         }
     ],
-    "UnaffiliatedEmployee": [],
+    "UnaffiliatedEmployee": [
+        "계약직 23호",
+        "계약직 20호",
+        "계약직 65호",
+        "계약직 46호",
+        "계약직 50호",
+        "계약직 63호"
+    ],
     "All_Monster": [
         "Dummy",
         "Dummy2",

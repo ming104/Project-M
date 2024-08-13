@@ -41,7 +41,7 @@ public class UI_Manager : Singleton<UI_Manager>
     private int Select_mon_Depart;
     public int currnentFloor;
     public string pri_monname;
-    public ObjectLayoutGroup SelectedRoom;
+    public ResearchStatusSlider selectedRoom;
     public Transform Roomtrans;
 
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -198,7 +198,7 @@ public class UI_Manager : Singleton<UI_Manager>
             switch (workButtonNumber) // 여기에 이동코드 들어가야 함
             {
                 case 1:
-                    emUI.Empdata.agent.destination = Roomtrans.position;
+                    //emUI.Empdata.agent.destination = Roomtrans.position;
                     emUI.SuccessRate.text = $"{mondata.Research_Preferences.FEAR}%";
                     newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(mondata, mondata.Research_Preferences.FEAR));
                     break;
@@ -241,51 +241,28 @@ public class UI_Manager : Singleton<UI_Manager>
         {
             case 1:
                 RePoCount = 10;
-                StartCoroutine(Probabilitytask(RePoCount, persent));
+                selectedRoom.GetComponent<ResearchStatusSlider>().StartResearch(RePoCount, persent);
                 break;
             case 2:
                 RePoCount = 20;
-                StartCoroutine(Probabilitytask(RePoCount, persent));
+                selectedRoom.GetComponent<ResearchStatusSlider>().StartResearch(RePoCount, persent);
                 break;
             case 3:
                 RePoCount = 30;
-                StartCoroutine(Probabilitytask(RePoCount, persent));
+                selectedRoom.GetComponent<ResearchStatusSlider>().StartResearch(RePoCount, persent);
                 break;
             case 4:
                 RePoCount = 40;
-                StartCoroutine(Probabilitytask(RePoCount, persent));
+                selectedRoom.GetComponent<ResearchStatusSlider>().StartResearch(RePoCount, persent);
                 break;
             case 5:
                 RePoCount = 50;
-                StartCoroutine(Probabilitytask(RePoCount, persent));
+                selectedRoom.GetComponent<ResearchStatusSlider>().StartResearch(RePoCount, persent);
                 break;
         }
-
+        
     }
-    private IEnumerator Probabilitytask(int RePo, int persent)
-    {
-        int sum = 0;
-        int nsum = 0;
-        //Debug.Log(SelectedRoom.GetComponent<ObjectLayoutGroup>());
-        SelectedRoom.GetComponent<ObjectLayoutGroup>().ChildDestory();
-        for (int i = 0; i < RePo; i++)
-        {
-            var RanNum = Random.Range(0, 100);
-
-            if (RanNum <= persent)
-            {
-                sum++;
-                SelectedRoom.GetComponent<ObjectLayoutGroup>().StackObjects(RePo, true);
-            }
-            else
-            {
-                nsum++;
-                SelectedRoom.GetComponent<ObjectLayoutGroup>().StackObjects(RePo, false);
-            }
-            yield return new WaitForSeconds(0.6f);
-        }
-        Debug.Log($"성공 : {sum}, 실패 : {nsum}");
-    }
+    
 
     public void EmployeeSelected() //데미지 받으면 다시 호출하는 방식으로 해야할듯 그래야 체력이 동기화됨 + 힐 받을 때
     {

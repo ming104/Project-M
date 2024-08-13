@@ -85,6 +85,7 @@ public class Management_Manager : MonoBehaviour
     public GameObject Depart_Select;
     public GameObject Selected_Depart;
     public List<GameObject> Depart;
+    public GameObject Depart_S;
 
     [Header("ResetImage")]
     public Sprite ResetImage;
@@ -128,6 +129,7 @@ public class Management_Manager : MonoBehaviour
         {
             EmployeeImage[i].sprite = null;
             EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[DepartmentNumber].EmployeeList[i];
+            EmployeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpDepart = DepartmentNumber;
             EmployeeNameText[i].text = DataManager.Instance.MainDataLoad().Floor[FloorNumber].Department[DepartmentNumber].EmployeeList[i];
         }
         GameStartBtn_check();
@@ -137,18 +139,30 @@ public class Management_Manager : MonoBehaviour
     {
         DepartmentInfoReset_S();
         Department_S.text = $"현재 부서 : 총괄부서";
+        DepartmentNumber = -1;
         Depart_Select.SetActive(false);
         Selected_Depart_S.SetActive(true);
+        foreach (var emp in AuditEmployeeImage_S)
+        {
+            emp.GetComponent<EmployeeInfo_Management>()._EmpDepart = -2;
+        }
+        foreach (var emp in AccountEmployeeImage_S)
+        {
+            emp.GetComponent<EmployeeInfo_Management>()._EmpDepart = -1;
+        }
         for (int i = 0; i < DataManager.Instance.MainDataLoad().Floor[FloorNumber].AuditDepartment.Count; i++)
         {
             AuditEmployeeImage_S[i].sprite = null;
             AuditEmployeeImage_S[i].GetComponent<EmployeeInfo_Management>()._EmpName = DataManager.Instance.MainDataLoad().Floor[FloorNumber].AuditDepartment[i];
+            
             AuditEmployeeNameText_S[i].text = DataManager.Instance.MainDataLoad().Floor[FloorNumber].AuditDepartment[i];
         }
+        
         for (int i = 0; i < DataManager.Instance.MainDataLoad().Floor[FloorNumber].AccountingDepartment.Count; i++)
         {
             AccountEmployeeImage_S[i].sprite = null;
             AccountEmployeeImage_S[i].GetComponent<EmployeeInfo_Management>()._EmpName = DataManager.Instance.MainDataLoad().Floor[FloorNumber].AccountingDepartment[i];
+            AccountEmployeeImage_S[i].GetComponent<EmployeeInfo_Management>()._EmpDepart = -1;
             AccountEmployeeNameText_S[i].text = DataManager.Instance.MainDataLoad().Floor[FloorNumber].AccountingDepartment[i];
         }
         GameStartBtn_check();
@@ -268,6 +282,10 @@ public class Management_Manager : MonoBehaviour
             BtnColor.normalColor = Color.white;
             Depart[i].GetComponent<Button>().colors = BtnColor;
         }
+
+        ColorBlock BtnColors = Depart_S.GetComponent<Button>().colors;
+        BtnColors.normalColor = Color.white;
+        Depart_S.GetComponent<Button>().colors = BtnColors;
     }
 
     public void FloorInfo()
@@ -291,6 +309,13 @@ public class Management_Manager : MonoBehaviour
                     //Depart[i].GetComponent<SpriteRenderer>().color = Color.red;
                 }
             }
+        }
+        if(mainData.Floor[FloorNumber].AccountingDepartment.Count == 0
+           || mainData.Floor[FloorNumber].AuditDepartment.Count == 0)
+        {
+            ColorBlock BtnColor = Depart_S.GetComponent<Button>().colors;
+            BtnColor.normalColor = Color.red;
+            Depart_S.GetComponent<Button>().colors = BtnColor;
         }
         GameStartBtn_check();
     }
@@ -383,10 +408,12 @@ public class Management_Manager : MonoBehaviour
         if (GO.GetComponent<EmployeeInfo_Management>()._EmpName != string.Empty)
         {
             var UnaffiliatedEmployeeData = DataManager.Instance.EmployeeDataLoad(GO.GetComponent<EmployeeInfo_Management>()._EmpName);
+            DepartmentNumber = GO.GetComponent<EmployeeInfo_Management>()._EmpDepart;
             AffiliatedEmployee_Panel_On(UnaffiliatedEmployeeData);
         }
         else
         {
+            DepartmentNumber = GO.GetComponent<EmployeeInfo_Management>()._EmpDepart;
             UnaffiliatedEmployee_Panel_On();
         }
     }
@@ -421,7 +448,14 @@ public class Management_Manager : MonoBehaviour
         if (SelectedName != string.Empty)
         {
             DataManager.Instance.MaindataSave(2, FloorNumber, DepartmentNumber, SelectedName);
-            DepartmentInfo(DepartmentNumber);
+            if (DepartmentNumber >= 0)
+            {
+                DepartmentInfo(DepartmentNumber);
+            }
+            else
+            {
+                DepartmentInfo_S();
+            }
             UnaffiliatedEmployee_Panel_Off();
         }
         else
@@ -436,7 +470,14 @@ public class Management_Manager : MonoBehaviour
         {
             DataManager.Instance.MaindataSave(3, FloorNumber, DepartmentNumber, SelectedName);
             AffiliatedEmployee_Panel_Off();
-            DepartmentInfo(DepartmentNumber);
+            if (DepartmentNumber >= 0)
+            {
+                DepartmentInfo(DepartmentNumber); // 리셋 느낌
+            }
+            else
+            {
+                DepartmentInfo_S();
+            }
         }
         else
         {

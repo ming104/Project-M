@@ -96,7 +96,7 @@ public class Astar : MonoBehaviour
                 FinalNodeList.Reverse();
 
                 //for (int i = 0; i < FinalNodeList.Count; i++) print(i + "번째는 " + FinalNodeList[i].x + ", " + FinalNodeList[i].y);
-                myEmployee.PingPongstartPosition = new Vector3(targetPos.x, targetPos.y, 0);
+                //myEmployee.PingPongstartPosition = new Vector3(targetPos.x, targetPos.y, 0);
                 StartMovingToWaypoints();
                 return;
             }

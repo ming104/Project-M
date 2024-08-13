@@ -730,10 +730,11 @@ MonoBehaviour:
   EmployeeJustice: 0
   EmployeeMovementSpeed: 0
   Employee_CurrentStatus: 0
+  Emp_GO: {fileID: 0}
   nameText: {fileID: 6039076812296237182}
   HPBar: {fileID: 4136967584666949297}
   MPBar: {fileID: 3549128601381790399}
-  PingPongstartPosition: {x: 0, y: 0, z: 0}
+  agent: {fileID: 0}
 --- !u!70 &8099665975918514000
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

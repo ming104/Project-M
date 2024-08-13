@@ -6,7 +6,7 @@ using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
-
+using Debug = UnityEngine.Debug;
 
 
 public class Employee : MonoBehaviour
@@ -97,6 +97,8 @@ public class Employee : MonoBehaviour
     [SerializeField] private Slider HPBar;
     [SerializeField] private Slider MPBar;
     public NavMeshAgent agent;
+
+    private Vector3 destinationPos;
     //Start is called before the first frame update
     private void Awake()
     {
@@ -105,7 +107,7 @@ public class Employee : MonoBehaviour
         //agent.updateUpAxis = false;
     }
 
-    public Vector3 PingPongstartPosition;
+    //public Vector3 PingPongstartPosition;
 
 
     void Start()
@@ -117,9 +119,23 @@ public class Employee : MonoBehaviour
         Employee_CurrentStatus = EmployeeFSM.Wait;
     }
 
+    public void DestinationMoving(float x, float y, float z)
+    {
+        agent.SetDestination(new Vector3(x, y, z));
+        destinationPos = new Vector3(x, y, z);
+    }
+
     //Update is called once per frame
     void Update() // 매우 많은 수정이 필요할듯
     {
+        if (agent.isOnOffMeshLink) //만약 agent가 offmeshLink를 만난다면?
+        {
+            agent.Warp(agent.currentOffMeshLinkData.endPos); // 바로 끝 점으로 워프를 함
+            agent.CompleteOffMeshLink(); // offmesh가 끝났음을 알림
+
+            agent.SetDestination(destinationPos); // 그리고 다시 원래 좌표로 지정해줌
+        }
+        
         HPBar.value = EmployeeManager.Instance.Employees[EmployeeName].CurrentHP;
         MPBar.value = EmployeeManager.Instance.Employees[EmployeeName].CurrentMP;
         if (agent.velocity.sqrMagnitude >= .2f && agent.remainingDistance <= 0.5f)

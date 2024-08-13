@@ -125,7 +125,7 @@ public class DataManager : Singleton_DonDes<DataManager>
     /// department는 소속될 회사 부서를 말함 //
     /// name은 말 그대로 이름임, maindata에 올라갈 이름으로 꼭 파일이름과 같아야 함
     /// </summary>
-    public void MaindataSave(int type, int floor, int department, string name) // 종류, 소속, 이름으로 저장
+    public void MaindataSave(int type, int floor, int department, string name) // 종류, 층, 소속, 이름으로 저장
     {
         string filePath = "Assets/Resources/GameData/MainData.json";
 
