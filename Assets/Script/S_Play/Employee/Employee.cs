@@ -1,186 +1,198 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Unity.VisualScripting;
-using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
-using Debug = UnityEngine.Debug;
 
+
+public delegate void NavmeshDelegate(Vector3 destination);
 
 public class Employee : MonoBehaviour
 {
-    public enum EmployeeFSM
+    public enum EmployeeFsm
     {
         Wait = 0,
-        moving = 1,
+        Moving = 1,
         Work = 2,
-        battle = 3,
-        status_effect = 4
-    }
-    [SerializeField] private string EmployeeName;
-    public string _empName
-    {
-        set { EmployeeName = value; }
-        get { return EmployeeName; }
+        Battle = 3,
+        StatusEffect = 4
     }
 
-    [SerializeField] private int EmployeeMaxHp;
-    public int _empMaxHp
+    // Employee Info
+    [SerializeField] private string employeeName;
+    public string EmployeeName
     {
-        set { EmployeeMaxHp = value; }
-        get { return EmployeeMaxHp; }
+        get => employeeName;
+        set => employeeName = value;
     }
 
-    [SerializeField] private int EmployeeMaxMp;
-    public int _empMaxMp
+    [SerializeField] private int employeeMaxHp;
+    public int EmployeeMaxHp
     {
-        set { EmployeeMaxMp = value; }
-        get { return EmployeeMaxMp; }
+        get => employeeMaxHp;
+        set => employeeMaxHp = value;
     }
 
-    [SerializeField] private string EmployeeDepartment;
-    public string _empDepartment
+    [SerializeField] private int employeeMaxMp;
+    public int EmployeeMaxMp
     {
-        set { EmployeeDepartment = value; }
-        get { return EmployeeDepartment; }
+        get => employeeMaxMp;
+        set => employeeMaxMp = value;
     }
 
-    [SerializeField] private int Employeedef;
-    public int _empdef
+    [SerializeField] private string employeeDepartment;
+    public string EmployeeDepartment
     {
-        set { Employeedef = value; }
-        get { return Employeedef; }
+        get => employeeDepartment;
+        set => employeeDepartment = value;
     }
 
-    [SerializeField] private int EmployeePower;
-    public int _empPower
+    [SerializeField] private int employeeDef;
+    public int EmployeeDef
     {
-        set { EmployeePower = value; }
-        get { return EmployeePower; }
-    }
-    [SerializeField] private int Employeeintelligence;
-    public int _empintelligence
-    {
-        set { Employeeintelligence = value; }
-        get { return Employeeintelligence; }
-    }
-    [SerializeField] private int EmployeeJustice;
-    public int _empJustice
-    {
-        set { EmployeeJustice = value; }
-        get { return EmployeeJustice; }
-    }
-    [SerializeField] private int EmployeeMovementSpeed;
-    public int _empMovementSpeed
-    {
-        set { EmployeeMovementSpeed = value; }
-        get { return EmployeeMovementSpeed; }
+        get => employeeDef;
+        set => employeeDef = value;
     }
 
-    [SerializeField] private EmployeeFSM Employee_CurrentStatus;
-    public EmployeeFSM _empEmployee_CurrentStatus
+    [SerializeField] private int employeePower;
+    public int EmployeePower
     {
-        set { Employee_CurrentStatus = value; }
-        get { return Employee_CurrentStatus; }
+        get => employeePower;
+        set => employeePower = value;
     }
 
-    [SerializeField] private GameObject Emp_GO;
-    public GameObject _emp_GameObject
+    [SerializeField] private int employeeIntelligence;
+    public int EmployeeIntelligence
     {
-        set { Emp_GO = value; }
-        get { return Emp_GO; }
+        get => employeeIntelligence;
+        set => employeeIntelligence = value;
+    }
+
+    [SerializeField] private int employeeJustice;
+    public int EmployeeJustice
+    {
+        get => employeeJustice;
+        set => employeeJustice = value;
+    }
+
+    [SerializeField] private int employeeMovementSpeed;
+    public int EmployeeMovementSpeed
+    {
+        get => employeeMovementSpeed;
+        set => employeeMovementSpeed = value;
+    }
+
+    [SerializeField] private EmployeeFsm employeeCurrentStatus;
+    public EmployeeFsm EmployeeCurrentStatus
+    {
+        get => employeeCurrentStatus;
+        set => employeeCurrentStatus = value;
+    }
+
+    [SerializeField] private GameObject empGameObject;
+    public GameObject EmpGameObject
+    {
+        get => empGameObject;
+        set => empGameObject = value;
     }
 
     [SerializeField] private TMPro.TextMeshProUGUI nameText;
-    [SerializeField] private Slider HPBar;
-    [SerializeField] private Slider MPBar;
-    public NavMeshAgent agent;
+    [SerializeField] private Slider hpBar;
+    [SerializeField] private Slider mpBar;
 
-    private Vector3 destinationPos;
-    //Start is called before the first frame update
+    private NavMeshAgent _agent;
+    private Vector3 _destinationPos;
+
+    public bool isResearchMoving;
+
+    NavmeshDelegate _navmeshDelegate;
+
     private void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
-        //agent.updateRotation = false;
-        //agent.updateUpAxis = false;
+        _agent = GetComponent<NavMeshAgent>();
     }
 
-    //public Vector3 PingPongstartPosition;
-
-
-    void Start()
+    private void Start()
     {
-        nameText.text = EmployeeName;
-        HPBar.maxValue = EmployeeMaxHp;
-        MPBar.maxValue = EmployeeMaxMp;
+        nameText.text = employeeName;
+        hpBar.maxValue = employeeMaxHp;
+        mpBar.maxValue = employeeMaxMp;
+        employeeCurrentStatus = EmployeeFsm.Wait;
+        _navmeshDelegate = DestinationMoving;
 
-        Employee_CurrentStatus = EmployeeFSM.Wait;
+        isResearchMoving = false;
     }
 
-    public void DestinationMoving(float x, float y, float z)
+    public void DestinationMoving(Vector3 destination)
     {
-        agent.SetDestination(new Vector3(x, y, z));
-        destinationPos = new Vector3(x, y, z);
+        _agent.SetDestination(destination);
+        _destinationPos = destination;
+    }
+    
+    public void ResearchDestinationMoving(Vector3 destination)
+    {
+        _agent.SetDestination(destination);
+        _destinationPos = destination;
+        isResearchMoving = true;
     }
 
-    //Update is called once per frame
-    void Update() // 매우 많은 수정이 필요할듯
+    private void Update()
     {
-        if (agent.isOnOffMeshLink) //만약 agent가 offmeshLink를 만난다면?
-        {
-            agent.Warp(agent.currentOffMeshLinkData.endPos); // 바로 끝 점으로 워프를 함
-            agent.CompleteOffMeshLink(); // offmesh가 끝났음을 알림
+        HandleOffMeshLink();
+        Research();
+        // Update HP and MP bars
+        hpBar.value = EmployeeManager.Instance.Employees[employeeName].CurrentHP;
+        mpBar.value = EmployeeManager.Instance.Employees[employeeName].CurrentMP;
 
-            agent.SetDestination(destinationPos); // 그리고 다시 원래 좌표로 지정해줌
-        }
-        
-        HPBar.value = EmployeeManager.Instance.Employees[EmployeeName].CurrentHP;
-        MPBar.value = EmployeeManager.Instance.Employees[EmployeeName].CurrentMP;
-        if (agent.velocity.sqrMagnitude >= .2f && agent.remainingDistance <= 0.5f)
+        // Handle FSM state
+        switch (employeeCurrentStatus)
         {
-            agent.ResetPath();
-            Employee_CurrentStatus = EmployeeFSM.Wait;
-        }
-        switch (Employee_CurrentStatus)
-        {
-            case EmployeeFSM.Wait:
+            case EmployeeFsm.Wait:
                 Waiting();
                 break;
-            case EmployeeFSM.moving:
+            case EmployeeFsm.Moving:
                 Moving();
                 break;
-            case EmployeeFSM.Work:
+            case EmployeeFsm.Work:
                 Working();
                 break;
-            case EmployeeFSM.battle:
+            case EmployeeFsm.Battle:
                 Fighting();
                 break;
-            case EmployeeFSM.status_effect:
+            case EmployeeFsm.StatusEffect:
                 StatusAbnormality();
                 break;
         }
     }
 
-    void Waiting()
+    private void HandleOffMeshLink()
     {
-
+        if (_agent.isOnOffMeshLink)
+        {
+            _agent.Warp(_agent.currentOffMeshLinkData.endPos);
+            _agent.CompleteOffMeshLink();
+            _agent.SetDestination(_destinationPos);
+        }
+        
+        if (_agent.remainingDistance <= 0.5f && isResearchMoving)
+        //if (_agent.velocity.sqrMagnitude <= 0.2f && _agent.remainingDistance >= 0.5f)
+        {
+            _agent.ResetPath();
+            isResearchMoving = false;
+            
+            employeeCurrentStatus = EmployeeFsm.Wait;
+        }
     }
-    void Moving()
+
+    private void Research()
     {
-
+        if (isResearchMoving == false)
+        {
+            
+        }
     }
-    void Working()
-    {
 
-    }
-    void Fighting()
-    {
-
-    }
-    void StatusAbnormality()
-    {
-
-    }
+    private void Waiting() { }
+    private void Moving() { }
+    private void Working() { }
+    private void Fighting() { }
+    private void StatusAbnormality() { }
 }

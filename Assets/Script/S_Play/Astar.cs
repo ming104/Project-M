@@ -164,7 +164,7 @@ public class Astar : MonoBehaviour
 
     IEnumerator MoveToWaypoints()
     {
-        myEmployee._empEmployee_CurrentStatus = Employee.EmployeeFSM.moving;
+        //myEmployee._empEmployee_CurrentStatus = Employee.EmployeeFSM.moving;
         for (int i = 0; i < FinalNodeList.Count; i++)
         {
             Vector2 targetPosition = new Vector2(FinalNodeList[i].x, FinalNodeList[i].y); //FinalNodeList[i].x, FinalNodeList[i].y
@@ -172,10 +172,10 @@ public class Astar : MonoBehaviour
 
             while (Vector2.Distance(transform.position, targetPosition) > 0.01f)
             {
-                transform.position = Vector2.MoveTowards(transform.position, targetPosition, GetComponent<Employee>()._empMovementSpeed / 10 * Time.deltaTime);
+                //transform.position = Vector2.MoveTowards(transform.position, targetPosition, GetComponent<Employee>()._empMovementSpeed / 10 * Time.deltaTime);
                 yield return null;
             }
         }
-        myEmployee._empEmployee_CurrentStatus = Employee.EmployeeFSM.Wait;
+        //myEmployee._empEmployee_CurrentStatus = Employee.EmployeeFSM.Wait;
     }
 }

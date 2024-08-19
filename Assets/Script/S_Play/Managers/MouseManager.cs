@@ -19,13 +19,14 @@ public class MouseManager : Singleton<MouseManager>
         {
             Vector2 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // 마우스 클릭 위치를 2D 좌표로 변환
             //RaycastHit2D hit = Physics2D.Raycast(clickPos, Vector2.zero); // Raycast로 해당 위치에 오브젝트 감지
+            
             if (Selection_Obj.Instance.isSelect == true)
             {
                 for (int i = 0; i < Selection_Obj.Instance.SelectOBJ.Count; i++)
                 {
                     var SelectEmp = Selection_Obj.Instance.SelectOBJ[i].GetComponent<Employee>();
-                    SelectEmp.DestinationMoving(clickPos.x, clickPos.y, transform.position.z);
-                    SelectEmp._empEmployee_CurrentStatus = Employee.EmployeeFSM.moving;
+                    SelectEmp.DestinationMoving(new Vector3( clickPos.x, clickPos.y, transform.position.z));
+                    SelectEmp.EmployeeCurrentStatus = Employee.EmployeeFsm.Moving;
                 }
 
                 Selection_Obj.Instance.DeSelect_Obj();

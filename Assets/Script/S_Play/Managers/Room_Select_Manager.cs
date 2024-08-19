@@ -28,10 +28,17 @@ public class Room_Select_Manager : MonoBehaviour
         get { return Depart_locate; }
     }
 
+    [SerializeField] private Vector3 Room_locate;
+    public Vector3 RoomPos
+    {
+        get { return Room_locate; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         textName.text = _monName;
+        Room_locate = new Vector3(transform.position.x + 3.5f, transform.position.y - 1f, transform.position.z);
     }
 
     // Update is called once per frame

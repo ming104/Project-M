@@ -8919,10 +8919,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Main_Camera: {fileID: 519420031}
   CameraMovementSpeed: 21
-  CursorTexture: {fileID: 0}
+  defaultTexture: {fileID: 2800000, guid: ed878b9d416642c4ebffb932f5c42a9c, type: 3}
+  screenMoveTexture: {fileID: 2800000, guid: c135550f826d8c24a8c4892b260bc537, type: 3}
+  screenMoveUp: {fileID: 2800000, guid: 1c872da8b2610c2418e4191bc5583cf1, type: 3}
+  screenMoveDown: {fileID: 2800000, guid: c4a9950a0892c3848aad298489bdc95c, type: 3}
+  screenMoveRight: {fileID: 2800000, guid: 091dee7c5236f2a4a8bf347d6442b2c2, type: 3}
+  screenMoveLeft: {fileID: 2800000, guid: b3fe7e48e92ce9a4390cc77f77217917, type: 3}
   CamInteractionOn: 1
   MaxPosX: 0
   MinPosX: 0
+  edgeThickness: 10
 --- !u!4 &1122904980
 Transform:
   m_ObjectHideFlags: 0

@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+public delegate void ActionDelegate();
+
+
 public class EmployeeListUI : MonoBehaviour
 {
     public Image Employee_Image;
@@ -14,5 +17,5 @@ public class EmployeeListUI : MonoBehaviour
     public TextMeshProUGUI Name;
     public TextMeshProUGUI SuccessRate;
     public TextMeshProUGUI ResearchTime;
-    public Employee Empdata;
+    
 }

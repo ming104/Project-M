@@ -10,7 +10,12 @@ public class Camera_Manager : Singleton<Camera_Manager>
     [SerializeField] private float CameraMovementSpeed = 7f; // WASD카메라 움직임
     private Vector3 MousePos; // 마우스 포지션 전역변수
     [Header("커서 모양")]
-    public Texture2D CursorTexture;
+    public Texture2D defaultTexture;
+    public Texture2D screenMoveTexture;
+    public Texture2D screenMoveUp;
+    public Texture2D screenMoveDown;
+    public Texture2D screenMoveRight;
+    public Texture2D screenMoveLeft;
 
     public bool CamInteractionOn = true;
     [Header("최대 x값, 최소 x값")]
@@ -18,7 +23,6 @@ public class Camera_Manager : Singleton<Camera_Manager>
     public float MinPosX;
     
     public float edgeThickness = 10f; // 화면 가장자리에 가까워졌을 때의 거리
-    public float scrollSpeed = 100f; // 카메라 이동 속도
     
     private Dictionary<KeyCode, Vector3> cameraPositions = new Dictionary<KeyCode, Vector3>
     {
@@ -72,7 +76,7 @@ public class Camera_Manager : Singleton<Camera_Manager>
         //var asdf = Mathf.Clamp(Main_Camera.transform.position.x, MinPosX, MaxPosX);
         if (Input.GetMouseButtonDown(2))//Input.GetMouseButtonDown(1) || 
         {
-            //Cursor.SetCursor(CursorTexture, Vector2.zero, CursorMode.ForceSoftware);
+            Cursor.SetCursor(screenMoveTexture, Vector2.zero, CursorMode.ForceSoftware);
             MousePos = Main_Camera.ScreenToWorldPoint(Input.mousePosition); // 마우스 포지션을 먼저 지정하고
         }
         if (Input.GetMouseButton(2))//Input.GetMouseButton(1) || 
@@ -82,7 +86,7 @@ public class Camera_Manager : Singleton<Camera_Manager>
         }
         if (Input.GetMouseButtonUp(2))//Input.GetMouseButtonUp(1) || 
         {
-            //Cursor.SetCursor(CursorTexture, Vector2.zero, CursorMode.ForceSoftware);
+            Cursor.SetCursor(defaultTexture, Vector2.zero, CursorMode.ForceSoftware);
         }
         
      
@@ -96,19 +100,27 @@ public class Camera_Manager : Singleton<Camera_Manager>
         if (mousePosition.x < edgeThickness)
         {
             Main_Camera.transform.Translate(Vector2.left * CameraMovementSpeed * Time.unscaledDeltaTime);
+            //Cursor.SetCursor(screenMoveLeft, Vector2.zero, CursorMode.ForceSoftware);
+            Debug.Log("left");
         }
         else if (mousePosition.x > screenWidth - edgeThickness)
         {
             Main_Camera.transform.Translate(Vector2.right * CameraMovementSpeed * Time.unscaledDeltaTime);
+            //Cursor.SetCursor(screenMoveRight, Vector2.zero, CursorMode.ForceSoftware);
+            Debug.Log("right");
         }
 
         if (mousePosition.y < edgeThickness)
         {
             Main_Camera.transform.Translate(Vector2.down * CameraMovementSpeed * Time.unscaledDeltaTime);
+            //Cursor.SetCursor(screenMoveDown, Vector2.zero, CursorMode.ForceSoftware);
+            Debug.Log("down");
         }
         else if (mousePosition.y > screenHeight - edgeThickness)
         {
             Main_Camera.transform.Translate(Vector2.up * CameraMovementSpeed * Time.unscaledDeltaTime);
+            //Cursor.SetCursor(screenMoveUp, Vector2.zero, CursorMode.ForceSoftware);
+            Debug.Log("up");
         }
     
 

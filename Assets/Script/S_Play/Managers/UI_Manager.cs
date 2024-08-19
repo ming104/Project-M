@@ -38,11 +38,11 @@ public class UI_Manager : Singleton<UI_Manager>
     public TextMeshProUGUI RiskLevel;
     public TextMeshProUGUI OpenLevel;
 
-    private int Select_mon_Depart;
+    public int Select_mon_Depart;
     public int currnentFloor;
     public string pri_monname;
-    public ResearchStatusSlider selectedRoom;
-    public Transform Roomtrans;
+    public ResearchStatusSlider researchStatusSlider;
+    public Vector3 roomPos;
 
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -184,43 +184,34 @@ public class UI_Manager : Singleton<UI_Manager>
             emUI.MpSlider.value = EmployeeManager.Instance.Employees[empListdata.name].CurrentMP;
             emUI.HpSlider_Text.text = $"HP : {empListdata.hp}/{empListdata.hp}";
             emUI.MpSlider_Text.text = $"MP : {empListdata.mp}/{empListdata.mp}";
-
-            //emUI.Empdata = FindObjectOfType<Employee>();
-            var employeedata = FindObjectsOfType<Employee>();
-            for (int e = 0; e < employeedata.Length; e++)
-            {
-                //if(employeedata._ == em)
-
-            }
-
-
-
-            switch (workButtonNumber) // 여기에 이동코드 들어가야 함
+            
+            
+            
+            switch (workButtonNumber) // 여기에 이동코드 들어가야 함 <- 여기 아님 밑에임
             {
                 case 1:
-                    //emUI.Empdata.agent.destination = Roomtrans.position;
                     emUI.SuccessRate.text = $"{mondata.Research_Preferences.FEAR}%";
-                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(mondata, mondata.Research_Preferences.FEAR));
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, mondata, mondata.Research_Preferences.FEAR));
                     break;
                 case 2:
                     emUI.SuccessRate.text = $"{mondata.Research_Preferences.ANGER}%";
-                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(mondata, mondata.Research_Preferences.ANGER));
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, mondata, mondata.Research_Preferences.ANGER));
                     break;
                 case 3:
                     emUI.SuccessRate.text = $"{mondata.Research_Preferences.DISGUST}%";
-                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(mondata, mondata.Research_Preferences.DISGUST));
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, mondata, mondata.Research_Preferences.DISGUST));
                     break;
                 case 4:
                     emUI.SuccessRate.text = $"{mondata.Research_Preferences.SAD}%";
-                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(mondata, mondata.Research_Preferences.SAD));
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, mondata, mondata.Research_Preferences.SAD));
                     break;
                 case 5:
                     emUI.SuccessRate.text = $"{mondata.Research_Preferences.HAPPY}%";
-                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(mondata, mondata.Research_Preferences.HAPPY));
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, mondata, mondata.Research_Preferences.HAPPY));
                     break;
                 case 6:
                     emUI.SuccessRate.text = $"{mondata.Research_Preferences.SURPRISE}%";
-                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(mondata, mondata.Research_Preferences.SURPRISE));
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, mondata, mondata.Research_Preferences.SURPRISE));
                     break;
             }
             //emUI.ResearchTime.text = data.def.ToString(); // 수정필요
@@ -233,54 +224,61 @@ public class UI_Manager : Singleton<UI_Manager>
         EmployeeListCanvas.SetActive(false);
     }
 
-    public void ResearchStart(MonsterData mondata, int persent)
+    public void ResearchStart(EmployeeData empdata,MonsterData mondata, int persent)
     {
         int RePoCount;
         //var empListUI = gameObject.GetComponent<EmployeeListUI>();
-        switch (mondata.profile.riskLevel)
-        {
-            case 1:
-                RePoCount = 10;
-                selectedRoom.GetComponent<ResearchStatusSlider>().StartResearch(RePoCount, persent);
-                break;
-            case 2:
-                RePoCount = 20;
-                selectedRoom.GetComponent<ResearchStatusSlider>().StartResearch(RePoCount, persent);
-                break;
-            case 3:
-                RePoCount = 30;
-                selectedRoom.GetComponent<ResearchStatusSlider>().StartResearch(RePoCount, persent);
-                break;
-            case 4:
-                RePoCount = 40;
-                selectedRoom.GetComponent<ResearchStatusSlider>().StartResearch(RePoCount, persent);
-                break;
-            case 5:
-                RePoCount = 50;
-                selectedRoom.GetComponent<ResearchStatusSlider>().StartResearch(RePoCount, persent);
-                break;
-        }
         
+        //여기서 작업 실행 해야됨
+        if (EmployeeManager.Instance.EmployeeDatas.ContainsKey(empdata.name))
+        {
+            EmployeeManager.Instance.EmployeeDatas[empdata.name].ResearchDestinationMoving(roomPos);
+            
+                switch (mondata.profile.riskLevel)
+                {
+                    case 1:
+                        RePoCount = 10;
+                        researchStatusSlider.StartResearch(RePoCount, persent);
+                        break;
+                    case 2:
+                        RePoCount = 20;
+                        researchStatusSlider.StartResearch(RePoCount, persent);
+                        break;
+                    case 3:
+                        RePoCount = 30;
+                        researchStatusSlider.StartResearch(RePoCount, persent);
+                        break;
+                    case 4:
+                        RePoCount = 40;
+                        researchStatusSlider.StartResearch(RePoCount, persent);
+                        break;
+                    case 5:
+                        RePoCount = 50;
+                        researchStatusSlider.StartResearch(RePoCount, persent);
+                        break;
+                }
+            
+        }
     }
     
 
     public void EmployeeSelected() //데미지 받으면 다시 호출하는 방식으로 해야할듯 그래야 체력이 동기화됨 + 힐 받을 때
     {
         var SelectedEmployeeData = Selection_Obj.Instance.SelectOBJ[0].GetComponent<Employee>();
-        empName.text = SelectedEmployeeData._empName;
-        empHp.text = $"체력 : {EmployeeManager.Instance.Employees[SelectedEmployeeData._empName].CurrentHP}/{SelectedEmployeeData._empMaxHp}";
-        empMp.text = $"정신력 : {EmployeeManager.Instance.Employees[SelectedEmployeeData._empName].CurrentMP}/{SelectedEmployeeData._empMaxMp}";
-        empDepartment.text = $"근무 부서 : {SelectedEmployeeData._empDepartment}";
-        empDef.text = $"방어력 : {SelectedEmployeeData._empdef}";
-        empPower.text = $"힘 : {SelectedEmployeeData._empPower}";
-        empintelligence.text = $"지능 : {SelectedEmployeeData._empintelligence}";
-        empJustice.text = $"정의 : {SelectedEmployeeData._empJustice}";
-        empMovementSpeed.text = $"이동속도 : {SelectedEmployeeData._empMovementSpeed}";
+        empName.text = SelectedEmployeeData.EmployeeName;
+        empHp.text = $"체력 : {EmployeeManager.Instance.Employees[SelectedEmployeeData.EmployeeName].CurrentHP}/{SelectedEmployeeData.EmployeeMaxHp}";
+        empMp.text = $"정신력 : {EmployeeManager.Instance.Employees[SelectedEmployeeData.EmployeeName].CurrentMP}/{SelectedEmployeeData.EmployeeMaxMp}";
+        empDepartment.text = $"근무 부서 : {SelectedEmployeeData.EmployeeDepartment}";
+        empDef.text = $"방어력 : {SelectedEmployeeData.EmployeeDef}";
+        empPower.text = $"힘 : {SelectedEmployeeData.EmployeePower}";
+        empintelligence.text = $"지능 : {SelectedEmployeeData.EmployeeIntelligence}";
+        empJustice.text = $"정의 : {SelectedEmployeeData.EmployeeJustice}";
+        empMovementSpeed.text = $"이동속도 : {SelectedEmployeeData.EmployeeMovementSpeed}";
 
-        EmployeeSelected_HpSlider.maxValue = SelectedEmployeeData._empMaxHp;
-        EmployeeSelected_HpSlider.value = EmployeeManager.Instance.Employees[SelectedEmployeeData._empName].CurrentHP;
-        EmployeeSelected_MpSlider.maxValue = SelectedEmployeeData._empMaxMp;
-        EmployeeSelected_MpSlider.value = EmployeeManager.Instance.Employees[SelectedEmployeeData._empName].CurrentMP;
+        EmployeeSelected_HpSlider.maxValue = SelectedEmployeeData.EmployeeMaxHp;
+        EmployeeSelected_HpSlider.value = EmployeeManager.Instance.Employees[SelectedEmployeeData.EmployeeName].CurrentHP;
+        EmployeeSelected_MpSlider.maxValue = SelectedEmployeeData.EmployeeMaxMp;
+        EmployeeSelected_MpSlider.value = EmployeeManager.Instance.Employees[SelectedEmployeeData.EmployeeName].CurrentMP;
         Employee_Info.SetActive(true);
     }
     public void EmployeeSelectcancel()

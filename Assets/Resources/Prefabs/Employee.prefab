@@ -720,21 +720,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e31fa2f1162371646ada1569feb1713b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EmployeeName: 
-  EmployeeMaxHp: 0
-  EmployeeMaxMp: 0
-  EmployeeDepartment: 
-  Employeedef: 0
-  EmployeePower: 0
-  Employeeintelligence: 0
-  EmployeeJustice: 0
-  EmployeeMovementSpeed: 0
-  Employee_CurrentStatus: 0
-  Emp_GO: {fileID: 0}
+  employeeName: 
+  employeeMaxHp: 0
+  employeeMaxMp: 0
+  employeeDepartment: 
+  employeeDef: 0
+  employeePower: 0
+  employeeIntelligence: 0
+  employeeJustice: 0
+  employeeMovementSpeed: 0
+  employeeCurrentStatus: 0
+  empGameObject: {fileID: 6493314234655353575}
   nameText: {fileID: 6039076812296237182}
-  HPBar: {fileID: 4136967584666949297}
-  MPBar: {fileID: 3549128601381790399}
-  agent: {fileID: 0}
+  hpBar: {fileID: 4136967584666949297}
+  mpBar: {fileID: 3549128601381790399}
 --- !u!70 &8099665975918514000
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
