@@ -6,7 +6,8 @@
     "imagePATH": "MonsterImage/Importance of turn",
     "MonsterName": "차례의 중요성",
     "MonsterBuy_Info": "하나! 둘! 셋! 넷! 다섯! 여섯!",
-    "riskLevel": 2
+    "riskLevel": 2,
+    "isEscape": "탈출하지않음"
   },
 
   "Research_log": {

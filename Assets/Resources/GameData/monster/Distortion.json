@@ -6,7 +6,8 @@
     "imagePATH": "MonsterImage/Distortion",
     "MonsterName": "뒤틀림",
     "MonsterBuy_Info": "#@$@$@##!#@%@%!!^!#%#!#$*",
-    "riskLevel": 5
+    "riskLevel": 5,
+    "isEscape": "탈출하지않음"
   },
 
   "Research_log": {

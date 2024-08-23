@@ -6,7 +6,8 @@
     "imagePATH": "MonsterImage/Double Faced Ghost",
     "MonsterName": "양면귀",
     "MonsterBuy_Info": "호오…. 재미있는 놈들이로고",
-    "riskLevel": 5
+    "riskLevel": 5,
+    "isEscape": "탈출함"
   },
 
   "Research_log": {

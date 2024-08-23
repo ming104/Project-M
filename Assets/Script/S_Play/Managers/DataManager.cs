@@ -64,6 +64,7 @@ public class ProfileData
     public string MonsterName;
     public string MonsterBuy_Info;
     public int riskLevel;
+    public string isEscape;
 }
 [Serializable]
 public class ResearchLogData

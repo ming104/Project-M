@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 
@@ -26,6 +27,11 @@ public class UI_Manager : Singleton<UI_Manager>
     public TextMeshProUGUI monsterCode;
     public TextMeshProUGUI riskLevel;
     public TextMeshProUGUI research_log;
+    public Transform logContent;
+    public GameObject logTextBoxPrefab;
+    public TextMeshProUGUI feelingBad;
+    public TextMeshProUGUI feelingDefault;
+    public TextMeshProUGUI feelingGood;
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     [Header("Pause")]
     public GameObject PauseMenu;
@@ -37,7 +43,7 @@ public class UI_Manager : Singleton<UI_Manager>
     public Image monsterWorkImage;
     public TextMeshProUGUI Name;
     public TextMeshProUGUI CodeName;
-    public TextMeshProUGUI RiskLevel;
+    public TextMeshProUGUI workRiskLevel;
     public TextMeshProUGUI OpenLevel;
 
     public int Select_mon_Depart;
@@ -114,15 +120,48 @@ public class UI_Manager : Singleton<UI_Manager>
     {
         monsterImage.sprite = Resources.Load<Sprite>(monsterData.profile.imagePATH);
         monsterName.text = $"이름 : {monsterData.profile.MonsterName}";
-        possibilityOfEscape.text = $"탈출 가능성 : ";
+        possibilityOfEscape.text = $"탈출 여부 : {monsterData.profile.isEscape}";
         mentalDamage.text = $"연구시 정신피해 정도 : ";
         monsterCode.text = $"식별 코드 : {monsterData.profile.code}";
-        RiskLevel.text = $"위험도 : {monsterData.profile.riskLevel}";
-        research_log.text = "연구 일지";
-        // foreach (string relog in monsterData.Research_log.log)
-        // {
-        //     research_log.text += "- " + relog + "\n";
-        // }
+        riskLevel.text = $"위험도 : {monsterData.profile.riskLevel}";
+        research_log.text = "연구 기록";
+        foreach (string relog in monsterData.Research_log.log)
+        {
+            var logTextBox = Instantiate(logTextBoxPrefab);
+            logTextBox.GetComponent<MonsterResultLog>().resultText.text = relog;
+            logTextBox.transform.SetParent(logContent);
+        }
+
+        switch (monsterData.profile.riskLevel)
+        {
+            case 1:
+                feelingBad.text = "나쁨 : 0 ~ 2";
+                feelingDefault.text = "보통 : 3 ~ 6";
+                feelingGood.text = "좋음 : 7 ~ 10";
+                break;
+            case 2:
+                feelingBad.text = "나쁨 : 0 ~ 6";
+                feelingDefault.text = "보통 : 7 ~ 13";
+                feelingGood.text = "좋음 : 14 ~ 20";
+                break;
+            case 3:
+                feelingBad.text = "나쁨 : 0 ~ 9";
+                feelingDefault.text = "보통 : 10 ~ 20";
+                feelingGood.text = "좋음 : 21 ~ 30";
+                break;
+            case 4:
+                feelingBad.text = "나쁨 : 0 ~ 12";
+                feelingDefault.text = "보통 : 13 ~ 26";
+                feelingGood.text = "좋음 : 27 ~ 40";
+                break;
+            case 5:
+                feelingBad.text = "나쁨 : 0 ~ 16";
+                feelingDefault.text = "보통 : 17 ~ 33";
+                feelingGood.text = "좋음 : 33 ~ 50";
+                break;
+        }
+        
+        
         InfoCanvas.SetActive(true);
     }
 
@@ -131,7 +170,7 @@ public class UI_Manager : Singleton<UI_Manager>
         monsterImage.sprite = null;
         monsterName.text = null;
         monsterCode.text = null;
-        RiskLevel.text = null;
+        workRiskLevel.text = null;
         research_log.text = null;
         InfoCanvas.SetActive(false);
     }
@@ -141,7 +180,7 @@ public class UI_Manager : Singleton<UI_Manager>
         monsterWorkImage.sprite = Resources.Load<Sprite>(monsterData.profile.imagePATH);
         Name.text = monsterData.profile.MonsterName;
         CodeName.text = monsterData.profile.code;
-        RiskLevel.text = $"위험도 : {monsterData.profile.riskLevel}";
+        workRiskLevel.text = $"위험도 : {monsterData.profile.riskLevel}";
         OpenLevel.text = $"연구 정도 : {monsterData.OpenLevel}";
         Select_mon_Depart = Mon_depart;
 

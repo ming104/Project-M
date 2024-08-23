@@ -6,7 +6,8 @@
     "imagePATH": "MonsterImage/ill-fated Sniper",
     "MonsterName": "비운의 스나이퍼",
     "MonsterBuy_Info": "죽이고 싶지 않아 더는....",
-    "riskLevel": 4
+    "riskLevel": 4,
+    "isEscape": "탈출하지않음"
   },
 
   "Research_log": {

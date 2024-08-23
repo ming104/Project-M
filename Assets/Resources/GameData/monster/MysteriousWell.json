@@ -6,7 +6,8 @@
     "imagePATH": "MonsterImage/Mysterious Well",
     "MonsterName": "신비한 우물",
     "MonsterBuy_Info": "이 물을 마시게 된다면 엄청난 일을 겪게 되지...",
-    "riskLevel": 3
+    "riskLevel": 3,
+    "isEscape": "탈출하지않음"
   },
 
   "Research_log": {

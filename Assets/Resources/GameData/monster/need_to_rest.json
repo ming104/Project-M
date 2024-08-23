@@ -6,7 +6,8 @@
     "imagePATH": "MonsterImage/need_to_rest",
     "MonsterName": "휴식이 필요한 소녀",
     "MonsterBuy_Info": "피곤해 자고싶어...",
-    "riskLevel": 1
+    "riskLevel": 1,
+    "isEscape": "탈출하지않음"
   },
 
   "Research_log": {

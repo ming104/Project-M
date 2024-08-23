@@ -6,7 +6,8 @@
     "imagePATH": "MonsterImage/P.O.V",
     "MonsterName": "P.O.V",
     "MonsterBuy_Info": "인간들을 지키기 위해서라면...",
-    "riskLevel": 4
+    "riskLevel": 4,
+    "isEscape": "탈출함"
   },
 
   "Research_log": {
