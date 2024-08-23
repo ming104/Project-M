@@ -112,7 +112,7 @@ public class DataManager : Singleton_DonDes<DataManager>
 
         MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText); // class객체로 변환
 
-        maindata.day = GameManager.Instance.nowday;
+        maindata.day = GameManager.Instance.nowday + 1;
         maindata.Money = GameManager.Instance.nowMoney;
         maindata.ResearchPoint = GameManager.Instance.nowResearchPoint;
 

@@ -747,109 +747,112 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec22faddf8d5e94f9c39aae183de0fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Day: {fileID: 354326233}
-  Money: {fileID: 320500612}
-  ResearchPoint: {fileID: 1000434841}
-  GameStartBtn: {fileID: 1219368699}
-  FloorOpeningBtn: {fileID: 2111423650}
-  currentFloor_Text: {fileID: 1432476014}
-  FloorNumber: 0
-  DepartmentNumber: 0
-  Department: {fileID: 2079407551}
-  MonsterImage:
+  mainDay: {fileID: 354326233}
+  mainMoney: {fileID: 320500612}
+  mainResearchPoint: {fileID: 1000434841}
+  gameStartBtn: {fileID: 1219368699}
+  floorOpeningBtn: {fileID: 2111423650}
+  currentFloorText: {fileID: 1432476014}
+  floorNumber: 0
+  departmentNumber: 0
+  department: {fileID: 2079407551}
+  monsterImageList:
   - {fileID: 1475580425}
   - {fileID: 840980313}
   - {fileID: 199916699}
   - {fileID: 706709349}
-  MonsterNameText:
+  monsterNameText:
   - {fileID: 1852051603}
   - {fileID: 1683152931}
   - {fileID: 1746305501}
   - {fileID: 1447502369}
-  EmployeeImage:
+  employeeImage:
   - {fileID: 1470531393}
   - {fileID: 322822961}
   - {fileID: 725194461}
   - {fileID: 493480902}
   - {fileID: 1188424507}
-  EmployeeNameText:
+  employeeNameText:
   - {fileID: 810434725}
   - {fileID: 1104680733}
   - {fileID: 1113338252}
   - {fileID: 2029150010}
   - {fileID: 2129929154}
-  Selected_Depart_S: {fileID: 405008871}
-  Department_S: {fileID: 1818510405}
-  AuditEmployeeImage_S:
+  selectedDepartGeneral: {fileID: 405008871}
+  departmentGeneral: {fileID: 1818510405}
+  auditEmployeeImageGeneral:
   - {fileID: 1982426739}
   - {fileID: 1780789136}
   - {fileID: 679711737}
   - {fileID: 170310481}
   - {fileID: 495484364}
-  AuditEmployeeNameText_S:
+  auditEmployeeNameTextGeneral:
   - {fileID: 1115767283}
   - {fileID: 1432849088}
   - {fileID: 1983629001}
   - {fileID: 1714644304}
   - {fileID: 541824325}
-  AccountEmployeeImage_S:
+  accountEmployeeImageGeneral:
   - {fileID: 639347584}
   - {fileID: 1273413299}
   - {fileID: 210298467}
   - {fileID: 290087958}
   - {fileID: 525488245}
-  AccountEmployeeNameText_S:
+  accountEmployeeNameTextGeneral:
   - {fileID: 1844052610}
   - {fileID: 156119394}
   - {fileID: 30736334}
   - {fileID: 1462390077}
   - {fileID: 481396722}
-  InfoCanvas: {fileID: 1068787331}
+  dayGeneral: {fileID: 1312874000}
+  moneyGeneral: {fileID: 713374901}
+  researchPointGeneral: {fileID: 1390004113}
+  infoCanvas: {fileID: 0}
   monsterImage: {fileID: 1732841043}
   monsterName: {fileID: 1788189956}
   code: {fileID: 2088526040}
   dangerLevel: {fileID: 1945535796}
-  research_log: {fileID: 1353428832}
-  Employ_Canvas: {fileID: 719459943}
-  UnaffiliatedEmployee_Panel: {fileID: 635578741}
-  UnaffiliatedEmployee_Info: {fileID: 229790332}
-  Prefab_UnaffiliatedEmployee_List: {fileID: 2001940986}
-  Prefab_UnaffiliatedEmployee_Ele: {fileID: 4981798888067986823, guid: 416117ad6dba3e04ba7bd59e733318e9, type: 3}
-  Prefab_UnaffiliatedEmployee_Ele_List: []
-  SelectedName: 
-  UnaffiliatedEmployeeName: {fileID: 2122230382}
-  UnaffiliatedEmployeeHp: {fileID: 496545910}
-  UnaffiliatedEmployeeMp: {fileID: 912711438}
-  UnaffiliatedEmployeeDef: {fileID: 44471384}
-  UnaffiliatedEmployeePower: {fileID: 1654666409}
-  UnaffiliatedEmployeeIntelligence: {fileID: 548502666}
-  UnaffiliatedEmployeeJustice: {fileID: 1036109359}
-  UnaffiliatedEmployeeMovementSpeed: {fileID: 1565337379}
-  AffiliatedEmployee_Panel: {fileID: 1590996348}
-  AffiliatedEmployeeName: {fileID: 11272589}
-  AffiliatedEmployeeHp: {fileID: 217166295}
-  AffiliatedEmployeeMp: {fileID: 533602184}
-  AffiliatedEmployeeDef: {fileID: 1120824139}
-  AffiliatedEmployeePower: {fileID: 726986930}
-  AffiliatedEmployeeIntelligence: {fileID: 962939197}
-  AffiliatedEmployeeJustice: {fileID: 562021826}
-  AffiliatedEmployeeMovementSpeed: {fileID: 2098469177}
-  Selected_GameObject: {fileID: 0}
-  MonsterBuy_Canvas: {fileID: 2142510591}
-  MonsterBuy_GO:
+  researchLog: {fileID: 1353428832}
+  employCanvas: {fileID: 719459943}
+  unaffiliatedEmployeePanel: {fileID: 635578741}
+  unaffiliatedEmployeeInfo: {fileID: 229790332}
+  prefabUnaffiliatedEmployeeList: {fileID: 2001940986}
+  prefabUnaffiliatedEmployeeElement: {fileID: 4981798888067986823, guid: 416117ad6dba3e04ba7bd59e733318e9, type: 3}
+  prefabUnaffiliatedEmployee: []
+  selectedName: 
+  unaffiliatedEmployeeName: {fileID: 2122230382}
+  unaffiliatedEmployeeHp: {fileID: 496545910}
+  unaffiliatedEmployeeMp: {fileID: 912711438}
+  unaffiliatedEmployeeDef: {fileID: 44471384}
+  unaffiliatedEmployeePower: {fileID: 1654666409}
+  unaffiliatedEmployeeIntelligence: {fileID: 548502666}
+  unaffiliatedEmployeeJustice: {fileID: 1036109359}
+  unaffiliatedEmployeeMovementSpeed: {fileID: 1565337379}
+  affiliatedEmployeePanel: {fileID: 1590996348}
+  affiliatedEmployeeName: {fileID: 11272589}
+  affiliatedEmployeeHp: {fileID: 217166295}
+  affiliatedEmployeeMp: {fileID: 533602184}
+  affiliatedEmployeeDef: {fileID: 1120824139}
+  affiliatedEmployeePower: {fileID: 726986930}
+  affiliatedEmployeeIntelligence: {fileID: 962939197}
+  affiliatedEmployeeJustice: {fileID: 562021826}
+  affiliatedEmployeeMovementSpeed: {fileID: 2098469177}
+  selectedGameObject: {fileID: 0}
+  monsterBuyCanvas: {fileID: 2142510591}
+  monsterBuyGameObjects:
   - {fileID: 2106732314}
   - {fileID: 743716600}
   - {fileID: 1536007404}
-  DuplicateList: 
-  Depart_Select: {fileID: 632220461}
-  Selected_Depart: {fileID: 94684813}
-  Depart:
+  duplicateList: 
+  departSelect: {fileID: 632220461}
+  selectedDepart: {fileID: 94684813}
+  depart:
   - {fileID: 729864570}
   - {fileID: 941880708}
   - {fileID: 1605564450}
   - {fileID: 1770669504}
-  Depart_S: {fileID: 308254401}
-  ResetImage: {fileID: 21300000, guid: 5295aafcb024ed047bc66d7662a2f586, type: 3}
+  departGeneral: {fileID: 308254401}
+  resetImage: {fileID: 21300000, guid: 5295aafcb024ed047bc66d7662a2f586, type: 3}
 --- !u!1 &49967025
 GameObject:
   m_ObjectHideFlags: 0
@@ -3696,7 +3699,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 48303929}
-        m_TargetAssemblyTypeName: Management_Manager, Assembly-CSharp
+        m_TargetAssemblyTypeName: ManagementManager, Assembly-CSharp
         m_MethodName: DepartmentInfo_S
         m_Mode: 1
         m_Arguments:
@@ -7675,7 +7678,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 48303929}
-        m_TargetAssemblyTypeName: Management_Manager, Assembly-CSharp
+        m_TargetAssemblyTypeName: ManagementManager, Assembly-CSharp
         m_MethodName: DepartmentInfo
         m_Mode: 3
         m_Arguments:
@@ -9118,7 +9121,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 48303929}
-        m_TargetAssemblyTypeName: Management_Manager, Assembly-CSharp
+        m_TargetAssemblyTypeName: ManagementManager, Assembly-CSharp
         m_MethodName: DepartmentInfo
         m_Mode: 3
         m_Arguments:
@@ -11174,7 +11177,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 48303929}
-        m_TargetAssemblyTypeName: Management_Manager, Assembly-CSharp
+        m_TargetAssemblyTypeName: ManagementManager, Assembly-CSharp
         m_MethodName: GameStart
         m_Mode: 1
         m_Arguments:
@@ -14207,7 +14210,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 48303929}
-        m_TargetAssemblyTypeName: Management_Manager, Assembly-CSharp
+        m_TargetAssemblyTypeName: ManagementManager, Assembly-CSharp
         m_MethodName: DepartmentInfo
         m_Mode: 3
         m_Arguments:
@@ -15766,7 +15769,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 48303929}
-        m_TargetAssemblyTypeName: Management_Manager, Assembly-CSharp
+        m_TargetAssemblyTypeName: ManagementManager, Assembly-CSharp
         m_MethodName: DepartmentInfo
         m_Mode: 3
         m_Arguments:
@@ -16193,10 +16196,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 121525574}
   - {fileID: 632220462}
   - {fileID: 405008872}
   - {fileID: 94684814}
-  - {fileID: 121525574}
   - {fileID: 719459944}
   - {fileID: 635578742}
   - {fileID: 1590996349}
@@ -17546,7 +17549,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 48303929}
-        m_TargetAssemblyTypeName: Management_Manager, Assembly-CSharp
+        m_TargetAssemblyTypeName: ManagementManager, Assembly-CSharp
         m_MethodName: MonsterBuy_Canvas_Btn_On
         m_Mode: 1
         m_Arguments:
@@ -17555,7 +17558,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &2042432422
 MonoBehaviour:
@@ -18367,7 +18370,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 48303929}
-        m_TargetAssemblyTypeName: Management_Manager, Assembly-CSharp
+        m_TargetAssemblyTypeName: ManagementManager, Assembly-CSharp
         m_MethodName: AddFloor
         m_Mode: 1
         m_Arguments:

@@ -101,26 +101,26 @@ public class Camera_Manager : Singleton<Camera_Manager>
         {
             Main_Camera.transform.Translate(Vector2.left * CameraMovementSpeed * Time.unscaledDeltaTime);
             //Cursor.SetCursor(screenMoveLeft, Vector2.zero, CursorMode.ForceSoftware);
-            Debug.Log("left");
+            //Debug.Log("left");
         }
         else if (mousePosition.x > screenWidth - edgeThickness)
         {
             Main_Camera.transform.Translate(Vector2.right * CameraMovementSpeed * Time.unscaledDeltaTime);
             //Cursor.SetCursor(screenMoveRight, Vector2.zero, CursorMode.ForceSoftware);
-            Debug.Log("right");
+            //Debug.Log("right");
         }
 
         if (mousePosition.y < edgeThickness)
         {
             Main_Camera.transform.Translate(Vector2.down * CameraMovementSpeed * Time.unscaledDeltaTime);
             //Cursor.SetCursor(screenMoveDown, Vector2.zero, CursorMode.ForceSoftware);
-            Debug.Log("down");
+            //Debug.Log("down");
         }
         else if (mousePosition.y > screenHeight - edgeThickness)
         {
             Main_Camera.transform.Translate(Vector2.up * CameraMovementSpeed * Time.unscaledDeltaTime);
             //Cursor.SetCursor(screenMoveUp, Vector2.zero, CursorMode.ForceSoftware);
-            Debug.Log("up");
+            //Debug.Log("up");
         }
     
 

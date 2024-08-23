@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -13,7 +14,8 @@ public class Employee : MonoBehaviour
         Moving = 1,
         Work = 2,
         Battle = 3,
-        StatusEffect = 4
+        StatusEffect = 4,
+        Death = 5
     }
 
     // Employee Info
@@ -86,12 +88,19 @@ public class Employee : MonoBehaviour
         get => employeeCurrentStatus;
         set => employeeCurrentStatus = value;
     }
-
-    [SerializeField] private GameObject empGameObject;
-    public GameObject EmpGameObject
+    
+    [SerializeField] private String weapon;
+    public String Weapon
     {
-        get => empGameObject;
-        set => empGameObject = value;
+        get => weapon;
+        set => weapon = value;
+    }
+    
+    [SerializeField] private String armor;
+    public String Armor
+    {
+        get => armor;
+        set => armor = value;
     }
 
     [SerializeField] private TMPro.TextMeshProUGUI nameText;
@@ -102,8 +111,9 @@ public class Employee : MonoBehaviour
     private Vector3 _destinationPos;
 
     public bool isResearchMoving;
+    public bool isAttackMoving;
 
-    NavmeshDelegate _navmeshDelegate;
+    //NavmeshDelegate _navmeshDelegate;
 
     private void Awake()
     {
@@ -116,7 +126,7 @@ public class Employee : MonoBehaviour
         hpBar.maxValue = employeeMaxHp;
         mpBar.maxValue = employeeMaxMp;
         employeeCurrentStatus = EmployeeFsm.Wait;
-        _navmeshDelegate = DestinationMoving;
+        //_navmeshDelegate = DestinationMoving;
 
         isResearchMoving = false;
     }
@@ -132,6 +142,14 @@ public class Employee : MonoBehaviour
         _agent.SetDestination(destination);
         _destinationPos = destination;
         isResearchMoving = true;
+    }
+
+    public void AttackDestinationMoving(Vector3 enemyPosition)
+    {
+        _agent.SetDestination(enemyPosition);
+        _destinationPos = enemyPosition;
+        isAttackMoving = true;
+        // 무기 관련 코드 입력 되야함
     }
 
     private void Update()
@@ -170,7 +188,10 @@ public class Employee : MonoBehaviour
             _agent.Warp(_agent.currentOffMeshLinkData.endPos);
             _agent.CompleteOffMeshLink();
             _agent.SetDestination(_destinationPos);
+            //_agent.SamplePathPosition();
         }
+        
+        
         
         if (_agent.remainingDistance <= 0.5f && isResearchMoving)
         //if (_agent.velocity.sqrMagnitude <= 0.2f && _agent.remainingDistance >= 0.5f)
@@ -182,7 +203,7 @@ public class Employee : MonoBehaviour
         }
     }
 
-    private void Research()
+    private void Research() // 해결해야됨
     {
         if (isResearchMoving == false)
         {

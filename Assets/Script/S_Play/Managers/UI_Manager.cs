@@ -21,8 +21,10 @@ public class UI_Manager : Singleton<UI_Manager>
     [Header("InfoManager_Element")]
     public Image monsterImage;
     public TextMeshProUGUI monsterName;
-    public TextMeshProUGUI code;
-    public TextMeshProUGUI dangerLevel;
+    public TextMeshProUGUI possibilityOfEscape;
+    public TextMeshProUGUI mentalDamage;
+    public TextMeshProUGUI monsterCode;
+    public TextMeshProUGUI riskLevel;
     public TextMeshProUGUI research_log;
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     [Header("Pause")]
@@ -70,7 +72,7 @@ public class UI_Manager : Singleton<UI_Manager>
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
     [Header("else")]
-    public Slider Enegy_Slider;
+    public Slider Energy_Slider;
     public GameObject EndButton;
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -91,23 +93,36 @@ public class UI_Manager : Singleton<UI_Manager>
         ReserchPoint.text = "연구 포인트 : " + GameManager.Instance.nowResearchPoint;
     }
 
+    public void SettingEnergy(int day)
+    {
+        Energy_Slider.maxValue = (day * day) * 10;
+        Energy_Slider.value = 0;
+    }
+
+    public void IncreasedEnergy(int increase)
+    {
+        Energy_Slider.value += increase;
+    }
+
     public void WorkButtonClick(int workNum) // 작업 버튼 클릭
     {
         EmployeeListCanvasOn(currnentFloor, Select_mon_Depart, workNum);
         Debug.Log("Select_Work : " + workNum);
     }
 
-    public void InfoCanvasOn(MonsterData monsterData)
+    public void InfoCanvasOn(MonsterData monsterData) // 수정 필요
     {
         monsterImage.sprite = Resources.Load<Sprite>(monsterData.profile.imagePATH);
         monsterName.text = $"이름 : {monsterData.profile.MonsterName}";
-        code.text = $"식별 코드 : {monsterData.profile.code}";
-        dangerLevel.text = $"위험도 : {monsterData.profile.riskLevel}";
-        research_log.text = "연구 일지\n";
-        foreach (string relog in monsterData.Research_log.log)
-        {
-            research_log.text += "- " + relog + "\n";
-        }
+        possibilityOfEscape.text = $"탈출 가능성 : ";
+        mentalDamage.text = $"연구시 정신피해 정도 : ";
+        monsterCode.text = $"식별 코드 : {monsterData.profile.code}";
+        RiskLevel.text = $"위험도 : {monsterData.profile.riskLevel}";
+        research_log.text = "연구 일지";
+        // foreach (string relog in monsterData.Research_log.log)
+        // {
+        //     research_log.text += "- " + relog + "\n";
+        // }
         InfoCanvas.SetActive(true);
     }
 
@@ -115,8 +130,8 @@ public class UI_Manager : Singleton<UI_Manager>
     {
         monsterImage.sprite = null;
         monsterName.text = null;
-        code.text = null;
-        dangerLevel.text = null;
+        monsterCode.text = null;
+        RiskLevel.text = null;
         research_log.text = null;
         InfoCanvas.SetActive(false);
     }
@@ -185,11 +200,9 @@ public class UI_Manager : Singleton<UI_Manager>
             emUI.HpSlider_Text.text = $"HP : {empListdata.hp}/{empListdata.hp}";
             emUI.MpSlider_Text.text = $"MP : {empListdata.mp}/{empListdata.mp}";
             
-            
-            
             switch (workButtonNumber) // 여기에 이동코드 들어가야 함 <- 여기 아님 밑에임
             {
-                case 1:
+                case 1:    
                     emUI.SuccessRate.text = $"{mondata.Research_Preferences.FEAR}%";
                     newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, mondata, mondata.Research_Preferences.FEAR));
                     break;
@@ -232,8 +245,8 @@ public class UI_Manager : Singleton<UI_Manager>
         //여기서 작업 실행 해야됨
         if (EmployeeManager.Instance.EmployeeDatas.ContainsKey(empdata.name))
         {
-            EmployeeManager.Instance.EmployeeDatas[empdata.name].ResearchDestinationMoving(roomPos);
-            
+            EmployeeManager.Instance.EmployeeDatas[empdata.name].ResearchDestinationMoving(roomPos); // 이동
+                        
                 switch (mondata.profile.riskLevel)
                 {
                     case 1:
@@ -257,7 +270,7 @@ public class UI_Manager : Singleton<UI_Manager>
                         researchStatusSlider.StartResearch(RePoCount, persent);
                         break;
                 }
-            
+            Work_Canvas.SetActive(false);
         }
     }
     

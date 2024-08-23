@@ -36,7 +36,7 @@ public class RoomManager : Singleton<RoomManager>
                 {
                     var MonRoom = Instantiate(Room);
                     var RoLoc = Department_Room[Depart].RoomLocate[i].transform.position;
-                    MonRoom.transform.position = new Vector3(RoLoc.x, RoLoc.y, f * 20);
+                    MonRoom.transform.position = new Vector3(RoLoc.x, RoLoc.y,0);
                     var monroom = MonRoom.GetComponent<Room_Select_Manager>();
                     monroom._monName = DataManager.Instance.MonsterDataLoad(DataManager.Instance.MainDataLoad().Floor[f].Department[Depart].MonsterList[i]).profile.MonsterName;
                     monroom._monfileName = DataManager.Instance.MainDataLoad().Floor[f].Department[Depart].MonsterList[i];

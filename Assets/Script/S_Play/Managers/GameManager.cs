@@ -20,6 +20,7 @@ public class GameManager : Singleton<GameManager>
         nowResearchPoint = DataManager.Instance.MainDataLoad().ResearchPoint;
         RoomManager.Instance.MainSet();
         EmployeeManager.Instance.MainSet();
+        UI_Manager.Instance.SettingEnergy(nowday);
 
         AllInteractionOn();
     }
@@ -27,7 +28,9 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        if (UI_Manager.Instance.Enegy_Slider.value >= 1)
+        MoneyResearchPointTextUpdate();
+        
+        if (UI_Manager.Instance.Energy_Slider.value >= UI_Manager.Instance.Energy_Slider.maxValue)
         {
             UI_Manager.Instance.EndButtonOn();
         }
@@ -41,14 +44,45 @@ public class GameManager : Singleton<GameManager>
             AllInteractionOn();
             UI_Manager.Instance.PauseMenuOff();
         }
-        // if (Input.GetKeyDown(KeyCode.L))
-        // {
-        //     DataManager.Instance.MaindataSave();
-        // }
-        // if (Input.GetKeyDown(KeyCode.M))
-        // {
-        //     DataManager.Instance.CreateEmployeeData(0);
-        // }
+        
+    }
+    
+    public void MoneyResearchPointTextUpdate()
+    {
+        UI_Manager.Instance.Money.text = $"자금 : {nowMoney}";
+        UI_Manager.Instance.ReserchPoint.text = $"연구 포인트 : {nowResearchPoint}";
+    }
+
+    public void EndOfDay()
+    {
+        Revenue();
+        DataManager.Instance.MaindataSave();
+    }
+
+    public void Revenue()
+    {
+        int defaultMoney = 0;
+        int revMoney = 0;
+        int accountMoney = 0;
+        var mainData = DataManager.Instance.MainDataLoad();
+        for (int i = 0; i < mainData.Floor.Count; i++)
+        {
+            for (int l = 0; l < mainData.Floor[i].Department.Count; l++)
+            {
+                defaultMoney += mainData.Floor[i].Department[l].MonsterList.Count;
+            }
+            for (int j = 0; j < mainData.Floor[i].AccountingDepartment.Count; j++)
+            {
+                var empdata = DataManager.Instance.EmployeeDataLoad(mainData.Floor[i].AccountingDepartment[j]);
+                revMoney += empdata.intelligence;
+            }
+        }
+
+        defaultMoney *= 100;
+        accountMoney = (int)((revMoney / 5) * 0.01 * defaultMoney); // 기본수익에 직원 추가 수익 % 계산
+        Debug.Log($"지금 현재 돈 : {nowMoney}, 기본 수익 : {defaultMoney}, 직원 추가 수익 : {accountMoney}");
+        nowMoney += defaultMoney + accountMoney;
+        Debug.Log($"합계 : {nowMoney}");
     }
 
     public void AllInteractionOn() // 모든 인터렉션 켜기

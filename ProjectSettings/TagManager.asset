@@ -9,6 +9,7 @@ TagManager:
   - RoomInfo
   - Employee
   - Passage_Col
+  - Monster
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - RoomInfo
   - Passage_Col
   - Elevator
-  - 
+  - Monster
   - 
   - 
   - 

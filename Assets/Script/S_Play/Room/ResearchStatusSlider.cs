@@ -79,6 +79,8 @@ public class ResearchStatusSlider : MonoBehaviour
         }
         ResetStatus();
         Debug.Log($"성공 : {sum}, 실패 : {nsum}");
+        UI_Manager.Instance.IncreasedEnergy(sum);
+        GameManager.Instance.nowResearchPoint += RePo / 10;
     }
 
     private void ResearchStatus(int maxRePo, bool Results)
