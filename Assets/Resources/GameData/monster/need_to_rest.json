@@ -7,7 +7,8 @@
     "MonsterName": "휴식이 필요한 소녀",
     "MonsterBuy_Info": "피곤해 자고싶어...",
     "riskLevel": 1,
-    "isEscape": "탈출하지않음"
+    "isEscape": "탈출하지않음",
+    "researchMentalDamage": 1
   },
 
   "Research_log": {
@@ -25,6 +26,15 @@
     "HAPPY": 50,
     "SURPRISE": 50
   },
+
+  "MonEquipment":
+  {
+    "imagePATH": "EquipImage/need_to_rest",
+    "EquipName" : "휴식",
+    "equipEffect" : "정신력 5 증가",
+    "equipSpecialEffect" : "편안해… : 부서를 이동하지 않고 있으면 10초마다 체력 1 회복",
+    "type" : 1
+  },  
 
   "OpenLevel": 0
 }

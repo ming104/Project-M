@@ -7,7 +7,8 @@
     "MonsterName": "투니",
     "MonsterBuy_Info": "지금까지 이런 웹툰은 없었다.",
     "riskLevel": 3,
-    "isEscape": "탈출하지않음"
+    "isEscape": "탈출하지않음",
+    "researchMentalDamage": 5
   },
 
   "Research_log": {
@@ -21,6 +22,15 @@
     "SAD": 20,
     "HAPPY": 80,
     "SURPRISE": 90
+  },
+
+  "MonEquipment":
+  {
+    "imagePATH": "EquipImage/Toonie",
+    "EquipName" : "화가의 모자",
+    "equipEffect" : "지능 20 증가, 힘 20 감소",
+    "equipSpecialEffect" : "창작의 고통: 장착직원이 공격 시 일정 확률로 지능의 30%만큼 추가 피해를 입힌다.",
+    "type" : 1
   },
 
   "OpenLevel": 0

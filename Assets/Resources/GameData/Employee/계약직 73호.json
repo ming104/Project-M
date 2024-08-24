@@ -6,5 +6,9 @@
     "power": 45,
     "intelligence": 71,
     "justice": 39,
-    "movementSpeed": 50
+    "movementSpeed": 50,
+    "equipment": {
+        "weapon": "SuppressionBaton",
+        "armor": "LabCoat"
+    }
 }

@@ -7,7 +7,8 @@
     "MonsterName": "차례의 중요성",
     "MonsterBuy_Info": "하나! 둘! 셋! 넷! 다섯! 여섯!",
     "riskLevel": 2,
-    "isEscape": "탈출하지않음"
+    "isEscape": "탈출하지않음",
+    "researchMentalDamage": 2
   },
 
   "Research_log": {
@@ -24,6 +25,15 @@
     "SAD": 50,
     "HAPPY": 50,
     "SURPRISE": 50
+  },
+
+  "MonEquipment":
+  {
+    "imagePATH": "EquipImage/Importance of turn",
+    "EquipName" : "강박",
+    "equipEffect" : "모든 스텟 5증가",
+    "equipSpecialEffect" : "순서가 중요해! : 공격을 받을 시 반사 피해 10%",
+    "type" : 1
   },
 
   "OpenLevel": 0

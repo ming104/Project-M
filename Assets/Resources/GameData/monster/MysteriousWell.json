@@ -7,7 +7,8 @@
     "MonsterName": "신비한 우물",
     "MonsterBuy_Info": "이 물을 마시게 된다면 엄청난 일을 겪게 되지...",
     "riskLevel": 3,
-    "isEscape": "탈출하지않음"
+    "isEscape": "탈출하지않음",
+    "researchMentalDamage": 2
   },
 
   "Research_log": {
@@ -26,6 +27,15 @@
     "SAD": 50,
     "HAPPY": 70,
     "SURPRISE": 70
+  },
+
+  "MonEquipment":
+  {
+    "imagePATH": "EquipImage/Mysterious Well",
+    "EquipName" : "알 수 없는 물",
+    "equipEffect" : "체력 5, 정신력 5, 이동속도 5 증가",
+    "equipSpecialEffect" : "신비한 물 : 어느 효과가 5초마다 4배의 효과로 바뀌게 된다.",
+    "type" : "0"
   },
 
   "OpenLevel": 0

@@ -7,7 +7,8 @@
     "MonsterName": "어둠의 기둥",
     "MonsterBuy_Info": "마지막 불빛을 꺼뜨리고 영원한 어둠을 내려 주시옵소서",
     "riskLevel": 5,
-    "isEscape": "탈출하지않음"
+    "isEscape": "탈출하지않음",
+    "researchMentalDamage": 5
   },
 
   "Research_log": {
@@ -17,6 +18,24 @@
       "연구 결과가 실패일 경우 탈출 카운트가 증가한다.",
       "\"삼켜짐\"를 사용할 시 해당 연구법을 사용한 직원은 사라지고 탈출 카운트가 감소한다."
     ]
+  },
+
+  "Research_Preferences": {
+    "FEAR": 30,
+    "ANGER": 30,
+    "DISGUST": 20,
+    "SAD": 60,
+    "HAPPY": 100,
+    "SURPRISE": 0
+  },
+  
+  "MonEquipment":   
+  {
+    "imagePATH": "EquipImage/Darkness pillars",
+    "EquipName" : "어둠으로",
+    "equipEffect" : "체력 20, 정신력 20, 이동속도 20 증가",
+    "equipSpecialEffect" : "깊은 어둠 : 공격에 아군이 맞을 시 아군 힘, 이동속도 각각 20씩 회복",
+    "type" : 0
   },
 
   "OpenLevel": 0

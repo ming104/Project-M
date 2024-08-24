@@ -7,7 +7,8 @@
     "MonsterName": "별빛 꽃",
     "MonsterBuy_Info": "꽃은 하늘의 별과 같아!",
     "riskLevel": 2,
-    "isEscape": "탈출하지않음"
+    "isEscape": "탈출하지않음",
+    "researchMentalDamage": 1
   },
 
   "Research_log": {
@@ -24,6 +25,15 @@
     "SAD": 40,
     "HAPPY": 90,
     "SURPRISE": 60
+  },
+
+  "MonEquipment":
+  {
+    "imagePATH": "EquipImage/Double Faced Ghost",
+    "EquipName" : "별 꽃 목걸이",
+    "equipEffect" : "체력 15, 정신력 15 증가",
+    "equipSpecialEffect" : "별빛 : 피해를 받을 시 체력 2 회복",
+    "type" : 1
   },
 
   "OpenLevel": 0

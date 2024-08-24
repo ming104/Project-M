@@ -7,7 +7,8 @@
     "MonsterName": "P.O.V",
     "MonsterBuy_Info": "인간들을 지키기 위해서라면...",
     "riskLevel": 4,
-    "isEscape": "탈출함"
+    "isEscape": "탈출함",
+    "researchMentalDamage": 2
   },
 
   "Research_log": {
@@ -27,6 +28,15 @@
     "SAD": 10,
     "HAPPY": 80,
     "SURPRISE": 10
+  },
+
+  "MonEquipment":
+  {
+    "imagePATH": "EquipImage/P.O.V",
+    "EquipName" : "Peace and Violence",
+    "equipEffect" : "정신력 20 증가, 힘 10 증가",
+    "equipSpecialEffect" : "평화를 위해: Peace로 공격할 때에는 주변 아군 치유 Violence로 공격할 때에는 추가 피해를 입힙니다.",
+    "type" : 0
   },
 
   "OpenLevel": 0

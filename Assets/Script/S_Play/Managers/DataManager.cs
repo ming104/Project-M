@@ -45,6 +45,15 @@ public class ResearchList
 }
 
 // 몬스터 데이터 셋
+[Serializable]
+public class MonsterEquipment
+{
+    public string ImagePATH;
+    public string EquipName;
+    public string equipEffect;
+    public string equipSpecialEffect;
+    public int Type;
+}
 
 [Serializable]
 public class MonsterData
@@ -54,6 +63,7 @@ public class MonsterData
     public ProfileData profile;
     public ResearchLogData Research_log;
     public ResearchList Research_Preferences;
+    public MonsterEquipment MonEquipment;
     public int OpenLevel;
 }
 [Serializable]
@@ -65,6 +75,7 @@ public class ProfileData
     public string MonsterBuy_Info;
     public int riskLevel;
     public string isEscape;
+    public float researchMentalDamage;
 }
 [Serializable]
 public class ResearchLogData
@@ -74,6 +85,12 @@ public class ResearchLogData
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 //직원 전용 데이터 셋
+[Serializable]
+public class Equipment
+{
+    public string weapon;
+    public string armor;
+}
 [Serializable]
 public class EmployeeData
 {
@@ -87,6 +104,7 @@ public class EmployeeData
     public int intelligence;
     public int justice;
     public int movementSpeed;
+    public Equipment equipment;
 }
 
 #endregion DataSet
@@ -300,6 +318,11 @@ public class DataManager : Singleton_DonDes<DataManager>
                 newEmployeeData.movementSpeed = 50;
                 break;
         }
+
+        Equipment equipment = new Equipment();
+        equipment.weapon = "SuppressionBaton";
+        equipment.armor = "LabCoat";
+        newEmployeeData.equipment = equipment;
 
         return newEmployeeData;
         // string filename = newEmployeeData.name;

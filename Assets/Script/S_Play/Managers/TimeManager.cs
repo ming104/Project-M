@@ -39,14 +39,14 @@ public class TimeManager : Singleton<TimeManager>
     {
         if (Time.timeScale == 0f) // 이미 멈춘상태라면 원래 속도로 돌려줌
         {
-            Time_UI_Image[0].color = Color.red;
+            Time_UI_Image[0].color = Color.white;
             Time_UI_Image[TimeScaleListIndex + 1].color = Color.black;
             Time.timeScale = TimeScaleList[TimeScaleListIndex];
         }
         else // 멈춤상태가 아니라면 멈춤
         {
             Time_UI_Image[0].color = Color.black;
-            Time_UI_Image[TimeScaleListIndex + 1].color = Color.red;
+            Time_UI_Image[TimeScaleListIndex + 1].color = Color.white;
             Time.timeScale = 0f;
         }
 
@@ -56,8 +56,8 @@ public class TimeManager : Singleton<TimeManager>
     {
         if (TimeScaleListIndex > 0) // 만약 0보다 크면 1배속 보다 크니까 
         {
-            Time_UI_Image[0].color = Color.red;
-            Time_UI_Image[TimeScaleListIndex + 1].color = Color.red; // 원래 자기 자신
+            Time_UI_Image[0].color = Color.white;
+            Time_UI_Image[TimeScaleListIndex + 1].color = Color.white; // 원래 자기 자신
             TimeScaleListIndex -= 1; // 감소시키고
             Time_UI_Image[TimeScaleListIndex + 1].color = Color.black;
             Time.timeScale = TimeScaleList[TimeScaleListIndex]; // 배속을 줄임
@@ -67,8 +67,8 @@ public class TimeManager : Singleton<TimeManager>
     {
         if (TimeScaleListIndex < TimeScaleList.Length - 1) // 만약 3보다 작으면 3배속 이하니까
         {
-            Time_UI_Image[0].color = Color.red;
-            Time_UI_Image[TimeScaleListIndex + 1].color = Color.red;
+            Time_UI_Image[0].color = Color.white;
+            Time_UI_Image[TimeScaleListIndex + 1].color = Color.white;
             TimeScaleListIndex += 1; // 증가시키고
             Time_UI_Image[TimeScaleListIndex + 1].color = Color.black;
             Time.timeScale = TimeScaleList[TimeScaleListIndex]; // 배속을 늘림

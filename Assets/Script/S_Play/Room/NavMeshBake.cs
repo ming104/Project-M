@@ -2,21 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NavMeshBake : MonoBehaviour
+public class NavMeshBake : Singleton<NavMeshBake>
 {
     public NavMeshPlus.Components.NavMeshSurface nav;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public void BakingPlace()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            nav.BuildNavMesh();
-        }
+        nav.BuildNavMesh();
     }
 }

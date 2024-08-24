@@ -7,7 +7,8 @@
     "MonsterName": "비운의 스나이퍼",
     "MonsterBuy_Info": "죽이고 싶지 않아 더는....",
     "riskLevel": 4,
-    "isEscape": "탈출하지않음"
+    "isEscape": "탈출하지않음",
+    "researchMentalDamage": 4
   },
 
   "Research_log": {
@@ -26,6 +27,15 @@
     "SAD": 50,
     "HAPPY": 0,
     "SURPRISE": 0
+  },
+
+  "MonEquipment":
+  {
+    "imagePATH": "EquipImage/ill-fated Sniper",
+    "EquipName" : "비참한 저격",
+    "equipEffect" : "정신력 30 감소, 힘 20 증가",
+    "equipSpecialEffect" : "대상을 처음 때릴 때 추가 피해 150%",
+    "type" : 0
   },
 
   "OpenLevel": 0

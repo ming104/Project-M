@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.AI;
 
 [Serializable]
 public class RoomList
@@ -10,11 +11,18 @@ public class RoomList
     public List<GameObject> RoomLocate;
 }
 
+[Serializable]
+public class RoomDoor
+{
+    public List<GameObject> DoorLocate;
+}
+
 public class RoomManager : Singleton<RoomManager>
 {
     public GameObject Room;
 
     public List<RoomList> Department_Room; //1층마다 최대 16개의 격리시설 존재
+    public List<RoomDoor> departmentRoomDoors;
     /*
     크리쳐 배치 순서
       9        10
@@ -41,10 +49,15 @@ public class RoomManager : Singleton<RoomManager>
                     monroom._monName = DataManager.Instance.MonsterDataLoad(DataManager.Instance.MainDataLoad().Floor[f].Department[Depart].MonsterList[i]).profile.MonsterName;
                     monroom._monfileName = DataManager.Instance.MainDataLoad().Floor[f].Department[Depart].MonsterList[i];
                     monroom.DepartLocate = Depart;
+                    departmentRoomDoors[Depart].DoorLocate[i].GetComponent<OffMeshLink>().startTransform =
+                        departmentRoomDoors[Depart].DoorLocate[i].transform;
+                    departmentRoomDoors[Depart].DoorLocate[i].GetComponent<OffMeshLink>().endTransform =
+                        monroom.transform;
 
                 }
             }
         }
+        NavMeshBake.Instance.BakingPlace();
     }
 
     // Update is called once per frame

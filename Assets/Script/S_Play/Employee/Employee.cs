@@ -141,7 +141,7 @@ public class Employee : MonoBehaviour
     {
         _agent.SetDestination(destination);
         _destinationPos = destination;
-        isResearchMoving = true;
+        //isResearchMoving = true;
     }
 
     public void AttackDestinationMoving(Vector3 enemyPosition)

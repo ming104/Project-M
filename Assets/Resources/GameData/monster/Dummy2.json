@@ -7,7 +7,8 @@
     "MonsterName": "더2",
     "MonsterBuy_Info": "초보자 튜토리얼용 크리쳐다222",
     "riskLevel": 5,
-    "isEscape": "탈출하지않음"
+    "isEscape": "탈출하지않음",
+    "researchMentalDamage": 3
   },
 
   "Research_log": {
@@ -24,6 +25,15 @@
     "SAD": 50,
     "HAPPY": 50,
     "SURPRISE": 50
+  },
+
+  "MonEquipment":
+  {
+    "imagePATH": "EquipImage/Dummy2",
+    "EquipName" : "더어어미",
+    "equipEffect" : "힘 5 증가",
+    "equipSpecialEffect" : "없음",
+    "type" : 1
   },
 
   "OpenLevel": 0

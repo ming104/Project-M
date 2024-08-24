@@ -32,6 +32,19 @@ public class UI_Manager : Singleton<UI_Manager>
     public TextMeshProUGUI feelingBad;
     public TextMeshProUGUI feelingDefault;
     public TextMeshProUGUI feelingGood;
+
+    public TextMeshProUGUI equipmentName;
+    public TextMeshProUGUI equipmentType;
+    public TextMeshProUGUI equipEffect;
+    public TextMeshProUGUI equipSpacialEffect;
+    public TextMeshProUGUI equipCost;
+    
+    public TextMeshProUGUI monsterResearchFear;
+    public TextMeshProUGUI monsterResearchAnger;
+    public TextMeshProUGUI monsterResearchDisgust;
+    public TextMeshProUGUI monsterResearchSad;
+    public TextMeshProUGUI monsterResearchHappy;
+    public TextMeshProUGUI monsterResearchSurprise;
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     [Header("Pause")]
     public GameObject PauseMenu;
@@ -121,7 +134,7 @@ public class UI_Manager : Singleton<UI_Manager>
         monsterImage.sprite = Resources.Load<Sprite>(monsterData.profile.imagePATH);
         monsterName.text = $"이름 : {monsterData.profile.MonsterName}";
         possibilityOfEscape.text = $"탈출 여부 : {monsterData.profile.isEscape}";
-        mentalDamage.text = $"연구시 정신피해 정도 : ";
+        mentalDamage.text = $"연구시 정신피해 정도 : {monsterData.profile.researchMentalDamage}";
         monsterCode.text = $"식별 코드 : {monsterData.profile.code}";
         riskLevel.text = $"위험도 : {monsterData.profile.riskLevel}";
         research_log.text = "연구 기록";
@@ -160,19 +173,47 @@ public class UI_Manager : Singleton<UI_Manager>
                 feelingGood.text = "좋음 : 33 ~ 50";
                 break;
         }
+
+        equipmentName.text = $"{monsterData.MonEquipment.EquipName}";
+
+        switch (monsterData.MonEquipment.Type)
+        {
+            case 0:
+                equipmentType.text = "무기";
+                break;
+            case 1:
+                equipmentType.text = "방어구";
+                break;
+        }
+
+        equipEffect.text = $"효과 : {monsterData.MonEquipment.equipEffect}";
+        equipSpacialEffect.text = $"{monsterData.MonEquipment.equipSpecialEffect}";
+        equipCost.text = "가격 : ???";
+
+        monsterResearchFear.text = $"{monsterData.Research_Preferences.FEAR}%";
+        monsterResearchAnger.text = $"{monsterData.Research_Preferences.ANGER}%";
+        monsterResearchDisgust.text = $"{monsterData.Research_Preferences.DISGUST}%";
+        monsterResearchSad.text = $"{monsterData.Research_Preferences.SAD}%";
+        monsterResearchHappy.text = $"{monsterData.Research_Preferences.HAPPY}%";
+        monsterResearchSurprise.text = $"{monsterData.Research_Preferences.SURPRISE}%";
         
-        
+        GameManager.Instance.AllInteractionOff();
         InfoCanvas.SetActive(true);
     }
 
     public void InfoCanvasOff()
     {
-        monsterImage.sprite = null;
-        monsterName.text = null;
-        monsterCode.text = null;
-        workRiskLevel.text = null;
-        research_log.text = null;
+        // monsterImage.sprite = null;
+        // monsterName.text = null;
+        // monsterCode.text = null;
+        // workRiskLevel.text = null;
+        // research_log.text = null;
         InfoCanvas.SetActive(false);
+        GameManager.Instance.AllInteractionOn();
+        foreach (Transform child in logContent)
+        {
+            Destroy(child.gameObject) ;
+        }
     }
 
     public void WorkCanvasOn(MonsterData monsterData, int Mon_depart)

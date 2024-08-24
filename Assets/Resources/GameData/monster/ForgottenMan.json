@@ -7,7 +7,8 @@
     "MonsterName": "잊혀진 사람",
     "MonsterBuy_Info": "기억해줘",
     "riskLevel": 2,
-    "isEscape": "탈출하지않음"
+    "isEscape": "탈출하지않음",
+    "researchMentalDamage": 2
   },
 
   "Research_log": {
@@ -26,6 +27,15 @@
     "SAD": 90,
     "HAPPY": 10,
     "SURPRISE": 5
+  },
+
+  "MonEquipment":
+  {
+    "imagePATH": "EquipImage/ForgottenMan",
+    "EquipName" : "기억",
+    "equipEffect" : "정신력 30 증가",
+    "equipSpecialEffect" : "잊혀진 기억 : 추가 정신력 만큼 무기의 공격력이 증가한다.",
+    "type" : 0
   },
 
   "OpenLevel": 0

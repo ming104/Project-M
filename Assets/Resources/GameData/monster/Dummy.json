@@ -7,7 +7,8 @@
     "MonsterName": "더미",
     "MonsterBuy_Info": "초보자 튜토리얼용 크리쳐다",
     "riskLevel": 1,
-    "isEscape": "탈출함"
+    "isEscape": "탈출함",
+    "researchMentalDamage": 1
   },
 
   "Research_log": {
@@ -24,6 +25,15 @@
     "SAD": 50,
     "HAPPY": 50,
     "SURPRISE": 50
+  },
+
+  "MonEquipment":
+  {
+    "imagePATH": "EquipImage/Dummy",
+    "EquipName" : "더미용 무기",
+    "equipEffect" : "힘 5 증가",
+    "equipSpecialEffect" : "없음",
+    "type" : 1
   },
 
   "OpenLevel": "0"

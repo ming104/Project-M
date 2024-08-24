@@ -7,7 +7,8 @@
     "MonsterName": "빛의 기둥",
     "MonsterBuy_Info": "어둠을 멸하고 부디 빛을 내려주소서",
     "riskLevel": 5,
-    "isEscape": "탈출하지않음"
+    "isEscape": "탈출하지않음",
+    "researchMentalDamage": 5
   },
 
   "Research_log": {
@@ -26,6 +27,15 @@
     "SAD": 30,
     "HAPPY": 100,
     "SURPRISE": 0
+  },
+
+  "MonEquipment":
+  {
+    "imagePATH": "EquipImage/Light pillars",
+    "EquipName" : "빛으로",
+    "equipEffect" : "체력 20, 정신력 20, 힘 20 증가",
+    "equipSpecialEffect" : "섬광 : 공격에 아군이 맞을 시 아군 체력, 정신력 각각 20씩 회복",
+    "type" : 0
   },
 
   "OpenLevel": 0
