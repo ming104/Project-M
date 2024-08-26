@@ -36,18 +36,19 @@ public class RoomManager : Singleton<RoomManager>
 
     public void MainSet()
     {
-        for (int f = 0; f < DataManager.Instance.MainDataLoad().Floor.Count; f++)
+        var Datas = DataManager.Instance;
+        for (int f = 0; f < Datas.MainDataLoad().Floor.Count; f++)
         {
-            for (int Depart = 0; Depart < DataManager.Instance.MainDataLoad().Floor[f].Department.Count; Depart++)
+            for (int Depart = 0; Depart < Datas.MainDataLoad().Floor[f].Department.Count; Depart++)
             {
-                for (int i = 0; i < DataManager.Instance.MainDataLoad().Floor[f].Department[Depart].MonsterList.Count; i++)
+                for (int i = 0; i < Datas.MainDataLoad().Floor[f].Department[Depart].MonsterList.Count; i++)
                 {
                     var MonRoom = Instantiate(Room);
                     var RoLoc = Department_Room[Depart].RoomLocate[i].transform.position;
                     MonRoom.transform.position = new Vector3(RoLoc.x, RoLoc.y,0);
                     var monroom = MonRoom.GetComponent<Room_Select_Manager>();
-                    monroom._monName = DataManager.Instance.MonsterDataLoad(DataManager.Instance.MainDataLoad().Floor[f].Department[Depart].MonsterList[i]).profile.MonsterName;
-                    monroom._monfileName = DataManager.Instance.MainDataLoad().Floor[f].Department[Depart].MonsterList[i];
+                    monroom._monName =Datas.MonsterDataLoad(Datas.MainDataLoad().Floor[f].Department[Depart].MonsterList[i]).profile.MonsterName;
+                    monroom.RoomMonsterData = Datas.MonsterDataLoad(Datas.MainDataLoad().Floor[f].Department[Depart].MonsterList[i]);
                     monroom.DepartLocate = Depart;
                     departmentRoomDoors[Depart].DoorLocate[i].GetComponent<OffMeshLink>().startTransform =
                         departmentRoomDoors[Depart].DoorLocate[i].transform;

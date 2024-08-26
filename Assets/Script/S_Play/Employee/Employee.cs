@@ -3,9 +3,6 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-
-public delegate void NavmeshDelegate(Vector3 destination);
-
 public class Employee : MonoBehaviour
 {
     public enum EmployeeFsm
@@ -108,10 +105,15 @@ public class Employee : MonoBehaviour
     [SerializeField] private Slider mpBar;
 
     private NavMeshAgent _agent;
+    [SerializeField]
+    private Vector3 _resetDestinationPos;
     private Vector3 _destinationPos;
 
     public bool isResearchMoving;
     public bool isAttackMoving;
+
+    private Room_Select_Manager _currentResearchData;
+    private int _roomIndex;
 
     //NavmeshDelegate _navmeshDelegate;
 
@@ -133,19 +135,35 @@ public class Employee : MonoBehaviour
 
     public void DestinationMoving(Vector3 destination)
     {
+        isResearchMoving = false;
+        _currentResearchData = null;
         _agent.SetDestination(destination);
         _destinationPos = destination;
     }
-    
-    public void ResearchDestinationMoving(Vector3 destination)
+
+    public void ResearchDestinationMoving(Vector3 destination, Room_Select_Manager roomData, int workindex)
     {
+        Debug.Log("실행");
+        _resetDestinationPos = transform.position;
         _agent.SetDestination(destination);
         _destinationPos = destination;
-        //isResearchMoving = true;
+        isResearchMoving = true;
+        _currentResearchData = roomData;
+        _roomIndex = workindex;
+    }
+
+    public void ResetDestinationMoving()
+    {
+        isResearchMoving = false;
+        _currentResearchData = null;
+        _agent.SetDestination(_resetDestinationPos);
+        _destinationPos = _resetDestinationPos;
     }
 
     public void AttackDestinationMoving(Vector3 enemyPosition)
     {
+        isResearchMoving = false;
+        _currentResearchData = null;
         _agent.SetDestination(enemyPosition);
         _destinationPos = enemyPosition;
         isAttackMoving = true;
@@ -188,20 +206,26 @@ public class Employee : MonoBehaviour
             _agent.Warp(_agent.currentOffMeshLinkData.endPos);
             _agent.CompleteOffMeshLink();
             _agent.SetDestination(_destinationPos);
+            if (isResearchMoving == true)
+            {
+                Debug.Log("들어옴");
+                _currentResearchData.StartResearch(_roomIndex , this);
+            }
             //_agent.SamplePathPosition();
         }
         
         
         
-        if (_agent.remainingDistance <= 0.5f && isResearchMoving)
-        //if (_agent.velocity.sqrMagnitude <= 0.2f && _agent.remainingDistance >= 0.5f)
+        //if (_agent.remainingDistance <= 0.5f && isResearchMoving)
+        if (_agent.velocity.sqrMagnitude >= 0.2f && _agent.remainingDistance <= 0.5f)
         {
             _agent.ResetPath();
-            isResearchMoving = false;
-            
+            //isResearchMoving = false;
             employeeCurrentStatus = EmployeeFsm.Wait;
         }
     }
+    
+    
 
     private void Research() // 해결해야됨
     {

@@ -61,8 +61,8 @@ public class UI_Manager : Singleton<UI_Manager>
 
     public int Select_mon_Depart;
     public int currnentFloor;
-    public string pri_monname;
-    public ResearchStatusSlider researchStatusSlider;
+    public MonsterData monsterData;
+    public Room_Select_Manager roomSelectManager;
     public Vector3 roomPos;
 
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -271,7 +271,6 @@ public class UI_Manager : Singleton<UI_Manager>
             var newEmployee_Element = Instantiate(Employee_Element, EmpLayOutGroup);
             EmployeeListUI emUI = newEmployee_Element.GetComponent<EmployeeListUI>();
             var empListdata = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().Floor[floor].Department[depart].EmployeeList[i]);
-            var mondata = DataManager.Instance.MonsterDataLoad(pri_monname);
             emUI.Name.text = empListdata.name;
             emUI.HpSlider.maxValue = empListdata.hp;
             emUI.MpSlider.maxValue = empListdata.mp;
@@ -280,31 +279,31 @@ public class UI_Manager : Singleton<UI_Manager>
             emUI.HpSlider_Text.text = $"HP : {empListdata.hp}/{empListdata.hp}";
             emUI.MpSlider_Text.text = $"MP : {empListdata.mp}/{empListdata.mp}";
             
-            switch (workButtonNumber) // 여기에 이동코드 들어가야 함 <- 여기 아님 밑에임
+            switch (workButtonNumber)
             {
                 case 1:    
-                    emUI.SuccessRate.text = $"{mondata.Research_Preferences.FEAR}%";
-                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, mondata, mondata.Research_Preferences.FEAR));
+                    emUI.SuccessRate.text = $"{monsterData.Research_Preferences.FEAR}%";
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, roomSelectManager, 1)); //fear
                     break;
                 case 2:
-                    emUI.SuccessRate.text = $"{mondata.Research_Preferences.ANGER}%";
-                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, mondata, mondata.Research_Preferences.ANGER));
+                    emUI.SuccessRate.text = $"{monsterData.Research_Preferences.ANGER}%";
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, roomSelectManager, 2)); //anger
                     break;
                 case 3:
-                    emUI.SuccessRate.text = $"{mondata.Research_Preferences.DISGUST}%";
-                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, mondata, mondata.Research_Preferences.DISGUST));
+                    emUI.SuccessRate.text = $"{monsterData.Research_Preferences.DISGUST}%";
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, roomSelectManager, 3)); //disgust
                     break;
                 case 4:
-                    emUI.SuccessRate.text = $"{mondata.Research_Preferences.SAD}%";
-                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, mondata, mondata.Research_Preferences.SAD));
+                    emUI.SuccessRate.text = $"{monsterData.Research_Preferences.SAD}%";
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, roomSelectManager, 4)); //sad
                     break;
                 case 5:
-                    emUI.SuccessRate.text = $"{mondata.Research_Preferences.HAPPY}%";
-                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, mondata, mondata.Research_Preferences.HAPPY));
-                    break;
+                    emUI.SuccessRate.text = $"{monsterData.Research_Preferences.HAPPY}%";
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, roomSelectManager, 5)); // happy
+                    break; 
                 case 6:
-                    emUI.SuccessRate.text = $"{mondata.Research_Preferences.SURPRISE}%";
-                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, mondata, mondata.Research_Preferences.SURPRISE));
+                    emUI.SuccessRate.text = $"{monsterData.Research_Preferences.SURPRISE}%";
+                    newEmployee_Element.GetComponent<Button>().onClick.AddListener(() => ResearchStart(empListdata, roomSelectManager, 6)); //surprise
                     break;
             }
             //emUI.ResearchTime.text = data.def.ToString(); // 수정필요
@@ -317,39 +316,39 @@ public class UI_Manager : Singleton<UI_Manager>
         EmployeeListCanvas.SetActive(false);
     }
 
-    public void ResearchStart(EmployeeData empdata,MonsterData mondata, int persent)
+    public void ResearchStart(EmployeeData empdata,Room_Select_Manager roomData, int workIndex)
     {
-        int RePoCount;
+        //int RePoCount;
         //var empListUI = gameObject.GetComponent<EmployeeListUI>();
         
         //여기서 작업 실행 해야됨
         if (EmployeeManager.Instance.EmployeeDatas.ContainsKey(empdata.name))
         {
-            EmployeeManager.Instance.EmployeeDatas[empdata.name].ResearchDestinationMoving(roomPos); // 이동
+            EmployeeManager.Instance.EmployeeDatas[empdata.name].ResearchDestinationMoving(roomPos, roomData, workIndex); // 이동
                         
-                switch (mondata.profile.riskLevel)
-                {
-                    case 1:
-                        RePoCount = 10;
-                        researchStatusSlider.StartResearch(RePoCount, persent);
-                        break;
-                    case 2:
-                        RePoCount = 20;
-                        researchStatusSlider.StartResearch(RePoCount, persent);
-                        break;
-                    case 3:
-                        RePoCount = 30;
-                        researchStatusSlider.StartResearch(RePoCount, persent);
-                        break;
-                    case 4:
-                        RePoCount = 40;
-                        researchStatusSlider.StartResearch(RePoCount, persent);
-                        break;
-                    case 5:
-                        RePoCount = 50;
-                        researchStatusSlider.StartResearch(RePoCount, persent);
-                        break;
-                }
+                // switch (mondata.profile.riskLevel)
+                // {
+                //     case 1:
+                //         RePoCount = 10;
+                //         researchStatusSlider.StartResearch(RePoCount, persent);
+                //         break;
+                //     case 2:
+                //         RePoCount = 20;
+                //         researchStatusSlider.StartResearch(RePoCount, persent);
+                //         break;
+                //     case 3:
+                //         RePoCount = 30;
+                //         researchStatusSlider.StartResearch(RePoCount, persent);
+                //         break;
+                //     case 4:
+                //         RePoCount = 40;
+                //         researchStatusSlider.StartResearch(RePoCount, persent);
+                //         break;
+                //     case 5:
+                //         RePoCount = 50;
+                //         researchStatusSlider.StartResearch(RePoCount, persent);
+                //         break;
+                // }
             Work_Canvas.SetActive(false);
         }
     }

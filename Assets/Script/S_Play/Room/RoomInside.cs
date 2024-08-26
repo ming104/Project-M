@@ -5,24 +5,26 @@ using UnityEngine.EventSystems;
 
 public class RoomInside : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    
+    
     public void OnPointerEnter(PointerEventData eventData)
     {
-        GetComponent<SpriteRenderer>().color = Color.blue;
+        GetComponentInParent<Room_Select_Manager>().RoomStatusResearchActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        GetComponent<SpriteRenderer>().color = Color.green;
+        GetComponentInParent<Room_Select_Manager>().RoomStatusResearchActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left && MouseManager.Instance.MouseInteractionOn == true && eventData.pointerDrag == false)
         {
-            var monsterData = DataManager.Instance.MonsterDataLoad(GetComponentInParent<Room_Select_Manager>()._monfileName);
-            UI_Manager.Instance.pri_monname = GetComponentInParent<Room_Select_Manager>()._monfileName;
+            var monsterData = GetComponentInParent<Room_Select_Manager>().RoomMonsterData;
+            UI_Manager.Instance.monsterData = GetComponentInParent<Room_Select_Manager>().RoomMonsterData;
             int monster_depart = GetComponentInParent<Room_Select_Manager>().DepartLocate;
-            UI_Manager.Instance.researchStatusSlider = transform.parent.GetComponentInChildren<ResearchStatusSlider>();
+            UI_Manager.Instance.roomSelectManager = GetComponentInParent<Room_Select_Manager>();
             UI_Manager.Instance.WorkCanvasOn(monsterData, monster_depart); //UI 활성화하는 코드 실행
             UI_Manager.Instance.roomPos = GetComponentInParent<Room_Select_Manager>().RoomPos;
         }

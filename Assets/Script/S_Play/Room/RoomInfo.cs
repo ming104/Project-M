@@ -12,7 +12,7 @@ public class RoomInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (MouseManager.Instance.MouseInteractionOn == true)
         {
-            var monsterData = DataManager.Instance.MonsterDataLoad(GetComponentInParent<Room_Select_Manager>()._monfileName);
+            var monsterData = GetComponentInParent<Room_Select_Manager>().RoomMonsterData;
 
             UI_Manager.Instance.InfoCanvasOn(monsterData);
         }
