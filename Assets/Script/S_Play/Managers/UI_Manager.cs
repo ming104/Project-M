@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -87,8 +88,6 @@ public class UI_Manager : Singleton<UI_Manager>
     public TextMeshProUGUI empintelligence;
     public TextMeshProUGUI empJustice;
     public TextMeshProUGUI empMovementSpeed;
-
-    //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
     [Header("else")]
     public Slider Energy_Slider;
@@ -271,6 +270,7 @@ public class UI_Manager : Singleton<UI_Manager>
             var newEmployee_Element = Instantiate(Employee_Element, EmpLayOutGroup);
             EmployeeListUI emUI = newEmployee_Element.GetComponent<EmployeeListUI>();
             var empListdata = DataManager.Instance.EmployeeDataLoad(DataManager.Instance.MainDataLoad().Floor[floor].Department[depart].EmployeeList[i]);
+            //var employeeData = EmployeeManager.Instance.EmployeeDatas[empListdata.name];
             emUI.Name.text = empListdata.name;
             emUI.HpSlider.maxValue = empListdata.hp;
             emUI.MpSlider.maxValue = empListdata.mp;
@@ -278,6 +278,10 @@ public class UI_Manager : Singleton<UI_Manager>
             emUI.MpSlider.value = EmployeeManager.Instance.Employees[empListdata.name].CurrentMP;
             emUI.HpSlider_Text.text = $"HP : {empListdata.hp}/{empListdata.hp}";
             emUI.MpSlider_Text.text = $"MP : {empListdata.mp}/{empListdata.mp}";
+            // if (employeeData.EmployeeCurrentStatus == Employee.EmployeeFsm.Work)
+            // {
+            //     emUI.ResearchPanel.SetActive(true);
+            // }
             
             switch (workButtonNumber)
             {
@@ -386,4 +390,15 @@ public class UI_Manager : Singleton<UI_Manager>
     {
         SettingPanel.SetActive(false);
     }
+
+    public void GotoMenu()
+    {
+        SceneManager.LoadScene("GameTitle");
+    }
+    public void SaveAndExit()
+    {
+        Application.Quit();
+    }
+
+
 }

@@ -7,6 +7,7 @@
     "MonsterName": "더미",
     "MonsterBuy_Info": "초보자 튜토리얼용 크리쳐다",
     "riskLevel": 1,
+    "escapeCount": 5,
     "isEscape": "탈출함",
     "researchMentalDamage": 1
   },

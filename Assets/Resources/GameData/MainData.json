@@ -1,7 +1,8 @@
 {
-    "day": 4,
-    "Money": 13584,
-    "ResearchPoint": 304,
+    "companyStability": 100,
+    "day": 5,
+    "Money": 15408,
+    "ResearchPoint": 329,
     "Floor": [
         {
             "AuditDepartment": [

@@ -34,10 +34,18 @@ public class Room_Select_Manager : MonoBehaviour
     {
         get { return Room_locate; }
     }
+
+    public int escapeCount;
     
     //RoomStatus
     public GameObject roomStatusResearch;
-    public GameObject roomStatusResearching;
+   //public GameObject roomStatusResearching;
+
+    public Sprite roomStatusResearchStart;
+    public Sprite roomStatusResearching;
+    //public Image roomStatusResearchSt;
+    
+    public bool isResearching;
 
     public Slider researchStatusSlider;
 
@@ -56,14 +64,11 @@ public class Room_Select_Manager : MonoBehaviour
     {
         roomStatusResearch.SetActive(active);
     }
-    public void RoomStatusResearchingActive(bool active)
-    {
-        roomStatusResearching.SetActive(active);
-    }
     
     public void StartResearch(int index, Employee employee)
     {
         StartCoroutine(Probabilitytask(index, employee));
+        isResearching = true;
     }
     
     private IEnumerator Probabilitytask(int index, Employee employee)
@@ -113,9 +118,11 @@ public class Room_Select_Manager : MonoBehaviour
         }
         ResetStatus();
         Debug.Log($"성공 : {sum}, 실패 : {nsum}");
+        isResearching = false;
+        employee.EmployeeCurrentStatus = Employee.EmployeeFsm.Wait;
         employee.ResetDestinationMoving();
         UI_Manager.Instance.IncreasedEnergy(sum);
-        GameManager.Instance.nowResearchPoint += RePo / 10;
+        GameManager.Instance.sumResearchPoint += RePo / 10;
     }
 
     private void ResearchStatus(int maxRePo, bool Results)

@@ -7,6 +7,7 @@
     "MonsterName": "어둠의 기둥",
     "MonsterBuy_Info": "마지막 불빛을 꺼뜨리고 영원한 어둠을 내려 주시옵소서",
     "riskLevel": 5,
+    "escapeCount": 5,
     "isEscape": "탈출하지않음",
     "researchMentalDamage": 5
   },

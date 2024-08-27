@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class RoomInside : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
@@ -9,7 +10,18 @@ public class RoomInside : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     
     public void OnPointerEnter(PointerEventData eventData)
     {
-        GetComponentInParent<Room_Select_Manager>().RoomStatusResearchActive(true);
+        var roomSelectManager = GetComponentInParent<Room_Select_Manager>();
+        if (roomSelectManager.isResearching == false)
+        {
+            roomSelectManager.roomStatusResearch.GetComponent<Image>().sprite =
+                roomSelectManager.roomStatusResearchStart;
+        }
+        if (roomSelectManager.isResearching == true)
+        {
+            roomSelectManager.roomStatusResearch.GetComponent<Image>().sprite =
+                roomSelectManager.roomStatusResearching;
+        }
+        roomSelectManager.RoomStatusResearchActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)

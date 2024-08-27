@@ -6,8 +6,6 @@ using UnityEngine.EventSystems;
 
 public class RoomInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    public TextMeshPro MonName_text;
-
     public void OnPointerClick(PointerEventData eventData)
     {
         if (MouseManager.Instance.MouseInteractionOn == true)
@@ -20,13 +18,13 @@ public class RoomInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        GetComponent<SpriteRenderer>().color = Color.yellow;
-        MonName_text.color = Color.black;
+        GetComponent<SpriteRenderer>().color = new Color32(221,219,158, 255);
+        GetComponentInParent<Room_Select_Manager>().textName.color = Color.white;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        GetComponent<SpriteRenderer>().color = Color.black;
-        MonName_text.color = Color.white;
+        GetComponent<SpriteRenderer>().color = Color.white;
+        GetComponentInParent<Room_Select_Manager>().textName.color = Color.black;
     }
 }

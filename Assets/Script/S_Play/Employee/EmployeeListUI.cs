@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,5 +18,18 @@ public class EmployeeListUI : MonoBehaviour
     public TextMeshProUGUI Name;
     public TextMeshProUGUI SuccessRate;
     public TextMeshProUGUI ResearchTime;
-    
+
+    public GameObject ResearchPanel;
+
+    void Update()
+    {
+        if (EmployeeManager.Instance.EmployeeDatas[Name.text].EmployeeCurrentStatus == Employee.EmployeeFsm.Work)
+        {
+            ResearchPanel.SetActive(true);
+        }
+        else
+        {
+            ResearchPanel.SetActive(false);
+        }
+    }
 }

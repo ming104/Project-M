@@ -26,6 +26,7 @@ public class Floors
 [Serializable]
 public class MainCompanyData
 {
+    public int companyStability;
     public int day;
     public int Money;
     public int ResearchPoint;
@@ -74,6 +75,7 @@ public class ProfileData
     public string MonsterName;
     public string MonsterBuy_Info;
     public int riskLevel;
+    public int escapeCount;
     public string isEscape;
     public float researchMentalDamage;
 }
@@ -107,6 +109,12 @@ public class EmployeeData
     public Equipment equipment;
 }
 
+// 무기 관련 데이터셋
+[Serializable]
+public class EquipmentData
+{
+    
+}
 #endregion DataSet
 
 [Serializable]

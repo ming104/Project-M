@@ -7,6 +7,7 @@
     "MonsterName": "휴식이 필요한 소녀",
     "MonsterBuy_Info": "피곤해 자고싶어...",
     "riskLevel": 1,
+    "escapeCount": 5,
     "isEscape": "탈출하지않음",
     "researchMentalDamage": 1
   },

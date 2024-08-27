@@ -111,9 +111,12 @@ public class Employee : MonoBehaviour
 
     public bool isResearchMoving;
     public bool isAttackMoving;
+    
+    public int areaMask;
 
     private Room_Select_Manager _currentResearchData;
     private int _roomIndex;
+    
 
     //NavmeshDelegate _navmeshDelegate;
 
@@ -127,7 +130,7 @@ public class Employee : MonoBehaviour
         nameText.text = employeeName;
         hpBar.maxValue = employeeMaxHp;
         mpBar.maxValue = employeeMaxMp;
-        employeeCurrentStatus = EmployeeFsm.Wait;
+        EmployeeCurrentStatus = EmployeeFsm.Wait;
         //_navmeshDelegate = DestinationMoving;
 
         isResearchMoving = false;
@@ -135,6 +138,8 @@ public class Employee : MonoBehaviour
 
     public void DestinationMoving(Vector3 destination)
     {
+        Debug.Log(EmployeeCurrentStatus);
+        _agent.isStopped = false;
         isResearchMoving = false;
         _currentResearchData = null;
         _agent.SetDestination(destination);
@@ -143,43 +148,63 @@ public class Employee : MonoBehaviour
 
     public void ResearchDestinationMoving(Vector3 destination, Room_Select_Manager roomData, int workindex)
     {
-        Debug.Log("실행");
-        _resetDestinationPos = transform.position;
-        _agent.SetDestination(destination);
-        _destinationPos = destination;
-        isResearchMoving = true;
-        _currentResearchData = roomData;
-        _roomIndex = workindex;
+        Debug.Log(EmployeeCurrentStatus);
+        if (EmployeeCurrentStatus != EmployeeFsm.Work)
+        {
+            EmployeeCurrentStatus = EmployeeFsm.Moving;
+            //Debug.Log("실행");
+            _agent.isStopped = false;
+            _resetDestinationPos = transform.position;
+            _agent.SetDestination(destination);
+            _destinationPos = destination;
+            isResearchMoving = true;
+            _currentResearchData = roomData;
+            _roomIndex = workindex;
+        }
     }
 
     public void ResetDestinationMoving()
     {
-        isResearchMoving = false;
-        _currentResearchData = null;
-        _agent.SetDestination(_resetDestinationPos);
-        _destinationPos = _resetDestinationPos;
+        Debug.Log(EmployeeCurrentStatus);
+        if (EmployeeCurrentStatus != EmployeeFsm.Work)
+        {
+            EmployeeCurrentStatus = EmployeeFsm.Moving;
+            _agent.isStopped = false;
+            isResearchMoving = false;
+            _currentResearchData = null;
+            _agent.SetDestination(_resetDestinationPos);
+            _destinationPos = _resetDestinationPos;
+        }
     }
 
     public void AttackDestinationMoving(Vector3 enemyPosition)
     {
-        isResearchMoving = false;
-        _currentResearchData = null;
-        _agent.SetDestination(enemyPosition);
-        _destinationPos = enemyPosition;
-        isAttackMoving = true;
-        // 무기 관련 코드 입력 되야함
+        if (EmployeeCurrentStatus != EmployeeFsm.Work)
+        {
+            EmployeeCurrentStatus = EmployeeFsm.Moving;
+            Debug.Log("attackMoving");
+
+            _agent.isStopped = false;
+            isResearchMoving = false;
+            _currentResearchData = null;
+            _agent.SetDestination(enemyPosition);
+            _destinationPos = enemyPosition;
+            isAttackMoving = true;
+            // 무기 관련 코드 입력 되야함
+        }
     }
 
     private void Update()
     {
         HandleOffMeshLink();
         Research();
+        CurrentArea();
         // Update HP and MP bars
         hpBar.value = EmployeeManager.Instance.Employees[employeeName].CurrentHP;
         mpBar.value = EmployeeManager.Instance.Employees[employeeName].CurrentMP;
 
         // Handle FSM state
-        switch (employeeCurrentStatus)
+        switch (EmployeeCurrentStatus)
         {
             case EmployeeFsm.Wait:
                 Waiting();
@@ -206,11 +231,8 @@ public class Employee : MonoBehaviour
             _agent.Warp(_agent.currentOffMeshLinkData.endPos);
             _agent.CompleteOffMeshLink();
             _agent.SetDestination(_destinationPos);
-            if (isResearchMoving == true)
-            {
-                Debug.Log("들어옴");
-                _currentResearchData.StartResearch(_roomIndex , this);
-            }
+            Debug.Log(areaMask);
+            
             //_agent.SamplePathPosition();
         }
         
@@ -219,20 +241,36 @@ public class Employee : MonoBehaviour
         //if (_agent.remainingDistance <= 0.5f && isResearchMoving)
         if (_agent.velocity.sqrMagnitude >= 0.2f && _agent.remainingDistance <= 0.5f)
         {
+            
             _agent.ResetPath();
+            _agent.isStopped = true;
+            _agent.velocity = Vector3.zero;
             //isResearchMoving = false;
             employeeCurrentStatus = EmployeeFsm.Wait;
+            
+            if (isResearchMoving && areaMask == 8)
+            {
+                //Debug.Log("들어옴");
+                _currentResearchData.StartResearch(_roomIndex , this);
+                employeeCurrentStatus = EmployeeFsm.Work;
+            }
         }
     }
-    
+
+    private void CurrentArea()
+    {
+        NavMeshHit hit;
+       
+        if (NavMesh.SamplePosition(_agent.transform.position, out hit, 1.0f, NavMesh.AllAreas))
+        {
+            areaMask = hit.mask;
+        }
+    }
     
 
     private void Research() // 해결해야됨
     {
-        if (isResearchMoving == false)
-        {
-            
-        }
+        
     }
 
     private void Waiting() { }
