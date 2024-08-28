@@ -2584,11 +2584,11 @@ MonoBehaviour:
       HAPPY: 0
       SURPRISE: 0
     MonEquipment:
-      ImagePATH: 
+      imagePATH: 
       EquipName: 
       equipEffect: 
       equipSpecialEffect: 
-      Type: 0
+      type: 0
     OpenLevel: 0
   roomSelectManager: {fileID: 0}
   roomPos: {x: 0, y: 0, z: 0}
@@ -3669,7 +3669,7 @@ RectTransform:
   m_Father: {fileID: 817288149}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -14497,7 +14497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Main_Camera: {fileID: 519420031}
-  CameraMovementSpeed: 21
+  CameraMovementSpeed: 60
   defaultTexture: {fileID: 2800000, guid: ed878b9d416642c4ebffb932f5c42a9c, type: 3}
   screenMoveTexture: {fileID: 2800000, guid: c135550f826d8c24a8c4892b260bc537, type: 3}
   screenMoveUp: {fileID: 2800000, guid: 1c872da8b2610c2418e4191bc5583cf1, type: 3}
@@ -19071,7 +19071,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1484326745
 RectTransform:
   m_ObjectHideFlags: 0
