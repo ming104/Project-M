@@ -34,6 +34,7 @@ public class UI_Manager : Singleton<UI_Manager>
     public TextMeshProUGUI feelingDefault;
     public TextMeshProUGUI feelingGood;
 
+    public Image equipmentImage;
     public TextMeshProUGUI equipmentName;
     public TextMeshProUGUI equipmentType;
     public TextMeshProUGUI equipEffect;
@@ -173,9 +174,10 @@ public class UI_Manager : Singleton<UI_Manager>
                 break;
         }
 
+        equipmentImage.sprite = Resources.Load<Sprite>(monsterData.MonEquipment.imagePATH);
         equipmentName.text = $"{monsterData.MonEquipment.EquipName}";
 
-        switch (monsterData.MonEquipment.Type)
+        switch (monsterData.MonEquipment.type)
         {
             case 0:
                 equipmentType.text = "무기";

@@ -39,7 +39,8 @@ public class Room_Select_Manager : MonoBehaviour
     
     //RoomStatus
     public GameObject roomStatusResearch;
-   //public GameObject roomStatusResearching;
+   //monsterObject
+   public GameObject monsterObject;
 
     public Sprite roomStatusResearchStart;
     public Sprite roomStatusResearching;

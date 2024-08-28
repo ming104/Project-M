@@ -50,6 +50,8 @@ public class RoomManager : Singleton<RoomManager>
                     monroom._monName =Datas.MonsterDataLoad(Datas.MainDataLoad().Floor[f].Department[Depart].MonsterList[i]).profile.MonsterName;
                     monroom.RoomMonsterData = Datas.MonsterDataLoad(Datas.MainDataLoad().Floor[f].Department[Depart].MonsterList[i]);
                     monroom.DepartLocate = Depart;
+                    monroom.monsterObject.GetComponent<SpriteRenderer>().sprite =
+                        Resources.Load<Sprite>(monroom.RoomMonsterData.appearanceImagePath);
                     departmentRoomDoors[Depart].DoorLocate[i].GetComponent<OffMeshLink>().startTransform =
                         departmentRoomDoors[Depart].DoorLocate[i].transform;
                     departmentRoomDoors[Depart].DoorLocate[i].GetComponent<OffMeshLink>().endTransform =

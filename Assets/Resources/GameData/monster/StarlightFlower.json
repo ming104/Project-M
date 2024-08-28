@@ -1,9 +1,10 @@
 {
   "Max_research_Level": 3,
+  "appearanceImagePath" : "MonsterImage/appearance/StarlightFlower",
 
   "profile": {
     "code": "T-08-81",
-    "imagePATH": "MonsterImage/StarlightFlower",
+    "imagePATH": "MonsterImage/Icon/StarlightFlower",
     "MonsterName": "별빛 꽃",
     "MonsterBuy_Info": "꽃은 하늘의 별과 같아!",
     "riskLevel": 2,
@@ -30,7 +31,7 @@
 
   "MonEquipment":
   {
-    "imagePATH": "EquipImage/Double Faced Ghost",
+    "imagePATH": "EquipImage/Armor/StarLightFlower",
     "EquipName" : "별 꽃 목걸이",
     "equipEffect" : "체력 15, 정신력 15 증가",
     "equipSpecialEffect" : "별빛 : 피해를 받을 시 체력 2 회복",

@@ -49,17 +49,17 @@ public class ResearchList
 [Serializable]
 public class MonsterEquipment
 {
-    public string ImagePATH;
+    public string imagePATH;
     public string EquipName;
     public string equipEffect;
     public string equipSpecialEffect;
-    public int Type;
+    public int type;
 }
 
 [Serializable]
 public class MonsterData
 {
-    public string id;
+    public string appearanceImagePath;
     public int Max_research_Level;
     public ProfileData profile;
     public ResearchLogData Research_log;
@@ -111,9 +111,29 @@ public class EmployeeData
 
 // 무기 관련 데이터셋
 [Serializable]
+public class EquipmentCount
+{
+    public int equipmentcount;
+}
+[Serializable]
+public class EquipmentRating
+{
+    public EquipmentCount risk1;
+    public EquipmentCount risk2;
+    public EquipmentCount risk3;
+    public EquipmentCount risk4;
+    public EquipmentCount risk5;
+}
+[Serializable]
+public class EquipmentType
+{
+    public EquipmentRating weapon;
+    public EquipmentRating armor;
+}
+[Serializable]
 public class EquipmentData
 {
-    
+    public EquipmentType equipmentData;
 }
 #endregion DataSet
 
@@ -340,7 +360,20 @@ public class DataManager : Singleton_DonDes<DataManager>
 
     }
 
+    public void EquipDataSave()
+    {
+        string filePath = "Assets/Resources/GameData/MainData.json";
 
+        string jsonText = File.ReadAllText(filePath); // 읽어오고
+
+        EquipmentData equipmentData = new EquipmentData();
+        //EquipmentType equipmentType = new
+        
+        //maindata.Floor.Add(newfloors);
+        //string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
+
+        //File.WriteAllText(filePath, ChangeMainData); // string 값을 파일로 저장
+    }
 
     #endregion DataSave_and_Create
 

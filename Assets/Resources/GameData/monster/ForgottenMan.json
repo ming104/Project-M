@@ -1,5 +1,6 @@
 {
   "Max_research_Level": 3,
+  "appearanceImagePath" : "MonsterImage/appearance/Dummy",
 
   "profile": {
     "code": "W-09-69",
