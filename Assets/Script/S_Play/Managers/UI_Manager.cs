@@ -27,7 +27,7 @@ public class UI_Manager : Singleton<UI_Manager>
     public TextMeshProUGUI mentalDamage;
     public TextMeshProUGUI monsterCode;
     public TextMeshProUGUI riskLevel;
-    public TextMeshProUGUI research_log;
+    public TextMeshProUGUI researchLog;
     public Transform logContent;
     public GameObject logTextBoxPrefab;
     public TextMeshProUGUI feelingBad;
@@ -40,6 +40,7 @@ public class UI_Manager : Singleton<UI_Manager>
     public TextMeshProUGUI equipEffect;
     public TextMeshProUGUI equipSpacialEffect;
     public TextMeshProUGUI equipCost;
+    public GameObject equipBuyPostit;
     
     public TextMeshProUGUI monsterResearchFear;
     public TextMeshProUGUI monsterResearchAnger;
@@ -135,9 +136,9 @@ public class UI_Manager : Singleton<UI_Manager>
         monsterName.text = $"이름 : {monsterData.profile.MonsterName}";
         possibilityOfEscape.text = $"탈출 여부 : {monsterData.profile.isEscape}";
         mentalDamage.text = $"연구시 정신피해 정도 : {monsterData.profile.researchMentalDamage}";
-        monsterCode.text = $"식별 코드 : {monsterData.profile.code}";
+        monsterCode.text = $"{monsterData.profile.code}";
         riskLevel.text = $"위험도 : {monsterData.profile.riskLevel}";
-        research_log.text = "연구 기록";
+        researchLog.text = "연구 기록";
         foreach (string relog in monsterData.Research_log.log)
         {
             var logTextBox = Instantiate(logTextBoxPrefab);
@@ -189,7 +190,9 @@ public class UI_Manager : Singleton<UI_Manager>
 
         equipEffect.text = $"효과 : {monsterData.MonEquipment.equipEffect}";
         equipSpacialEffect.text = $"{monsterData.MonEquipment.equipSpecialEffect}";
-        equipCost.text = "가격 : ???";
+        equipCost.text = $"가격 : 자금 : {monsterData.MonEquipment.buyMoney}, RP : {monsterData.MonEquipment.buyRP}";
+
+        equipBuyPostit.GetComponent<EquipmentBuy>().monsterData = monsterData;
 
         monsterResearchFear.text = $"{monsterData.Research_Preferences.FEAR}%";
         monsterResearchAnger.text = $"{monsterData.Research_Preferences.ANGER}%";

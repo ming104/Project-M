@@ -35,7 +35,11 @@
     "EquipName" : "별 꽃 목걸이",
     "equipEffect" : "체력 15, 정신력 15 증가",
     "equipSpecialEffect" : "별빛 : 피해를 받을 시 체력 2 회복",
-    "type" : 1
+    "type" : 1,
+    "maximumCount" : 5,
+    "currentCount" : 0,
+    "buyMoney" : 0,
+    "buyRP" : 0
   },
 
   "OpenLevel": 0

@@ -1,6 +1,6 @@
 {
   "Max_research_Level": 3,
-  "appearanceImagePath" : "MonsterImage/appearance/Dummy",
+  "appearanceImagePath" : "MonsterImage/appearance/ForgottenMan",
 
   "profile": {
     "code": "W-09-69",
@@ -33,11 +33,15 @@
 
   "MonEquipment":
   {
-    "imagePATH": "EquipImage/ForgottenMan",
+    "imagePATH": "EquipImage/Weapon/ForgottenMan",
     "EquipName" : "기억",
     "equipEffect" : "정신력 30 증가",
     "equipSpecialEffect" : "잊혀진 기억 : 추가 정신력 만큼 무기의 공격력이 증가한다.",
-    "type" : 0
+    "type" : 0,
+    "maximumCount" : 5,
+    "currentCount" : 0,
+    "buyMoney" : 2350,
+    "buyRP" : 231
   },
 
   "OpenLevel": 0

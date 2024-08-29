@@ -1,6 +1,6 @@
 {
   "Max_research_Level": 3,
-  "appearanceImagePath" : "MonsterImage/appearance/Dummy",
+  "appearanceImagePath" : "MonsterImage/appearance/ill-fated Sniper",
 
   "profile": {
     "code": "S-06-973",
@@ -33,11 +33,15 @@
 
   "MonEquipment":
   {
-    "imagePATH": "EquipImage/ill-fated Sniper",
+    "imagePATH": "EquipImage/Weapon/ill-fated Sniper",
     "EquipName" : "비참한 저격",
     "equipEffect" : "정신력 30 감소, 힘 20 증가",
     "equipSpecialEffect" : "대상을 처음 때릴 때 추가 피해 150%",
-    "type" : 0
+    "type" : 0,
+    "maximumCount" : 2,
+    "currentCount" : 0,
+    "buyMoney" : 4444,
+    "buyRP" : 444
   },
 
   "OpenLevel": 0

@@ -31,11 +31,15 @@
 
   "MonEquipment":
   {
-    "imagePATH": "EquipImage/Dummy",
+    "imagePATH": "EquipImage/Weapon/Dummy",
     "EquipName" : "더미용 무기",
     "equipEffect" : "힘 5 증가",
     "equipSpecialEffect" : "없음",
-    "type" : 1
+    "type" : 1,
+    "maximumCount" : 5,
+    "currentCount" : 0,
+    "buyMoney" : 0,
+    "buyRP" : 0
   },
 
   "OpenLevel": "0"

@@ -8,7 +8,7 @@ using System;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
-public class ManagementManager : MonoBehaviour
+public class ManagementManager : Singleton<ManagementManager>
 {
     [Header("Main_Canvas")]
     public TextMeshProUGUI mainDay;
@@ -44,13 +44,35 @@ public class ManagementManager : MonoBehaviour
     public TextMeshProUGUI moneyGeneral;
     public TextMeshProUGUI researchPointGeneral;
 
-    [Header("InfoCanvas")]
+    [Header("InfoCanvas")] 
     public GameObject infoCanvas;
     public Image monsterImage;
     public TextMeshProUGUI monsterName;
-    public TextMeshProUGUI code;
-    public TextMeshProUGUI dangerLevel;
+    public TextMeshProUGUI possibilityOfEscape;
+    public TextMeshProUGUI mentalDamage;
+    public TextMeshProUGUI monsterCode;
+    public TextMeshProUGUI riskLevel;
     public TextMeshProUGUI researchLog;
+    public Transform logContent;
+    public GameObject logTextBoxPrefab;
+    public TextMeshProUGUI feelingBad;
+    public TextMeshProUGUI feelingDefault;
+    public TextMeshProUGUI feelingGood;
+
+    public Image equipmentImage;
+    public TextMeshProUGUI equipmentName;
+    public TextMeshProUGUI equipmentType;
+    public TextMeshProUGUI equipEffect;
+    public TextMeshProUGUI equipSpacialEffect;
+    public TextMeshProUGUI equipCost;
+    public GameObject equipBuyPostit;
+    
+    public TextMeshProUGUI monsterResearchFear;
+    public TextMeshProUGUI monsterResearchAnger;
+    public TextMeshProUGUI monsterResearchDisgust;
+    public TextMeshProUGUI monsterResearchSad;
+    public TextMeshProUGUI monsterResearchHappy;
+    public TextMeshProUGUI monsterResearchSurprise;
     
     [Header("Employ_Canvas")]
     public GameObject employCanvas;
@@ -100,12 +122,18 @@ public class ManagementManager : MonoBehaviour
 
     [Header("ResetImage")]
     public Sprite resetImage;
+
+    public int currentMoney;
+    public int currentRP;
     // Start is called before the first frame update
     void Start()
     {
         mainDay.text = $"Day : {DataManager.Instance.MainDataLoad().day}";
+        dayGeneral.text = $"Day : {DataManager.Instance.MainDataLoad().day}";
+        currentMoney = DataManager.Instance.MainDataLoad().Money;
+        currentRP = DataManager.Instance.MainDataLoad().ResearchPoint;
         
-        mainResearchPoint.text = $"연구 포인트 : {DataManager.Instance.MainDataLoad().ResearchPoint}";
+        //mainResearchPoint.text = $"연구 포인트 : {currentRP}";
         departmentNumber = 0;
         floorNumber = 0;
         currentFloorText.text = $"현재 층 : {floorNumber + 1}층";
@@ -123,10 +151,10 @@ public class ManagementManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mainMoney.text = $"돈 : {DataManager.Instance.MainDataLoad().Money}";
-        mainResearchPoint.text = $"연구 포인트 : {DataManager.Instance.MainDataLoad().ResearchPoint}";
-        moneyGeneral.text = $"돈 : {DataManager.Instance.MainDataLoad().Money}";
-        researchPointGeneral.text = $"연구 포인트 : {DataManager.Instance.MainDataLoad().ResearchPoint}";
+        mainMoney.text = $"돈 : {currentMoney}";
+        mainResearchPoint.text = $"연구 포인트 : {currentRP}";
+        moneyGeneral.text = $"돈 : {currentMoney}";
+        researchPointGeneral.text = $"연구 포인트 : {currentRP}";
         if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject() == false)
         {
             // 아무런 오브젝트와 충돌하지 않았을 때의 처리                
@@ -335,27 +363,87 @@ public class ManagementManager : MonoBehaviour
         GameStartBtn_check();
     }
 
-    public void InfoCanvasOn(MonsterData monsterData)
+    public void InfoCanvasOn(MonsterData monsterData) // 수정 필요
     {
         monsterImage.sprite = Resources.Load<Sprite>(monsterData.profile.imagePATH);
         monsterName.text = $"이름 : {monsterData.profile.MonsterName}";
-        code.text = $"식별 코드 : {monsterData.profile.code}";
-        dangerLevel.text = $"위험도 : {monsterData.profile.riskLevel}";
-        researchLog.text = "연구 일지\n";
+        possibilityOfEscape.text = $"탈출 여부 : {monsterData.profile.isEscape}";
+        mentalDamage.text = $"연구시 정신피해 정도 : {monsterData.profile.researchMentalDamage}";
+        monsterCode.text = $"{monsterData.profile.code}";
+        riskLevel.text = $"위험도 : {monsterData.profile.riskLevel}";
+        researchLog.text = "연구 기록";
         foreach (string relog in monsterData.Research_log.log)
         {
-            researchLog.text += "- " + relog + "\n";
+            var logTextBox = Instantiate(logTextBoxPrefab);
+            logTextBox.GetComponent<MonsterResultLog>().resultText.text = relog;
+            logTextBox.transform.SetParent(logContent);
         }
+
+        switch (monsterData.profile.riskLevel)
+        {
+            case 1:
+                feelingBad.text = "나쁨 : 0 ~ 2";
+                feelingDefault.text = "보통 : 3 ~ 6";
+                feelingGood.text = "좋음 : 7 ~ 10";
+                break;
+            case 2:
+                feelingBad.text = "나쁨 : 0 ~ 6";
+                feelingDefault.text = "보통 : 7 ~ 13";
+                feelingGood.text = "좋음 : 14 ~ 20";
+                break;
+            case 3:
+                feelingBad.text = "나쁨 : 0 ~ 9";
+                feelingDefault.text = "보통 : 10 ~ 20";
+                feelingGood.text = "좋음 : 21 ~ 30";
+                break;
+            case 4:
+                feelingBad.text = "나쁨 : 0 ~ 12";
+                feelingDefault.text = "보통 : 13 ~ 26";
+                feelingGood.text = "좋음 : 27 ~ 40";
+                break;
+            case 5:
+                feelingBad.text = "나쁨 : 0 ~ 16";
+                feelingDefault.text = "보통 : 17 ~ 33";
+                feelingGood.text = "좋음 : 33 ~ 50";
+                break;
+        }
+
+        equipmentImage.sprite = Resources.Load<Sprite>(monsterData.MonEquipment.imagePATH);
+        equipmentName.text = $"{monsterData.MonEquipment.EquipName}";
+
+        switch (monsterData.MonEquipment.type)
+        {
+            case 0:
+                equipmentType.text = "무기";
+                break;
+            case 1:
+                equipmentType.text = "방어구";
+                break;
+        }
+
+        equipEffect.text = $"효과 : {monsterData.MonEquipment.equipEffect}";
+        equipSpacialEffect.text = $"{monsterData.MonEquipment.equipSpecialEffect}";
+        equipCost.text = $"가격 : 자금 : {monsterData.MonEquipment.buyMoney}, RP : {monsterData.MonEquipment.buyRP}";
+
+        equipBuyPostit.GetComponent<EquipmentBuyManagement>().monsterData = monsterData;
+
+        monsterResearchFear.text = $"{monsterData.Research_Preferences.FEAR}%";
+        monsterResearchAnger.text = $"{monsterData.Research_Preferences.ANGER}%";
+        monsterResearchDisgust.text = $"{monsterData.Research_Preferences.DISGUST}%";
+        monsterResearchSad.text = $"{monsterData.Research_Preferences.SAD}%";
+        monsterResearchHappy.text = $"{monsterData.Research_Preferences.HAPPY}%";
+        monsterResearchSurprise.text = $"{monsterData.Research_Preferences.SURPRISE}%";
+        
         infoCanvas.SetActive(true);
     }
 
     public void InfoCanvasOff()
     {
-        monsterImage.sprite = null;
-        monsterName.text = null;
-        code.text = null;
-        dangerLevel.text = null;
-        researchLog.text = null;
+        // monsterImage.sprite = null;
+        // monsterName.text = null;
+        // code.text = null;
+        // dangerLevel.text = null;
+        // researchLog.text = null;
         infoCanvas.SetActive(false);
     }
 

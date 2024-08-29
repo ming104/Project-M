@@ -9,7 +9,7 @@
     "MonsterBuy_Info": "#@$@$@##!#@%@%!!^!#%#!#$*",
     "riskLevel": 5,
     "escapeCount": 5,
-    "isEscape": "탈출하지않음",
+    "isEscape": "탈출함",
     "researchMentalDamage": 7
   },
 
@@ -31,11 +31,15 @@
 
   "MonEquipment":
   {
-    "imagePATH": "EquipImage/Distortion",
+    "imagePATH": "EquipImage/Weapon/Distortion",
     "EquipName" : "뒤틀림의 흔적",
     "equipEffect" : "체력 25, 힘 25 증가, 이동 속도 25 증가, 정신력 15 감소, 정의감 15 감소",
     "equipSpecialEffect" : "섞일지어다. : 공격 시 입힌 피해에 6%를 회복하고 대상 최대 체력의 6%의 해당하는 피해를 3초간 입힙니다.",
-    "type" : 0
+    "type" : 0,
+    "maximumCount" : 1,
+    "currentCount" : 0,
+    "buyMoney" : 6666,
+    "buyRP" : 666
   },
 
   "OpenLevel": 0

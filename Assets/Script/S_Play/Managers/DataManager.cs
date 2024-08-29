@@ -54,6 +54,10 @@ public class MonsterEquipment
     public string equipEffect;
     public string equipSpecialEffect;
     public int type;
+    public int maximumCount;
+    public int currentCount;
+    public int buyMoney;
+    public int buyRP;
 }
 
 [Serializable]
@@ -111,29 +115,16 @@ public class EmployeeData
 
 // 무기 관련 데이터셋
 [Serializable]
-public class EquipmentCount
-{
-    public int equipmentcount;
-}
-[Serializable]
-public class EquipmentRating
-{
-    public EquipmentCount risk1;
-    public EquipmentCount risk2;
-    public EquipmentCount risk3;
-    public EquipmentCount risk4;
-    public EquipmentCount risk5;
-}
-[Serializable]
 public class EquipmentType
 {
-    public EquipmentRating weapon;
-    public EquipmentRating armor;
+    public List<string> weapon;
+    public List<string> armor;
 }
 [Serializable]
 public class EquipmentData
 {
-    public EquipmentType equipmentData;
+    public EquipmentType mountedEquipment;
+    public EquipmentType unmountedEquipment;
 }
 #endregion DataSet
 
@@ -158,10 +149,25 @@ public class DataManager : Singleton_DonDes<DataManager>
         string jsonText = File.ReadAllText(filePath); // 읽어오고
 
         MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText); // class객체로 변환
-
+        
         maindata.day = GameManager.Instance.nowday + 1;
         maindata.Money = GameManager.Instance.nowMoney;
         maindata.ResearchPoint = GameManager.Instance.nowResearchPoint;
+
+        string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
+
+        File.WriteAllText(filePath, ChangeMainData); // string 값을 파일로 저장
+    }
+    public void MaindataSaveManagement()
+    {
+        string filePath = "Assets/Resources/GameData/MainData.json";
+
+        string jsonText = File.ReadAllText(filePath); // 읽어오고
+
+        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText); // class객체로 변환
+
+        maindata.Money = ManagementManager.Instance.currentMoney;
+        maindata.ResearchPoint = ManagementManager.Instance.currentRP;
 
         string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
 
@@ -359,20 +365,60 @@ public class DataManager : Singleton_DonDes<DataManager>
         // File.WriteAllText(filePath, Employeejson);
 
     }
-
-    public void EquipDataSave()
+    
+    public void EquipmentEquip(string equipName, int type)
     {
-        string filePath = "Assets/Resources/GameData/MainData.json";
+        string filePath = "Assets/Resources/GameData/EquipmentData.json";
 
         string jsonText = File.ReadAllText(filePath); // 읽어오고
 
-        EquipmentData equipmentData = new EquipmentData();
-        //EquipmentType equipmentType = new
-        
-        //maindata.Floor.Add(newfloors);
-        //string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
+        EquipmentData equipmentData = JsonUtility.FromJson<EquipmentData>(jsonText); // class객체로 변환
 
-        //File.WriteAllText(filePath, ChangeMainData); // string 값을 파일로 저장
+        switch (type)
+        {
+            case 0:
+                equipmentData.unmountedEquipment.weapon.Remove(equipName);
+                equipmentData.mountedEquipment.weapon.Add(equipName);
+                break;
+            
+            case 1:
+                equipmentData.unmountedEquipment.armor.Remove(equipName);
+                equipmentData.mountedEquipment.armor.Add(equipName);
+                break;
+        }
+
+        string changeEquipmentData = JsonUtility.ToJson(equipmentData, true); // class를 string으로 바꾸고
+
+        File.WriteAllText(filePath, changeEquipmentData); // string 값을 파일로 저장
+    }
+
+    public void EquipmentCreate(string equipName, int type)
+    {
+        string filePath = "Assets/Resources/GameData/EquipmentData.json";
+
+        string jsonText = File.ReadAllText(filePath); // 읽어오고
+
+        EquipmentType mounted = new EquipmentType();
+        EquipmentType unmounted = new EquipmentType();
+        
+        switch (type)
+        {
+            case 0:
+                //equipmentData.unmountedEquipment.weapon.Add(equipName);
+                mounted.weapon.Add(equipName);
+                break;
+            case 1:
+                //equipmentData.unmountedEquipment.armor.Add(equipName);
+                unmounted.armor.Add(equipName);
+                break;
+        }
+        EquipmentData equipmentData = JsonUtility.FromJson<EquipmentData>(jsonText); // class객체로 변환
+        equipmentData.mountedEquipment = mounted;
+        equipmentData.unmountedEquipment = unmounted;
+
+        string changeEquipmentData = JsonUtility.ToJson(equipmentData, true); // class를 string으로 바꾸고
+
+        File.WriteAllText(filePath, changeEquipmentData); // string 값을 파일로 저장
     }
 
     #endregion DataSave_and_Create
@@ -415,6 +461,58 @@ public class DataManager : Singleton_DonDes<DataManager>
         EmployeeData employeeData = JsonUtility.FromJson<EmployeeData>(jsonText);
 
         return employeeData;
+    }
+
+    public int EquipmentCountLoad(string equipmentName, int type)
+    {
+        string filePath = "Assets/Resources/GameData/EquipmentData.json";
+
+        string jsonText = File.ReadAllText(filePath);
+
+        int equipmentCount = 0;
+
+        EquipmentData equipmentData = JsonUtility.FromJson<EquipmentData>(jsonText);
+        switch (type)
+        {
+            case 0:
+                foreach (var weapons in equipmentData.unmountedEquipment.weapon)
+                {
+                    if (weapons == equipmentName)
+                    {
+                        equipmentCount++;
+                    }
+                }
+                foreach (var armors in equipmentData.mountedEquipment.armor)
+                {
+                    if (armors == equipmentName)
+                    {
+                        equipmentCount++;
+                    }
+                }
+
+                break;
+            
+            case 1:
+                foreach (var weapons in equipmentData.unmountedEquipment.weapon)
+                {
+                    if (weapons == equipmentName)
+                    {
+                        equipmentCount++;
+                    }
+                }
+                foreach (var armors in equipmentData.mountedEquipment.armor)
+                {
+                    if (armors == equipmentName)
+                    {
+                        equipmentCount++;
+                    }
+                }
+
+                break;
+            
+        }
+        
+        return equipmentCount;
     }
     #endregion DataLoad
 }

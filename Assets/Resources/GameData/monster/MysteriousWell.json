@@ -33,11 +33,15 @@
 
   "MonEquipment":
   {
-    "imagePATH": "EquipImage/Mysterious Well",
+    "imagePATH": "EquipImage/Armor/Mysterious Well",
     "EquipName" : "알 수 없는 물",
     "equipEffect" : "체력 5, 정신력 5, 이동속도 5 증가",
     "equipSpecialEffect" : "신비한 물 : 어느 효과가 5초마다 4배의 효과로 바뀌게 된다.",
-    "type" : "0"
+    "type" : 1,
+    "maximumCount" : 3,
+    "currentCount" : 0,
+    "buyMoney" : 0,
+    "buyRP" : 0
   },
 
   "OpenLevel": 0

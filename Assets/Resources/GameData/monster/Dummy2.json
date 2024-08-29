@@ -31,11 +31,15 @@
 
   "MonEquipment":
   {
-    "imagePATH": "EquipImage/Dummy2",
+    "imagePATH": "EquipImage/Weapon/Dummy2",
     "EquipName" : "더어어미",
     "equipEffect" : "힘 5 증가",
     "equipSpecialEffect" : "없음",
-    "type" : 1
+    "type" : 1,
+    "maximumCount" : 1,
+    "currentCount" : 0,
+    "buyMoney" : 0,
+    "buyRP" : 0
   },
 
   "OpenLevel": 0

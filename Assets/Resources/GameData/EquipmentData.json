@@ -1,0 +1,10 @@
+{
+    "mountedEquipment": {
+        "weapon": [],
+        "armor": []
+    },
+    "unmountedEquipment": {
+        "weapon": [],
+        "armor": []
+    }
+}

@@ -1,6 +1,6 @@
 {
   "Max_research_Level": 3,
-  "appearanceImagePath" : "MonsterImage/appearance/Dummy",
+  "appearanceImagePath" : "MonsterImage/appearance/Importance of turn",
 
   "profile": {
     "code": "M-07-505",
@@ -31,11 +31,15 @@
 
   "MonEquipment":
   {
-    "imagePATH": "EquipImage/Importance of turn",
+    "imagePATH": "EquipImage/Armor/Importance of turn",
     "EquipName" : "강박",
     "equipEffect" : "모든 스텟 5증가",
     "equipSpecialEffect" : "순서가 중요해! : 공격을 받을 시 반사 피해 10%",
-    "type" : 1
+    "type" : 1,
+    "maximumCount" : 5,
+    "currentCount" : 0,
+    "buyMoney" : 0,
+    "buyRP" : 0
   },
 
   "OpenLevel": 0

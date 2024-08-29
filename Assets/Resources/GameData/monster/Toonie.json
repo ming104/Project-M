@@ -28,11 +28,15 @@
 
   "MonEquipment":
   {
-    "imagePATH": "EquipImage/Toonie",
+    "imagePATH": "EquipImage/Armor/Toonie",
     "EquipName" : "화가의 모자",
     "equipEffect" : "지능 20 증가, 힘 20 감소",
     "equipSpecialEffect" : "창작의 고통: 장착직원이 공격 시 일정 확률로 지능의 30%만큼 추가 피해를 입힌다.",
-    "type" : 1
+    "type" : 1,
+    "maximumCount" : 3,
+    "currentCount" : 0,
+    "buyMoney" : 0,
+    "buyRP" : 0
   },
 
   "OpenLevel": 0

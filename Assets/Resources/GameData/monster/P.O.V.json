@@ -34,11 +34,15 @@
 
   "MonEquipment":
   {
-    "imagePATH": "EquipImage/P.O.V",
+    "imagePATH": "EquipImage/Weapon/P.O.V",
     "EquipName" : "Peace and Violence",
     "equipEffect" : "정신력 20 증가, 힘 10 증가",
     "equipSpecialEffect" : "평화를 위해: Peace로 공격할 때에는 주변 아군 치유 Violence로 공격할 때에는 추가 피해를 입힙니다.",
-    "type" : 0
+    "type" : 0,
+    "maximumCount" : 2,
+    "currentCount" : 0,
+    "buyMoney" : 4262,
+    "buyRP" : 774
   },
 
   "OpenLevel": 0

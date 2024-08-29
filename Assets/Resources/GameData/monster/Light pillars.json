@@ -33,11 +33,15 @@
 
   "MonEquipment":
   {
-    "imagePATH": "EquipImage/Light pillars",
+    "imagePATH": "EquipImage/Weapon/Light pillars",
     "EquipName" : "빛으로",
     "equipEffect" : "체력 20, 정신력 20, 힘 20 증가",
     "equipSpecialEffect" : "섬광 : 공격에 아군이 맞을 시 아군 체력, 정신력 각각 20씩 회복",
-    "type" : 0
+    "type" : 0,
+    "maximumCount" : 1,
+    "currentCount" : 0,
+    "buyMoney" : 6500,
+    "buyRP" : 700
   },
 
   "OpenLevel": 0

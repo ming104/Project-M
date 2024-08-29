@@ -1,8 +1,8 @@
 {
     "companyStability": 100,
     "day": 5,
-    "Money": 15408,
-    "ResearchPoint": 329,
+    "Money": 1529856,
+    "ResearchPoint": 5006,
     "Floor": [
         {
             "AuditDepartment": [
@@ -58,7 +58,7 @@
                     "MonsterList": [
                         "Darkness pillars",
                         "Distortion",
-                        "Distortion",
+                        "ForgottenMan",
                         "Light pillars"
                     ],
                     "EmployeeList": [
