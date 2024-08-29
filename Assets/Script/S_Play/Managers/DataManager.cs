@@ -396,30 +396,30 @@ public class DataManager : Singleton_DonDes<DataManager>
     {
         string filePath = "Assets/Resources/GameData/EquipmentData.json";
 
-        string jsonText = File.ReadAllText(filePath); // 읽어오고
+        // JSON 파일 읽기
+        string jsonText = File.ReadAllText(filePath);
 
-        EquipmentType mounted = new EquipmentType();
-        EquipmentType unmounted = new EquipmentType();
-        
+        // JSON 데이터를 EquipmentData 객체로 변환
+        EquipmentData equipmentData = JsonUtility.FromJson<EquipmentData>(jsonText);
+
+        // 타입에 따라 무기 또는 방어구 추가
         switch (type)
         {
             case 0:
-                //equipmentData.unmountedEquipment.weapon.Add(equipName);
-                mounted.weapon.Add(equipName);
+                equipmentData.unmountedEquipment.weapon.Add(equipName);
                 break;
             case 1:
-                //equipmentData.unmountedEquipment.armor.Add(equipName);
-                unmounted.armor.Add(equipName);
+                equipmentData.unmountedEquipment.armor.Add(equipName);
                 break;
         }
-        EquipmentData equipmentData = JsonUtility.FromJson<EquipmentData>(jsonText); // class객체로 변환
-        equipmentData.mountedEquipment = mounted;
-        equipmentData.unmountedEquipment = unmounted;
 
-        string changeEquipmentData = JsonUtility.ToJson(equipmentData, true); // class를 string으로 바꾸고
+        // 변경된 데이터를 JSON 문자열로 변환
+        string changeEquipmentData = JsonUtility.ToJson(equipmentData, true);
 
-        File.WriteAllText(filePath, changeEquipmentData); // string 값을 파일로 저장
+        // 수정된 JSON 데이터를 파일에 다시 저장
+        File.WriteAllText(filePath, changeEquipmentData);
     }
+
 
     #endregion DataSave_and_Create
 

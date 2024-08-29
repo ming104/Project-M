@@ -11,9 +11,10 @@ public class MouseManager : Singleton<MouseManager>
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) && isAttack == false && MouseInteractionOn && Selection_Obj.Instance.SelectOBJ.Count != 0)
+        if (Input.GetKeyDown(KeyCode.A) && isAttack == false && MouseInteractionOn && Selection_Obj.Instance.isSelect)
         {
             isAttack = true;
+            UI_Manager.Instance.attackOnTextActive(true);
             Selection_Obj.Instance.Select_Interaction = false;
         }
         
@@ -31,6 +32,7 @@ public class MouseManager : Singleton<MouseManager>
                     var SelectEmp = Selection_Obj.Instance.SelectOBJ[i].GetComponent<Employee>();
                     SelectEmp.AttackDestinationMoving(new Vector3(clickPos.x, clickPos.y, transform.position.z));
                     SelectEmp.EmployeeCurrentStatus = Employee.EmployeeFsm.Moving;
+                    UI_Manager.Instance.attackOnTextActive(false);
                     Selection_Obj.Instance.Select_Interaction = true;
                     isAttack = false;
                 }
@@ -50,6 +52,7 @@ public class MouseManager : Singleton<MouseManager>
                 {
                     isAttack = false;
                     Selection_Obj.Instance.Select_Interaction = true;
+                    UI_Manager.Instance.attackOnTextActive(false);
                     return;
                 }
                 for (int i = 0; i < Selection_Obj.Instance.SelectOBJ.Count; i++)

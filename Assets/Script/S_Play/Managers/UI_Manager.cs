@@ -68,6 +68,8 @@ public class UI_Manager : Singleton<UI_Manager>
     public Room_Select_Manager roomSelectManager;
     public Vector3 roomPos;
 
+    public GameObject attackOnText;
+
     //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
     [Header("EmployeeList_Element")]
@@ -405,5 +407,8 @@ public class UI_Manager : Singleton<UI_Manager>
         Application.Quit();
     }
 
-
+    public void attackOnTextActive(bool isActive)
+    {
+        attackOnText.SetActive(isActive);
+    }
 }

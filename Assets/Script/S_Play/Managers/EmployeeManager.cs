@@ -24,6 +24,8 @@ public class EmployeeManager : Singleton<EmployeeManager>
 {
     public GameObject Emp;
     public List<EmployeeList> Department_Emp;
+    public List<WeaponScriptableObject> weaponScriptable;
+    public List<WeaponScriptableObject> ArmorScriptable;
 
     public Dictionary<string, Employee_Hp_Mp_Data> Employees = new Dictionary<string, Employee_Hp_Mp_Data>();
     public Dictionary<string, Employee> EmployeeDatas = new Dictionary<string, Employee>();

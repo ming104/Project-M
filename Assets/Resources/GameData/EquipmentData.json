@@ -4,7 +4,12 @@
         "armor": []
     },
     "unmountedEquipment": {
-        "weapon": [],
-        "armor": []
+        "weapon": [
+            "어둠으로",
+            "뒤틀림의 흔적"
+        ],
+        "armor": [
+            "알 수 없는 물"
+        ]
     }
 }

@@ -20,7 +20,7 @@ public class EquipmentBuy : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (monsterData.MonEquipment.buyMoney <= GameManager.Instance.nowMoney
             && monsterData.MonEquipment.buyRP <= GameManager.Instance.nowResearchPoint
             && monsterData.MonEquipment.maximumCount >
-            DataManager.Instance.EquipmentCountLoad(monsterData.MonEquipment.EquipName, monsterData.profile.riskLevel))
+            DataManager.Instance.EquipmentCountLoad(monsterData.MonEquipment.EquipName,  monsterData.MonEquipment.type))
         {
             buyPossiblePanel.SetActive(true);
         }
@@ -41,9 +41,9 @@ public class EquipmentBuy : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (monsterData.MonEquipment.buyMoney <= GameManager.Instance.nowMoney
             && monsterData.MonEquipment.buyRP <= GameManager.Instance.nowResearchPoint
             && monsterData.MonEquipment.maximumCount >
-            DataManager.Instance.EquipmentCountLoad(monsterData.MonEquipment.EquipName, monsterData.profile.riskLevel))
+            DataManager.Instance.EquipmentCountLoad(monsterData.MonEquipment.EquipName,  monsterData.MonEquipment.type))
         {
-            DataManager.Instance.EquipmentCreate(monsterData.MonEquipment.EquipName, monsterData.profile.riskLevel);
+            DataManager.Instance.EquipmentCreate(monsterData.MonEquipment.EquipName,  monsterData.MonEquipment.type);
             GameManager.Instance.nowMoney -= monsterData.MonEquipment.buyMoney;
             GameManager.Instance.nowResearchPoint -= monsterData.MonEquipment.buyRP;
         }

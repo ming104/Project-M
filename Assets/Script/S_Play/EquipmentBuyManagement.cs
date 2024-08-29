@@ -21,7 +21,7 @@ public class EquipmentBuyManagement : MonoBehaviour, IPointerEnterHandler, IPoin
         if (monsterData.MonEquipment.buyMoney <= ManagementManager.Instance.currentMoney
             && monsterData.MonEquipment.buyRP <= ManagementManager.Instance.currentRP
             && monsterData.MonEquipment.maximumCount >
-            DataManager.Instance.EquipmentCountLoad(monsterData.MonEquipment.EquipName, monsterData.profile.riskLevel))
+            DataManager.Instance.EquipmentCountLoad(monsterData.MonEquipment.EquipName,  monsterData.MonEquipment.type))
         {
             buyPossiblePanel.SetActive(true);
         }
@@ -43,9 +43,9 @@ public class EquipmentBuyManagement : MonoBehaviour, IPointerEnterHandler, IPoin
         if (monsterData.MonEquipment.buyMoney <= ManagementManager.Instance.currentMoney
             && monsterData.MonEquipment.buyRP <= ManagementManager.Instance.currentRP
             && monsterData.MonEquipment.maximumCount >
-            DataManager.Instance.EquipmentCountLoad(monsterData.MonEquipment.EquipName, monsterData.profile.riskLevel))
+            DataManager.Instance.EquipmentCountLoad(monsterData.MonEquipment.EquipName,  monsterData.MonEquipment.type))
         {
-            DataManager.Instance.EquipmentCreate(monsterData.MonEquipment.EquipName, monsterData.profile.riskLevel);
+            DataManager.Instance.EquipmentCreate(monsterData.MonEquipment.EquipName, monsterData.MonEquipment.type);
             ManagementManager.Instance.currentMoney -= monsterData.MonEquipment.buyMoney;
             ManagementManager.Instance.currentRP -= monsterData.MonEquipment.buyRP;
             DataManager.Instance.MaindataSaveManagement();
