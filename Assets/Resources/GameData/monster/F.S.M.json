@@ -1,0 +1,46 @@
+{
+  "Max_research_Level": 3,
+  "appearanceImagePath" : "MonsterImage/appearance/F.S.M",
+
+  "profile": {
+    "code": "M-21-861",
+    "imagePATH": "MonsterImage/F.S.M",
+    "MonsterName": "F.S.M",
+    "MonsterBuy_Info": "배고픈 아이들아. 구원을 받아들여라",
+    "riskLevel": 3,
+    "escapeCount": 2,
+    "isEscape": "탈출함",
+    "researchMentalDamage": 3
+  },
+
+  "Research_log": {
+    "log": [
+      "갑옷을 착용하지 않은 채 연구를 진행할 시 해당 직원에게 $*(&%$이 생긴 것으로 확인 됬다.",
+      "$*(&%$가 생긴 직원이 연구 시 $*(&%$가 $*(&%$해서 F.S.M이 탈출합니다."
+    ]
+  },
+
+  "Research_Preferences": {
+    "FEAR": 30,
+    "ANGER": 10,
+    "DISGUST": 10,
+    "SAD": 10,
+    "HAPPY": 75,
+    "SURPRISE": 20
+  },
+  
+  "MonEquipment":   
+  {
+    "imagePATH": "EquipImage/Armor/F.S.M",
+    "EquipName" : "스파게티 기생충",
+    "equipEffect" : "체력 15 증가, 정신력 20 감소, 방어력 15 증가, 힘 10 감소, 지능 10 감소, 이동속도 15 증가",
+    "equipSpecialEffect" : "스파게티화: 착용후 날이 바뀔 때 방어력이 1 감소하고 체력이 1 증가합니다.(최대 10)",
+    "type" : 1,
+    "maximumCount" : 3,
+    "currentCount" : 0,
+    "buyMoney" : 1500,
+    "buyRP" : 500
+  },
+
+  "OpenLevel": 0
+}

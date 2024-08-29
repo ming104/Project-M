@@ -8,7 +8,7 @@
   "justice": 73,
   "movementSpeed": 30,
   "equipment": {
-    "weapon": "SuppressionBaton",
-    "armor": "LabCoat"
+    "weapon": "삼단봉",
+    "armor": "격리복"
   }
 }

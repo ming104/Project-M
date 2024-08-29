@@ -27535,6 +27535,23 @@ MonoBehaviour:
     - {fileID: 845798755}
     - {fileID: 320438182}
     - {fileID: 620455790}
+  weaponScriptable:
+  - {fileID: 11400000, guid: c13d0bfea1c584f49a962cea12c518d2, type: 2}
+  - {fileID: 11400000, guid: 9333d60eb9e619341952297c0527b532, type: 2}
+  - {fileID: 11400000, guid: d21402decc4721c4396df81c5b6e546e, type: 2}
+  - {fileID: 11400000, guid: e155def4b72ca2e4ebca73dc0d3b3458, type: 2}
+  - {fileID: 11400000, guid: 3694594b3ab492f4190addeb5bf878af, type: 2}
+  - {fileID: 11400000, guid: 2ad51dfeb1f711c45b6d6cd9247e49b8, type: 2}
+  - {fileID: 11400000, guid: 2230ad141aa07924290c4cbdb435f205, type: 2}
+  - {fileID: 11400000, guid: 226868eb08d1cd64c8ae6b37f78e2479, type: 2}
+  armorScriptable:
+  - {fileID: 11400000, guid: 8408c790d15eab447b2af3499895dd2f, type: 2}
+  - {fileID: 11400000, guid: 052739ac9c57b8c4388dd52f8d5c580b, type: 2}
+  - {fileID: 11400000, guid: 8638073ab8ee1c34ea0da4b511bcb6d0, type: 2}
+  - {fileID: 11400000, guid: 839720c4c78aaa243a74b0c6b5a6b68d, type: 2}
+  - {fileID: 11400000, guid: 12bfb95c855ee4643b828653c6f83a8d, type: 2}
+  - {fileID: 11400000, guid: 34a6f3a1f126d5a459e882166e3f4079, type: 2}
+  - {fileID: 11400000, guid: 15efa9c12fbc0e44e80ddff31457eec7, type: 2}
 --- !u!1 &2058874104
 GameObject:
   m_ObjectHideFlags: 0

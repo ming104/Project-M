@@ -33,7 +33,7 @@
   {
     "imagePATH": "EquipImage/Armor/need_to_rest",
     "EquipName" : "휴식",
-    "equipEffect" : "정신력 5 증가",
+    "equipEffect" : "정신력 15 증가",
     "equipSpecialEffect" : "편안해… : 부서를 이동하지 않고 있으면 10초마다 체력 1 회복",
     "type" : 1,
     "maximumCount" : 5,

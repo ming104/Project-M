@@ -415,7 +415,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1233611867}
         m_TargetAssemblyTypeName: TitleManager, Assembly-CSharp
-        m_MethodName: ExitBtn_On
+        m_MethodName: GameExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_text: Button
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 7355707485838887045, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -738,7 +738,7 @@ MonoBehaviour:
   m_text: "\uC804\uCCB4\uD654\uBA74"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
-  m_sharedMaterial: {fileID: 4681818631210200266, guid: 0b02c5bd75aae094ca2995ec2dda97d0, type: 2}
+  m_sharedMaterial: {fileID: 7355707485838887045, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1108,7 +1108,7 @@ MonoBehaviour:
   m_text: "\uC804\uCCB4\uD654\uBA74"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
-  m_sharedMaterial: {fileID: 4681818631210200266, guid: 0b02c5bd75aae094ca2995ec2dda97d0, type: 2}
+  m_sharedMaterial: {fileID: 7355707485838887045, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2064,7 +2064,7 @@ MonoBehaviour:
   m_text: "\uD574\uC0C1\uB3C4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
-  m_sharedMaterial: {fileID: 4681818631210200266, guid: 0b02c5bd75aae094ca2995ec2dda97d0, type: 2}
+  m_sharedMaterial: {fileID: 7355707485838887045, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2742,7 +2742,7 @@ MonoBehaviour:
   m_text: "\uC124\uC815"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
-  m_sharedMaterial: {fileID: 4681818631210200266, guid: 0b02c5bd75aae094ca2995ec2dda97d0, type: 2}
+  m_sharedMaterial: {fileID: 7355707485838887045, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2898,7 +2898,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 569725191}
   m_HandleRect: {fileID: 569725190}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3002,7 +3002,7 @@ MonoBehaviour:
   m_text: "\uC801\uC6A9"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
-  m_sharedMaterial: {fileID: 4681818631210200266, guid: 0b02c5bd75aae094ca2995ec2dda97d0, type: 2}
+  m_sharedMaterial: {fileID: 7355707485838887045, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3136,7 +3136,7 @@ MonoBehaviour:
   m_text: Button
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 7355707485838887045, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3613,7 +3613,7 @@ MonoBehaviour:
   m_text: Option A
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
-  m_sharedMaterial: {fileID: 4681818631210200266, guid: 0b02c5bd75aae094ca2995ec2dda97d0, type: 2}
+  m_sharedMaterial: {fileID: 7355707485838887045, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4120,7 +4120,7 @@ MonoBehaviour:
   m_text: Option A
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
-  m_sharedMaterial: {fileID: 4681818631210200266, guid: 0b02c5bd75aae094ca2995ec2dda97d0, type: 2}
+  m_sharedMaterial: {fileID: 7355707485838887045, guid: 0cfc97c3e5cae1f4a888ccc5f931c62e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

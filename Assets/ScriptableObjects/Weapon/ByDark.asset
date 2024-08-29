@@ -16,3 +16,10 @@ MonoBehaviour:
   weaponDamage: 100
   weaponAttackRange: 11
   weaponAttackCoolTime: 2
+  additionalHp: 20
+  additionalMp: 20
+  additionalDef: 0
+  additionalPower: 0
+  additionalIntelligence: 0
+  additionalJustice: 0
+  additionalMovementSpeed: 20

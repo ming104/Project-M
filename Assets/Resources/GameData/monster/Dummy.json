@@ -32,8 +32,8 @@
   "MonEquipment":
   {
     "imagePATH": "EquipImage/Weapon/Dummy",
-    "EquipName" : "더미용 무기",
-    "equipEffect" : "힘 5 증가",
+    "EquipName" : "더미의 눈물",
+    "equipEffect" : "체력 10 증가, 정신력 10 증가",
     "equipSpecialEffect" : "없음",
     "type" : 1,
     "maximumCount" : 5,

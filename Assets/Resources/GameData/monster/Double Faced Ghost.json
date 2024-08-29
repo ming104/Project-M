@@ -34,7 +34,7 @@
   {
     "imagePATH": "EquipImage/Weapon/Double Faced Ghost",
     "EquipName" : "양면귀의 손",
-    "equipEffect" : "체력 20, 힘 20 증가,이동속도 20 증가,방어력 20 증가, 최대 정신력 20 감소",
+    "equipEffect" : "체력 20, 힘 20 증가, 이동속도 20 증가,방어력 20 증가, 최대 정신력 20 감소",
     "equipSpecialEffect" : "양면귀의 저주 : 공격 시 입힌 피해에 10% 만큼 추가 피해를 입힙니다. 정신력이 10 이하로 떨어질 시 양면귀의 폭주로 착용 직원의 ???로 변화합니다.",
     "type" : 0,
     "maximumCount" : 1,

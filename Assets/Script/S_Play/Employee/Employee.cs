@@ -86,15 +86,15 @@ public class Employee : MonoBehaviour
         set => employeeCurrentStatus = value;
     }
     
-    [SerializeField] private String weapon;
-    public String Weapon
+    [SerializeField] private WeaponScriptableObject weapon;
+    public WeaponScriptableObject Weapon
     {
         get => weapon;
         set => weapon = value;
     }
     
-    [SerializeField] private String armor;
-    public String Armor
+    [SerializeField] private ArmorScriptableObject armor;
+    public ArmorScriptableObject Armor
     {
         get => armor;
         set => armor = value;

@@ -11,22 +11,47 @@ public class ArmorScriptableObject : ScriptableObject
     {
         get => armorName; 
     }
-    [SerializeField]
-    private float armorDamage;
-    public float ArmorDamage
+
+    [Header("additional"), SerializeField]
+    private int additionalHp;
+    public int AdditionalHp
     {
-        get => armorDamage; 
+        get => additionalHp;
     }
-    [SerializeField]
-    private int weaponAttackRange;
-    public int WeaponAttackRange
+    [SerializeField] 
+    private int additionalMp;
+    public int AdditionalMp
     {
-        get => weaponAttackRange; 
+        get => additionalMp;
     }
-    [SerializeField]
-    private int weaponAttackCoolTime;
-    public int WeaponAttackCoolTime
+    [SerializeField] 
+    private int additionalDef;
+    public int AdditionalDef
     {
-        get => weaponAttackCoolTime; 
+        get => additionalDef;
+    }
+    [SerializeField] 
+    private int additionalPower;
+    public int AdditionalPower
+    {
+        get => additionalPower;
+    }
+    [SerializeField] 
+    private int additionalIntelligence;
+    public int AdditionalIntelligence
+    {
+        get => additionalIntelligence;
+    }
+    [SerializeField] 
+    private int additionalJustice;
+    public int AdditionalJustice
+    {
+        get => additionalJustice;
+    }
+    [SerializeField] 
+    private int additionalMovementSpeed;
+    public int AdditionalMovementSpeed
+    {
+        get => additionalMovementSpeed;
     }
 }
