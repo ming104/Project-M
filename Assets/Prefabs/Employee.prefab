@@ -730,10 +730,19 @@ MonoBehaviour:
   employeeJustice: 0
   employeeMovementSpeed: 0
   employeeCurrentStatus: 0
-  empGameObject: {fileID: 6493314234655353575}
+  weapon: {fileID: 0}
+  armor: {fileID: 0}
   nameText: {fileID: 6039076812296237182}
   hpBar: {fileID: 4136967584666949297}
   mpBar: {fileID: 3549128601381790399}
+  _resetDestinationPos: {x: 0, y: 0, z: 0}
+  attackRangeCollider: {fileID: 0}
+  isResearchMoving: 0
+  isAttackMoving: 0
+  areaMask: 0
+  monsterLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!70 &8099665975918514000
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -783,7 +792,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1

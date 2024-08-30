@@ -109,10 +109,13 @@ public class Employee : MonoBehaviour
     private Vector3 _resetDestinationPos;
     private Vector3 _destinationPos;
 
+    public CircleCollider2D attackRangeCollider;
+
     public bool isResearchMoving;
     public bool isAttackMoving;
     
     public int areaMask;
+    public LayerMask monsterLayerMask; // 몬스터 레이어 마스크
 
     private Room_Select_Manager _currentResearchData;
     private int _roomIndex;
@@ -197,7 +200,7 @@ public class Employee : MonoBehaviour
     private void Update()
     {
         HandleOffMeshLink();
-        Research();
+        Attack();
         CurrentArea();
         // Update HP and MP bars
         hpBar.value = EmployeeManager.Instance.Employees[employeeName].CurrentHP;
@@ -241,7 +244,6 @@ public class Employee : MonoBehaviour
         //if (_agent.remainingDistance <= 0.5f && isResearchMoving)
         if (_agent.velocity.sqrMagnitude >= 0.2f && _agent.remainingDistance <= 0.5f)
         {
-            
             _agent.ResetPath();
             _agent.isStopped = true;
             _agent.velocity = Vector3.zero;
@@ -256,7 +258,6 @@ public class Employee : MonoBehaviour
             }
         }
     }
-
     private void CurrentArea()
     {
         NavMeshHit hit;
@@ -266,12 +267,25 @@ public class Employee : MonoBehaviour
             areaMask = hit.mask;
         }
     }
-    
 
-    private void Research() // 해결해야됨
+    private void Attack()
     {
-        
+        if (isAttackMoving)
+        {
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, weapon.WeaponAttackRange, monsterLayerMask);
+
+            foreach (Collider2D attackRangeCol in hitColliders)
+            {
+                _agent.isStopped = true;
+                _agent.velocity = Vector2.zero;
+                isAttackMoving = false;
+                employeeCurrentStatus = EmployeeFsm.Battle;
+                attackRangeCol.GetComponent<Enemy>().BeAttacked(); // 이거 히트스캔이면 이래야됨
+                Debug.Log("Found Collider: " + attackRangeCol.name);
+            }
+        }
     }
+    
 
     private void Waiting() { }
     private void Moving() { }

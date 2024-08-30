@@ -21,7 +21,7 @@ public class Passage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
                     //Selection_Obj.Instance.SelectOBJ[i].GetComponent<Astar>().targetPos = new Vector2Int((int)transform.position.x, (int)Mathf.Floor(transform.position.y));
                     //Selection_Obj.Instance.SelectOBJ[i].GetComponent<Astar>().PathFinding();
                 }
-                Selection_Obj.Instance.DeSelect_Obj();
+                //Selection_Obj.Instance.DeSelect_Obj();
             }
         }
         else

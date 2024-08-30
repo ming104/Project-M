@@ -37,7 +37,7 @@ public class MouseManager : Singleton<MouseManager>
                     isAttack = false;
                 }
 
-                Selection_Obj.Instance.DeSelect_Obj();
+                //Selection_Obj.Instance.DeSelect_Obj();
             }
         }
 
@@ -61,7 +61,7 @@ public class MouseManager : Singleton<MouseManager>
                     SelectEmp.DestinationMoving(new Vector3(clickPos.x, clickPos.y, transform.position.z));
                     SelectEmp.EmployeeCurrentStatus = Employee.EmployeeFsm.Moving;
                 }
-                Selection_Obj.Instance.DeSelect_Obj();
+                //Selection_Obj.Instance.DeSelect_Obj();
             }
 
 
