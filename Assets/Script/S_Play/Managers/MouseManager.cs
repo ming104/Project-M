@@ -31,7 +31,7 @@ public class MouseManager : Singleton<MouseManager>
                 {
                     var SelectEmp = Selection_Obj.Instance.SelectOBJ[i].GetComponent<Employee>();
                     SelectEmp.AttackDestinationMoving(new Vector3(clickPos.x, clickPos.y, transform.position.z));
-                    SelectEmp.EmployeeCurrentStatus = Employee.EmployeeFsm.Moving;
+                    //SelectEmp.EmployeeCurrentStatus = Employee.EmployeeFsm.Moving;
                     UI_Manager.Instance.attackOnTextActive(false);
                     Selection_Obj.Instance.Select_Interaction = true;
                     isAttack = false;

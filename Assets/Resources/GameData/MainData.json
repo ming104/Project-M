@@ -1,83 +1,32 @@
 {
-    "companyStability": 100,
-    "day": 5,
-    "Money": 1529856,
-    "ResearchPoint": 5000006,
+    "companyStability": 0,
+    "day": 3,
+    "Money": 3769,
+    "ResearchPoint": 8,
     "Floor": [
         {
             "AuditDepartment": [
-                "계약직 48호"
+                "계약직 63호"
             ],
             "AccountingDepartment": [
-                "계약직 73호"
+                "계약직 99호",
+                "계약직 92호",
+                "계약직 20호"
             ],
             "Department": [
                 {
                     "MonsterList": [
                         "Dummy",
-                        "Dummy2",
-                        "P.O.V",
-                        "Toonie"
+                        "ill-fated Sniper"
                     ],
                     "EmployeeList": [
-                        "계약직 17호",
-                        "계약직 44호",
-                        "계약직 32호",
-                        "계약직 97호",
-                        "계약직 94호"
-                    ]
-                },
-                {
-                    "MonsterList": [
-                        "need_to_rest",
-                        "MysteriousWell",
-                        "ill-fated Sniper",
-                        "StarlightFlower"
-                    ],
-                    "EmployeeList": [
-                        "계약직 28호",
-                        "계약직 37호",
-                        "계약직 77호",
-                        "계약직 85호",
-                        "계약직 41호"
-                    ]
-                },
-                {
-                    "MonsterList": [
-                        "F.S.M",
-                        "P.O.V",
-                        "Double Faced Ghost",
-                        "Distortion"
-                    ],
-                    "EmployeeList": [
-                        "계약직 36호",
-                        "계약직 60호"
-                    ]
-                },
-                {
-                    "MonsterList": [
-                        "Darkness pillars",
-                        "Distortion",
-                        "ForgottenMan",
-                        "Light pillars"
-                    ],
-                    "EmployeeList": [
-                        "계약직 34호",
-                        "계약직 26호"
+                        "계약직 43호"
                     ]
                 }
             ]
         }
     ],
-    "UnaffiliatedEmployee": [
-        "계약직 23호",
-        "계약직 20호",
-        "계약직 65호",
-        "계약직 46호",
-        "계약직 50호",
-        "계약직 63호",
-        "계약직 65호"
-    ],
+    "UnaffiliatedEmployee": [],
     "All_Monster": [
         "Dummy",
         "Dummy2",

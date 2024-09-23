@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -9,10 +10,11 @@ public class Employee : MonoBehaviour
     {
         Wait = 0,
         Moving = 1,
-        Work = 2,
-        Battle = 3,
-        StatusEffect = 4,
-        Death = 5
+        AttackMoving = 2,
+        Work = 3,
+        Battle = 4,
+        StatusEffect = 5,
+        Death = 6
     }
 
     // Employee Info
@@ -117,6 +119,9 @@ public class Employee : MonoBehaviour
     public int areaMask;
     public LayerMask monsterLayerMask; // 몬스터 레이어 마스크
 
+    private bool _canAttack = true;
+    //private float nextAttackTime = 0f;
+
     private Room_Select_Manager _currentResearchData;
     private int _roomIndex;
     
@@ -184,7 +189,7 @@ public class Employee : MonoBehaviour
     {
         if (EmployeeCurrentStatus != EmployeeFsm.Work)
         {
-            EmployeeCurrentStatus = EmployeeFsm.Moving;
+            EmployeeCurrentStatus = EmployeeFsm.AttackMoving;
             Debug.Log("attackMoving");
 
             _agent.isStopped = false;
@@ -200,7 +205,10 @@ public class Employee : MonoBehaviour
     private void Update()
     {
         HandleOffMeshLink();
-        Attack();
+        if (employeeCurrentStatus == EmployeeFsm.AttackMoving || employeeCurrentStatus == EmployeeFsm.Battle)
+        {
+            Attack();
+        }
         CurrentArea();
         // Update HP and MP bars
         hpBar.value = EmployeeManager.Instance.Employees[employeeName].CurrentHP;
@@ -214,6 +222,9 @@ public class Employee : MonoBehaviour
                 break;
             case EmployeeFsm.Moving:
                 Moving();
+                break;
+            case EmployeeFsm.AttackMoving:
+                //Moving();
                 break;
             case EmployeeFsm.Work:
                 Working();
@@ -270,20 +281,58 @@ public class Employee : MonoBehaviour
 
     private void Attack()
     {
-        if (isAttackMoving)
-        {
+        //if (Time.time >= nextAttackTime)
+        //{
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, weapon.WeaponAttackRange, monsterLayerMask);
 
-            foreach (Collider2D attackRangeCol in hitColliders)
+            if (hitColliders.Length > 0)
             {
+                // 가장 가까운 적 찾기
+                isAttackMoving = false;
                 _agent.isStopped = true;
                 _agent.velocity = Vector2.zero;
-                isAttackMoving = false;
                 employeeCurrentStatus = EmployeeFsm.Battle;
-                attackRangeCol.GetComponent<Enemy>().BeAttacked(); // 이거 히트스캔이면 이래야됨
-                Debug.Log("Found Collider: " + attackRangeCol.name);
+                Collider2D closestEnemy = null;
+                float minDistance = Mathf.Infinity;
+
+                foreach (var collider in hitColliders)
+                {
+                    float distance = Vector2.Distance(transform.position, collider.transform.position);
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        closestEnemy = collider;
+                    }
+                }
+
+                if (closestEnemy != null)
+                {
+
+                    if (_canAttack)
+                    {
+                        closestEnemy.GetComponent<Enemy>().BeAttacked();
+                        Debug.Log("Attacking closest enemy: " + closestEnemy.name);
+                        // 쿨타임 설정
+                        StartCoroutine(AttackCoolTimeCoroutine());
+                    }
+                }
             }
-        }
+            else
+            {
+                // 적이 없을 때 유닛을 이동 가능 상태로 변경
+                isAttackMoving = true;
+                employeeCurrentStatus = EmployeeFsm.AttackMoving;
+                // 이동을 활성화합니다 (여기서는 이동 로직을 적절히 추가해야 합니다)
+            }
+        //}
+    }
+
+    private IEnumerator AttackCoolTimeCoroutine()
+    {
+        _canAttack = false;
+        //nextAttackTime = Time.time + weapon.WeaponAttackCoolTime;
+        yield return new WaitForSeconds(weapon.WeaponAttackCoolTime);
+        _canAttack = true;
     }
     
 

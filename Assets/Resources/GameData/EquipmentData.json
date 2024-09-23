@@ -1,14 +1,25 @@
 {
     "mountedEquipment": {
-        "weapon": ["어둠으로"],
-        "armor": ["알 수 없는 물"]
-    },
-    "unmountedEquipment": {
         "weapon": [
-            "뒤틀림의 흔적"
+            "삼단봉",
+            "삼단봉",
+            "삼단봉",
+            "삼단봉",
+            "삼단봉"
         ],
         "armor": [
-            
+            "격리복",
+            "격리복",
+            "격리복",
+            "더미의 눈물",
+            "더미의 눈물"
+        ]
+    },
+    "unmountedEquipment": {
+        "weapon": [],
+        "armor": [
+            "격리복",
+            "격리복"
         ]
     }
 }

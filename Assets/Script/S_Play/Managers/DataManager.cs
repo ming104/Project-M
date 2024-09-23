@@ -135,20 +135,142 @@ public class DataManager : Singleton_DonDes<DataManager>
     {
         //MainCompanyData();
         //CreateEmployeeData();
+        DataCreate();
+    }
+    
+    void DataCreate()
+    {
+        if(!File.Exists(Path.Combine(Application.persistentDataPath, "MainData.json")))
+        {
+            MainDataReset();
+        }
     }
 
     #region DataSave_and_Create
+
+    public void MainDataReset()
+    {
+        //string mainDataFilePath = "Assets/Resources/GameData/MainData.json";
+        string mainDataFilePath = Path.Combine(Application.persistentDataPath, "MainData.json");
+         string mainjsonText;
+        if (!File.Exists(mainDataFilePath))
+        {
+            TextAsset jsonFile = Resources.Load<TextAsset>("GameData/MainData");
+            mainjsonText = jsonFile.text; // 읽어오고
+        }
+        else
+        {
+             mainjsonText = File.ReadAllText(mainDataFilePath);
+        }
+
+        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(mainjsonText); // class객체로 변환
+        
+        maindata.companyStability = 0;
+        maindata.day = 1;
+        maindata.Money = 5000;
+        maindata.ResearchPoint = 10;
+        foreach (var floor in maindata.Floor)
+        {
+            if (floor.AuditDepartment != null)
+                floor.AuditDepartment.Clear(); // AuditDepartment 내부 데이터 삭제
+
+            if (floor.AccountingDepartment != null)
+                floor.AccountingDepartment.Clear(); // AccountingDepartment 내부 데이터 삭제
+
+            if (floor.Department != null)
+            {
+                floor.Department.Clear();
+                MonsterEmpListClass monsterListAdd = new MonsterEmpListClass
+                {
+                    MonsterList = new List<string> { "Dummy" },
+                    EmployeeList = new List<string>()
+                };
+                floor.Department.Add(monsterListAdd);
+            }
+        }
+        
+        maindata.UnaffiliatedEmployee.Clear(); // 리스트 초기화
+    
+        string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
+
+        File.WriteAllText(mainDataFilePath, ChangeMainData); // string 값을 파일로 저장
+        // 아래는 장착 데이터
+        
+        //string EquipDataFilePath = "Assets/Resources/GameData/EquipmentData.json";
+        string EquipDataFilePath = Path.Combine(Application.persistentDataPath, "EquipmentData.json");
+         string EquipjsonText;
+        if (!File.Exists(EquipDataFilePath))
+        {
+            TextAsset jsonFile = Resources.Load<TextAsset>("GameData/EquipmentData");
+            EquipjsonText = jsonFile.text; // 읽어오고
+        }
+        else
+        {
+             EquipjsonText = File.ReadAllText(EquipDataFilePath);
+        }
+        
+        //string EquipjsonText = File.ReadAllText(EquipDataFilePath); // 읽어오고
+
+        EquipmentData equipmentData = JsonUtility.FromJson<EquipmentData>(EquipjsonText); // class객체로 변환
+        
+        equipmentData.unmountedEquipment.weapon.Clear();
+        equipmentData.unmountedEquipment.armor.Clear();
+        equipmentData.mountedEquipment.weapon.Clear();
+        equipmentData.mountedEquipment.armor.Clear();
+
+        string ChangeEquipData = JsonUtility.ToJson(equipmentData, true); // class를 string으로 바꾸고
+
+        File.WriteAllText(EquipDataFilePath, ChangeEquipData); // string 값을 파일로 저장
+        // 아래는 직원 파일 삭제
+
+        string employeeDataFilePath = Path.Combine(Application.persistentDataPath, "Employee");
+        DirectoryInfo di = new DirectoryInfo(employeeDataFilePath);
+        Debug.Log(employeeDataFilePath);
+        if(!Directory.Exists(employeeDataFilePath))
+        {
+            //string 
+            di.Create();
+            employeeDataFilePath = "Assets/Resources/GameData/Employee";
+        }
+       
+
+        if (Directory.Exists(employeeDataFilePath))
+        {
+            string[] files = Directory.GetFiles(employeeDataFilePath);
+            foreach (var filePath in files)
+            {
+                try
+                {
+                  File.Delete(filePath);
+                  Debug.Log($"파일 삭제 성공: {filePath}");
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log($"파일 삭제 실패: {filePath} - 오류 메시지: {ex.Message}");
+                }
+            }
+        }
+        else
+        {
+            Console.WriteLine($"디렉토리가 존재하지 않습니다: {employeeDataFilePath}");
+        } 
+    }
+    
+    
 
     /// <summary>
     /// Day, Money, ReserchPoint 처럼 기본적인 것들만 저장함
     /// </summary>
     public void MaindataSave()
     {
-        string filePath = "Assets/Resources/GameData/MainData.json";
+        string mainDataFilePath = Path.Combine(Application.persistentDataPath, "MainData.json");
+        string mainjsonText = File.ReadAllText(mainDataFilePath);
+        
+        //string filePath = "Assets/Resources/GameData/MainData.json";
 
-        string jsonText = File.ReadAllText(filePath); // 읽어오고
+        //string jsonText = File.ReadAllText(filePath); // 읽어오고
 
-        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText); // class객체로 변환
+        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(mainjsonText); // class객체로 변환
         
         maindata.day = GameManager.Instance.nowday + 1;
         maindata.Money = GameManager.Instance.nowMoney;
@@ -156,22 +278,25 @@ public class DataManager : Singleton_DonDes<DataManager>
 
         string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
 
-        File.WriteAllText(filePath, ChangeMainData); // string 값을 파일로 저장
+        File.WriteAllText(mainDataFilePath, ChangeMainData); // string 값을 파일로 저장
     }
     public void MaindataSaveManagement()
     {
-        string filePath = "Assets/Resources/GameData/MainData.json";
+        string mainDataFilePath = Path.Combine(Application.persistentDataPath, "MainData.json");
+        string mainjsonText = File.ReadAllText(mainDataFilePath);
+        
+        //string filePath = "Assets/Resources/GameData/MainData.json";
 
-        string jsonText = File.ReadAllText(filePath); // 읽어오고
+        //string jsonText = File.ReadAllText(filePath); // 읽어오고
 
-        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText); // class객체로 변환
+        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(mainjsonText); // class객체로 변환
 
         maindata.Money = ManagementManager.Instance.currentMoney;
         maindata.ResearchPoint = ManagementManager.Instance.currentRP;
 
         string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
 
-        File.WriteAllText(filePath, ChangeMainData); // string 값을 파일로 저장
+        File.WriteAllText(mainDataFilePath, ChangeMainData); // string 값을 파일로 저장
     }
     /// <summary>
     /// type는 0일때 몬스터, 1, 2, 3일때 직원임 다만 1은 직원 생성이고 2는 직원 부서 배치임 3은 부서에서 부서 이동할 때 잠깐 부서가 없을 때//
@@ -180,11 +305,15 @@ public class DataManager : Singleton_DonDes<DataManager>
     /// </summary>
     public void MaindataSave(int type, int floor, int department, string name) // 종류, 층, 소속, 이름으로 저장
     {
-        string filePath = "Assets/Resources/GameData/MainData.json";
+        string mainDataFilePath = Path.Combine(Application.persistentDataPath, "MainData.json");
+        string mainjsonText = File.ReadAllText(mainDataFilePath);
+        
+        
+        //string filePath = "Assets/Resources/GameData/MainData.json";
 
-        string jsonText = File.ReadAllText(filePath); // 읽어오고
+        //string jsonText = File.ReadAllText(filePath); // 읽어오고
 
-        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText); // class객체로 변환
+        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(mainjsonText); // class객체로 변환
         switch (type)
         {
             case 0: // 몬스터
@@ -196,11 +325,15 @@ public class DataManager : Singleton_DonDes<DataManager>
                         EmployeeList = new List<string>()
                     };
                     maindata.Floor[maindata.Floor.Count - 1].Department.Add(monsterListAdd);
+                    ManagementManager.Instance.currentMoney -= 1000 + (maindata.Floor.Count * 400);
                 }
                 else
                 {
                     maindata.Floor[maindata.Floor.Count - 1].Department[maindata.Floor[maindata.Floor.Count - 1].Department.Count - 1].MonsterList.Add(name);
+                    ManagementManager.Instance.currentMoney -= 1000 + (maindata.Floor.Count * 400);
                 }
+
+                maindata.Money = ManagementManager.Instance.currentMoney;
                 break;
             case 1: // 직원
                 maindata.UnaffiliatedEmployee.Add(name);
@@ -243,15 +376,19 @@ public class DataManager : Singleton_DonDes<DataManager>
 
         string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
 
-        File.WriteAllText(filePath, ChangeMainData); // string 값을 파일로 저장
+        File.WriteAllText(mainDataFilePath, ChangeMainData); // string 값을 파일로 저장
     }
     public void AddFloor()
     {
-        string filePath = "Assets/Resources/GameData/MainData.json";
+        
+        string mainDataFilePath = Path.Combine(Application.persistentDataPath, "MainData.json");
+        string mainjsonText = File.ReadAllText(mainDataFilePath);
+        
+        //string filePath = "Assets/Resources/GameData/MainData.json";
 
-        string jsonText = File.ReadAllText(filePath); // 읽어오고
+        //string jsonText = File.ReadAllText(filePath); // 읽어오고
 
-        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText); // class객체로 변환
+        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(mainjsonText); // class객체로 변환
 
         MonsterEmpListClass floorDepart = new MonsterEmpListClass
         {
@@ -272,21 +409,25 @@ public class DataManager : Singleton_DonDes<DataManager>
         maindata.Floor.Add(newfloors);
         string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
 
-        File.WriteAllText(filePath, ChangeMainData); // string 값을 파일로 저장
+        File.WriteAllText(mainDataFilePath, ChangeMainData); // string 값을 파일로 저장
     }
     public void MaindataSave_Employ(string name) // 종류, 소속, 이름으로 저장
     {
-        string filePath = "Assets/Resources/GameData/MainData.json";
+        string mainDataFilePath = Path.Combine(Application.persistentDataPath, "MainData.json");
+        string mainjsonText = File.ReadAllText(mainDataFilePath);
+        
+        //string filePath = "Assets/Resources/GameData/MainData.json";
 
-        string jsonText = File.ReadAllText(filePath); // 읽어오고
+        //string jsonText = File.ReadAllText(filePath); // 읽어오고
 
-        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(jsonText); // class객체로 변환
+        MainCompanyData maindata = JsonUtility.FromJson<MainCompanyData>(mainjsonText); // class객체로 변환
 
         maindata.UnaffiliatedEmployee.Add(name);
+        ManagementManager.Instance.currentMoney -= (maindata.Floor.Count) * 100;
 
         string ChangeMainData = JsonUtility.ToJson(maindata, true); // class를 string으로 바꾸고
 
-        File.WriteAllText(filePath, ChangeMainData); // string 값을 파일로 저장
+        File.WriteAllText(mainDataFilePath, ChangeMainData); // string 값을 파일로 저장
     }
 
     /// <summary>
@@ -295,7 +436,6 @@ public class DataManager : Singleton_DonDes<DataManager>
     /// </summary>
     public EmployeeData CreateEmployeeData(int number) // 직원 생성
     {
-
         EmployeeData newEmployeeData = new EmployeeData();
 
         switch (number)
@@ -354,8 +494,8 @@ public class DataManager : Singleton_DonDes<DataManager>
         }
 
         Equipment equipment = new Equipment();
-        equipment.weapon = "SuppressionBaton";
-        equipment.armor = "LabCoat";
+        equipment.weapon = "삼단봉";
+        equipment.armor = "격리복";
         newEmployeeData.equipment = equipment;
 
         return newEmployeeData;
@@ -366,41 +506,105 @@ public class DataManager : Singleton_DonDes<DataManager>
 
     }
     
-    public void EquipmentEquip(string equipName, int type)
+    public void MountedEquipmentCreate(string equipName, int type) 
     {
-        string filePath = "Assets/Resources/GameData/EquipmentData.json";
+        string EquipDataFilePath = Path.Combine(Application.persistentDataPath, "EquipmentData.json");
+        string EquipjsonText = File.ReadAllText(EquipDataFilePath);
+        
+        //string filePath = "Assets/Resources/GameData/EquipmentData.json";
 
-        string jsonText = File.ReadAllText(filePath); // 읽어오고
+        // JSON 파일 읽기
+        //string jsonText = File.ReadAllText(filePath);
 
-        EquipmentData equipmentData = JsonUtility.FromJson<EquipmentData>(jsonText); // class객체로 변환
+        // JSON 데이터를 EquipmentData 객체로 변환
+        EquipmentData equipmentData = JsonUtility.FromJson<EquipmentData>(EquipjsonText);
 
+        // 타입에 따라 무기 또는 방어구 추가
         switch (type)
         {
             case 0:
-                equipmentData.unmountedEquipment.weapon.Remove(equipName);
                 equipmentData.mountedEquipment.weapon.Add(equipName);
                 break;
-            
             case 1:
-                equipmentData.unmountedEquipment.armor.Remove(equipName);
                 equipmentData.mountedEquipment.armor.Add(equipName);
                 break;
         }
 
-        string changeEquipmentData = JsonUtility.ToJson(equipmentData, true); // class를 string으로 바꾸고
+        // 변경된 데이터를 JSON 문자열로 변환
+        string changeEquipmentData = JsonUtility.ToJson(equipmentData, true);
 
-        File.WriteAllText(filePath, changeEquipmentData); // string 값을 파일로 저장
+        // 수정된 JSON 데이터를 파일에 다시 저장
+        File.WriteAllText(EquipDataFilePath, changeEquipmentData);
+    }
+    
+    public void EquipmentEquip(string empName, string equipName, int type) // 주인없는놈 찾아줌 -> 장챡
+    {
+        string EquipmentFilePath = Path.Combine(Application.persistentDataPath, "EquipmentData.json");
+        string EquipmentjsonText = File.ReadAllText(EquipmentFilePath);
+        
+        
+        string employeeFilepath = Path.Combine(Application.persistentDataPath, $"Employee/{empName}.json");
+        string employeejsonText;
+        if (!File.Exists(employeeFilepath))
+        {
+            TextAsset jsonFile = Resources.Load<TextAsset>($"GameData/Employee/{empName}");
+            employeejsonText = jsonFile.text; // 읽어오고
+        }
+        else
+        {
+            employeejsonText = File.ReadAllText(employeeFilepath);
+        }
+        
+        //string employeeFilepath = $"Assets/Resources/GameData/Employee/{empName}.json";
+        //string filePath = "Assets/Resources/GameData/EquipmentData.json";
+
+        //string jsonText = File.ReadAllText(mainDataFilePath); // 읽어오고
+        var empdata = EmployeeDataLoad(empName);
+
+        EquipmentData equipmentData = JsonUtility.FromJson<EquipmentData>(EquipmentjsonText); // class객체로 변환
+        switch (type)
+        {
+            case 0:
+                equipmentData.mountedEquipment.weapon.Remove(empdata.equipment.weapon);
+                equipmentData.unmountedEquipment.weapon.Add(empdata.equipment.weapon);
+                
+                equipmentData.unmountedEquipment.weapon.Remove(equipName);
+                equipmentData.mountedEquipment.weapon.Add(equipName);
+                
+                empdata.equipment.weapon = equipName;
+                break;
+            
+            case 1:
+                equipmentData.mountedEquipment.armor.Remove(empdata.equipment.armor);
+                equipmentData.unmountedEquipment.armor.Add(empdata.equipment.armor);
+                
+                equipmentData.unmountedEquipment.armor.Remove(equipName);
+                equipmentData.mountedEquipment.armor.Add(equipName);
+                
+                empdata.equipment.armor = equipName;
+                break;
+        }
+        string changeEmployeeData = JsonUtility.ToJson(empdata, true);
+        string changeEquipmentData = JsonUtility.ToJson(equipmentData, true); // class를 string으로 바꾸고
+        
+        File.WriteAllText(employeeFilepath, changeEmployeeData);
+        File.WriteAllText(EquipmentFilePath, changeEquipmentData); // string 값을 파일로 저장
     }
 
-    public void EquipmentCreate(string equipName, int type)
+    public void EquipmentCreate(string equipName, int type) 
     {
-        string filePath = "Assets/Resources/GameData/EquipmentData.json";
+        
+        string EquipDataFilePath = Path.Combine(Application.persistentDataPath, "EquipmentData.json");
+        string EquipjsonText = File.ReadAllText(EquipDataFilePath);
+        
+        
+        //string filePath = "Assets/Resources/GameData/EquipmentData.json";
 
         // JSON 파일 읽기
-        string jsonText = File.ReadAllText(filePath);
+        //string jsonText = File.ReadAllText(filePath);
 
         // JSON 데이터를 EquipmentData 객체로 변환
-        EquipmentData equipmentData = JsonUtility.FromJson<EquipmentData>(jsonText);
+        EquipmentData equipmentData = JsonUtility.FromJson<EquipmentData>(EquipjsonText);
 
         // 타입에 따라 무기 또는 방어구 추가
         switch (type)
@@ -417,7 +621,30 @@ public class DataManager : Singleton_DonDes<DataManager>
         string changeEquipmentData = JsonUtility.ToJson(equipmentData, true);
 
         // 수정된 JSON 데이터를 파일에 다시 저장
-        File.WriteAllText(filePath, changeEquipmentData);
+        File.WriteAllText(EquipDataFilePath, changeEquipmentData);
+    }
+
+    public void EmployeeEquipChange(string empName, string equip, int type) // 주인 이름보고 끼워줌
+    {
+        string employeeFilepath = Path.Combine(Application.persistentDataPath, $"Employee/{empName}.json");
+        string employeejsonText = File.ReadAllText(employeeFilepath);
+        
+        
+        var equipmentData = EmployeeDataLoad(empName);
+        //string filePath = $"Assets/Resources/GameData/Employee/{empName}.json";
+        switch (type)
+        {
+            case 0:
+                //EquipmentEquip(empName, 0);
+                equipmentData.equipment.weapon = equip;
+                break;
+            case 1 :
+                //EquipmentUnEquip(equip, 1);
+                equipmentData.equipment.armor = equip;
+                break;
+        }
+        string changeEquipmentData = JsonUtility.ToJson(equipmentData, true);
+        File.WriteAllText(employeeFilepath, changeEquipmentData);
     }
 
 
@@ -427,10 +654,14 @@ public class DataManager : Singleton_DonDes<DataManager>
 
     public MainCompanyData MainDataLoad()
     {
-        string filePath = "Assets/Resources/GameData/MainData.json";
+        string mainDataFilePath = Path.Combine(Application.persistentDataPath, "MainData.json");
+        string mainjsonText = File.ReadAllText(mainDataFilePath);
+        
+        
+        //string filePath = "Assets/Resources/GameData/MainData.json";
 
-        string jsonText = File.ReadAllText(filePath);
-        MainCompanyData MainData = JsonUtility.FromJson<MainCompanyData>(jsonText);
+        //string jsonText = File.ReadAllText(filePath);
+        MainCompanyData MainData = JsonUtility.FromJson<MainCompanyData>(mainjsonText);
         //Debug.Log(jsonText);
 
         return MainData;
@@ -438,13 +669,14 @@ public class DataManager : Singleton_DonDes<DataManager>
 
     public MonsterData MonsterDataLoad(string filename)
     {
-        string filePath = $"Assets/Resources/GameData/Monster/{filename}.json";
-
+        //string filePath = $"Assets/Resources/GameData/Monster/{filename}.json";
+        TextAsset filePath = Resources.Load<TextAsset>($"GameData/Monster/{filename}");
+        Debug.Log(filePath);
         // JSON 파일 읽어오기
-        string jsonText = File.ReadAllText(filePath);
+        //string jsonText = File.ReadAllText(filePath.text);
 
         // JSON 데이터를 객체로 변환
-        MonsterData monsterData = JsonUtility.FromJson<MonsterData>(jsonText);
+        MonsterData monsterData = JsonUtility.FromJson<MonsterData>(filePath.text);
 
         //Debug.Log(jsonText);
 
@@ -454,24 +686,32 @@ public class DataManager : Singleton_DonDes<DataManager>
 
     public EmployeeData EmployeeDataLoad(string filename)
     {
-        string filePath = $"Assets/Resources/GameData/Employee/{filename}.json";
+        string employeeFilepath = Path.Combine(Application.persistentDataPath, $"Employee/{filename}.json");
+        string employeejsonText = File.ReadAllText(employeeFilepath);
+        
+        
+        //string filePath = $"Assets/Resources/GameData/Employee/{filename}.json";
 
-        string jsonText = File.ReadAllText(filePath);
+        //string jsonText = File.ReadAllText(filePath);
 
-        EmployeeData employeeData = JsonUtility.FromJson<EmployeeData>(jsonText);
+        EmployeeData employeeData = JsonUtility.FromJson<EmployeeData>(employeejsonText);
 
         return employeeData;
     }
 
     public int EquipmentCountLoad(string equipmentName, int type)
     {
-        string filePath = "Assets/Resources/GameData/EquipmentData.json";
+        string EquipDataFilePath = Path.Combine(Application.persistentDataPath, "EquipmentData.json");
+        string EquipjsonText = File.ReadAllText(EquipDataFilePath);
+        
+        
+       // string filePath = "Assets/Resources/GameData/EquipmentData.json";
 
-        string jsonText = File.ReadAllText(filePath);
+        //string jsonText = File.ReadAllText(filePath);
 
         int equipmentCount = 0;
 
-        EquipmentData equipmentData = JsonUtility.FromJson<EquipmentData>(jsonText);
+        EquipmentData equipmentData = JsonUtility.FromJson<EquipmentData>(EquipjsonText);
         switch (type)
         {
             case 0:
@@ -482,7 +722,7 @@ public class DataManager : Singleton_DonDes<DataManager>
                         equipmentCount++;
                     }
                 }
-                foreach (var armors in equipmentData.mountedEquipment.armor)
+                foreach (var armors in equipmentData.mountedEquipment.weapon)
                 {
                     if (armors == equipmentName)
                     {
@@ -493,7 +733,7 @@ public class DataManager : Singleton_DonDes<DataManager>
                 break;
             
             case 1:
-                foreach (var weapons in equipmentData.unmountedEquipment.weapon)
+                foreach (var weapons in equipmentData.unmountedEquipment.armor)
                 {
                     if (weapons == equipmentName)
                     {
@@ -511,8 +751,23 @@ public class DataManager : Singleton_DonDes<DataManager>
                 break;
             
         }
-        
+        Debug.Log(equipmentCount);
         return equipmentCount;
+    }
+
+    public EquipmentData EquipmentDataLoad()
+    {
+        string EquipDataFilePath = Path.Combine(Application.persistentDataPath, "EquipmentData.json");
+        string EquipjsonText = File.ReadAllText(EquipDataFilePath);
+        
+        
+        //string filePath = "Assets/Resources/GameData/EquipmentData.json";
+
+        //string jsonText = File.ReadAllText(filePath);
+
+        EquipmentData equipmentData = JsonUtility.FromJson<EquipmentData>(EquipjsonText);
+        
+        return equipmentData;
     }
     #endregion DataLoad
 }

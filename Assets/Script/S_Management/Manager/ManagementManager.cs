@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System;
+using Unity.VisualScripting;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
@@ -15,6 +16,8 @@ public class ManagementManager : Singleton<ManagementManager>
     public TextMeshProUGUI mainMoney;
     public TextMeshProUGUI mainResearchPoint;
     public Button gameStartBtn;
+    public Button employBtn;
+    public Button monBuyBtn;
     public Button floorOpeningBtn;
     public TextMeshProUGUI currentFloorText;
     public int floorNumber;
@@ -105,7 +108,24 @@ public class ManagementManager : Singleton<ManagementManager>
     public TextMeshProUGUI affiliatedEmployeeIntelligence;
     public TextMeshProUGUI affiliatedEmployeeJustice;
     public TextMeshProUGUI affiliatedEmployeeMovementSpeed;
-    public GameObject selectedGameObject;
+    //public GameObject selectedGameObject;
+
+    public GameObject weaponGameObject;
+    public Image weaponImage;
+    public TextMeshProUGUI weaponName;
+    public TextMeshProUGUI weaponItemPerformance;
+    public TextMeshProUGUI weaponItemSpacialPerformance;
+    
+    public GameObject armorGameObject;
+    public Image armorImage;
+    public TextMeshProUGUI armorName;
+    public TextMeshProUGUI armorItemPerformance;
+    public TextMeshProUGUI armorItemSpacialPerformance;
+
+    public GameObject equipmentScroll;
+    public Transform equipmentScrollContent;
+    public GameObject equipElementArmor;
+    public GameObject equipElementWeapon;
     
     [Header("MonsterBuy_Element")]
     public GameObject monsterBuyCanvas;
@@ -157,9 +177,25 @@ public class ManagementManager : Singleton<ManagementManager>
         researchPointGeneral.text = $"연구 포인트 : {currentRP}";
         if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject() == false)
         {
-            // 아무런 오브젝트와 충돌하지 않았을 때의 처리                
-            //Debug.Log("No object clicked.");
             AffiliatedEmployee_Panel_Off();
+        }
+
+        if (currentMoney < 1000 + (DataManager.Instance.MainDataLoad().Floor.Count * 400))
+        {
+            monBuyBtn.interactable = false;
+        }
+        else
+        {
+            monBuyBtn.interactable = true;
+        }
+        
+        if (currentMoney < (DataManager.Instance.MainDataLoad().Floor.Count) * 100)
+        {
+            employBtn.interactable = false;
+        }
+        else
+        {
+            employBtn.interactable = true;
         }
         FloorNumberSizeControll();
     }
@@ -185,7 +221,14 @@ public class ManagementManager : Singleton<ManagementManager>
             employeeImage[i].sprite = null;
             employeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpName = DataManager.Instance.MainDataLoad().Floor[floorNumber].Department[departmentNumber].EmployeeList[i];
             employeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpDepart = departmentNumber;
+            Debug.Log(departmentNumber);
             employeeNameText[i].text = DataManager.Instance.MainDataLoad().Floor[floorNumber].Department[departmentNumber].EmployeeList[i];
+            //employeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpDepart = departmentNumber;
+        }
+
+        for (int i = 0; i < employeeImage.Count; i++)
+        {
+            employeeImage[i].GetComponent<EmployeeInfo_Management>()._EmpDepart = departmentNumber;
         }
         GameStartBtn_check();
     }
@@ -291,7 +334,7 @@ public class ManagementManager : Singleton<ManagementManager>
 
     void FloorNumberSizeControll()
     {
-        if (departSelect.activeSelf == true)
+        if (departSelect.activeSelf)
         {
             float wheelInput = Input.GetAxis("Mouse ScrollWheel");
             if (wheelInput > 0 && floorNumber > 0) // 올렸을 때 처리 -> Floor감소
@@ -309,10 +352,17 @@ public class ManagementManager : Singleton<ManagementManager>
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                FloorInfo();
-                departSelect.SetActive(true);
-                selectedDepart.SetActive(false);
-                selectedDepartGeneral.SetActive(false);
+                if (affiliatedEmployeePanel.activeSelf)
+                {
+                    AffiliatedEmployee_Panel_Off();
+                }
+                else
+                {
+                    FloorInfo();
+                    departSelect.SetActive(true);
+                    selectedDepart.SetActive(false);
+                    selectedDepartGeneral.SetActive(false);
+                }
             }
         }
     }
@@ -598,11 +648,109 @@ public class ManagementManager : Singleton<ManagementManager>
         affiliatedEmployeeJustice.text = $"정의 : {empdata.justice}";
         affiliatedEmployeeMovementSpeed.text = $"이동속도 : {empdata.movementSpeed}";
         selectedName = empdata.name;
+        weaponGameObject.GetComponent<CurrentEquipWeapon>().empName = empdata.name;
+        armorGameObject.GetComponent<CurrentEquipArmor>().empName = empdata.name;
+
+        var dataManager = DataManager.Instance;
+        foreach (var maindataMonsterName in dataManager.MainDataLoad().All_Monster)
+        {
+            if (empdata.equipment.weapon == dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.EquipName)
+            {
+                Debug.Log(empdata.name);
+                weaponImage.sprite = Resources.Load<Sprite>(dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.imagePATH);
+                weaponName.text = $"이름 : {dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.EquipName}";
+                weaponItemPerformance.text = $"효과 : {dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.equipEffect}";
+                weaponItemSpacialPerformance.text = $"{dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.equipSpecialEffect}";
+                break;
+            }
+            else
+            {
+                weaponImage.sprite = Resources.Load<Sprite>("EquipImage/Weapon/SuppressionBaton");
+                weaponName.text = $"이름 : 삼단봉";
+                weaponItemPerformance.text = $"효과 : 없음";
+                weaponItemSpacialPerformance.text = $"특수 효과 : 없음";
+
+            }
+        }
+        foreach (var maindataMonsterName in dataManager.MainDataLoad().All_Monster)
+        {
+            if (empdata.equipment.armor == dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.EquipName)
+            {
+                Debug.Log(empdata.name);
+                armorImage.sprite = Resources.Load<Sprite>(dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.imagePATH);
+                armorName.text = $"이름 : {dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.EquipName}";
+                armorItemPerformance.text = $"효과 : {dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.equipEffect}";
+                armorItemSpacialPerformance.text = $"{dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.equipSpecialEffect}";
+                break;
+            }
+            else
+            {
+                armorImage.sprite = Resources.Load<Sprite>("EquipImage/Armor/LabCoat");
+                armorName.text = $"이름 : 격리복";
+                armorItemPerformance.text = $"효과 : 없음";
+                armorItemSpacialPerformance.text = $"특수 효과 : 없음";
+
+            }
+        }
         affiliatedEmployeePanel.SetActive(true);
     }
     public void AffiliatedEmployee_Panel_Off()
     {
         affiliatedEmployeePanel.SetActive(false);
+    }
+    
+    public void AffiliatedEmployee_Panel_Reset(string empName, int type)
+    {
+        var dataManager = DataManager.Instance;
+        var empData = dataManager.EmployeeDataLoad(empName);
+        switch (type)
+        {
+            case 0:
+                foreach (var maindataMonsterName in dataManager.MainDataLoad().All_Monster)
+                {
+                    if (empData.equipment.weapon == dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.EquipName)
+                    {
+                        //Debug.Log(empdata.name);
+                        weaponImage.sprite = Resources.Load<Sprite>(dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.imagePATH);
+                        weaponName.text = $"이름 : {dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.EquipName}";
+                        weaponItemPerformance.text = $"효과 : {dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.equipEffect}";
+                        weaponItemSpacialPerformance.text = $"{dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.equipSpecialEffect}";
+                        break;
+                    }
+                    else
+                    {
+                        weaponImage.sprite = Resources.Load<Sprite>("EquipImage/Weapon/SuppressionBaton");
+                        weaponName.text = $"이름 : 삼단봉";
+                        weaponItemPerformance.text = $"효과 : 없음";
+                        weaponItemSpacialPerformance.text = $"특수 효과 : 없음";
+
+                    }
+                }
+                break;
+            case 1:
+                foreach (var maindataMonsterName in dataManager.MainDataLoad().All_Monster)
+                {
+                    if (empData.equipment.armor == dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.EquipName)
+                    {
+                        //Debug.Log(empdata.name);
+                        armorImage.sprite = Resources.Load<Sprite>(dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.imagePATH);
+                        armorName.text = $"이름 : {dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.EquipName}";
+                        armorItemPerformance.text = $"효과 : {dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.equipEffect}";
+                        armorItemSpacialPerformance.text = $"{dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.equipSpecialEffect}";
+                        break;
+                    }
+                    else
+                    {
+                        armorImage.sprite = Resources.Load<Sprite>("EquipImage/Armor/LabCoat");
+                        armorName.text = $"이름 : 격리복";
+                        armorItemPerformance.text = $"효과 : 없음";
+                        armorItemSpacialPerformance.text = $"특수 효과 : 없음";
+
+                    }
+                }
+                break;
+        }
+        
     }
     public int CreateUnDuplicateRandom(int min, int max)
     {
@@ -657,6 +805,89 @@ public class ManagementManager : Singleton<ManagementManager>
     {
         DataManager.Instance.AddFloor();
         FloorOpeningBtn_Check();
+    }
+
+    public void WeaponChangeMethod(EmployeeData empData)
+    {
+        foreach (Transform child in equipmentScrollContent)
+        {
+            Destroy(child.gameObject) ;
+        }
+        var dataManager = DataManager.Instance;
+        var equipmentData =  dataManager.EquipmentDataLoad();
+        foreach (var unmountweapon in equipmentData.unmountedEquipment.weapon)
+        {
+            foreach (var maindataMonsterName in dataManager.MainDataLoad().All_Monster)
+            {
+                if (unmountweapon == dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.EquipName)
+                {
+                   GameObject equipEle = Instantiate(equipElementWeapon) as GameObject;
+                   var equipWeapon = equipEle.GetComponent<WeaponChange>();
+                  equipWeapon.weaponImage.sprite = Resources.Load<Sprite>(dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.imagePATH);
+                  equipWeapon.weaponName.text = $"이름 : {dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.EquipName}";
+                  equipWeapon.weaponPerformance.text = $"효과 : {dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.equipEffect}";
+                  equipWeapon.empData = empData;
+                  equipWeapon.weaponNameString =
+                      dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.EquipName;
+                  equipEle.transform.SetParent(equipmentScrollContent);
+                  //break;
+                }
+            }
+            if(unmountweapon == "삼단봉")
+            {
+                GameObject equipEle = Instantiate(equipElementWeapon) as GameObject;
+                var equipWeapon = equipEle.GetComponent<WeaponChange>();
+                equipWeapon.weaponImage.sprite = Resources.Load<Sprite>("EquipImage/Weapon/SuppressionBaton");
+                equipWeapon.weaponName.text = $"이름 : 삼단봉";
+                equipWeapon.weaponPerformance.text = $"효과 : 없음";
+                equipWeapon.empData = empData;
+                equipWeapon.weaponNameString = "삼단봉";
+                equipEle.transform.SetParent(equipmentScrollContent);
+            }
+
+        }
+        equipmentScroll.SetActive(true);
+    }
+    public void ArmorChangeMethod(EmployeeData empData)
+    {
+        foreach (Transform child in equipmentScrollContent)
+        {
+            Destroy(child.gameObject) ;
+        }
+        var dataManager = DataManager.Instance;
+        var equipmentData =  dataManager.EquipmentDataLoad();
+        foreach (var unmountarmor in equipmentData.unmountedEquipment.armor)
+        {
+            foreach (var maindataMonsterName in dataManager.MainDataLoad().All_Monster)
+            {
+                if (unmountarmor == dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.EquipName)
+                {
+                    GameObject equipEle = Instantiate(equipElementArmor) as GameObject;
+                    var equipArmor = equipEle.GetComponent<ArmorChange>();
+                    equipArmor.armorImage.sprite = Resources.Load<Sprite>(dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.imagePATH);
+                    equipArmor.armorName.text = $"이름 : {dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.EquipName}";
+                    equipArmor.armorPerformance.text = $"효과 : {dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.equipEffect}";
+                    equipArmor.empData = empData;
+                    equipArmor.armorNameString =
+                        dataManager.MonsterDataLoad(maindataMonsterName).MonEquipment.EquipName;
+                    equipEle.transform.SetParent(equipmentScrollContent);
+                    break;
+                }
+            }
+            if (unmountarmor == "격리복")
+            {
+                GameObject equipEle = Instantiate(equipElementArmor) as GameObject;
+                var equipArmor = equipEle.GetComponent<ArmorChange>();
+                equipArmor.armorImage.sprite = Resources.Load<Sprite>("EquipImage/Armor/LabCoat");
+                equipArmor.armorName.text = $"이름 : 격리복";
+                equipArmor.armorPerformance.text = $"효과 : 없음";
+                equipArmor.empData = empData;
+                equipArmor.armorNameString = "격리복";
+                equipEle.transform.SetParent(equipmentScrollContent);
+                break;
+            }
+        }
+        equipmentScroll.SetActive(true);
     }
 
 }

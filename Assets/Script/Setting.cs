@@ -12,6 +12,7 @@ public class Setting : MonoBehaviour
     public TMP_Dropdown resolutionDropdown;
     public Toggle fullscreenBtn;
     List<Resolution> resolutions = new List<Resolution>();
+    [SerializeField]
     private int resolutionNum;
     //public GameObject Settingpanel;
     //public Button SettingEndButton;
@@ -37,7 +38,7 @@ public class Setting : MonoBehaviour
         foreach (Resolution item in resolutions)
         {
             TMP_Dropdown.OptionData option = new TMP_Dropdown.OptionData();
-            option.text = item.width + "x" + item.height + " " + item.refreshRateRatio + "hz";
+            option.text = item.width + "x" + item.height + " " + item.refreshRate + "hz";
             resolutionDropdown.options.Add(option);
 
             if (item.width == Screen.width && item.height == Screen.height)

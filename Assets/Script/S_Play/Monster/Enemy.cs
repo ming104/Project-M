@@ -27,6 +27,6 @@ public class Enemy : MonoBehaviour
     {
         _sprRanderer.color = Color.red;
         yield return new WaitForSeconds(0.3f);
-        _sprRanderer.color = Color.blue;
+        _sprRanderer.color = Color.white;
     }
 }

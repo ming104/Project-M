@@ -31,15 +31,15 @@
 
   "MonEquipment":
   {
-    "imagePATH": "EquipImage/Weapon/Dummy",
+    "imagePATH": "EquipImage/Armor/Dummy",
     "EquipName" : "더미의 눈물",
     "equipEffect" : "체력 10 증가, 정신력 10 증가",
     "equipSpecialEffect" : "없음",
     "type" : 1,
     "maximumCount" : 5,
     "currentCount" : 0,
-    "buyMoney" : 0,
-    "buyRP" : 0
+    "buyMoney" : 100,
+    "buyRP" : 5
   },
 
   "OpenLevel": "0"

@@ -44,6 +44,11 @@ public class EmployeeManager : Singleton<EmployeeManager>
                     if(empdata_manager.equipment.weapon == weapons.WeaponName)
                     {
                         empdata.Weapon = weapons;
+                        break;
+                    }
+                    else
+                    {
+                        empdata.Weapon = weaponScriptable[0];
                     }
                 }
                 foreach (var armors in armorScriptable)
@@ -51,6 +56,11 @@ public class EmployeeManager : Singleton<EmployeeManager>
                     if(empdata_manager.equipment.armor == armors.ArmorName)
                     {
                         empdata.Armor = armors;
+                        break;
+                    }
+                    else
+                    {
+                        empdata.Armor = armorScriptable[0];
                     }
                 }
                 empl.transform.position = Department_Emp[0].EmpLocate[0].transform.position;
@@ -92,6 +102,11 @@ public class EmployeeManager : Singleton<EmployeeManager>
                     if(empdata_manager.equipment.weapon == weapons.WeaponName)
                     {
                         empdata.Weapon = weapons;
+                        break;
+                    }
+                    else
+                    {
+                        empdata.Weapon = weaponScriptable[0];
                     }
                 }
                 foreach (var armors in armorScriptable)
@@ -99,6 +114,11 @@ public class EmployeeManager : Singleton<EmployeeManager>
                     if(empdata_manager.equipment.armor == armors.ArmorName)
                     {
                         empdata.Armor = armors;
+                        break;
+                    }
+                    else
+                    {
+                        empdata.Armor = armorScriptable[0];
                     }
                 }
                 
@@ -146,6 +166,11 @@ public class EmployeeManager : Singleton<EmployeeManager>
                         if(empdata_manager.equipment.weapon == weapons.WeaponName)
                         {
                             empdata.Weapon = weapons;
+                            break;
+                        }
+                        else
+                        {
+                            empdata.Weapon = weaponScriptable[0];
                         }
                     }
                     foreach (var armors in armorScriptable)
@@ -153,6 +178,11 @@ public class EmployeeManager : Singleton<EmployeeManager>
                         if(empdata_manager.equipment.armor == armors.ArmorName)
                         {
                             empdata.Armor = armors;
+                            break;
+                        }
+                        else
+                        {
+                            empdata.Armor = armorScriptable[0];
                         }
                     }
                     empl.transform.position = Department_Emp[f].EmpLocate[i + 1].transform.position;

@@ -38,8 +38,8 @@
     "type" : 1,
     "maximumCount" : 5,
     "currentCount" : 0,
-    "buyMoney" : 0,
-    "buyRP" : 0
+    "buyMoney" : 100,
+    "buyRP" : 50
   },  
 
   "OpenLevel": 0

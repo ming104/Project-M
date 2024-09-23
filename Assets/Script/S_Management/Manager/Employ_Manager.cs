@@ -43,10 +43,12 @@ public class Employ_Manager : Singleton<Employ_Manager>
     public void Selected_Employee()
     {
         string filename = empdata[Selected_Number].name;
-        string filePath = $"Assets/Resources/GameData/Employee/{filename}.json";
+        string filePath = Path.Combine(Application.persistentDataPath, $"Employee/{filename}.json");;
         string Employeejson = JsonUtility.ToJson(empdata[Selected_Number], true);
         File.WriteAllText(filePath, Employeejson);
         Debug.Log(filename);
+        DataManager.Instance.MountedEquipmentCreate("삼단봉", 0);
+        DataManager.Instance.MountedEquipmentCreate("격리복", 1);
         DataManager.Instance.MaindataSave_Employ(filename);
     }
 
